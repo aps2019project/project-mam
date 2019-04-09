@@ -6,48 +6,32 @@ import Model.*;
 
 public class Controller {
 
+    private static final Controller CONTROLLER = new Controller();
+    private Controller(){}
+
+    static Controller getInstance(){
+        return CONTROLLER;
+    }
     private View view = View.getInstance();
 
 
-    public void main() {
-        String stateOfMenu = "account";
-        boolean isProjectEnded = false;
-        while (!isProjectEnded) {
-            account:
-            while (stateOfMenu.equals("account")) {
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("menu") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
-                    continue;
-                }
-                switch (request.getRequestType("menu")) {
-                    case ACCOUNT_CREATE_ACCOUNT:
-                        createAccount(request);
-                        break;
-                    case ACCOUNT_SAVE:
-                        saveAccount(request);
-                        break;
-                    case ACCOUNT_LOGIN:
 
 
-                }
-            }
-        }
-
+    void saveAccount(Request request) {
     }
 
-    private void saveAccount(Request request) {
+    void createAccount(Request request) {
+    }
+    void loginAccount(Request request){
+    }
+    boolean isAccountValidForLogin(Request request){
+        return true;
     }
 
-    private void createAccount(Request request) {
-    }
-    private void loginAccount(Request request){}
+    void logoutAccount(Request request){}
 
-    private void logoutAccount(Request request){}
+    void showLeaderBoard(Request request, View view){}
 
-    private void showLeaderBoard(Request request){}
-
-    private void helpForAccount(Request request){}
+    void helpForAccount(Request request, View view){}
 
 }

@@ -11,4 +11,7 @@ public class View {
     }
 
     public void printError(ErrorType type){}
+
+    public void showHelpForAccountMenu(){}
+    public void showHelpForMainMenu(){}
 }
