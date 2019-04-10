@@ -16,6 +16,7 @@ public class Controller {
 
 
 
+//------------------------------user account -----------------------------
 
     void saveAccount(Request request) {
     }
@@ -30,8 +31,30 @@ public class Controller {
 
     void logoutAccount(Request request){}
 
-    void showLeaderBoard(Request request, View view){}
+    void showLeaderBoard(Request request){}
+    //--------------------------------------collection------------------------------
 
-    void helpForAccount(Request request, View view){}
+    void showCollection(Request request){}
+
+    void searchInCollection(Request request){}
+
+    void saveCommandInCollection(){}
+
+    void createDeck(Request request){}
+
+    void deleteDeck(Request request){}
+
+    void addCardToDeck(Request request){}               //???????
+
+    void removeFromDeck(Request request){}
+
+    void isDeckValid(Request request){}
+
+    void selectMainDeck(Request request){}
+
+    void showDeck(){}
+
+    void showDeck(Request request){}
+    //------------------------------------------
 
 }

@@ -14,4 +14,8 @@ public class View {
 
     public void showHelpForAccountMenu(){}
     public void showHelpForMainMenu(){}
+    public void showHelpForCollectionMenu(){}
+    public void showHelpForBattleMenu(){}
+    public void showHelpForShopMenu(){}
+
 }

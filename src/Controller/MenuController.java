@@ -40,7 +40,7 @@ public class MenuController {
                         controller.logoutAccount(request);
                         break;
                     case ACCOUNT_SHOWlEADERBOARD:
-                        controller.showLeaderBoard(request, view);
+                        controller.showLeaderBoard(request);
                         break;
                     case HELP:
                         view.showHelpForAccountMenu();
@@ -78,7 +78,58 @@ public class MenuController {
                         isProjectEnded = true;
                         break;
                 }
-            }
+            }                                                        // main menu while
+
+            while (stateOfMenu.equals("collection Menu")) {
+                view.showHelpForMainMenu();
+                Request request = new Request();
+                request.getNewCommand();
+                if (request.getRequestType("collection Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(request.getError());
+                    continue;
+                }
+                switch (request.getRequestType("collection Menu")){
+                    case EXIT:
+                        stateOfMenu = "main Menu";
+                        break;
+                    case COLLECTION_SHOW:
+                        controller.showCollection(request);
+                        break;
+                    case COLLECTION_SEARCH:
+                        controller.searchInCollection(request);
+                        break;
+                    case COLLECTION_SAVE:
+                        controller.saveCommandInCollection();
+                        break;
+                    case COLLECTION_CREATE_DECK:
+                        controller.createDeck(request);
+                        break;
+                    case COLLECTION_DELETE_DECK:
+                        controller.deleteDeck(request);
+                        break;
+                    case COLLECTION_ADD:
+                        controller.addCardToDeck(request);
+                        break;
+                    case COLLECTION_REMOVE:
+                        controller.removeFromDeck(request);
+                        break;
+                    case COLLECTION_VALIDATE_DECK:
+                        controller.isDeckValid(request);
+                        break;
+                    case COLLECTION_SELECT_DECK:
+                        controller.selectMainDeck(request);
+                        break;
+                    case COLLECTION_SHOW_ALL_DECKS:
+                        controller.showDeck();
+                        break;
+                    case COLLECTION_SHOW_DECK:
+                        controller.showDeck(request);
+                    case HELP:
+                        view.showHelpForCollectionMenu();
+                }
+            }                                                     // collection menu while
+
+
 
         }                                                           // project while
 

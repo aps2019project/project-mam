@@ -61,6 +61,40 @@ public class Request {
                     return INVALID_COMMAND;
             }
         }
+
+        else if (menu.equals("collection Menu")){
+            switch (command){
+                case "exit":
+                    return EXIT;
+                case "help":
+                    return HELP;
+                case "show":
+                    return COLLECTION_SHOW;
+                case "save":
+                    return COLLECTION_SAVE;
+                case "show all decks":
+                    return COLLECTION_SHOW_ALL_DECKS;
+            }
+            if (command.matches("search .*"))
+                return COLLECTION_SEARCH;
+            else if (command.matches("create deck .*"))
+                return COLLECTION_CREATE_DECK;
+            else if (command.matches("delete deck .*"))
+                return COLLECTION_DELETE_DECK;
+            else if (command.matches("add /d+ to deck .*"))
+                return COLLECTION_ADD;
+            else if (command.matches("remove /d+ from deck .*"))
+                return COLLECTION_REMOVE;
+            else if (command.matches("validate deck .*"))
+                return COLLECTION_VALIDATE_DECK;
+            else if (command.matches("select deck .*"))
+                return COLLECTION_SELECT_DECK;
+            else if (command.matches("show deck .*"))
+                return COLLECTION_SHOW_DECK;
+            else
+                return INVALID_COMMAND;
+        }
+
         return INVALID_COMMAND;
     }
 }
