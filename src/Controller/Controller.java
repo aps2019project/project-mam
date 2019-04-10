@@ -55,6 +55,16 @@ public class Controller {
     void showDeck(){}
 
     void showDeck(Request request){}
-    //------------------------------------------
+    //------------------------------------------Shop-----------------------
+
+    void searchInShop(Request request){}
+
+    void showCollectionInShop(Request request){}
+
+    void buyCard(Request request){}
+
+    void sellCard(Request request){}
+
+    void showShop(){}
 
 }

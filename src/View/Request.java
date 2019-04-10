@@ -95,6 +95,29 @@ public class Request {
                 return INVALID_COMMAND;
         }
 
+        else if (menu.equals("shop Menu")){
+            switch (command){
+                case "exit":
+                    return EXIT;
+                case "help":
+                    return HELP;
+                case "show collection":
+                    return SHOP_SHOW_COLLECTION;
+                case "show":
+                    return SHOP_SHOW;
+            }
+            if (command.matches("search collection .*"))
+                return SHOP_SEARCH_COLLECTION;
+            else if (command.matches("search .*"))
+                return SHOP_SEARCH;
+            else if (command.matches("buy .*"))
+                return SHOP_BUY_CARD;
+            else if (command.matches("sell .*"))
+                return SHOP_SELL_CARD;
+            else
+                return INVALID_COMMAND;
+        }
+
         return INVALID_COMMAND;
     }
 }

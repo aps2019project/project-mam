@@ -129,7 +129,35 @@ public class MenuController {
                 }
             }                                                     // collection menu while
 
-
+            while (stateOfMenu.equals("shop Menu")) {
+                view.showHelpForMainMenu();
+                Request request = new Request();
+                request.getNewCommand();
+                if (request.getRequestType("shop Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(request.getError());
+                    continue;
+                }
+                switch (request.getRequestType("shop Menu")){
+                    case EXIT:
+                        stateOfMenu = "main Menu";
+                        break;
+                    case HELP:
+                        view.showHelpForShopMenu();
+                        break;
+                    case SHOP_SHOW_COLLECTION:
+                        controller.showCollectionInShop(request);
+                    case SHOP_SEARCH:
+                        controller.searchInShop(request);
+                    case SHOP_SEARCH_COLLECTION:
+                        controller.searchInCollection(request);
+                    case SHOP_BUY_CARD:
+                        controller.buyCard(request);
+                    case SHOP_SELL_CARD:
+                        controller.sellCard(request);
+                    case SHOP_SHOW:
+                        controller.showShop();
+                }
+            }                                                       // shop menu while
 
         }                                                           // project while
 
