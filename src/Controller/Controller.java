@@ -13,6 +13,7 @@ public class Controller {
         return CONTROLLER;
     }
     private View view = View.getInstance();
+    User user = new User();
 
 
 
@@ -22,14 +23,26 @@ public class Controller {
     }
 
     void createAccount(Request request) {
+        String userName = request.getCommand();
+        System.out.println("password :");
+        request.getNewCommand();
+        String password = request.getCommand();
+        if(User.isUserNameNew(userName))
+            User.addUser(new User(userName, password));
     }
     void loginAccount(Request request){
-    }
-    boolean isAccountValidForLogin(Request request){
-        return true;
+        String userName = request.getCommand();
+        System.out.println("password :");
+        request.getNewCommand();
+        String password = request.getCommand();
+        User temp = User.login(userName, password);
+        if (temp != null)
+            user = temp;
     }
 
-    void logoutAccount(Request request){}
+    void logoutAccount(Request request){
+        user = null;
+    }
 
     void showLeaderBoard(Request request){}
     //--------------------------------------collection------------------------------

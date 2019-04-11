@@ -14,12 +14,16 @@ public class User {
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
 
-    public User(String name) {
+    public User(String name, String password) {
         this.name = name;
         this.numberOfWin = 0;
+        this.password = password;
         mainDeck = new Deck();
         collection = new Collection();
         lastGames = new ArrayList<>();
+    }
+
+    public User() {
     }
 
     public static ArrayList<User> getUsers() {
@@ -70,18 +74,18 @@ public class User {
         lastGames.add(stringBuilder);
     }
 
-    public void isUserNameNew(String userName) {
+    public static boolean isUserNameNew(String userName) {
         boolean isUserNameNew = true;
         for (User user : users)
             if (user.name.equals(userName)) {
                 isUserNameNew = false;
-                break;
+                return true;
             }
-        if (!isUserNameNew)
-            View.getInstance().printError("username is'nt new");
+        View.getInstance().printError("username is'nt new");
+        return false;
     }
 
-    public User login(String userName, String password) {
+    public static User login(String userName, String password) {
         boolean isUserNameValid = false;
         for (User user : users)
             if (user.name.equals(userName)) {
@@ -95,6 +99,23 @@ public class User {
             View.getInstance().printError("password is incorrect");
 
         return null;
+    }
+
+    public static User[] showLeaderBoard() {
+        User[] arr = new User[20];
+        int numberOfUser = 0;
+        for (User user : users) {
+            arr[numberOfUser] = user;
+            numberOfUser++;
+        }
+        for (int i = 0; i < numberOfUser; i++)
+            for (int j = 1; j < numberOfUser - i; j++)
+                if (arr[j].numberOfWin > arr[j-1].numberOfWin){
+                    User temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                }
+        return arr;
     }
 }
 

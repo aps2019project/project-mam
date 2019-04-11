@@ -12,6 +12,9 @@ public class Request {
     private ErrorType error = null;
     private String command;
 
+    public String getCommand() {
+        return command;
+    }
 
     public void getNewCommand() {
         this.command = scanner.nextLine();
