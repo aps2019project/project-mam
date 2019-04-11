@@ -42,7 +42,7 @@ public class Request {
             else if (command.matches("login .*"))
                 return ACCOUNT_LOGIN;
             else if (command.matches("show leaderboard"))
-                return ACCOUNT_SHOWlEADERBOARD;
+                return ACCOUNT_SHOW_LEADERBOARD;
             else if (command.matches("help"))
                 return HELP;
             else

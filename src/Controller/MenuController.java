@@ -42,7 +42,7 @@ public class MenuController {
                     case ACCOUNT_LOGOUT:
                         controller.logoutAccount(request);
                         break;
-                    case ACCOUNT_SHOWlEADERBOARD:
+                    case ACCOUNT_SHOW_LEADERBOARD:
                         controller.showLeaderBoard(request);
                         break;
                     case HELP:
