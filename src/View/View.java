@@ -11,6 +11,9 @@ public class View {
     }
 
     public void printError(ErrorType type){}
+    public void printError(String errorMessage){
+        System.out.println(errorMessage);
+    }
 
     public void showHelpForAccountMenu(){}
     public void showHelpForMainMenu(){}

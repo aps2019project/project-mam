@@ -14,9 +14,12 @@ public class MenuController {
         boolean isProjectEnded = false;
         while (!isProjectEnded) {
 
-
+            boolean shouldShowHelp = true;
             while (stateOfMenu.equals("account")) {
-                view.showHelpForAccountMenu();
+                if (shouldShowHelp) {
+                    view.showHelpForAccountMenu();
+                    shouldShowHelp = false;
+                }
                 Request request = new Request();
                 request.getNewCommand();
                 if (request.getRequestType("account") == RequestType.INVALID_COMMAND) {
@@ -51,16 +54,19 @@ public class MenuController {
                 }
 
             }                                                       // account while
-
-            while (stateOfMenu.equals("main Menu")){
-                view.showHelpForMainMenu();
+            shouldShowHelp = true;
+            while (stateOfMenu.equals("main Menu")) {
+                if (shouldShowHelp) {
+                    view.showHelpForMainMenu();
+                    shouldShowHelp = false;
+                }
                 Request request = new Request();
                 request.getNewCommand();
                 if (request.getRequestType("main Menu") == RequestType.INVALID_COMMAND) {
                     view.printError(request.getError());
                     continue;
                 }
-                switch (request.getRequestType("main Menu")){
+                switch (request.getRequestType("main Menu")) {
                     case MAIN_COLLECTION:
                         stateOfMenu = "collection Menu";
                         break;
@@ -79,16 +85,19 @@ public class MenuController {
                         break;
                 }
             }                                                        // main menu while
-
+            shouldShowHelp = true;
             while (stateOfMenu.equals("collection Menu")) {
-                view.showHelpForMainMenu();
+                if (shouldShowHelp) {
+                    view.showHelpForMainMenu();
+                    shouldShowHelp = false;
+                }
                 Request request = new Request();
                 request.getNewCommand();
                 if (request.getRequestType("collection Menu") == RequestType.INVALID_COMMAND) {
                     view.printError(request.getError());
                     continue;
                 }
-                switch (request.getRequestType("collection Menu")){
+                switch (request.getRequestType("collection Menu")) {
                     case EXIT:
                         stateOfMenu = "main Menu";
                         break;
@@ -127,17 +136,20 @@ public class MenuController {
                     case HELP:
                         view.showHelpForCollectionMenu();
                 }
-            }                                                     // collection menu while
-
+            }                                             // collection menu while
+            shouldShowHelp = true;
             while (stateOfMenu.equals("shop Menu")) {
-                view.showHelpForMainMenu();
+                if (shouldShowHelp) {
+                    view.showHelpForMainMenu();
+                    shouldShowHelp = false;
+                }
                 Request request = new Request();
                 request.getNewCommand();
                 if (request.getRequestType("shop Menu") == RequestType.INVALID_COMMAND) {
                     view.printError(request.getError());
                     continue;
                 }
-                switch (request.getRequestType("shop Menu")){
+                switch (request.getRequestType("shop Menu")) {
                     case EXIT:
                         stateOfMenu = "main Menu";
                         break;
