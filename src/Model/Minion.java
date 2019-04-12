@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Minion extends Card{
 
     private int AP;
@@ -7,7 +10,8 @@ public class Minion extends Card{
     private int TargetCommunity;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
-    //private Spell specialPower;
+    private Spell specialPower;
+    private ArrayList<Buff> buffs = new ArrayList<>();
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity, Model.SPActivationTime SPActivationTime, String desc) {
         super(name, price, MP, desc);
@@ -36,5 +40,19 @@ public class Minion extends Card{
 
     public Model.SPActivationTime getSPActivationTime() {
         return SPActivationTime;
+    }
+
+    public void addBuff(Buff buff, String sign){
+        buff.setSign(sign);
+        buffs.add(buff);
+    }
+
+    public void updateBuffList(){
+        Iterator itr = buffs.iterator();
+        while (itr.hasNext()){
+            Buff temp = (Buff) itr;
+            if (temp.getTime() == 0)
+                itr.remove();
+        }
     }
 }
