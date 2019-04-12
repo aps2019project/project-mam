@@ -10,10 +10,11 @@ public class Minion extends Card{
     private int TargetCommunity;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
-    private Spell specialPower;
+    private ArrayList<Buff> specialPower = new ArrayList<>();
     private ArrayList<Buff> buffs = new ArrayList<>();
 
-    public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity, Model.SPActivationTime SPActivationTime, String desc) {
+    public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
+                  Model.SPActivationTime SPActivationTime, String desc) {
         super(name, price, MP, desc);
         this.AP = AP;
         this.HP = HP;
@@ -21,6 +22,17 @@ public class Minion extends Card{
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
     }
+
+    public Minion(String name, int price,int MP,int HP, int AP, int targetCommunity, ImpactType minionClass,
+                  Model.SPActivationTime SPActivationTime) {
+        super(name, MP, price);
+        this.AP = AP;
+        this.HP = HP;
+        TargetCommunity = targetCommunity;
+        this.minionClass = minionClass;
+        this.SPActivationTime = SPActivationTime;
+    }
+
 
     public int getAP() {
         return AP;
@@ -45,6 +57,10 @@ public class Minion extends Card{
     public void addBuff(Buff buff, String sign){
         buff.setSign(sign);
         buffs.add(buff);
+    }
+
+    public void addBuffToSpecialPower(Buff buff){
+        specialPower.add(buff);
     }
 
     public void updateBuffList(){

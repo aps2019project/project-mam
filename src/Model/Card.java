@@ -6,6 +6,8 @@ public class Card {
     private String name;
     private String desc;
 
+    Card(){}
+
     Card(String name, int price, int MP, String desc) {
         this.MP = MP;
         this.price = price;
