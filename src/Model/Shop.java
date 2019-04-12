@@ -42,7 +42,9 @@ public class Shop {
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 0, 8));
         cards.add(card);
 
-
+        card = new Spell("poison Bolt", 900, 5, THREE_IN_THREE);
+        card.addBuff(new Buff(CELL_EFFECT_POSION, 1, 1));
+        cards.add(card);
 
     }
 }

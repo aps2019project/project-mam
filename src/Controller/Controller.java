@@ -47,6 +47,8 @@ public class Controller {
     void showLeaderBoard(Request request){}
     //--------------------------------------collection------------------------------
 
+    void isAccountValidForLogin(Request request){}
+
     void showCollection(Request request){}
 
     void searchInCollection(Request request){}
