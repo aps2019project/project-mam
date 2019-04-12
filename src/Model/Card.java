@@ -6,11 +6,17 @@ public class Card {
     private String name;
     private String desc;
 
-    public Card(String name, int price, int MP, String desc) {
+    Card(String name, int price, int MP, String desc) {
         this.MP = MP;
         this.price = price;
         this.name = name;
         this.desc = desc;
+    }
+
+    Card(String name, int MP, int price) {
+        this.MP = MP;
+        this.price = price;
+        this.name = name;
     }
 
     public int getMP() {
@@ -27,5 +33,8 @@ public class Card {
 
     public String getDesc() {
         return desc;
+    }
+
+    public void addBuff(Buff buff){
     }
 }

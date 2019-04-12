@@ -11,6 +11,18 @@ public class Spell extends Card{
         TargetCommunity = targetCommunity;
     }
 
+    public Spell(String name, int price, int MP, Model.TargetCommunity targetCommunity,
+                 ArrayList<Buff> buffs) {
+        super(name, price, MP);
+        TargetCommunity = targetCommunity;
+        this.buffs = buffs;
+    }
+
+    public Spell(String name, int MP, int price, Model.TargetCommunity targetCommunity) {
+        super(name, MP, price);
+        TargetCommunity = targetCommunity;
+    }
+
     public void addBuff(Buff buff){
         this.buffs.add(buff);
     }
