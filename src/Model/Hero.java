@@ -10,7 +10,6 @@ public class Hero extends Card {
     private int cooldown;
     private ImpactType heroClass;
     private ArrayList<Buff> specialPower = new ArrayList<>();
-    private ArrayList<Buff> buffs = new ArrayList<>();
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
@@ -20,6 +19,11 @@ public class Hero extends Card {
         TargetCommunity = targetCommunity;
         this.cooldown = cooldown;
         this.heroClass = heroClass;
+    }
+
+    @Override
+    public String getInfo() {
+        return "hero";
     }
 
     public int getAP() {
@@ -42,17 +46,14 @@ public class Hero extends Card {
         return heroClass;
     }
 
-    public void addBuff(Buff buff, String sign){
-        buff.setSign(sign);
-        buffs.add(buff);
-    }
+
 
     public void addBuff(Buff buff){
         specialPower.add(buff);
     }
 
     public void updateBuffList(){
-        Iterator itr = buffs.iterator();
+        Iterator itr = getBuffs().iterator();
         while (itr.hasNext()){
             Buff temp = (Buff) itr;
             if (temp.getTime() == 0)

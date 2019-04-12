@@ -3,13 +3,15 @@ package Model;
 public class Map {
     private CellEffect[][] cellEffects;
     private CollectableItem[][] cellItems;
-    private Card[][] cellCards;
+    private Card[][] cellCards1;
+    private Card[][] cellCards2;
     private int[][] cellFlags;
 
     public Map() {
         cellEffects = new CellEffect[5][9];
         cellItems = new CollectableItem[5][9];
-        cellCards = new Card[5][9];
+        cellCards1 = new Card[5][9];
+        cellCards2 = new Card[5][9];
         cellFlags = new int[5][9];
     }
 
@@ -21,8 +23,12 @@ public class Map {
         return cellItems;
     }
 
-    public Card[][] getCellCards() {
-        return cellCards;
+    public Card[][] getCellCards1() {
+        return cellCards1;
+    }
+
+    public Card[][] getCellCards2() {
+        return cellCards2;
     }
 
     public int[][] getCellFlags() {
@@ -37,8 +43,12 @@ public class Map {
         this.cellItems[row][column] = cellItems;
     }
 
-    public void setCellCards(Card[][] cellCards) {
-        this.cellCards = cellCards;
+    public void setCellCards1(Card[][] cellCards1) {
+        this.cellCards1 = cellCards1;
+    }
+
+    public void setCellCards2(Card[][] cellCards2) {
+        this.cellCards2 = cellCards2;
     }
 
     public void setCellFlags(int[][] cellFlags) {

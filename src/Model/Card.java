@@ -1,10 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Card {
     private int MP;
     private int price;
     private String name;
     private String desc;
+    private ArrayList<Buff> buffs = new ArrayList<>();
 
     Card(){}
 
@@ -37,6 +40,20 @@ public class Card {
         return desc;
     }
 
+    public ArrayList<Buff> getBuffs() {
+        return buffs;
+    }
+
+    public String getInfo(){
+        return null;
+    }
+
     public void addBuff(Buff buff){
+        buffs.add(buff);
+    }
+
+    public void addBuff(Buff buff, String sign){
+        buff.setSign(sign);
+        buffs.add(buff);
     }
 }

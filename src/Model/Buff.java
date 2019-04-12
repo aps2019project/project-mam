@@ -3,13 +3,15 @@ package Model;
 public class Buff {
     private BuffType type;
     private int time;
-    private int BuffPower;
+    private int buffPower;
     private String sign;
+    private TargetCommunity targetCommunity;
 
-    public Buff(BuffType type, int time, int buffPower) {
+    public Buff(BuffType type, int time, int buffPower, Model.TargetCommunity targetCommunity) {
         this.type = type;
         this.time = time;
-        BuffPower = buffPower;
+        this.buffPower = buffPower;
+        this.targetCommunity = targetCommunity;
     }
 
     public BuffType getType() {
@@ -21,14 +23,14 @@ public class Buff {
     }
 
     public int getBuffPower() {
-        return BuffPower;
+        return buffPower;
     }
 
     public void setSign(String sign) {
         this.sign = sign;
     }
 
-    public void decrementOfTime(){
+    public void decrementOfTime() {
         time--;
     }
 }

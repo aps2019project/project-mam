@@ -12,5 +12,5 @@ public enum TargetCommunity {
     INSIDER_HERO,
     TWO_IN_TWO,
     THREE_IN_THREE,
-
+    OWN,
 }
