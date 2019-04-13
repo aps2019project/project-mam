@@ -10,6 +10,7 @@ public class Hero extends Card {
     private int cooldown;
     private ImpactType heroClass;
     private ArrayList<Buff> specialPower = new ArrayList<>();
+    private int flagCount;
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
@@ -46,9 +47,15 @@ public class Hero extends Card {
         return heroClass;
     }
 
+    public int getFlagCount() {
+        return flagCount;
+    }
 
+    public void setFlagCount(int flagCount) {
+        this.flagCount = flagCount;
+    }
 
-    public void addBuff(Buff buff){
+    public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);
     }
 
