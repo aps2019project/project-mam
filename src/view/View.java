@@ -1,26 +1,25 @@
-package view;
+package View;
 
 import Model.ErrorType;
+
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class View {
-    private Scanner scanner = new Scanner(System.in);
     private static final View VIEW = new View();
     private View(){}
+    private Scanner scanner = new Scanner(System.in);
 
     public static View getInstance(){
         return VIEW;
     }
 
+    private static Deque<ConsolePage> pages = new LinkedList<>();
 
-
-    private Deque<ConsolePage> pages = new LinkedList<>();
-
-    public void start()
+    public static void start()
     {
-        pages.push(new AccountMenuPage());
+        pages.push(new MainMenuPage());
         ConsolePage currentPage = null;
         while (true)
         {
@@ -29,37 +28,45 @@ public class View {
                 currentPage = pages.peek();
                 if (currentPage == null)
                     break;
-                currentPage.showMenu();
+                currentPage.help();
             }
-
-            if (!scanner.hasNextLine())
-                break;
             String command = getNewCommand();
-            if (command.equals("back"))
+            if (command.equalsIgnoreCase("back"))
                 back();
             else
                 currentPage.handleCommand(command);
         }
     }
 
-    public void back()
+    public static void back()
     {
         pages.pop();
     }
 
     public String getNewCommand(){
-        return scanner.nextLine().toLowerCase().trim();
-    }
-    public String getPassword(){
         return scanner.nextLine();
     }
 
-    public Deque<ConsolePage> getPages() {
-        return pages;
-    }
 
-    public void printError(ErrorType type){
-        System.out.println(type.getMessage());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void printError(ErrorType type){}
+    public void printError(String errorMessage){
+        System.out.println(errorMessage);
     }
 
     public void showHelpForAccountMenu(){
@@ -81,7 +88,4 @@ public class View {
                 "sell [card id | card id] \nshow");
     }
 
-    public void show(String string){
-        System.out.println(string);
-    }
 }

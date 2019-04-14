@@ -1,12 +1,11 @@
 package Model;
 
 public enum ErrorType {
+
     DUPLICATE_USERNAME("username is'nt new"),
     INVALID_USERNAME("userName is inValid"),
     INCORRECT_PASSWORD("password is incorrect"),
-    INVALID_COMMAND("command is invalid"),
-
-    ;
+    INVALID_COMMAND("command is invalid"),;
 
     private String message;
 
