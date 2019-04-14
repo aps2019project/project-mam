@@ -1,9 +1,7 @@
-package View;
+package view;
 
 import Controller.Controller;
-
-import static Model.RequestType.*;
-import static Model.RequestType.INVALID_COMMAND;
+import Model.ErrorType;
 
 public class AccountMenuPage extends ConsolePage{
     Controller controller = Controller.getInstance();
@@ -13,22 +11,25 @@ public class AccountMenuPage extends ConsolePage{
         view.showHelpForAccountMenu();
     }
 
-    @Override
+
     public void handleCommand(String command) {
         if (command.matches("create account .*"))
-            controller.createAccount();
+            controller.createAccount(command);
         else if (command.matches("save"))
-            controller.saveAccount();
+            controller.saveAccount(command);
         else if (command.matches("logout"))
-            controller.logoutAccount();
+            controller.logoutAccount(command);
         else if (command.matches("login .*"))
-            controller.loginAccount();
+            controller.loginAccount(command);
         else if (command.matches("show leaderboard"))
-            controller.showLeaderBoard();
+            controller.showLeaderBoard(command);
         else if (command.matches("help"))
             view.showHelpForAccountMenu();
         else
-
+            view.printError(ErrorType.INVALID_COMMAND);
 
     }
+
+
+
 }

@@ -1,8 +1,7 @@
 package Controller;
 
 import Model.RequestType;
-import View.Request;
-import View.View;
+import view.View;
 
 public class MenuController {
 
@@ -20,30 +19,30 @@ public class MenuController {
                     view.showHelpForAccountMenu();
                     shouldShowHelp = false;
                 }
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("account") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
+                String string = new String();
+                string.getNewCommand();
+                if (string.getRequestType("account") == RequestType.INVALID_COMMAND) {
+                    view.printError(string.getError());
                     continue;
                 }
-                switch (request.getRequestType("account")) {
+                switch (string.getRequestType("account")) {
                     case ACCOUNT_CREATE_ACCOUNT:
-                        controller.createAccount(request);
+                        controller.createAccount(string);
                         break;
                     case ACCOUNT_SAVE:
-                        controller.saveAccount(request);
+                        controller.saveAccount(string);
                         break;
                     case ACCOUNT_LOGIN:
-                        if (controller.isAccountValidForLogin(request))
-                            controller.loginAccount(request);
+                        if (controller.isAccountValidForLogin(string))
+                            controller.loginAccount(string);
                         else
-                            view.printError(request.getError());
+                            view.printError(string.getError());
                         break;
                     case ACCOUNT_LOGOUT:
-                        controller.logoutAccount(request);
+                        controller.logoutAccount(string);
                         break;
                     case ACCOUNT_SHOW_LEADERBOARD:
-                        controller.showLeaderBoard(request);
+                        controller.showLeaderBoard(string);
                         break;
                     case HELP:
                         view.showHelpForAccountMenu();
@@ -60,13 +59,13 @@ public class MenuController {
                     view.showHelpForMainMenu();
                     shouldShowHelp = false;
                 }
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("main Menu") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
+                String string = new String();
+                string.getNewCommand();
+                if (string.getRequestType("main Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(string.getError());
                     continue;
                 }
-                switch (request.getRequestType("main Menu")) {
+                switch (string.getRequestType("main Menu")) {
                     case MAIN_COLLECTION:
                         stateOfMenu = "collection Menu";
                         break;
@@ -91,48 +90,48 @@ public class MenuController {
                     view.showHelpForMainMenu();
                     shouldShowHelp = false;
                 }
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("collection Menu") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
+                String string = new String();
+                string.getNewCommand();
+                if (string.getRequestType("collection Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(string.getError());
                     continue;
                 }
-                switch (request.getRequestType("collection Menu")) {
+                switch (string.getRequestType("collection Menu")) {
                     case EXIT:
                         stateOfMenu = "main Menu";
                         break;
                     case COLLECTION_SHOW:
-                        controller.showCollection(request);
+                        controller.showCollection(string);
                         break;
                     case COLLECTION_SEARCH:
-                        controller.searchInCollection(request);
+                        controller.searchInCollection(string);
                         break;
                     case COLLECTION_SAVE:
                         controller.saveCommandInCollection();
                         break;
                     case COLLECTION_CREATE_DECK:
-                        controller.createDeck(request);
+                        controller.createDeck(string);
                         break;
                     case COLLECTION_DELETE_DECK:
-                        controller.deleteDeck(request);
+                        controller.deleteDeck(string);
                         break;
                     case COLLECTION_ADD:
-                        controller.addCardToDeck(request);
+                        controller.addCardToDeck(string);
                         break;
                     case COLLECTION_REMOVE:
-                        controller.removeFromDeck(request);
+                        controller.removeFromDeck(string);
                         break;
                     case COLLECTION_VALIDATE_DECK:
-                        controller.isDeckValid(request);
+                        controller.isDeckValid(string);
                         break;
                     case COLLECTION_SELECT_DECK:
-                        controller.selectMainDeck(request);
+                        controller.selectMainDeck(string);
                         break;
                     case COLLECTION_SHOW_ALL_DECKS:
                         controller.showDeck();
                         break;
                     case COLLECTION_SHOW_DECK:
-                        controller.showDeck(request);
+                        controller.showDeck(string);
                     case HELP:
                         view.showHelpForCollectionMenu();
                 }
@@ -143,13 +142,13 @@ public class MenuController {
                     view.showHelpForMainMenu();
                     shouldShowHelp = false;
                 }
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("shop Menu") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
+                String string = new String();
+                string.getNewCommand();
+                if (string.getRequestType("shop Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(string.getError());
                     continue;
                 }
-                switch (request.getRequestType("shop Menu")) {
+                switch (string.getRequestType("shop Menu")) {
                     case EXIT:
                         stateOfMenu = "main Menu";
                         break;
@@ -157,15 +156,15 @@ public class MenuController {
                         view.showHelpForShopMenu();
                         break;
                     case SHOP_SHOW_COLLECTION:
-                        controller.showCollectionInShop(request);
+                        controller.showCollectionInShop(string);
                     case SHOP_SEARCH:
-                        controller.searchInShop(request);
+                        controller.searchInShop(string);
                     case SHOP_SEARCH_COLLECTION:
-                        controller.searchInCollection(request);
+                        controller.searchInCollection(string);
                     case SHOP_BUY_CARD:
-                        controller.buyCard(request);
+                        controller.buyCard(string);
                     case SHOP_SELL_CARD:
-                        controller.sellCard(request);
+                        controller.sellCard(string);
                     case SHOP_SHOW:
                         controller.showShop();
                 }
@@ -182,10 +181,10 @@ public class MenuController {
                     shouldShowHelp = false;
                 }
 
-                Request request = new Request();
-                request.getNewCommand();
-                if (request.getRequestType("battle Menu") == RequestType.INVALID_COMMAND) {
-                    view.printError(request.getError());
+                String string = new String();
+                string.getNewCommand();
+                if (string.getRequestType("battle Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(string.getError());
                     continue;
                 }
 

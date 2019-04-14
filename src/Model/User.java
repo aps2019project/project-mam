@@ -1,9 +1,8 @@
 package Model;
 
-import View.View;
+import view.View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User {
     private static ArrayList<User> users = new ArrayList<>();
@@ -75,30 +74,28 @@ public class User {
     }
 
     public static boolean isUserNameNew(String userName) {
-        boolean isUserNameNew = true;
         for (User user : users)
             if (user.name.equals(userName)) {
-                isUserNameNew = false;
-                //View.getInstance().printError("username is'nt new");
                 return false;
             }
-
         return true;
     }
 
-    public static User login(String userName, String password) {
-        boolean isUserNameValid = false;
+    public static boolean isPassCorrect(String userName, String password){
         for (User user : users)
             if (user.name.equals(userName)) {
-                isUserNameValid = true;
+                if (user.password.equals(password))
+                    return true;
+            }
+        return false;
+    }
+
+    public static User login(String userName, String password) {
+        for (User user : users)
+            if (user.name.equals(userName)) {
                 if (user.password.equals(password))
                     return user;
             }
-        if (!isUserNameValid)
-            View.getInstance().printError("userName is inValid");
-        else
-            View.getInstance().printError("password is incorrect");
-
         return null;
     }
 

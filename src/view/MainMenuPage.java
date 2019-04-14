@@ -1,17 +1,19 @@
-package View;
+package view;
 
-import static Model.RequestType.*;
-import static Model.RequestType.*;
+import Controller.Controller;
+
 
 public class MainMenuPage extends ConsolePage {
-    @Override
-    public void help() {
-        System.out.print("Collection \nShop \nBattle \nExit ");
-    }
+    Controller controller = Controller.getInstance();
+    private View view = View.getInstance();
 
     @Override
+    public void help() {
+        view.showHelpForMainMenu();
+    }
+
     public void handleCommand(String command) {
-        switch (command) {
+        /*switch (command) {
             case "enter collection":
                 return MAIN_COLLECTION;
             case "enter shop":
@@ -24,6 +26,6 @@ public class MainMenuPage extends ConsolePage {
                 return HELP;
             default:
                 return INVALID_COMMAND;
-        }
+        }*/
     }
 }

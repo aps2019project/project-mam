@@ -1,8 +1,8 @@
 package Controller;
 
-import View.View;
-import View.Request;
 import Model.*;
+import view.*;
+import java.lang.String;
 
 public class Controller {
 
@@ -11,7 +11,7 @@ public class Controller {
     private Controller() {
     }
 
-    static Controller getInstance() {
+    public static Controller getInstance() {
         return CONTROLLER;
     }
 
@@ -21,85 +21,90 @@ public class Controller {
 
 //------------------------------user account -----------------------------
 
-    void saveAccount(Request request) {
+    public void saveAccount(String string) {
     }
 
-    void createAccount(Request request) {
-        String userName = request.getCommand();
+    public void createAccount(String command) {
+        String userName = command.split(" ")[2];
         view.show("password :");
-        request.getNewCommand();
-        String password = request.getCommand();
+        view.getNewCommand();
+        String password = view.getPassword();
         if (User.isUserNameNew(userName))
             User.addUser(new User(userName, password));
         else view.printError(ErrorType.DUPLICATE_USERNAME);
     }
 
-    void loginAccount(Request request) {
-        String userName = request.getCommand();
+    public void loginAccount(String command) {
+        String userName = command.split(" ")[1];
         view.show("password :");
-        request.getNewCommand();
-        String password = request.getCommand();
-        User temp = User.login(userName, password);
-        if (temp != null)
-            user = temp;
+        String password = view.getPassword();
+        if (!User.isUserNameNew(userName)){
+            if (User.isPassCorrect(userName, password)){
+                user = User.login(userName, password);
+                view.getPages().push(new MainMenuPage());
+            }
+            else view.printError(ErrorType.INCORRECT_PASSWORD);
+        }
+        else view.printError(ErrorType.INVALID_USERNAME);
     }
 
-    void logoutAccount(Request request) {
+    public void logoutAccount(String command) {
         user = null;
     }
 
-    void showLeaderBoard(Request request) {
+    public void showLeaderBoard(String command) {
+
     }
     //--------------------------------------collection------------------------------
 
-    boolean isAccountValidForLogin(Request request) {
+    public boolean isAccountValidForLogin(String command) {
         return true;
     }
 
-    void showCollection(Request request) {
+    public void showCollection(String command) {
     }
 
-    void searchInCollection(Request request) {
+    public void searchInCollection(String command) {
     }
 
-    void saveCommandInCollection() {
+    public void saveCommandInCollection() {
     }
 
-    void createDeck(Request request) {
+    public void createDeck(String command) {
     }
 
-    void deleteDeck(Request request) {
+    public void deleteDeck(String command) {
     }
 
-    void addCardToDeck(Request request) {
+    void addCardToDeck(String command) {
     }               //???????
 
-    void removeFromDeck(Request request) {
+    void removeFromDeck(String command) {
     }
 
-    void isDeckValid(Request request) {
+    void isDeckValid(String command) {
     }
 
-    void selectMainDeck(Request request) {
+    void selectMainDeck(String command) {
     }
 
     void showDeck() {
     }
 
-    void showDeck(Request request) {
+    void showDeck(String command) {
     }
     //------------------------------------------Shop-----------------------
 
-    void searchInShop(Request request) {
+    void searchInShop(String command) {
     }
 
-    void showCollectionInShop(Request request) {
+    void showCollectionInShop(String command) {
     }
 
-    void buyCard(Request request) {
+    void buyCard(String command) {
     }
 
-    void sellCard(Request request) {
+    void sellCard(String command) {
     }
 
     void showShop() {

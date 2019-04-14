@@ -1,7 +1,8 @@
-import View.View;
+import view.View;
 
 public class Main {
     public static void main(String argc[]){
-        View.start();
+        View view = View.getInstance();
+        view.start();
     }
 }
