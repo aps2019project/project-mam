@@ -34,6 +34,4 @@ public class MainMenuPage extends ConsolePage {
                 view.printError(ErrorType.INVALID_COMMAND);
         }
     }
-
-
 }
