@@ -27,14 +27,13 @@ public class Controller {
     public void createAccount(String command) {
         String userName = command.split(" ")[2];
         view.show("password :");
-        view.getNewCommand();
         String password = view.getPassword();
         if (User.isUserNameNew(userName))
             User.addUser(new User(userName, password));
         else view.printError(ErrorType.DUPLICATE_USERNAME);
     }
 
-    public void loginAccount(String command) {
+    public void loginAccount(String command) {              //????? problem
         String userName = command.split(" ")[1];
         view.show("password :");
         String password = view.getPassword();
@@ -53,7 +52,6 @@ public class Controller {
     }
 
     public void showLeaderBoard(String command) {
-
     }
     //--------------------------------------collection------------------------------
 

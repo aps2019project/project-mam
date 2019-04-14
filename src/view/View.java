@@ -29,6 +29,7 @@ public class View {
                 currentPage = pages.peek();
                 if (currentPage == null)
                     break;
+                currentPage.showMenu();
             }
 
             if (!scanner.hasNextLine())

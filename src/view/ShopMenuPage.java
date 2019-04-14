@@ -11,7 +11,7 @@ public class ShopMenuPage extends ConsolePage {
         view.showHelpForShopMenu();
     }
 
-    public void handleCommand(recuest command) {
+    public void handleCommand(String command) {
 
     }
 }

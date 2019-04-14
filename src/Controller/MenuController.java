@@ -5,7 +5,7 @@ import view.View;
 
 public class MenuController {
 
-    private View view = View.getInstance();
+    /*private View view = View.getInstance();
     private Controller controller = Controller.getInstance();
 
     public void main() {
@@ -193,5 +193,5 @@ public class MenuController {
         }                                                           // project while
 
 
-    }
+    }*/
 }
