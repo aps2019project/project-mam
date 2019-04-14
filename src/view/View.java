@@ -1,72 +1,61 @@
-package View;
+package view;
 
 import Model.ErrorType;
-
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class View {
-    private static final View VIEW = new View();
-    private View(){}
     private Scanner scanner = new Scanner(System.in);
+    private static final View VIEW = new View();
+    private boolean isEnded = false;
+    private View(){}
 
     public static View getInstance(){
         return VIEW;
     }
 
-    private static Deque<ConsolePage> pages = new LinkedList<>();
 
-    public static void start()
+
+    private Deque<ConsolePage> pages = new LinkedList<>();
+
+    public void start()
     {
-        pages.push(new MainMenuPage());
+        pages.push(new AccountMenuPage());
         ConsolePage currentPage = null;
-        while (true)
+        while (!isEnded)
         {
             if (currentPage != pages.peek())
             {
                 currentPage = pages.peek();
                 if (currentPage == null)
                     break;
-                currentPage.help();
+                currentPage.showMenu();
             }
-            String command = getNewCommand();
-            if (command.equalsIgnoreCase("back"))
-                back();
-            else
-                currentPage.handleCommand(command);
+            currentPage.handleCommand(getNewCommand());
         }
     }
 
-    public static void back()
+    public void back()
     {
         pages.pop();
     }
 
+    public void exit(){isEnded = true;}
+
     public String getNewCommand(){
+        return scanner.nextLine().toLowerCase().trim();
+    }
+    public String getPassword(){
         return scanner.nextLine();
     }
 
+    public Deque<ConsolePage> getPages() {
+        return pages;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void printError(ErrorType type){}
-    public void printError(String errorMessage){
-        System.out.println(errorMessage);
+    public void printError(ErrorType type){
+        System.out.println(type.getMessage());
     }
 
     public void showHelpForAccountMenu(){
@@ -88,4 +77,7 @@ public class View {
                 "sell [card id | card id] \nshow");
     }
 
+    public void show(String string){
+        System.out.println(string);
+    }
 }

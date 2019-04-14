@@ -53,65 +53,73 @@ public class Controller {
 
     public void showLeaderBoard(String command) {
     }
+
+    public void showUsers(){
+
+    }
+
     //--------------------------------------collection------------------------------
 
     public boolean isAccountValidForLogin(String command) {
         return true;
     }
 
-    public void showCollection(String command) {
+    public void showCollection() {
     }
 
-    public void searchInCollection(String command) {
+    public void searchInCollection(String name) {
     }
 
-    public void saveCommandInCollection() {
+    public void saveCollection() {
     }
 
-    public void createDeck(String command) {
+    public void createDeck(String deckName) {
     }
 
-    public void deleteDeck(String command) {
+    public void deleteDeck(String deckName) {
     }
 
-    void addCardToDeck(String command) {
+    public void addCardToDeck(String deckName) {
     }               //???????
 
-    void removeFromDeck(String command) {
+    public void removeFromDeck(String command) {
     }
 
-    void isDeckValid(String command) {
+    public void isDeckValid(String deckName) {
     }
 
-    void selectMainDeck(String command) {
+    public void selectMainDeck(String command) {
     }
 
-    void showDeck() {
+    public void showAllDecks() {
     }
 
-    void showDeck(String command) {
+    public void showDeck(String command) {
     }
     //------------------------------------------Shop-----------------------
 
-    void searchInShop(String command) {
+    public void searchInShop(String name) {
     }
 
-    void showCollectionInShop(String command) {
+    public void showCollectionInShop(String command) {
     }
 
-    void buyCard(String command) {
+    public void buy(String name) {
     }
 
-    void sellCard(String command) {
+    public void sell(String name) {
     }
 
-    void showShop() {
+    public void showShop() {
     }
 
     //----------------------------------battle-------------------------------------
 
-    public void isMainDeckValid(){
-
+    public boolean isMainDeckValid(){
+return true;
+    }
+    public boolean isMainDeckValid(String userName){
+        return true;
     }
 
 }
