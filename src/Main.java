@@ -1,8 +1,7 @@
-import Controller.MenuController;
+import View.View;
 
 public class Main {
     public static void main(String argc[]){
-        MenuController menu = new MenuController();
-        menu.main();
+        View.start();
     }
 }

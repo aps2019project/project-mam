@@ -105,4 +105,10 @@ public class Controller {
     void showShop() {
     }
 
+    //----------------------------------battle-------------------------------------
+
+    public void isMainDeckValid(){
+
+    }
+
 }
