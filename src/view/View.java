@@ -23,7 +23,7 @@ public class View {
     {
         pages.push(new AccountMenuPage());
         ConsolePage currentPage = null;
-        while (isEnded)
+        while (!isEnded)
         {
             if (currentPage != pages.peek())
             {

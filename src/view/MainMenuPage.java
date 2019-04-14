@@ -17,14 +17,19 @@ public class MainMenuPage extends ConsolePage {
         switch (command) {
             case "enter collection":
                 view.getPages().push(new CollectionMenuPage());
+                break;
             case "enter shop":
                 view.getPages().push(new ShopMenuPage());
+                break;
             case "enter battle":
                 view.getPages().push(new BattleMenuPage());
+                break;
             case "exit":
                 view.exit();
+                break;
             case "help":
                 view.showHelpForMainMenu();
+                break;
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
