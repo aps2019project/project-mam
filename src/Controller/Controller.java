@@ -53,6 +53,11 @@ public class Controller {
 
     public void showLeaderBoard(String command) {
     }
+
+    public void showUsers(){
+
+    }
+
     //--------------------------------------collection------------------------------
 
     public boolean isAccountValidForLogin(String command) {
@@ -80,13 +85,13 @@ public class Controller {
     void removeFromDeck(String command) {
     }
 
-    void isDeckValid(String command) {
+    void isDeckValid(String deckName) {
     }
 
     void selectMainDeck(String command) {
     }
 
-    void showDeck() {
+    public void showAllDecks() {
     }
 
     void showDeck(String command) {
@@ -110,8 +115,11 @@ public class Controller {
 
     //----------------------------------battle-------------------------------------
 
-    public void isMainDeckValid(){
-
+    public boolean isMainDeckValid(){
+return true;
+    }
+    public boolean isMainDeckValid(String userName){
+        return true;
     }
 
 }

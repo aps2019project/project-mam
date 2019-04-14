@@ -5,6 +5,9 @@ public enum ErrorType {
     INVALID_USERNAME("userName is inValid"),
     INCORRECT_PASSWORD("password is incorrect"),
     INVALID_COMMAND("command is invalid"),
+    INVALID_DECK("selected deck is invalid"),
+    INVALID_DECK_2("selected deck for second player is invalid"),
+
 
     ;
 

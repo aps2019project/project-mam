@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class View {
     private Scanner scanner = new Scanner(System.in);
     private static final View VIEW = new View();
+    private boolean isEnded = false;
     private View(){}
 
     public static View getInstance(){
@@ -22,7 +23,7 @@ public class View {
     {
         pages.push(new AccountMenuPage());
         ConsolePage currentPage = null;
-        while (true)
+        while (isEnded)
         {
             if (currentPage != pages.peek())
             {
@@ -31,14 +32,7 @@ public class View {
                     break;
                 currentPage.showMenu();
             }
-
-            if (!scanner.hasNextLine())
-                break;
-            String command = getNewCommand();
-            if (command.equals("back"))
-                back();
-            else
-                currentPage.handleCommand(command);
+            currentPage.handleCommand(getNewCommand());
         }
     }
 
@@ -46,6 +40,8 @@ public class View {
     {
         pages.pop();
     }
+
+    public void exit(){isEnded = true;}
 
     public String getNewCommand(){
         return scanner.nextLine().toLowerCase().trim();

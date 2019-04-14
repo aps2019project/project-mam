@@ -1,6 +1,7 @@
 package view;
 
 import Controller.Controller;
+import Model.ErrorType;
 
 
 public class MainMenuPage extends ConsolePage {
@@ -13,19 +14,21 @@ public class MainMenuPage extends ConsolePage {
     }
 
     public void handleCommand(String command) {
-        /*switch (command) {
+        switch (command) {
             case "enter collection":
-                return MAIN_COLLECTION;
+                view.getPages().push(new CollectionMenuPage());
             case "enter shop":
-                return MAIN_SHOP;
+                view.getPages().push(new ShopMenuPage());
             case "enter battle":
-                return MAIN_BATTLE;
+                view.getPages().push(new BattleMenuPage());
             case "exit":
-                return EXIT;
+                view.exit();
             case "help":
-                return HELP;
+                view.showHelpForMainMenu();
             default:
-                return INVALID_COMMAND;
-        }*/
+                view.printError(ErrorType.INVALID_COMMAND);
+        }
     }
+
+
 }
