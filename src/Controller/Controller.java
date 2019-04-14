@@ -11,7 +11,7 @@ public class Controller {
     private Controller() {
     }
 
-    static Controller getInstance() {
+    public static Controller getInstance() {
         return CONTROLLER;
     }
 
@@ -21,10 +21,10 @@ public class Controller {
 
 //------------------------------user account -----------------------------
 
-    void saveAccount(Request request) {
+    public void saveAccount(Request request) {
     }
 
-    void createAccount(Request request) {
+    public void createAccount(Request request) {
         String userName = request.getCommand();
         System.out.println("password :");
         request.getNewCommand();
@@ -35,7 +35,7 @@ public class Controller {
         }
     }
 
-    void loginAccount(Request request) {
+    public void loginAccount(Request request) {
         String userName = request.getCommand();
         System.out.println("password :");
         request.getNewCommand();
@@ -45,11 +45,11 @@ public class Controller {
             user = temp;
     }
 
-    void logoutAccount(Request request) {
+    public void logoutAccount(Request request) {
         user = null;
     }
 
-    void showLeaderBoard(Request request) {
+    public void showLeaderBoard(Request request) {
     }
     //--------------------------------------collection------------------------------
 

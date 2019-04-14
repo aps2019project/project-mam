@@ -2,6 +2,10 @@ package View;
 
 import Model.ErrorType;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
 public class View {
     private static final View VIEW = new View();
     private View(){}
@@ -9,6 +13,55 @@ public class View {
     public static View getInstance(){
         return VIEW;
     }
+
+    private static Deque<ConsolePage> pages = new LinkedList<>();
+
+    public static void start()
+    {
+        Scanner scanner = new Scanner(System.in);
+        pages.push(new MainMenuPage());
+        ConsolePage currentPage = null;
+        while (true)
+        {
+            if (currentPage != pages.peek())
+            {
+                currentPage = pages.peek();
+                if (currentPage == null)
+                    break;
+                currentPage.help();
+            }
+
+            if (!scanner.hasNextLine())
+                break;
+            String command = scanner.nextLine();
+            if (command.equalsIgnoreCase("back"))
+                back();
+            else
+                currentPage.handleCommand(command);
+        }
+    }
+
+    public static void back()
+    {
+        pages.pop();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void printError(ErrorType type){}
     public void printError(String errorMessage){

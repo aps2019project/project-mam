@@ -1,32 +1,34 @@
 package View;
 
+import Controller.Controller;
+
 import static Model.RequestType.*;
 import static Model.RequestType.INVALID_COMMAND;
 
 public class AccountMenuPage extends ConsolePage{
+    Controller controller = Controller.getInstance();
+    View view = View.getInstance();
 
-    @Override
-    public void help() {
-        System.out.print("create account [user name]\nlogin [user name] \nshow leaderboard \nsave \nlogout");
+    public void help(){
+        view.showHelpForAccountMenu();
     }
 
     @Override
-    public  handleCommand(String command) {
-        if (command.equals("exit"))
-            return EXIT;
+    public void handleCommand(String command) {
         if (command.matches("create account .*"))
-            return ACCOUNT_CREATE_ACCOUNT;
+            controller.createAccount();
         else if (command.matches("save"))
-            return ACCOUNT_SAVE;
+            controller.saveAccount();
         else if (command.matches("logout"))
-            return ACCOUNT_LOGOUT;
+            controller.logoutAccount();
         else if (command.matches("login .*"))
-            return ACCOUNT_LOGIN;
+            controller.loginAccount();
         else if (command.matches("show leaderboard"))
-            return ACCOUNT_SHOW_LEADERBOARD;
+            controller.showLeaderBoard();
         else if (command.matches("help"))
-            return HELP;
+            view.showHelpForAccountMenu();
         else
-            return INVALID_COMMAND;
+
+
     }
 }
