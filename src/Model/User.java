@@ -79,10 +79,11 @@ public class User {
         for (User user : users)
             if (user.name.equals(userName)) {
                 isUserNameNew = false;
-                return true;
+                //View.getInstance().printError("username is'nt new");
+                return false;
             }
-        View.getInstance().printError("username is'nt new");
-        return false;
+
+        return true;
     }
 
     public static User login(String userName, String password) {
@@ -110,10 +111,10 @@ public class User {
         }
         for (int i = 0; i < numberOfUser; i++)
             for (int j = 1; j < numberOfUser - i; j++)
-                if (arr[j].numberOfWin > arr[j-1].numberOfWin){
+                if (arr[j].numberOfWin > arr[j - 1].numberOfWin) {
                     User temp = arr[j];
-                    arr[j] = arr[j-1];
-                    arr[j-1] = temp;
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
                 }
         return arr;
     }

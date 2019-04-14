@@ -1,7 +1,11 @@
 package Model;
 
 public enum ErrorType {
+    DUPLICATE_USERNAME("username is'nt new"),
+    INVALID_USERNAME("userName is inValid"),
+    INCORRECT_PASSWORD("password is incorrect"),
     ;
+
     private String message;
 
     public String getMessage() {

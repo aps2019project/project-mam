@@ -29,8 +29,8 @@ public class Request {
         this.error = error;
     }
 
-    public RequestType getRequestType(String menu){
-        if (menu.equals("account")){
+    public RequestType getRequestType(String menu) {
+        if (menu.equals("account")) {
             if (command.equals("exit"))
                 return EXIT;
             if (command.matches("create account .*"))
@@ -47,8 +47,7 @@ public class Request {
                 return HELP;
             else
                 return INVALID_COMMAND;
-        }
-        else if (menu.equals("main Menu")){
+        } else if (menu.equals("main Menu")) {
             switch (command) {
                 case "enter collection":
                     return MAIN_COLLECTION;
@@ -63,10 +62,8 @@ public class Request {
                 default:
                     return INVALID_COMMAND;
             }
-        }
-
-        else if (menu.equals("collection Menu")){
-            switch (command){
+        } else if (menu.equals("collection Menu")) {
+            switch (command) {
                 case "exit":
                     return EXIT;
                 case "help":
@@ -96,10 +93,8 @@ public class Request {
                 return COLLECTION_SHOW_DECK;
             else
                 return INVALID_COMMAND;
-        }
-
-        else if (menu.equals("shop Menu")){
-            switch (command){
+        } else if (menu.equals("shop Menu")) {
+            switch (command) {
                 case "exit":
                     return EXIT;
                 case "help":

@@ -26,16 +26,17 @@ public class Controller {
 
     void createAccount(Request request) {
         String userName = request.getCommand();
-        System.out.println("password :");
+        view.show("password :");
         request.getNewCommand();
         String password = request.getCommand();
         if (User.isUserNameNew(userName))
             User.addUser(new User(userName, password));
+        else view.printError(ErrorType.DUPLICATE_USERNAME);
     }
 
     void loginAccount(Request request) {
         String userName = request.getCommand();
-        System.out.println("password :");
+        view.show("password :");
         request.getNewCommand();
         String password = request.getCommand();
         User temp = User.login(userName, password);
@@ -51,7 +52,7 @@ public class Controller {
     }
     //--------------------------------------collection------------------------------
 
-    boolean isAccountValidForLogin(Request request){
+    boolean isAccountValidForLogin(Request request) {
         return true;
     }
 
