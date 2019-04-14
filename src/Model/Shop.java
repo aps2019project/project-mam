@@ -85,7 +85,7 @@ public class Shop {
         //----------------------------minions-----------------------
 
 
-        card = new Minion("kamandar fars", 300, 2, 6, 4, 7, RANGED, null);
+        card = new Minion("kamandar fars", 300, 2, 6, 4, 7, RANGED, NULL);
         cards.add(card);
 
         card = new Minion("shamshirZan fars", 400, 2, 4, 6, 0, MELEE, ON_ATTACK);

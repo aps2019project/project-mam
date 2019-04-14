@@ -117,6 +117,12 @@ public class User {
                 }
         return arr;
     }
+
+    public boolean isMainDeckValid(){
+        return true;
+    }
+
+
 }
 
 

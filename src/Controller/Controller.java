@@ -16,7 +16,7 @@ public class Controller {
     }
 
     private View view = View.getInstance();
-    User user = new User();
+    private User user = new User();
 
 
 //------------------------------user account -----------------------------
@@ -29,8 +29,10 @@ public class Controller {
         System.out.println("password :");
         request.getNewCommand();
         String password = request.getCommand();
-        if (User.isUserNameNew(userName))
-            User.addUser(new User(userName, password));
+        if (User.isUserNameNew(userName)) {
+            user = new User(userName, password);
+            User.addUser(user);
+        }
     }
 
     void loginAccount(Request request) {
@@ -102,6 +104,12 @@ public class Controller {
     }
 
     void showShop() {
+    }
+
+    //----------------------------------battle-------------------------------------
+
+    public void isMainDeckValid(){
+
     }
 
 }

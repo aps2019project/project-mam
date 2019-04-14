@@ -171,6 +171,26 @@ public class MenuController {
                 }
             }                                                       // shop menu while
 
+            shouldShowHelp = true;
+            while (stateOfMenu.equals("battle Menu")) {
+                controller.isMainDeckValid();
+
+
+
+                if (shouldShowHelp) {
+                    view.showHelpForBattleMenu();
+                    shouldShowHelp = false;
+                }
+
+                Request request = new Request();
+                request.getNewCommand();
+                if (request.getRequestType("battle Menu") == RequestType.INVALID_COMMAND) {
+                    view.printError(request.getError());
+                    continue;
+                }
+
+
+            }
         }                                                           // project while
 
 
