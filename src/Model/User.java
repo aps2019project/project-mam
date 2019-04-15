@@ -12,7 +12,7 @@ public class User {
     private Deck mainDeck;
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
-
+    private int money=15000;
     public User(String name, String password) {
         this.name = name;
         this.numberOfWin = 0;
@@ -40,7 +40,7 @@ public class User {
     public int getNumberOfWin() {
         return numberOfWin;
     }
-
+    public int getMoney(){return money;}
     public Deck getMainDeck() {
         return mainDeck;
     }

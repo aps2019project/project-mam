@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class Card {
     private int MP;
+    private int id;
     private int price;
     private String name;
     private String desc;
     private ArrayList<Buff> buffs = new ArrayList<>();
 
-    Card(){}
+    Card() {
+    }
 
     Card(String name, int price, int MP, String desc) {
         this.MP = MP;
@@ -23,7 +25,6 @@ public class Card {
         this.price = price;
         this.name = name;
     }
-
     public int getMP() {
         return MP;
     }
@@ -44,15 +45,15 @@ public class Card {
         return buffs;
     }
 
-    public String getInfo(){
+    public String getInfo() {
         return null;
     }
 
-    public void addBuff(Buff buff){
+    public void addBuff(Buff buff) {
         buffs.add(buff);
     }
 
-    public void addBuff(Buff buff, String sign){
+    public void addBuff(Buff buff, String sign) {
         buff.setSign(sign);
         buffs.add(buff);
     }

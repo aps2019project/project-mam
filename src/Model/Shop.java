@@ -15,7 +15,13 @@ public class Shop {
 
     private Shop() {
     }
-
+    public void buy(String cardName){
+        for (Card card : cards) {
+            if(card.getName()==cardName){
+                break;
+            }
+        }
+    }
     public static Shop getInstance() {
         return SHOP;
     }
