@@ -11,17 +11,61 @@ public class Shop {
     private static final Shop SHOP = new Shop();
 
     private static ArrayList<Card> cards = new ArrayList<>();
-
+    private static ArrayList<Item> items = new ArrayList<>();
 
     private Shop() {
     }
-    public void buy(String cardName){
+
+    public boolean checkIsItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void buyCard(String cardName, User user) {
         for (Card card : cards) {
-            if(card.getName()==cardName){
-                break;
+            if (card.getName().equals(cardName)) {
+                user.getCollection().addCard(card);
             }
         }
     }
+
+    public void buyItem(String itemName, User user) {
+        for (Item item : items) {
+            if (item.getName().equals(itemName)) {
+                user.getCollection().addItem(item);
+            }
+        }
+    }
+
+    public boolean checkIsPossibleToAddItem(User user) {
+        if (user.getCollection().getItems().size() < 3)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean checkNameIsCorrect(String name) {
+        for (Card card : cards) {
+            if (card.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkPriceIsEnough(int price, User user) {
+        for (Card card : cards) {
+            if (card.getPrice() <= user.getMoney()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Shop getInstance() {
         return SHOP;
     }
@@ -117,7 +161,9 @@ public class Shop {
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
         //card.addBuff(new Buff(""));
-
+        //-----------------------------Item------------------------------------------
+        Item item = new UsableItem("tajdanaii", 300, "3time");
+        items.add(item);
 
     }
 }

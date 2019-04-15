@@ -9,7 +9,7 @@ public class User {
     private String name;
     private String password;
     private int numberOfWin;
-    private Deck mainDeck;
+
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
     private int money=15000;
@@ -17,7 +17,6 @@ public class User {
         this.name = name;
         this.numberOfWin = 0;
         this.password = password;
-        mainDeck = new Deck();
         collection = new Collection();
         lastGames = new ArrayList<>();
     }
@@ -42,7 +41,7 @@ public class User {
     }
     public int getMoney(){return money;}
     public Deck getMainDeck() {
-        return mainDeck;
+        return collection.getMainDeck();
     }
 
     public Collection getCollection() {
@@ -51,10 +50,6 @@ public class User {
 
     public ArrayList<StringBuilder> getLastGames() {
         return lastGames;
-    }
-
-    public void setMainDeck(Deck mainDeck) {
-        this.mainDeck = mainDeck;
     }
 
     public static void addUser(User user) {
