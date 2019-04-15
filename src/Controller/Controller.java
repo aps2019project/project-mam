@@ -16,7 +16,8 @@ public class Controller {
     }
 
     private View view = View.getInstance();
-    User user = new User();
+    private Shop shop = Shop.getInstance();
+    private User user = new User();
 
 
 //------------------------------user account -----------------------------
@@ -105,6 +106,24 @@ public class Controller {
     }
 
     public void buy(String name) {
+        if (shop.cardNameIsAvailable(name)){
+            if (shop.priceIsEnough(shop.getCardPrice(name), user)) {
+                shop.buyCard(name, user);
+                view.printError(ErrorType.SUCCESSFUL_BUY);
+            }
+            else view.printError(ErrorType.MONEY_IS_NOT_ENOUGH);
+        }
+        else if (shop.itemNameIsAvailable(name)){
+            if (shop.isPossibleToAddItem(user)) {
+                if (shop.priceIsEnough(shop.getItemPrice(name), user)) {
+                    shop.buyItem(name, user);
+                    view.printError(ErrorType.SUCCESSFUL_BUY);
+                }
+                else view.printError(ErrorType.MONEY_IS_NOT_ENOUGH);
+            }
+            else view.printError(ErrorType.THREE_ITEM);
+        }
+        else view.printError(ErrorType.UNAVAILABLE_CARD_OR_ITEM);
     }
 
     public void sell(String name) {

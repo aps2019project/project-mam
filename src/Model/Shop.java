@@ -11,18 +11,9 @@ public class Shop {
     private static final Shop SHOP = new Shop();
 
     private static ArrayList<Card> cards = new ArrayList<>();
-    private static ArrayList<Item> items = new ArrayList<>();
+    private static ArrayList<UsableItem> items = new ArrayList<>();
 
     private Shop() {
-    }
-
-    public boolean checkIsItem(String name) {
-        for (Item item : items) {
-            if (item.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void buyCard(String cardName, User user) {
@@ -41,28 +32,50 @@ public class Shop {
         }
     }
 
-    public boolean checkIsPossibleToAddItem(User user) {
+    public int getCardPrice(String name){
+        for (Card card : cards) {
+            if (card.getName().equals(name))
+                return card.getPrice();
+        }
+        return 0;
+    }
+
+    public int getItemPrice(String name){
+        for (UsableItem item : items) {
+            if (item.getName().equals(name))
+                return item.getPrice();
+        }
+        return 0;
+    }
+
+    public boolean isPossibleToAddItem(User user) {
         if (user.getCollection().getItems().size() < 3)
             return true;
         else
             return false;
     }
 
-    private boolean checkNameIsCorrect(String name) {
+    public boolean cardNameIsAvailable(String cardName) {
         for (Card card : cards) {
-            if (card.getName().equals(name)) {
+            if (card.getName().equals(cardName)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean checkPriceIsEnough(int price, User user) {
-        for (Card card : cards) {
-            if (card.getPrice() <= user.getMoney()) {
+    public boolean itemNameIsAvailable(String itemName) {
+        for (Item item : items) {
+            if (item.getName().equals(itemName)) {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean priceIsEnough(int price, User user) {
+        if (user.getMoney() >= price)
+            return true;
         return false;
     }
 
@@ -162,7 +175,7 @@ public class Shop {
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
         //card.addBuff(new Buff(""));
         //-----------------------------Item------------------------------------------
-        Item item = new UsableItem("tajdanaii", 300, "3time");
+        UsableItem item = new UsableItem("tajdanaii", 300, "3time");
         items.add(item);
 
     }
