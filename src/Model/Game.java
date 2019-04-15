@@ -9,7 +9,6 @@ public class Game {
     private Map map;
     private Deck firstPlayerDeck, secondPlayerDeck;
 
-
     public Game(User firstPlayer, User secondPlayer, String mode, String kind) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
