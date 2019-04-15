@@ -23,4 +23,10 @@ public class Item {
     public void addBuff(Buff buff){
         buffs.add(buff);
     }
+
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Name :").append(getName()).append(getDesc());
+        return info.toString();
+    }
 }

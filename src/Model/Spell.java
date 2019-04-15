@@ -20,7 +20,7 @@ public class Spell extends Card{
     }
 
     @Override
-    public String getInfo() {
+    public String getCardType() {
         return "spell";
     }
 }

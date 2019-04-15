@@ -11,9 +11,53 @@ public class Shop {
     private static final Shop SHOP = new Shop();
 
     private static ArrayList<Card> cards = new ArrayList<>();
-    private static ArrayList<UsableItem> items = new ArrayList<>();
+    private static ArrayList<Item> items = new ArrayList<>();
 
     private Shop() {
+    }
+
+    public boolean searchCard(String cardName) {
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean searchItem(String itemName) {
+        for (Item item: items) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean searchCardInCollection(String cardName,User user){
+        for (Card card: user.getCollection().getCards()) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean searchItemInCollection(String itemName,User user){
+        for (Item item: user.getCollection().getItems()) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIsItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void buyCard(String cardName, User user) {
@@ -32,53 +76,39 @@ public class Shop {
         }
     }
 
-    public int getCardPrice(String name){
-        for (Card card : cards) {
-            if (card.getName().equals(name))
-                return card.getPrice();
-        }
-        return 0;
-    }
-
-    public int getItemPrice(String name){
-        for (UsableItem item : items) {
-            if (item.getName().equals(name))
-                return item.getPrice();
-        }
-        return 0;
-    }
-
-    public boolean isPossibleToAddItem(User user) {
+    public boolean checkIsPossibleToAddItem(User user) {
         if (user.getCollection().getItems().size() < 3)
             return true;
         else
             return false;
     }
 
-    public boolean cardNameIsAvailable(String cardName) {
+    private boolean checkNameIsCorrect(String name) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
+            if (card.getName().equals(name)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean itemNameIsAvailable(String itemName) {
-        for (Item item : items) {
-            if (item.getName().equals(itemName)) {
+    private boolean checkPriceIsEnough(int price, User user) {
+        for (Card card : cards) {
+            if (card.getPrice() <= user.getMoney()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean priceIsEnough(int price, User user) {
-        if (user.getMoney() >= price)
-            return true;
-        return false;
+    public void sell(int cardId,User user) {
+        for (Card card : user.getCollection().getCards()) {
+            if(card.getId()==cardId){
+                user.setMoney(user.getMoney()-card.getPrice());
+                user.getCollection().removeCard(card);
+            }
+        }
     }
-
     public static Shop getInstance() {
         return SHOP;
     }
@@ -175,7 +205,7 @@ public class Shop {
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
         //card.addBuff(new Buff(""));
         //-----------------------------Item------------------------------------------
-        UsableItem item = new UsableItem("tajdanaii", 300, "3time");
+        Item item = new UsableItem("tajdanaii", 300, "3time");
         items.add(item);
 
     }

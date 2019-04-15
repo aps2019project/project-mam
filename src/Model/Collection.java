@@ -16,6 +16,12 @@ public class Collection {
     public void addItem(Item item){
         items.add(item);
     }
+    public void removeCard(Card card){
+        cards.remove(card);
+    }
+    public void removeItem(Item item){
+        items.remove(item);
+    }
     public Deck getMainDeck() {
         return mainDeck;
     }
