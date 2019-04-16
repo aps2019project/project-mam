@@ -135,6 +135,12 @@ public class Shop {
         return SHOP;
     }
 
+    public StringBuilder showColeection(User user){
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append(user.getCollection().getMinionInfo());
+        return allInfo;
+    }
+
     public static void importCards() {
         Card card = new Spell("Total Disarm", 1000, 0);
         card.addBuff(new Buff(DISARM, 100, 0, ONE_ENEMY_FORCE));

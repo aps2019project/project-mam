@@ -33,7 +33,7 @@ public class Minion extends Card{
         this.SPActivationTime = SPActivationTime;
     }
 
-
+    @Override
     public String getCardType() {
         return "minion";
     }

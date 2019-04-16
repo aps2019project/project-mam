@@ -34,6 +34,15 @@ public class Collection {
         return items;
     }
 
+    public StringBuilder getMinionInfo(){
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            if (card.getCardType().equals("minion"))
+                info.append(card.getInfo()).append("\n");
+        }
+        return info;
+    }
+
     public boolean searchItemInCollection(String itemName,User user){
         for (Item item: user.getCollection().getItems()) {
             if (item.getName().equals(itemName)) {
@@ -69,7 +78,7 @@ public class Collection {
     }
 
     public void addCard(String name){
-        
+
 
     }
 }
