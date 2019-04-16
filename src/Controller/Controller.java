@@ -96,6 +96,15 @@ public class Controller {
     //------------------------------------------Shop-----------------------
 
     public void searchInShop(String name) {
+        if (shop.searchCard(name)){
+            view.printError(ErrorType.FOUND_CARD);
+            view.show(shop.getCardInfo(name));
+        }
+        else if (shop.searchItem(name)){
+            view.printError(ErrorType.FOUND_ITEM);
+            view.show(shop.getItemInfo(name));
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void buy(String name) {

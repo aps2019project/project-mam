@@ -28,6 +28,18 @@ public class Shop {
         }
         return info.toString();
     }
+
+    public String getCardInfo(String cardName){
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                info.append(card.getInfo()).append("\n");
+                return info.toString();
+            }
+        }
+        return null;
+    }
+
     public String getHeroInfo(){
         StringBuilder info = new StringBuilder();
         int counter = 1;
@@ -52,6 +64,17 @@ public class Shop {
         return info.toString();
     }
 
+    public String getItemInfo(String itemName){
+        StringBuilder info = new StringBuilder();
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName)){
+                info.append(item.getInfo()).append("\n");
+                return info.toString();
+            }
+        }
+        return null;
+    }
+
     public String show (){
         StringBuilder allInfo = new StringBuilder();
         allInfo.append("Heroes :\n").append(getHeroInfo());
@@ -60,18 +83,18 @@ public class Shop {
         return allInfo.toString();
     }
 
-    public int searchCard(String cardName) {
+    public boolean searchCard(String cardName) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                return card.getId();
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
     public boolean searchItem(String itemName) {
         for (Item item: items) {
-            if (item.getName().equals(itemName)) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
@@ -79,7 +102,7 @@ public class Shop {
     }
     public boolean searchCardInCollection(String cardName,User user){
         for (Card card: user.getCollection().getCards()) {
-            if (card.getName().equals(cardName)) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
                 return true;
             }
         }
@@ -88,7 +111,7 @@ public class Shop {
 
     public boolean searchItemInCollection(String itemName,User user){
         for (Item item: user.getCollection().getItems()) {
-            if (item.getName().equals(itemName)) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
