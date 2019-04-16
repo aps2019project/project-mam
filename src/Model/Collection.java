@@ -33,4 +33,43 @@ public class Collection {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public boolean searchItemInCollection(String itemName,User user){
+        for (Item item: user.getCollection().getItems()) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void creatDecks(String deckName){
+        for (Deck deck : decks) {
+            if(!deck.getName().equals(deckName)){
+                deck.setName(deckName);
+
+            }
+        }
+    }
+    public boolean checkIsexistDeck(String name){
+        for (Deck deck : decks) {
+            if(deck.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteDecks(String deckName){
+        for (Deck deck : decks) {
+            if(deck.getName().equals(deckName)){
+                decks.remove(deck);
+            }
+        }
+    }
+
+    public void addCard(String name){
+        
+
+    }
 }
