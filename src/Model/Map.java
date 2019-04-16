@@ -1,6 +1,8 @@
 package Model;
 
 public class Map {
+    private static final int ROW_NUMBER = 5;
+    private static final int COLUMN_NUMBER = 9;
     private CellEffect[][] cellEffects;
     private CollectableItem[][] cellItems;
     private Card[][] cellCards1;
@@ -8,11 +10,11 @@ public class Map {
     private int[][] cellFlags;
 
     public Map() {
-        cellEffects = new CellEffect[5][9];
-        cellItems = new CollectableItem[5][9];
-        cellCards1 = new Card[5][9];
-        cellCards2 = new Card[5][9];
-        cellFlags = new int[5][9];
+        cellEffects = new CellEffect[ROW_NUMBER][COLUMN_NUMBER];
+        cellItems = new CollectableItem[ROW_NUMBER][COLUMN_NUMBER];
+        cellCards1 = new Card[ROW_NUMBER][COLUMN_NUMBER];
+        cellCards2 = new Card[ROW_NUMBER][COLUMN_NUMBER];
+        cellFlags = new int[ROW_NUMBER][COLUMN_NUMBER];
     }
 
     public CellEffect[][] getCellEffects() {

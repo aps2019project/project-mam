@@ -1,5 +1,7 @@
 package Model;
 
+import view.BattleMenuPage;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -10,41 +12,59 @@ public class Game {
     private static final String THIRD_MODE = "3";
     private static final int BASIC_MANA = 2;
     private static final int BASIC_FLAG_COUNT = 7;
-    private String firstPlayer;
-    private String secondPlayer;
+    private static final int MY_TURN = 1;
+    private static final int OPPONENT_TURN = 2;
+    private Map map;
+    private Deck myDeck;
+    private Deck oppDeck;
+    private ArrayList<Card> graveYard;
+    private Card currentCard = null;
+    private String myName;
+    private String oppName;
     private String mode;
-    private String playerCount;
     private int turn;
     private int flagCount;
-    private int firstPlayerMana;
-    private int secondPlayerMana;
-    private Map map;
-    private Deck firstPlayerDeck;
-    private Deck secondPlayerDeck;
-    private ArrayList<Deck> graveYard;
-    private Card currentCard = null;
+    private int currentTurnMana;
+    private int myMana;
+    private int oppMana;
 
-    public Game(String firstPlayer, String secondPlayer, String mode, String playerCount,
-                int flagCount, Deck firstPlayerDeck, Deck secondPlayerDeck) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+
+    public Game(Deck myDeck, Deck oppDeck, String myName, String oppName, String mode, int flagCount) {
+        this.myDeck = myDeck;
+        this.oppDeck = oppDeck;
+        this.myName = myName;
+        this.oppName = oppName;
         this.mode = mode;
-        this.playerCount = playerCount;
         this.flagCount = flagCount;
-        this.firstPlayerDeck = firstPlayerDeck;
-        this.secondPlayerDeck = secondPlayerDeck;
         graveYard = new ArrayList<>();
-        map = new Map();
-
-
+        turn = MY_TURN;
+        currentTurnMana = BASIC_MANA;
+        myMana = BASIC_MANA;
+        oppMana = BASIC_MANA;
     }
 
-    public String getFirstPlayer() {
-        return firstPlayer;
+    public Map getMap() {
+        return map;
     }
 
-    public String getSecondPlayer() {
-        return secondPlayer;
+    public Deck getMyDeck() {
+        return myDeck;
+    }
+
+    public Deck getOppDeck() {
+        return oppDeck;
+    }
+
+    public ArrayList<Card> getGraveYard() {
+        return graveYard;
+    }
+
+    public String getMyName() {
+        return myName;
+    }
+
+    public String getOppName() {
+        return oppName;
     }
 
     public String getMode() {
@@ -55,36 +75,32 @@ public class Game {
         return turn;
     }
 
-    public String getKind() {
-        return playerCount;
+    public int getFlagCount() {
+        return flagCount;
     }
 
-    public int getFirstPlayerMana() {
-        return firstPlayerMana;
+    public int getMyMana() {
+        return myMana;
     }
 
-    public int getSecondPlayerMana() {
-        return secondPlayerMana;
+    public int getOppMana() {
+        return oppMana;
     }
 
-    public Map getMap() {
-        return map;
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
     }
 
-    public Deck getFirstPlayerDeck() {
-        return firstPlayerDeck;
+    public void setMyMana(int myMana) {
+        this.myMana = myMana;
     }
 
-    public Deck getSecondPlayerDeck() {
-        return secondPlayerDeck;
+    public void setOppMana(int oppMana) {
+        this.oppMana = oppMana;
     }
 
-    public void setFirstPlayerMana(int firstPlayerMana) {
-        this.firstPlayerMana = firstPlayerMana;
-    }
-
-    public void setSecondPlayerMana(int secondPlayerMana) {
-        this.secondPlayerMana = secondPlayerMana;
+    public void setCurrentTurnMana(int currentTurnMana) {
+        this.currentTurnMana = currentTurnMana;
     }
 
     public void changeTurn() {
@@ -104,6 +120,16 @@ public class Game {
     public void SelectCard(int cardId){
 
     }
+
+    public boolean isCardIdValid(int cardId){
+        return true;
+
+    }
+
+    public void moveCurrentCardTo(int x, int y){}
+
+
+
 
 
 }
