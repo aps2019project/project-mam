@@ -2,6 +2,7 @@ package view;
 
 import Controller.Controller;
 import Model.ErrorType;
+import Model.User;
 
 public class BattleMenuPage extends ConsolePage {
     Controller controller = Controller.getInstance();
@@ -12,11 +13,14 @@ public class BattleMenuPage extends ConsolePage {
     private String gameKind = null;
     private String gameMood = null;
     private String mission = null;
-    private String secondPlayer = null;
+    private User secondUser = null;
+    private User firstUser = controller.getFirstUser();
+    private int flags;
 
-    public static BattleMenuPage getInstance(){
+    public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;
     }
+
     @Override
     public void help() {
         view.showHelpForBattleMenu();
@@ -42,6 +46,9 @@ public class BattleMenuPage extends ConsolePage {
                 break;
             case "2":
                 view.getPages().push(new GameMoodMenuPage());
+                controller.showUsers();
+                view.show("Select User:");
+                setSecondUser(getUser2());
                 numOfPlayers = "multi player";
                 break;
             case "exit":
@@ -68,8 +75,16 @@ public class BattleMenuPage extends ConsolePage {
         return mission;
     }
 
-    public String getSecondPlayer() {
-        return secondPlayer;
+    public User getFirstUser() {
+        return firstUser;
+    }
+
+    public User getSecondUser() {
+        return secondUser;
+    }
+
+    public int getFlags() {
+        return flags;
     }
 
     public void setNumOfPlayers(String numOfPlayers) {
@@ -88,23 +103,32 @@ public class BattleMenuPage extends ConsolePage {
         this.mission = mission;
     }
 
-    public void setSecondPlayer(String secondPlayer) {
-        this.secondPlayer = secondPlayer;
+    public void setSecondUser(User secondUser) {
+        this.secondUser = secondUser;
     }
 
-    public void showMission() {
-        view.show("1\n2\n3\n");
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 
-    public void showFirstMenu() {
-        view.show("1: single player\n2: multi player\n");
-    }
-
-    public void showKinds() {
-        view.show("1: story\n2: custom game");
-    }
-
-    public void showMoods() {
-        view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
+    public User getUser2() {
+        String command = view.getNewCommand();
+        if (command.matches("select user .+")) {
+            String userName = command.split(" ")[2];
+            if (controller.getSecondUser(userName) != null) {
+                return controller.getSecondUser(userName);
+            } else {
+                view.back();
+                view.back();
+                view.getPages().push(new BattleMenuPage());
+                return null;
+            }
+        } else {
+            view.printError(ErrorType.INVALID_COMMAND);
+            view.back();
+            view.back();
+            view.getPages().push(new BattleMenuPage());
+            return null;
+        }
     }
 }

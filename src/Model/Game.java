@@ -165,7 +165,7 @@ public class Game {
     }
 
     public boolean isCardInMap(int cardId){
-
+return true;
 
     }
 

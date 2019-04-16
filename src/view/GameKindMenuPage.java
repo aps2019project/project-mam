@@ -21,7 +21,7 @@ public class GameKindMenuPage extends ConsolePage {
                 break;
             case "2":
                 battleMenuPage.setGameKind("custom game");
-                view.getPages().push(new GameMoodMenuPage());
+                view.getPages().push(new MainBattleMenuPage());
                 break;
             case "back":
                 view.back();
@@ -35,5 +35,10 @@ public class GameKindMenuPage extends ConsolePage {
     public void showMenu() {
         view.show("Select Game Kind:");
         view.show("1: story\n2: custom game\n");
+    }
+
+    public boolean getNewCommand(){
+        String newCommand = view.getNewCommand();
+        return true;
     }
 }

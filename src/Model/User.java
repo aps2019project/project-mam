@@ -36,6 +36,7 @@ public class User {
         this.idCounter = idCounter;
     }
 
+
     public static ArrayList<User> getUsers() {
         return users;
     }
@@ -74,13 +75,6 @@ public class User {
 
     public ArrayList<StringBuilder> getLastGames() {
         return lastGames;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "money=" + money +
-                '}';
     }
 
     public static void addUser(User user) {
@@ -151,7 +145,6 @@ public class User {
         int index = random.nextInt(this.collection.getDecks().size());
         return this.collection.getDecks().get(index);
     }
-
 
 }
 
