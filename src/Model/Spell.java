@@ -23,4 +23,12 @@ public class Spell extends Card{
     public String getCardType() {
         return "spell";
     }
+
+    @Override
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Type : Spell - Name : ").append(getName()).append(" - Mp : ").append(getMP());
+        info.append(" - Description : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
+        return info.toString();
+    }
 }

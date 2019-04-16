@@ -9,6 +9,7 @@ public class Controller {
     private static final Controller CONTROLLER = new Controller();
 
     private Controller() {
+        Shop.importCards();
     }
 
     public static Controller getInstance() {
@@ -17,6 +18,7 @@ public class Controller {
 
     private View view = View.getInstance();
     private Shop shop = Shop.getInstance();
+    private Collection collection = new Collection();
     private User user = new User();
 
 
@@ -26,7 +28,7 @@ public class Controller {
     }
 
     public void createAccount(String command) {
-        String userName = command.split(" ")[2];
+        String userName = command.substring(15);
         view.show("password :");
         String password = view.getPassword();
         if (User.isUserNameNew(userName))
@@ -62,6 +64,7 @@ public class Controller {
     //--------------------------------------collection------------------------------
 
     public void showCollection() {
+        view.show(collection.showCollection(user));
     }
 
     public void searchInCollection(String name) {
@@ -95,9 +98,6 @@ public class Controller {
     public void searchInShop(String name) {
     }
 
-    public void showCollectionInShop(String command) {
-    }
-
     public void buy(String name) {
         if (shop.cardNameIsAvailable(name)){
             if (shop.priceIsEnough(shop.getCardPrice(name), user)) {
@@ -123,6 +123,7 @@ public class Controller {
     }
 
     public void showShop() {
+        view.show(shop.show());
     }
 
     //----------------------------------battle-------------------------------------

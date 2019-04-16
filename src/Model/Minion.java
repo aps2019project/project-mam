@@ -40,9 +40,9 @@ public class Minion extends Card{
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();
-        info.append("Type: Minion - Name: ").append(getName()).append("-Class : ").append(getClass());
-        info.append("-Ap:").append(getAP()).append("-HP").append(getHP()).append("-Mp").append(getMP());
-        info.append("-Special power");
+        info.append("Type : Minion - Name : ").append(getName()).append(" - Class : ").append(getClass());
+        info.append(" - Ap : ").append(getAP()).append(" - HP : ").append(getHP()).append(" - Mp : ").append(getMP());
+        info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
     }
 

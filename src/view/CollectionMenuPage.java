@@ -41,4 +41,9 @@ public class CollectionMenuPage extends ConsolePage {
             view.back();
         else view.printError(ErrorType.INVALID_COMMAND);
     }
+
+    @Override
+    public void showMenu() {
+        view.show("----------<Collection>---------");
+    }
 }

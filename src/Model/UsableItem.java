@@ -11,4 +11,11 @@ public class UsableItem extends Item {
     public int getPrice() {
         return price;
     }
+
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Name : ").append(getName()).append(" - Description : ").append(getDesc());
+        info.append(" - Sell Cost : ").append(getPrice());
+        return info.toString();
+    }
 }

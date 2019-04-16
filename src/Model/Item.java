@@ -24,9 +24,5 @@ public class Item {
         buffs.add(buff);
     }
 
-    public String getInfo() {
-        StringBuilder info = new StringBuilder();
-        info.append("Name :").append(getName()).append(getDesc());
-        return info.toString();
-    }
+    public String getInfo() {return null;}
 }

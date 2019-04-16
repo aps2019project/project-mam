@@ -38,13 +38,48 @@ public class Collection {
     public void removeFromDeck(String command) {
     }
 
-    public StringBuilder getMinionInfo(){
+    public String getCardInfo(){
         StringBuilder info = new StringBuilder();
+        int counter = 1;
         for (Card card : cards) {
-            if (card.getCardType().equals("minion"))
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t").append(counter).append(" : ");
                 info.append(card.getInfo()).append("\n");
+                counter++;
+            }
         }
-        return info;
+        return info.toString();
+    }
+    public String getHeroInfo(){
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Card card : cards) {
+            if (card.getCardType().equals("hero")) {
+                info.append("\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
+        }
+        return info.toString();
+    }
+
+    public String getItemInfo(){
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Item item : items) {
+            info.append("\t\t").append(counter).append(" : ");
+            info.append(item.getInfo()).append("\n");
+            counter++;
+        }
+        return info.toString();
+    }
+
+    public String showCollection(User user){
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append("Heroes :\n").append(user.getCollection().getHeroInfo());
+        allInfo.append("\nItems :\n").append(user.getCollection().getItemInfo());
+        allInfo.append("\nCards :\n").append(user.getCollection().getCardInfo());
+        return allInfo.toString();
     }
 
     public boolean searchItemInCollection(String itemName,User user){
@@ -85,4 +120,5 @@ public class Collection {
 
 
     }
+
 }
