@@ -2,6 +2,7 @@ package Model;
 
 public enum ErrorType {
     DUPLICATE_USERNAME("username is'nt new"),
+    DUPLICATE_DECK("deck name is'nt new"),
     INVALID_USERNAME("userName is inValid"),
     INCORRECT_PASSWORD("password is incorrect"),
     INVALID_COMMAND("command is invalid"),
@@ -13,6 +14,7 @@ public enum ErrorType {
     SUCCESSFUL_BUY("buy successful"),
     SUCCESSFUL_SELL("sell successful"),
     NOT_FOUND_CARD_OR_ITEM("card or item not found"),
+    NOT_FOUND_DECK("deck not found"),
     FOUND_CARD("card found:"),
     FOUND_ITEM("item found:"),
 

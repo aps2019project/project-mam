@@ -41,8 +41,7 @@ public class Collection {
     }
 
 
-    public void removeFromDeck(String command) {
-    }
+
 
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
@@ -125,35 +124,39 @@ public class Collection {
         return false;
     }
 
-    public void creatDecks(String deckName) {
-        for (Deck deck : decks) {
-            if (!deck.getName().equals(deckName)) {
-                deck.setName(deckName);
-
-            }
-        }
+    public void createDeck(String deckName) {
+        Deck deck = new Deck();
+        deck.setName(deckName);
+        decks.add(deck);
     }
 
-    public boolean checkIsexistDeck(String name) {
+    public boolean checkIsExistDeck(String name) {
         for (Deck deck : decks) {
-            if (deck.getName().equals(name)) {
+            if (deck.getName().equalsIgnoreCase(name)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void deleteDecks(String deckName) {
+    public void deleteDeck(String deckName) {
         for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
+            if (deck.getName().equalsIgnoreCase(deckName)) {
                 decks.remove(deck);
             }
         }
     }
 
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
+    }
+
     public void addCard(String name) {
 
 
+    }
+
+    public void removeFromDeck(String command) {
     }
 
 }

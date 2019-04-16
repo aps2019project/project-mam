@@ -83,15 +83,25 @@ public class Controller {
     }
 
     public void createDeck(String deckName) {
+        if (!user.getCollection().checkIsExistDeck(deckName)){
+            user.getCollection().createDeck(deckName);
+        }
+        else view.printError(ErrorType.DUPLICATE_DECK);
+
     }
 
     public void deleteDeck(String deckName) {
+        if (user.getCollection().checkIsExistDeck(deckName)){
+            user.getCollection().deleteDeck(deckName);
+        }
+        else view.printError(ErrorType.NOT_FOUND_DECK);
     }
 
     public void addCardToDeck(String deckName) {
     }               //?????
 
-    public void selectMainDeck(String command) {
+    public void selectMainDeck(String deckName) {
+
     }
 
     public void isDeckValid(String deckName) {
