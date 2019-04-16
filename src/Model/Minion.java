@@ -33,10 +33,17 @@ public class Minion extends Card{
         this.SPActivationTime = SPActivationTime;
     }
 
-
     @Override
-    public String getInfo() {
+    public String getCardType() {
         return "minion";
+    }
+
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Type: Minion - Name: ").append(getName()).append("-Class : ").append(getClass());
+        info.append("-Ap:").append(getAP()).append("-HP").append(getHP()).append("-Mp").append(getMP());
+        info.append("-Special power");
+        return info.toString();
     }
 
     public int getAP() {

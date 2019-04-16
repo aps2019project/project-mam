@@ -23,7 +23,7 @@ public class Hero extends Card {
     }
 
     @Override
-    public String getInfo() {
+    public String getCardType() {
         return "hero";
     }
 
@@ -66,6 +66,14 @@ public class Hero extends Card {
             if (temp.getTime() == 0)
                 itr.remove();
         }
+    }
+
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Name :").append(getName()).append("-Ap:").append(getAP());
+        info.append("-HP").append(getHP()).append("-Class : ").append(getClass());
+        info.append("-Special power");
+        return info.toString();
     }
 }
 

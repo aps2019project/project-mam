@@ -53,7 +53,10 @@ public class Card {
         return buffs;
     }
 
-    public String getInfo() {
+    public String getCardType() {
+        return null;
+    }
+    public String getInfo(){
         return null;
     }
 

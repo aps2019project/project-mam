@@ -12,9 +12,10 @@ public class User {
     private int numberOfWin;
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
-    private int money=15000;
+    private int money;
     public User(String name, String password) {
         this.name = name;
+        this.money=15000;
         this.numberOfWin = 0;
         this.password = password;
         collection = new Collection();
@@ -40,6 +41,7 @@ public class User {
         return name;
     }
 
+    public void setMoney(int money){this.money=money;}
     public int getNumberOfWin() {
         return numberOfWin;
     }
@@ -54,6 +56,13 @@ public class User {
 
     public ArrayList<StringBuilder> getLastGames() {
         return lastGames;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "money=" + money +
+                '}';
     }
 
     public static void addUser(User user) {

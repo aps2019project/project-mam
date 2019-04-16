@@ -16,6 +16,12 @@ public class Collection {
     public void addItem(Item item){
         items.add(item);
     }
+    public void removeCard(Card card){
+        cards.remove(card);
+    }
+    public void removeItem(Item item){
+        items.remove(item);
+    }
     public Deck getMainDeck() {
         return mainDeck;
     }
@@ -30,5 +36,53 @@ public class Collection {
 
 
     public void removeFromDeck(String command) {
+    }
+
+    public StringBuilder getMinionInfo(){
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            if (card.getCardType().equals("minion"))
+                info.append(card.getInfo()).append("\n");
+        }
+        return info;
+    }
+
+    public boolean searchItemInCollection(String itemName,User user){
+        for (Item item: user.getCollection().getItems()) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void creatDecks(String deckName){
+        for (Deck deck : decks) {
+            if(!deck.getName().equals(deckName)){
+                deck.setName(deckName);
+
+            }
+        }
+    }
+    public boolean checkIsexistDeck(String name){
+        for (Deck deck : decks) {
+            if(deck.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteDecks(String deckName){
+        for (Deck deck : decks) {
+            if(deck.getName().equals(deckName)){
+                decks.remove(deck);
+            }
+        }
+    }
+
+    public void addCard(String name){
+
+
     }
 }

@@ -16,6 +16,50 @@ public class Shop {
     private Shop() {
     }
 
+    public boolean searchCard(String cardName) {
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean searchItem(String itemName) {
+        for (Item item: items) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean searchCardInCollection(String cardName,User user){
+        for (Card card: user.getCollection().getCards()) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean searchItemInCollection(String itemName,User user){
+        for (Item item: user.getCollection().getItems()) {
+            if (item.getName().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIsItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equals(cardName)) {
@@ -79,8 +123,22 @@ public class Shop {
         return false;
     }
 
+    public void sell(int cardId,User user) {
+        for (Card card : user.getCollection().getCards()) {
+            if(card.getId()==cardId){
+                user.setMoney(user.getMoney()-card.getPrice());
+                user.getCollection().removeCard(card);
+            }
+        }
+    }
     public static Shop getInstance() {
         return SHOP;
+    }
+
+    public StringBuilder showColeection(User user){
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append(user.getCollection().getMinionInfo());
+        return allInfo;
     }
 
     public static void importCards() {
