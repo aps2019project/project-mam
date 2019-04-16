@@ -6,12 +6,17 @@ import Model.ErrorType;
 public class BattleMenuPage extends ConsolePage {
     Controller controller = Controller.getInstance();
     View view = View.getInstance();
+
+    private static final BattleMenuPage BATTLE_MENU_PAGE = new BattleMenuPage();
     private String numOfPlayers;
     private String gameKind = null;
     private String gameMood = null;
     private String mission = null;
     private String secondPlayer = null;
 
+    public static BattleMenuPage getInstance(){
+        return BATTLE_MENU_PAGE;
+    }
     @Override
     public void help() {
         view.showHelpForBattleMenu();
@@ -19,7 +24,8 @@ public class BattleMenuPage extends ConsolePage {
 
     @Override
     public void showMenu() {
-        view.show("----------<Battle>---------");
+        view.show("----------<Battle Menu>---------");
+        view.show("1: single player\n2: multi player\n");
     }
 
     @Override
@@ -29,115 +35,76 @@ public class BattleMenuPage extends ConsolePage {
             view.back();
             return;
         }
-        numOfPlayers(command);
-    }
-
-    public void numOfPlayers(String command) {
-
-        numOfPlayers:
-        while (true) {
-            switch (command) {
-                case "1":
-                    numOfPlayers = "single player";
-                    secondPlayer = "AI";
-                    gameKind();
-                    break numOfPlayers;
-                case "2":
-                    numOfPlayers = "multi player";
-                    controller.showUsers();
-                    command = view.getNewCommand();
-                    if (!controller.isMainDeckValid(command.split(" ")[2])){
-                        view.printError(ErrorType.INVALID_DECK_2);
-                    }
-                    secondPlayer = command.split(" ")[2];
-                    gameMood();
-                    break numOfPlayers;
-                default:
-                    view.printError(ErrorType.INVALID_COMMAND);
-            }
-            command = view.getNewCommand();
+        switch (command) {
+            case "1":
+                view.getPages().push(new GameKindMenuPage());
+                numOfPlayers = "single player";
+                break;
+            case "2":
+                view.getPages().push(new GameMoodMenuPage());
+                numOfPlayers = "multi player";
+                break;
+            case "exit":
+                view.back();
+                break;
+            default:
+                view.printError(ErrorType.INVALID_COMMAND);
         }
     }
 
-    public void gameKind() {
-        showKinds();
-        gameKind:
-        while (true) {
-            String command = view.getNewCommand();
-            switch (command) {
-                case "1":
-                    gameKind = "story";
-                    mission();
-                    break gameKind;
-                case "2":
-                    gameKind = "custom game";
-                    controller.showAllDecks();
-                    showMoods();
-                    gameMood();
-                    break gameKind;
-                default:
-                    view.printError(ErrorType.INVALID_COMMAND);
-            }
-        }
+    public String getNumOfPlayers() {
+        return numOfPlayers;
     }
 
-    public void gameMood() {
-        showMoods();
-        gameMood:
-        while (true) {
-            String command = view.getNewCommand();
-            if (command.matches("start game (.*) (\\d)( \\d+)?")
-                    || command.matches("start multiplayer game (\\d)( \\d+)?"))
-                switch (command.split(" ")[3]) {
-                    case "1":
-                        gameMood = "kill opponent hero";
-                        break gameMood;
-                    case "2":
-                        gameMood = "collect and keep flags";
-                        break gameMood;
-                    case "3":
-                        gameMood = "collect half flags";
-                        break gameMood;
-                    default:
-                        view.printError(ErrorType.INVALID_COMMAND);
-                }
-            else  view.printError(ErrorType.INVALID_COMMAND);
-        }
+    public String getGameKind() {
+        return gameKind;
     }
 
-    public void mission() {
-        showMission();
-        mission:
-        while (true) {
-            String command = view.getNewCommand();
-            switch (command) {
-                case "1":
-                    mission = "1";
-                    break mission;
-                case "2":
-                    mission = "2";
-                    break mission;
-                case "3":
-                    mission = "3";
-                    break mission;
-                default:
-                    view.printError(ErrorType.INVALID_COMMAND);
-            }
-        }
+    public String getGameMood() {
+        return gameMood;
     }
-    public void showMission(){
+
+    public String getMission() {
+        return mission;
+    }
+
+    public String getSecondPlayer() {
+        return secondPlayer;
+    }
+
+    public void setNumOfPlayers(String numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
+    public void setGameKind(String gameKind) {
+        this.gameKind = gameKind;
+    }
+
+    public void setGameMood(String gameMood) {
+        this.gameMood = gameMood;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
+    }
+
+    public void setSecondPlayer(String secondPlayer) {
+        this.secondPlayer = secondPlayer;
+    }
+
+    public void showMission() {
         view.show("1\n2\n3\n");
     }
 
-    public void showFirstMenu(){
+    public void showFirstMenu() {
         view.show("1: single player\n2: multi player\n");
     }
 
-    public void showKinds(){
+    public void showKinds() {
         view.show("1: story\n2: custom game");
     }
 
-    public void showMoods(){
+    public void showMoods() {
         view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
     }
 }
