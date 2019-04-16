@@ -13,16 +13,27 @@ public class User {
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
     private int money;
+    private int idCounter;
+
     public User(String name, String password) {
         this.name = name;
-        this.money=15000;
+        this.money = 15000;
         this.numberOfWin = 0;
         this.password = password;
         collection = new Collection();
         lastGames = new ArrayList<>();
+        idCounter = 1;
     }
 
     public User() {
+    }
+
+    public int getIdCounter() {
+        return idCounter;
+    }
+
+    public void setIdCounter(int idCounter) {
+        this.idCounter = idCounter;
     }
 
     public static ArrayList<User> getUsers() {
@@ -41,11 +52,18 @@ public class User {
         return name;
     }
 
-    public void setMoney(int money){this.money=money;}
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public int getNumberOfWin() {
         return numberOfWin;
     }
-    public int getMoney(){return money;}
+
+    public int getMoney() {
+        return money;
+    }
+
     public Deck getMainDeck() {
         return collection.getMainDeck();
     }
@@ -89,7 +107,7 @@ public class User {
         return true;
     }
 
-    public static boolean isPassCorrect(String userName, String password){
+    public static boolean isPassCorrect(String userName, String password) {
         for (User user : users)
             if (user.name.equals(userName)) {
                 if (user.password.equals(password))
@@ -124,11 +142,11 @@ public class User {
         return arr;
     }
 
-    public boolean isMainDeckValid(){
+    public boolean isMainDeckValid() {
         return true;
     }
 
-    public Deck getRandomDeck(){
+    public Deck getRandomDeck() {
         Random random = new Random();
         int index = random.nextInt(this.collection.getDecks().size());
         return this.collection.getDecks().get(index);

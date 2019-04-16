@@ -17,6 +17,10 @@ public class BattleMenuPage extends ConsolePage {
         view.showHelpForBattleMenu();
     }
 
+    @Override
+    public void showMenu() {
+        view.show("----------<Battle>---------");
+    }
 
     @Override
     public void handleCommand(String command) {

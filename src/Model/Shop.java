@@ -16,9 +16,76 @@ public class Shop {
     private Shop() {
     }
 
+    public String getCardInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Card card : cards) {
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
+        }
+        return info.toString();
+    }
+
+    public String getCardInfo(String cardName) {
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                info.append(card.getInfo()).append("\n");
+                return info.toString();
+            }
+        }
+        return null;
+    }
+
+    public String getHeroInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Card card : cards) {
+            if (card.getCardType().equals("hero")) {
+                info.append("\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
+        }
+        return info.toString();
+    }
+
+    public String getItemInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Item item : items) {
+            info.append("\t\t").append(counter).append(" : ");
+            info.append(item.getInfo()).append("\n");
+            counter++;
+        }
+        return info.toString();
+    }
+
+    public String getItemInfo(String itemName) {
+        StringBuilder info = new StringBuilder();
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                info.append(item.getInfo()).append("\n");
+                return info.toString();
+            }
+        }
+        return null;
+    }
+
+    public String show() {
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append("Heroes :\n").append(getHeroInfo());
+        allInfo.append("\nItems :\n").append(getItemInfo());
+        allInfo.append("\nCards :\n").append(getCardInfo());
+        return allInfo.toString();
+    }
+
     public boolean searchCard(String cardName) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
                 return true;
             }
         }
@@ -26,25 +93,8 @@ public class Shop {
     }
 
     public boolean searchItem(String itemName) {
-        for (Item item: items) {
-            if (item.getName().equals(itemName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean searchCardInCollection(String cardName,User user){
-        for (Card card: user.getCollection().getCards()) {
-            if (card.getName().equals(cardName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean searchItemInCollection(String itemName,User user){
-        for (Item item: user.getCollection().getItems()) {
-            if (item.getName().equals(itemName)) {
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
@@ -62,31 +112,37 @@ public class Shop {
 
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                card.setId(user.getIdCounter());
                 user.getCollection().addCard(card);
+                user.setMoney(user.getMoney() - card.getPrice());
+                user.setIdCounter(user.getIdCounter() + 1);
             }
         }
     }
 
     public void buyItem(String itemName, User user) {
         for (Item item : items) {
-            if (item.getName().equals(itemName)) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
+                user.setMoney(user.getMoney() - item.getPrice());
+                user.setIdCounter(user.getIdCounter() + 1);
             }
         }
     }
 
-    public int getCardPrice(String name){
+    public int getCardPrice(String name) {
         for (Card card : cards) {
-            if (card.getName().equals(name))
+            if (card.getName().equalsIgnoreCase(name))
                 return card.getPrice();
         }
         return 0;
     }
 
-    public int getItemPrice(String name){
+    public int getItemPrice(String name) {
         for (UsableItem item : items) {
-            if (item.getName().equals(name))
+            if (item.getName().equalsIgnoreCase(name))
                 return item.getPrice();
         }
         return 0;
@@ -101,7 +157,7 @@ public class Shop {
 
     public boolean cardNameIsAvailable(String cardName) {
         for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
                 return true;
             }
         }
@@ -110,7 +166,7 @@ public class Shop {
 
     public boolean itemNameIsAvailable(String itemName) {
         for (Item item : items) {
-            if (item.getName().equals(itemName)) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
@@ -123,22 +179,30 @@ public class Shop {
         return false;
     }
 
-    public void sell(int cardId,User user) {
+    public boolean sellCard(int cardId, User user) {
         for (Card card : user.getCollection().getCards()) {
-            if(card.getId()==cardId){
-                user.setMoney(user.getMoney()-card.getPrice());
+            if (card.getId() == cardId) {
                 user.getCollection().removeCard(card);
+                user.setMoney(user.getMoney() + card.getPrice());
+                return true;
             }
         }
-    }
-    public static Shop getInstance() {
-        return SHOP;
+        return false;
     }
 
-    public StringBuilder showColeection(User user){
-        StringBuilder allInfo = new StringBuilder();
-        allInfo.append(user.getCollection().getMinionInfo());
-        return allInfo;
+    public boolean sellItem(int itemId, User user) {
+        for (Item item : user.getCollection().getItems()) {
+            if (item.getId() == itemId) {
+                user.getCollection().removeItem(item);
+                user.setMoney(user.getMoney() + item.getPrice());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Shop getInstance() {
+        return SHOP;
     }
 
     public static void importCards() {

@@ -9,6 +9,7 @@ public class Controller {
     private static final Controller CONTROLLER = new Controller();
 
     private Controller() {
+        Shop.importCards();
     }
 
     public static Controller getInstance() {
@@ -17,6 +18,7 @@ public class Controller {
 
     private View view = View.getInstance();
     private Shop shop = Shop.getInstance();
+    //private Collection collection = new Collection();
     private User user = new User();
 
 
@@ -26,7 +28,7 @@ public class Controller {
     }
 
     public void createAccount(String command) {
-        String userName = command.split(" ")[2];
+        String userName = command.substring(15);
         view.show("password :");
         String password = view.getPassword();
         if (User.isUserNameNew(userName))
@@ -62,9 +64,19 @@ public class Controller {
     //--------------------------------------collection------------------------------
 
     public void showCollection() {
+        view.show(user.getCollection().showCollection());
     }
 
     public void searchInCollection(String name) {
+        if (user.getCollection().searchCardInCollection(name)){
+            view.printError(ErrorType.FOUND_CARD);
+            view.show("Card ID: " + user.getCollection().getCardId(name));
+        }
+        else if (user.getCollection().searchItemInCollection(name)){
+            view.printError(ErrorType.FOUND_ITEM);
+            view.show("Item ID: " + user.getCollection().getItemId(name));
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void saveCollection() {
@@ -91,11 +103,16 @@ public class Controller {
     public void showDeck(String command) {
     }
     //------------------------------------------Shop-----------------------
-
     public void searchInShop(String name) {
-    }
-
-    public void showCollectionInShop(String command) {
+        if (shop.searchCard(name)){
+            view.printError(ErrorType.FOUND_CARD);
+            view.show(shop.getCardInfo(name));
+        }
+        else if (shop.searchItem(name)){
+            view.printError(ErrorType.FOUND_ITEM);
+            view.show(shop.getItemInfo(name));
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void buy(String name) {
@@ -119,10 +136,19 @@ public class Controller {
         else view.printError(ErrorType.UNAVAILABLE_CARD_OR_ITEM);
     }
 
-    public void sell(String name) {
+    public void sell(String id) {
+        int ID = Integer.parseInt(id);
+        if (shop.sellCard(ID, user)){
+            view.printError(ErrorType.SUCCESSFUL_SELL);
+        }
+        else if (shop.sellItem(ID, user)){
+            view.printError(ErrorType.SUCCESSFUL_SELL);
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void showShop() {
+        view.show(shop.show());
     }
 
     //----------------------------------battle-------------------------------------

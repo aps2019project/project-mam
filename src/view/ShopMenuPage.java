@@ -16,12 +16,12 @@ public class ShopMenuPage extends ConsolePage {
 
         if (command.matches("show collection"))
             controller.showCollection();
-        else if (command.matches("search .*"))
-            controller.searchInShop(command.split(" ")[1]);
         else if (command.matches("search collection .*"))
-            controller.searchInCollection(command.split(" ")[2]);
+            controller.searchInCollection(command.substring(18));
+        else if (command.matches("search .*"))
+            controller.searchInShop(command.substring(7));
         else if (command.matches("buy .*"))
-            controller.buy(command.split(" ")[1]);
+            controller.buy(command.substring(4));
         else if (command.matches("sell .*"))
             controller.sell(command.split(" ")[1]);
         else if (command.matches("show"))
@@ -31,5 +31,10 @@ public class ShopMenuPage extends ConsolePage {
         else if (command.matches("exit"))
             view.back();
         else view.printError(ErrorType.INVALID_COMMAND);
+    }
+
+    @Override
+    public void showMenu() {
+        view.show("----------<Shop>---------");
     }
 }

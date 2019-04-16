@@ -5,11 +5,24 @@ import java.util.ArrayList;
 public class Item {
     private String name;
     private String desc;
+    private int id;
     private ArrayList<Buff> buffs;
 
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
+    }
+
+    public int getPrice(){
+        return 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -24,9 +37,5 @@ public class Item {
         buffs.add(buff);
     }
 
-    public String getInfo() {
-        StringBuilder info = new StringBuilder();
-        info.append("Name :").append(getName()).append(getDesc());
-        return info.toString();
-    }
+    public String getInfo() {return null;}
 }

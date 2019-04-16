@@ -7,21 +7,27 @@ public class Collection {
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
+
     public ArrayList<Deck> getDecks() {
         return decks;
     }
-    public void addCard(Card card){
+
+    public void addCard(Card card) {
         cards.add(card);
     }
-    public void addItem(Item item){
+
+    public void addItem(Item item) {
         items.add(item);
     }
-    public void removeCard(Card card){
+
+    public void removeCard(Card card) {
         cards.remove(card);
     }
-    public void removeItem(Item item){
+
+    public void removeItem(Item item) {
         items.remove(item);
     }
+
     public Deck getMainDeck() {
         return mainDeck;
     }
@@ -38,51 +44,116 @@ public class Collection {
     public void removeFromDeck(String command) {
     }
 
-    public StringBuilder getMinionInfo(){
+    public String getCardInfo() {
         StringBuilder info = new StringBuilder();
+        int counter = 1;
         for (Card card : cards) {
-            if (card.getCardType().equals("minion"))
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t").append(counter).append(" : ");
                 info.append(card.getInfo()).append("\n");
+                counter++;
+            }
         }
-        return info;
+        return info.toString();
     }
 
-    public boolean searchItemInCollection(String itemName,User user){
-        for (Item item: user.getCollection().getItems()) {
-            if (item.getName().equals(itemName)) {
+    public String getHeroInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Card card : cards) {
+            if (card.getCardType().equals("hero")) {
+                info.append("\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
+        }
+        return info.toString();
+    }
+
+    public String getItemInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Item item : items) {
+            info.append("\t\t").append(counter).append(" : ");
+            info.append(item.getInfo()).append("\n");
+            counter++;
+        }
+        return info.toString();
+    }
+
+    public String showCollection() {
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append("Heroes :\n").append(getHeroInfo());
+        allInfo.append("\nItems :\n").append(getItemInfo());
+        allInfo.append("\nCards :\n").append(getCardInfo());
+        return allInfo.toString();
+    }
+
+    public int getCardId(String cardName){
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                return card.getId();
+            }
+        }
+        return -1;
+    }
+
+    public int getItemId(String itemName){
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item.getId();
+            }
+        }
+        return -1;
+    }
+
+    public boolean searchItemInCollection(String itemName) {
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void creatDecks(String deckName){
+    public boolean searchCardInCollection(String cardName) {
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void creatDecks(String deckName) {
         for (Deck deck : decks) {
-            if(!deck.getName().equals(deckName)){
+            if (!deck.getName().equals(deckName)) {
                 deck.setName(deckName);
 
             }
         }
     }
-    public boolean checkIsexistDeck(String name){
+
+    public boolean checkIsexistDeck(String name) {
         for (Deck deck : decks) {
-            if(deck.getName().equals(name)){
+            if (deck.getName().equals(name)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void deleteDecks(String deckName){
+    public void deleteDecks(String deckName) {
         for (Deck deck : decks) {
-            if(deck.getName().equals(deckName)){
+            if (deck.getName().equals(deckName)) {
                 decks.remove(deck);
             }
         }
     }
 
-    public void addCard(String name){
+    public void addCard(String name) {
 
 
     }
+
 }

@@ -15,23 +15,29 @@ public class MainMenuPage extends ConsolePage {
 
     public void handleCommand(String command) {
         switch (command) {
-            case "enter collection":
+            case "1": //Collection
                 view.getPages().push(new CollectionMenuPage());
                 break;
-            case "enter shop":
+            case "2": //Shop
                 view.getPages().push(new ShopMenuPage());
                 break;
-            case "enter battle":
+            case "3": //Battle
                 view.getPages().push(new BattleMenuPage());
                 break;
-            case "exit":
+            case "4": //Exit
                 view.exit();
                 break;
-            case "help":
+            case "5": //Help
                 view.showHelpForMainMenu();
                 break;
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
+    }
+
+    @Override
+    public void showMenu() {
+        view.show("----------<Main Menu>---------");
+        view.show("1: Collection\n2: Shop\n3: Battle\n4: Exit\n5: Help");
     }
 }

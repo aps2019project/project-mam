@@ -32,6 +32,6 @@ public class AccountMenuPage extends ConsolePage{
 
     @Override
     public void showMenu() {
-
+        view.show("----------<Account>---------");
     }
 }
