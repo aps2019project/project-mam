@@ -1,45 +1,70 @@
 package Model;
 
+import view.BattleMenuPage;
+
+import java.util.ArrayList;
+
 public class Game {
-    private User firstPlayer, secondPlayer;
+    private static final String SINGLE_PLAYER = "single player";
+    private static final String MULTI_PLAYER = "multi player";
+    private static final String FIRST_MODE = "1";
+    private static final String SECOND_MODE = "2";
+    private static final String THIRD_MODE = "3";
+    private static final int BASIC_MANA = 2;
+    private static final int BASIC_FLAG_COUNT = 7;
+    private static final int MY_TURN = 1;
+    private static final int OPPONENT_TURN = 2;
+    private Map map;
+    private Deck myDeck;
+    private Deck oppDeck;
+    private ArrayList<Card> graveYard;
+    private Card currentCard = null;
+    private String myName;
+    private String oppName;
     private String mode;
     private int turn;
-    private String kind;
-    private int firstPlayerMana, secondPlayerMana;
-    private Map map;
-    private Deck firstPlayerDeck, secondPlayerDeck;
+    private int flagCount;
+    private int currentTurnMana;
+    private int myMana;
+    private int oppMana;
 
-    public Game(User firstPlayer, User secondPlayer, String mode, String kind) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+
+    public Game(Deck myDeck, Deck oppDeck, String myName, String oppName, String mode, int flagCount) {
+        this.myDeck = myDeck;
+        this.oppDeck = oppDeck;
+        this.myName = myName;
+        this.oppName = oppName;
         this.mode = mode;
-        this.kind = kind;
-        map = new Map();
-        turn = 0;
-        firstPlayerMana = 2;
-        secondPlayerMana = 2;
+        this.flagCount = flagCount;
+        graveYard = new ArrayList<>();
+        turn = MY_TURN;
+        currentTurnMana = BASIC_MANA;
+        myMana = BASIC_MANA;
+        oppMana = BASIC_MANA;
     }
 
-    public Game(User firstPlayer, String mode, String kind, Deck firstPlayerDeck) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = AI.getAI();
-        this.mode = mode;
-        this.kind = kind;
-        this.firstPlayerDeck = firstPlayerDeck;
-        map = new Map();
-        turn = 0;
-        firstPlayerMana = 2;
-        secondPlayerMana = 2;
+    public Map getMap() {
+        return map;
     }
 
-
-
-    public User getFirstPlayer() {
-        return firstPlayer;
+    public Deck getMyDeck() {
+        return myDeck;
     }
 
-    public User getSecondPlayer() {
-        return secondPlayer;
+    public Deck getOppDeck() {
+        return oppDeck;
+    }
+
+    public ArrayList<Card> getGraveYard() {
+        return graveYard;
+    }
+
+    public String getMyName() {
+        return myName;
+    }
+
+    public String getOppName() {
+        return oppName;
     }
 
     public String getMode() {
@@ -50,50 +75,61 @@ public class Game {
         return turn;
     }
 
-    public String getKind() {
-        return kind;
+    public int getFlagCount() {
+        return flagCount;
     }
 
-    public int getFirstPlayerMana() {
-        return firstPlayerMana;
+    public int getMyMana() {
+        return myMana;
     }
 
-    public int getSecondPlayerMana() {
-        return secondPlayerMana;
+    public int getOppMana() {
+        return oppMana;
     }
 
-    public Map getMap() {
-        return map;
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
     }
 
-    public Deck getFirstPlayerDeck() {
-        return firstPlayerDeck;
+    public void setMyMana(int myMana) {
+        this.myMana = myMana;
     }
 
-    public Deck getSecondPlayerDeck() {
-        return secondPlayerDeck;
+    public void setOppMana(int oppMana) {
+        this.oppMana = oppMana;
     }
 
-    public void setFirstPlayerMana(int firstPlayerMana) {
-        this.firstPlayerMana = firstPlayerMana;
+    public void setCurrentTurnMana(int currentTurnMana) {
+        this.currentTurnMana = currentTurnMana;
     }
 
-    public void setSecondPlayerMana(int secondPlayerMana) {
-        this.secondPlayerMana = secondPlayerMana;
-    }
-
-    public void changeTurn(){
+    public void changeTurn() {
         if (turn == 2)
             turn = 1;
         else
             turn = 2;
     }
 
-    public void removeCardFromDeck(int turn, int cardId){}
+    public void removeCardFromDeck(int turn, int cardId) {
+    }
 
-    public boolean isGameEnded(){
+    public boolean isGameEnded() {
         return false;
     }
 
-    
+    public void SelectCard(int cardId){
+
+    }
+
+    public boolean isCardIdValid(int cardId){
+        return true;
+
+    }
+
+    public void moveCurrentCardTo(int x, int y){}
+
+
+
+
+
 }

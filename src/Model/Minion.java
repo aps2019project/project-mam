@@ -8,6 +8,7 @@ public class Minion extends Card{
     private int AP;
     private int HP;
     private int TargetCommunity;
+    private int flagCount;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
     private ArrayList<Buff> specialPower = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Minion extends Card{
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
+        flagCount = 0;
     }
 
     public Minion(String name, int price,int MP,int HP, int AP, int targetCommunity, ImpactType minionClass,
