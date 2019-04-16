@@ -61,10 +61,6 @@ public class Controller {
 
     //--------------------------------------collection------------------------------
 
-    public boolean isAccountValidForLogin(String command) {
-        return true;
-    }
-
     public void showCollection() {
     }
 
@@ -81,15 +77,12 @@ public class Controller {
     }
 
     public void addCardToDeck(String deckName) {
-    }               //???????
+    }               //?????
 
-    public void removeFromDeck(String command) {
+    public void selectMainDeck(String command) {
     }
 
     public void isDeckValid(String deckName) {
-    }
-
-    public void selectMainDeck(String command) {
     }
 
     public void showAllDecks() {

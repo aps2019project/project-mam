@@ -3,13 +3,13 @@ package Model;
 import view.View;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class User {
     private static ArrayList<User> users = new ArrayList<>();
     private String name;
     private String password;
     private int numberOfWin;
-
     private Collection collection;
     private ArrayList<StringBuilder> lastGames;
     private int money=15000;
@@ -117,6 +117,12 @@ public class User {
 
     public boolean isMainDeckValid(){
         return true;
+    }
+
+    public Deck getRandomDeck(){
+        Random random = new Random();
+        int index = random.nextInt(this.collection.getDecks().size());
+        return this.collection.getDecks().get(index);
     }
 
 

@@ -27,4 +27,8 @@ public class Collection {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+
+    public void removeFromDeck(String command) {
+    }
 }

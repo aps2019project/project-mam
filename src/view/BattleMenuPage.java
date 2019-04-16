@@ -10,6 +10,7 @@ public class BattleMenuPage extends ConsolePage {
     private String gameKind = null;
     private String gameMood = null;
     private String mission = null;
+    private String secondPlayer = null;
 
     @Override
     public void help() {
@@ -28,21 +29,24 @@ public class BattleMenuPage extends ConsolePage {
     }
 
     public void numOfPlayers(String command) {
+
         numOfPlayers:
         while (true) {
             switch (command) {
-                case "single player":
+                case "1":
                     numOfPlayers = "single player";
+                    secondPlayer = "AI";
                     gameKind();
                     break numOfPlayers;
-                case "multi player":
+                case "2":
                     numOfPlayers = "multi player";
                     controller.showUsers();
                     command = view.getNewCommand();
                     if (!controller.isMainDeckValid(command.split(" ")[2])){
                         view.printError(ErrorType.INVALID_DECK_2);
                     }
-                    gameKind();
+                    secondPlayer = command.split(" ")[2];
+                    gameMood();
                     break numOfPlayers;
                 default:
                     view.printError(ErrorType.INVALID_COMMAND);
@@ -52,15 +56,16 @@ public class BattleMenuPage extends ConsolePage {
     }
 
     public void gameKind() {
+        showKinds();
         gameKind:
         while (true) {
             String command = view.getNewCommand();
             switch (command) {
-                case "story":
+                case "1":
                     gameKind = "story";
                     mission();
                     break gameKind;
-                case "custom game":
+                case "2":
                     gameKind = "custom game";
                     controller.showAllDecks();
                     showMoods();
@@ -73,6 +78,7 @@ public class BattleMenuPage extends ConsolePage {
     }
 
     public void gameMood() {
+        showMoods();
         gameMood:
         while (true) {
             String command = view.getNewCommand();
@@ -96,6 +102,7 @@ public class BattleMenuPage extends ConsolePage {
     }
 
     public void mission() {
+        showMission();
         mission:
         while (true) {
             String command = view.getNewCommand();
@@ -114,8 +121,19 @@ public class BattleMenuPage extends ConsolePage {
             }
         }
     }
+    public void showMission(){
+        view.show("1\n2\n3\n");
+    }
+
+    public void showFirstMenu(){
+        view.show("1: single player\n2: multi player\n");
+    }
+
+    public void showKinds(){
+        view.show("1: story\n2: custom game");
+    }
 
     public void showMoods(){
-        view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags");
+        view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
     }
 }

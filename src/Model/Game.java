@@ -20,6 +20,20 @@ public class Game {
         secondPlayerMana = 2;
     }
 
+    public Game(User firstPlayer, String mode, String kind, Deck firstPlayerDeck) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = AI.getAI();
+        this.mode = mode;
+        this.kind = kind;
+        this.firstPlayerDeck = firstPlayerDeck;
+        map = new Map();
+        turn = 0;
+        firstPlayerMana = 2;
+        secondPlayerMana = 2;
+    }
+
+
+
     public User getFirstPlayer() {
         return firstPlayer;
     }
