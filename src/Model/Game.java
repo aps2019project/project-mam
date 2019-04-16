@@ -1,44 +1,49 @@
 package Model;
 
-public class Game {
-    private User firstPlayer, secondPlayer;
-    private String mode;
-    private int turn;
-    private String kind;
-    private int firstPlayerMana, secondPlayerMana;
-    private Map map;
-    private Deck firstPlayerDeck, secondPlayerDeck;
+import java.util.ArrayList;
 
-    public Game(User firstPlayer, User secondPlayer, String mode, String kind) {
+public class Game {
+    private static final String SINGLE_PLAYER = "single player";
+    private static final String MULTI_PLAYER = "multi player";
+    private static final String FIRST_MODE = "1";
+    private static final String SECOND_MODE = "2";
+    private static final String THIRD_MODE = "3";
+    private static final int BASIC_MANA = 2;
+    private static final int BASIC_FLAG_COUNT = 7;
+    private String firstPlayer;
+    private String secondPlayer;
+    private String mode;
+    private String playerCount;
+    private int turn;
+    private int flagCount;
+    private int firstPlayerMana;
+    private int secondPlayerMana;
+    private Map map;
+    private Deck firstPlayerDeck;
+    private Deck secondPlayerDeck;
+    private ArrayList<Deck> graveYard;
+    private Card currentCard = null;
+
+    public Game(String firstPlayer, String secondPlayer, String mode, String playerCount,
+                int flagCount, Deck firstPlayerDeck, Deck secondPlayerDeck) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.mode = mode;
-        this.kind = kind;
-        map = new Map();
-        turn = 0;
-        firstPlayerMana = 2;
-        secondPlayerMana = 2;
-    }
-
-    public Game(User firstPlayer, String mode, String kind, Deck firstPlayerDeck) {
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = AI.getAI();
-        this.mode = mode;
-        this.kind = kind;
+        this.playerCount = playerCount;
+        this.flagCount = flagCount;
         this.firstPlayerDeck = firstPlayerDeck;
+        this.secondPlayerDeck = secondPlayerDeck;
+        graveYard = new ArrayList<>();
         map = new Map();
-        turn = 0;
-        firstPlayerMana = 2;
-        secondPlayerMana = 2;
+
+
     }
 
-
-
-    public User getFirstPlayer() {
+    public String getFirstPlayer() {
         return firstPlayer;
     }
 
-    public User getSecondPlayer() {
+    public String getSecondPlayer() {
         return secondPlayer;
     }
 
@@ -51,7 +56,7 @@ public class Game {
     }
 
     public String getKind() {
-        return kind;
+        return playerCount;
     }
 
     public int getFirstPlayerMana() {
@@ -82,18 +87,23 @@ public class Game {
         this.secondPlayerMana = secondPlayerMana;
     }
 
-    public void changeTurn(){
+    public void changeTurn() {
         if (turn == 2)
             turn = 1;
         else
             turn = 2;
     }
 
-    public void removeCardFromDeck(int turn, int cardId){}
+    public void removeCardFromDeck(int turn, int cardId) {
+    }
 
-    public boolean isGameEnded(){
+    public boolean isGameEnded() {
         return false;
     }
 
-    
+    public void SelectCard(int cardId){
+
+    }
+
+
 }
