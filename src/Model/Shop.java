@@ -100,23 +100,6 @@ public class Shop {
         }
         return false;
     }
-    public boolean searchCardInCollection(String cardName,User user){
-        for (Card card: user.getCollection().getCards()) {
-            if (card.getName().equalsIgnoreCase(cardName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean searchItemInCollection(String itemName,User user){
-        for (Item item: user.getCollection().getItems()) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public boolean checkIsItem(String name) {
         for (Item item : items) {
@@ -149,7 +132,7 @@ public class Shop {
 
     public int getCardPrice(String name){
         for (Card card : cards) {
-            if (card.getName().equals(name))
+            if (card.getName().equalsIgnoreCase(name))
                 return card.getPrice();
         }
         return 0;
@@ -157,7 +140,7 @@ public class Shop {
 
     public int getItemPrice(String name){
         for (UsableItem item : items) {
-            if (item.getName().equals(name))
+            if (item.getName().equalsIgnoreCase(name))
                 return item.getPrice();
         }
         return 0;

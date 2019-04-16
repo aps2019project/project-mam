@@ -12,8 +12,8 @@ public enum ErrorType {
     THREE_ITEM("you have 3 item, you can'nt buy more item"),
     SUCCESSFUL_BUY("buy successful"),
     NOT_FOUND_CARD_OR_ITEM("card or item not found"),
-    FOUND_CARD("card found:\n"),
-    FOUND_ITEM("item found:\n"),
+    FOUND_CARD("card found:"),
+    FOUND_ITEM("item found:"),
 
     ;
 

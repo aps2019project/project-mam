@@ -18,7 +18,7 @@ public class Controller {
 
     private View view = View.getInstance();
     private Shop shop = Shop.getInstance();
-    private Collection collection = new Collection();
+    //private Collection collection = new Collection();
     private User user = new User();
 
 
@@ -64,10 +64,19 @@ public class Controller {
     //--------------------------------------collection------------------------------
 
     public void showCollection() {
-        view.show(collection.showCollection(user));
+        view.show(user.getCollection().showCollection());
     }
 
     public void searchInCollection(String name) {
+        if (user.getCollection().searchCardInCollection(name)){
+            view.printError(ErrorType.FOUND_CARD);
+            view.show("Card ID: " + user.getCollection().getCardId(name));
+        }
+        else if (user.getCollection().searchItemInCollection(name)){
+            view.printError(ErrorType.FOUND_ITEM);
+            view.show("Item ID: " + user.getCollection().getItemId(name));
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void saveCollection() {

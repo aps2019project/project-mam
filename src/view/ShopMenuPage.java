@@ -16,10 +16,10 @@ public class ShopMenuPage extends ConsolePage {
 
         if (command.matches("show collection"))
             controller.showCollection();
-        else if (command.matches("search .*"))
-            controller.searchInShop(command.substring(7));
         else if (command.matches("search collection .*"))
             controller.searchInCollection(command.substring(18));
+        else if (command.matches("search .*"))
+            controller.searchInShop(command.substring(7));
         else if (command.matches("buy .*"))
             controller.buy(command.substring(4));
         else if (command.matches("sell .*"))
