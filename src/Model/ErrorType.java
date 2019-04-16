@@ -11,6 +11,7 @@ public enum ErrorType {
     MONEY_IS_NOT_ENOUGH("you have'nt enough money for buy this card or item"),
     THREE_ITEM("you have 3 item, you can'nt buy more item"),
     SUCCESSFUL_BUY("buy successful"),
+    SUCCESSFUL_SELL("sell successful"),
     NOT_FOUND_CARD_OR_ITEM("card or item not found"),
     FOUND_CARD("card found:"),
     FOUND_ITEM("item found:"),

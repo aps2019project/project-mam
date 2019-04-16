@@ -137,7 +137,15 @@ public class Controller {
         else view.printError(ErrorType.UNAVAILABLE_CARD_OR_ITEM);
     }
 
-    public void sell(String name) {
+    public void sell(String id) {
+        int ID = Integer.parseInt(id);
+        if (shop.sellCard(ID, user)){
+            view.printError(ErrorType.SUCCESSFUL_SELL);
+        }
+        else if (shop.sellItem(ID, user)){
+            view.printError(ErrorType.SUCCESSFUL_SELL);
+        }
+        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
     public void showShop() {

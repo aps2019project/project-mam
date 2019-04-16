@@ -16,7 +16,7 @@ public class Shop {
     private Shop() {
     }
 
-    public String getCardInfo(){
+    public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
         for (Card card : cards) {
@@ -29,7 +29,7 @@ public class Shop {
         return info.toString();
     }
 
-    public String getCardInfo(String cardName){
+    public String getCardInfo(String cardName) {
         StringBuilder info = new StringBuilder();
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
@@ -40,7 +40,7 @@ public class Shop {
         return null;
     }
 
-    public String getHeroInfo(){
+    public String getHeroInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
         for (Card card : cards) {
@@ -53,7 +53,7 @@ public class Shop {
         return info.toString();
     }
 
-    public String getItemInfo(){
+    public String getItemInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
         for (Item item : items) {
@@ -64,10 +64,10 @@ public class Shop {
         return info.toString();
     }
 
-    public String getItemInfo(String itemName){
+    public String getItemInfo(String itemName) {
         StringBuilder info = new StringBuilder();
         for (Item item : items) {
-            if (item.getName().equalsIgnoreCase(itemName)){
+            if (item.getName().equalsIgnoreCase(itemName)) {
                 info.append(item.getInfo()).append("\n");
                 return info.toString();
             }
@@ -75,7 +75,7 @@ public class Shop {
         return null;
     }
 
-    public String show (){
+    public String show() {
         StringBuilder allInfo = new StringBuilder();
         allInfo.append("Heroes :\n").append(getHeroInfo());
         allInfo.append("\nItems :\n").append(getItemInfo());
@@ -93,7 +93,7 @@ public class Shop {
     }
 
     public boolean searchItem(String itemName) {
-        for (Item item: items) {
+        for (Item item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -132,7 +132,7 @@ public class Shop {
         }
     }
 
-    public int getCardPrice(String name){
+    public int getCardPrice(String name) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(name))
                 return card.getPrice();
@@ -140,7 +140,7 @@ public class Shop {
         return 0;
     }
 
-    public int getItemPrice(String name){
+    public int getItemPrice(String name) {
         for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(name))
                 return item.getPrice();
@@ -179,14 +179,28 @@ public class Shop {
         return false;
     }
 
-    public void sell(int cardId,User user) {
+    public boolean sellCard(int cardId, User user) {
         for (Card card : user.getCollection().getCards()) {
-            if(card.getId()==cardId){
-                user.setMoney(user.getMoney()-card.getPrice());
+            if (card.getId() == cardId) {
                 user.getCollection().removeCard(card);
+                user.setMoney(user.getMoney() + card.getPrice());
+                return true;
             }
         }
+        return false;
     }
+
+    public boolean sellItem(int itemId, User user) {
+        for (Item item : user.getCollection().getItems()) {
+            if (item.getId() == itemId) {
+                user.getCollection().removeItem(item);
+                user.setMoney(user.getMoney() + item.getPrice());
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Shop getInstance() {
         return SHOP;
     }
