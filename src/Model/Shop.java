@@ -115,6 +115,7 @@ public class Shop {
             if (card.getName().equalsIgnoreCase(cardName)) {
                 card.setId(user.getIdCounter());
                 user.getCollection().addCard(card);
+                user.setMoney(user.getMoney() - card.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
             }
         }
@@ -125,6 +126,7 @@ public class Shop {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
+                user.setMoney(user.getMoney() - item.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
             }
         }

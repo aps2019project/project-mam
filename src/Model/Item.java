@@ -13,6 +13,10 @@ public class Item {
         this.desc = desc;
     }
 
+    public int getPrice(){
+        return 0;
+    }
+
     public int getId() {
         return id;
     }
