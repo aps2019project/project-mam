@@ -103,7 +103,6 @@ public class Controller {
     public void showDeck(String command) {
     }
     //------------------------------------------Shop-----------------------
-
     public void searchInShop(String name) {
         if (shop.searchCard(name)){
             view.printError(ErrorType.FOUND_CARD);

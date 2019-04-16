@@ -66,14 +66,14 @@ public class View {
     }
     public void showHelpForCollectionMenu(){
         System.out.print("Exit \nshow \nsearch [card name | item name] \nsave \ncreate deck [deck name] \n" +
-                "delete deck[name] \nadd [card id | card id | hero id] to deck [deck name] \nremove deck [deck name]" +
+                "delete deck[name] \nadd [card id | card id | hero id] to deck [deck name] \nremove [card id | card id | hero id] from deck [deck name]" +
                 "\nvalidate deck [deck name] \nselect deck [deck name] \nshow all decks \nshow deck [deck name]\n");
     }
     public void showHelpForBattleMenu(){
 
     }
     public void showHelpForShopMenu(){
-        System.out.print("Exit \nshow collection \nsearch [item name | card name] \nbuy [card name | item name] \n" +
+        System.out.print("Exit \nShow collection \nSearch [item name | card name] \nSearch Collection [item name | card name]\nbuy [card name | item name] \n" +
                 "sell [card id | card id] \nshow\n");
     }
 
