@@ -60,13 +60,13 @@ public class Shop {
         return allInfo.toString();
     }
 
-    public boolean searchCard(String cardName) {
+    public int searchCard(String cardName) {
         for (Card card : cards) {
             if (card.getName().equals(cardName)) {
-                return true;
+                return card.getId();
             }
         }
-        return false;
+        return -1;
     }
 
     public boolean searchItem(String itemName) {
@@ -107,7 +107,9 @@ public class Shop {
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
+                card.setId(user.getIdCounter());
                 user.getCollection().addCard(card);
+                user.setIdCounter(user.getIdCounter() + 1);
             }
         }
     }
@@ -115,7 +117,9 @@ public class Shop {
     public void buyItem(String itemName, User user) {
         for (Item item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
+                item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
+                user.setIdCounter(user.getIdCounter() + 1);
             }
         }
     }
