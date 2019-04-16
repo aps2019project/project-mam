@@ -41,8 +41,6 @@ public class Collection {
     }
 
 
-
-
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
@@ -88,7 +86,7 @@ public class Collection {
         return allInfo.toString();
     }
 
-    public int getCardId(String cardName){
+    public int getCardId(String cardName) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
                 return card.getId();
@@ -97,13 +95,40 @@ public class Collection {
         return -1;
     }
 
-    public int getItemId(String itemName){
+    public int getItemId(String itemName) {
         for (Item item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return item.getId();
             }
         }
         return -1;
+    }
+
+    public Card getCard(int cardID) {
+        for (Card card : cards) {
+            if (card.getId() == cardID) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public Item getItem(int itemID) {
+        for (Item item : items) {
+            if (item.getId() == itemID) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Deck getDeck(String deckName){
+        for (Deck deck : decks) {
+            if (deck.getName().equalsIgnoreCase(deckName)){
+                return deck;
+            }
+        }
+        return null;
     }
 
     public boolean searchItemInCollection(String itemName) {
@@ -143,17 +168,30 @@ public class Collection {
         for (Deck deck : decks) {
             if (deck.getName().equalsIgnoreCase(deckName)) {
                 decks.remove(deck);
+                return;
             }
         }
     }
 
-    public void setMainDeck(Deck mainDeck) {
-        this.mainDeck = mainDeck;
+    public void addCardToDeck(Card card, String deckName){
+        for (Deck deck : decks) {
+            if (deck.getName().equalsIgnoreCase(deckName)){
+                deck.addCard(card);
+                return;
+            }
+        }
     }
 
-    public void addCard(String name) {
+    public void addItemToDeck(Item item, String deckName){
 
+    }
 
+    public void addHeroToDeck(Card hero, String deckName){
+
+    }
+
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
     }
 
     public void removeFromDeck(String command) {
