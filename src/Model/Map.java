@@ -1,68 +1,46 @@
 package Model;
 
+import java.util.HashMap;
+
+import static java.lang.Math.abs;
+
 public class Map {
     private static final int ROW_NUMBER = 5;
     private static final int COLUMN_NUMBER = 9;
-    private CellEffect[][] cellEffects;
-    private CollectableItem[][] cellItems;
-    private Card[][] cellCards1;
-    private Card[][] cellCards2;
-    private int[][] cellFlags;
+    private Cell[][] cells;
+    private HashMap<Integer, Card> firstPlayerCellCard;
+    private HashMap<Integer, Card> secondPlayerCellCard;
+
 
     public Map() {
-        cellEffects = new CellEffect[ROW_NUMBER][COLUMN_NUMBER];
-        cellItems = new CollectableItem[ROW_NUMBER][COLUMN_NUMBER];
-        cellCards1 = new Card[ROW_NUMBER][COLUMN_NUMBER];
-        cellCards2 = new Card[ROW_NUMBER][COLUMN_NUMBER];
-        cellFlags = new int[ROW_NUMBER][COLUMN_NUMBER];
+        cells = new Cell[ROW_NUMBER][COLUMN_NUMBER];
     }
 
-    public CellEffect[][] getCellEffects() {
-        return cellEffects;
+    public int getManhatanDistance(Cell firstCell, Cell secondCell) {
+        return abs(firstCell.getColumn() - secondCell.getColumn()) + abs(firstCell.getRow() - secondCell.getRow());
     }
 
-    public CollectableItem[][] getCellItems() {
-        return cellItems;
+    public int getManhatanDistance(int x1, int y1, int x2, int y2) {
+        return abs(x1 - x2) + abs(y1 - y2);
     }
 
-    public Card[][] getCellCards1() {
-        return cellCards1;
+    public Cell[][] getCells() {
+        return cells;
     }
 
-    public Card[][] getCellCards2() {
-        return cellCards2;
+    public HashMap<Integer, Card> getFirstPlayerCellCard() {
+        return firstPlayerCellCard;
     }
 
-    public int[][] getCellFlags() {
-        return cellFlags;
+    public HashMap<Integer, Card> getSecondPlayerCellCard() {
+        return secondPlayerCellCard;
     }
 
-    public void setCellEffect(CellEffect cellEffects, int row, int column) {
-        this.cellEffects[row][column] = cellEffects;
+    public boolean isLocationValid(int x, int y) {
+        return x < ROW_NUMBER && x >= 0 && y < COLUMN_NUMBER && y >= 0;
     }
 
-    public void setCellItem(CollectableItem cellItems, int row, int column) {
-        this.cellItems[row][column] = cellItems;
-    }
 
-    public void setCellCards1(Card[][] cellCards1) {
-        this.cellCards1 = cellCards1;
-    }
 
-    public void setCellCards2(Card[][] cellCards2) {
-        this.cellCards2 = cellCards2;
-    }
 
-    public void setCellFlags(int[][] cellFlags) {
-        this.cellFlags = cellFlags;
-    }
-
-    public void removeCellFlag(int row, int column) {
-        if (this.cellFlags[row][column] > 0)
-            this.cellFlags[row][column]--;
-    }
-
-    public void addCellFlag(int row, int column) {
-        this.cellFlags[row][column]++;
-    }
 }

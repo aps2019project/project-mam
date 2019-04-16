@@ -60,6 +60,20 @@ public class Card {
         return null;
     }
 
+    public int getRow(){
+        return -1;
+    }
+
+    public int getColumn() {
+        return -1;
+    }
+
+    public void setRow(int row) {
+    }
+
+    public void setColumn(int column) {
+    }
+
     public void addBuff(Buff buff) {
         buffs.add(buff);
     }

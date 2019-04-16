@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 public class Minion extends Card{
 
+    private int row;
+    private int column;
     private int AP;
     private int HP;
     private int TargetCommunity;
@@ -38,6 +40,22 @@ public class Minion extends Card{
     @Override
     public String getCardType() {
         return "minion";
+    }
+
+    public int getRow(){
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     public String getInfo() {

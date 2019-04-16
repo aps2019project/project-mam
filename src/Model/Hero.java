@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Hero extends Card {
+    private int row;
+    private int column;
     private int AP;
     private int HP;
     private int TargetCommunity;
@@ -57,6 +59,22 @@ public class Hero extends Card {
 
     public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);
+    }
+
+    public int getRow(){
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     public void updateBuffList(){

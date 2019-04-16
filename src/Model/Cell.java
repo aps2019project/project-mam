@@ -48,6 +48,10 @@ public class Cell {
         this.collectableItem = collectableItem;
     }
 
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
     public boolean haveCollectableItem(){
         return false;
     }
