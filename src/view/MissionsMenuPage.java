@@ -38,6 +38,8 @@ public class MissionsMenuPage extends ConsolePage {
     @Override
     public void showMenu() {
         view.show("Select Mission:");
-        view.show("1\n2\n3\n");
+        view.show("1:  Hero Name: Dive Sefid | Mood: kill opponent hero\n" +
+                "2: Hero Name: Zahhak | Mood: collect and keep flags\n" +
+                "3: Hero Name: Arash | Mood: collect half flags\n");
     }
 }
