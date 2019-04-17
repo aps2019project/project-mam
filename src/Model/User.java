@@ -146,6 +146,15 @@ public class User {
         return this.collection.getDecks().get(index);
     }
 
+    public static User getUser(String userName) {
+        for (User user : User.getUsers()) {
+            if (user.getName().equalsIgnoreCase(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 }
 
 

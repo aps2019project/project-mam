@@ -27,14 +27,14 @@ public class Controller {
     }
 
     public User getSecondUser(String userName) {
-        if (!User.isUserNameNew(userName)){
-            for (User user2 : User.getUsers()) {
-                if (user2.getName().equalsIgnoreCase(userName)) {
-                    return user2;
-                }
-            }
+        if (isUserNameValid(userName)){
+            return User.getUser(userName);
         } else view.printError(ErrorType.INVALID_USERNAME);
         return null;
+    }
+
+    public boolean isUserNameValid (String userName){
+        return !User.isUserNameNew(userName) && !user.getName().equalsIgnoreCase(userName);
     }
 
 
@@ -143,7 +143,8 @@ public class Controller {
 
     }
 
-    public void isDeckValid(String deckName) {
+    public boolean isDeckValid(String deckName) {
+        return true;
     }
 
     public void showAllDecks() {

@@ -45,15 +45,14 @@ public class BattleMenuPage extends ConsolePage {
                 numOfPlayers = "single player";
                 break;
             case "2":
-                view.getPages().push(new GameMoodMenuPage());
-                controller.showUsers();
-                view.show("Select User:");
-                setSecondUser(getUser2());
+                view.getPages().push(new SelectUserMenuPage());
                 numOfPlayers = "multi player";
                 break;
             case "exit":
                 view.back();
                 break;
+            case "help":
+                help();
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }

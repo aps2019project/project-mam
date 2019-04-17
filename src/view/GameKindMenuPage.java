@@ -21,11 +21,13 @@ public class GameKindMenuPage extends ConsolePage {
                 break;
             case "2":
                 battleMenuPage.setGameKind("custom game");
-                view.getPages().push(new MainBattleMenuPage());
+                view.getPages().push(new GameMoodMenuPage());
                 break;
             case "back":
                 view.back();
                 break;
+            case "help":
+                help();
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
