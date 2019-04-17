@@ -7,11 +7,11 @@ public class GameMoodMenuPage extends ConsolePage {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
-    Controller controller = Controller.getInstance();
+    private Controller controller = Controller.getInstance();
 
     @Override
     public void help() {
-        super.help();
+        view.showHelpForGameMoodMenu();
     }
 
     @Override
@@ -23,33 +23,46 @@ public class GameMoodMenuPage extends ConsolePage {
                 switch (command.split(" ")[3]) {
                     case "1":
                         view.getPages().push(new MainBattleMenuPage());
-                        battleMenuPage.setGameMood("1");
+                        BattleMenuPage.setGameMood("1");
                         break;
                     case "2":
                         view.getPages().push(new MainBattleMenuPage());
-                        battleMenuPage.setGameMood("2");
-                        battleMenuPage.setFlags(1);
+                        BattleMenuPage.setGameMood("2");
+                        BattleMenuPage.setFlags(1);
                         break;
                     case "3":
                         view.getPages().push(new MainBattleMenuPage());
-                        battleMenuPage.setGameMood("3");
-                        battleMenuPage.setFlags(Integer.parseInt(command.split(" ")[4]));
+                        BattleMenuPage.setGameMood("3");
+                        BattleMenuPage.setFlags(Integer.parseInt(command.split(" ")[4]));
                         break;
-                    case "help":
-                        help();
-                    case "back":
-                        view.back();
                     default:
                         view.printError(ErrorType.INVALID_MOOD_NUM);
                 }
             } else view.printError(ErrorType.INVALID_DECK);
-        } else view.printError(ErrorType.INVALID_COMMAND);
+        } else if (command.equalsIgnoreCase("help"))
+            help();
+        else if (command.equalsIgnoreCase("back"))
+            view.back();
+        else view.printError(ErrorType.INVALID_COMMAND);
     }
 
     @Override
     public void showMenu() {
-        view.show("Select Game Mood and Deck:");
-        view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
-        controller.showAllDecks();
+        switch (BattleMenuPage.getNumOfPlayers()) {
+            case "single player":
+                view.show("Select Game Mood and Deck:");
+                view.show("Moods:");
+                view.show("\t1: kill opponent hero\n\t2: collect and keep flags\n\t3: collect half flags\n");
+                view.show("Decks:");
+                controller.showAllDecks();
+                break;
+            case "multi player":
+                view.show("Select Game Mood:");
+                view.show("Moods:");
+                view.show("\t1: kill opponent hero\n\t2: collect and keep flags\n\t3: collect half flags\n");
+                break;
+            default:
+                view.show("....");
+        }
     }
 }

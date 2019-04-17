@@ -10,7 +10,7 @@ public class MainBattleMenuPage extends ConsolePage {
     private View view = View.getInstance();
 
     private Game game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
-            battleMenuPage.getGameMood(), battleMenuPage.getGameKind(), 0);
+            BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);
 
 
 
@@ -27,5 +27,9 @@ public class MainBattleMenuPage extends ConsolePage {
     @Override
     public void showMenu() {
         view.show("----------< BATTLE >---------");
+        view.show(BattleMenuPage.getNumOfPlayers());
+        view.show(BattleMenuPage.getGameKind());
+        view.show(BattleMenuPage.getGameMood());
+        view.show(BattleMenuPage.getMission());
     }
 }

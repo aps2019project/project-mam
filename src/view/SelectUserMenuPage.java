@@ -11,7 +11,7 @@ public class SelectUserMenuPage extends ConsolePage {
 
     @Override
     public void help() {
-        super.help();
+        view.showHelpForSelectUserMenu();
     }
 
     @Override

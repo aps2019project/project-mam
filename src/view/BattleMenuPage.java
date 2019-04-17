@@ -5,17 +5,17 @@ import Model.ErrorType;
 import Model.User;
 
 public class BattleMenuPage extends ConsolePage {
-    Controller controller = Controller.getInstance();
+    private Controller controller = Controller.getInstance();
     View view = View.getInstance();
 
     private static final BattleMenuPage BATTLE_MENU_PAGE = new BattleMenuPage();
-    private String numOfPlayers;
-    private String gameKind = null;
-    private String gameMood = null;
-    private String mission = null;
+    private static String numOfPlayers = null;
+    private static String gameKind = null;
+    private static String gameMood = null;
+    private static String mission = null;
     private User secondUser = null;
     private User firstUser = controller.getFirstUser();
-    private int flags;
+    private static int flags;
 
     public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;
@@ -41,12 +41,14 @@ public class BattleMenuPage extends ConsolePage {
         }
         switch (command) {
             case "1":
-                view.getPages().push(new GameKindMenuPage());
+                setNumOfPlayers("single player");
                 numOfPlayers = "single player";
+                view.getPages().push(new GameKindMenuPage());
                 break;
             case "2":
-                view.getPages().push(new SelectUserMenuPage());
+                setNumOfPlayers("multi player");
                 numOfPlayers = "multi player";
+                view.getPages().push(new SelectUserMenuPage());
                 break;
             case "exit":
                 view.back();
@@ -58,19 +60,19 @@ public class BattleMenuPage extends ConsolePage {
         }
     }
 
-    public String getNumOfPlayers() {
+    public static String getNumOfPlayers() {
         return numOfPlayers;
     }
 
-    public String getGameKind() {
+    public static String getGameKind() {
         return gameKind;
     }
 
-    public String getGameMood() {
+    public static String getGameMood() {
         return gameMood;
     }
 
-    public String getMission() {
+    public static String getMission() {
         return mission;
     }
 
@@ -82,52 +84,31 @@ public class BattleMenuPage extends ConsolePage {
         return secondUser;
     }
 
-    public int getFlags() {
+    public static int getFlags() {
         return flags;
     }
 
-    public void setNumOfPlayers(String numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
+    public static void setNumOfPlayers(String numOfPlayers) {
+        BattleMenuPage.numOfPlayers = numOfPlayers;
     }
 
-    public void setGameKind(String gameKind) {
-        this.gameKind = gameKind;
+    public static void setGameKind(String gameKind) {
+        BattleMenuPage.gameKind = gameKind;
     }
 
-    public void setGameMood(String gameMood) {
-        this.gameMood = gameMood;
+    public static void setGameMood(String gameMood) {
+        BattleMenuPage.gameMood = gameMood;
     }
 
-    public void setMission(String mission) {
-        this.mission = mission;
+    public static void setMission(String mission) {
+        BattleMenuPage.mission = mission;
     }
 
     public void setSecondUser(User secondUser) {
         this.secondUser = secondUser;
     }
 
-    public void setFlags(int flags) {
-        this.flags = flags;
-    }
-
-    public User getUser2() {
-        String command = view.getNewCommand();
-        if (command.matches("select user .+")) {
-            String userName = command.split(" ")[2];
-            if (controller.getSecondUser(userName) != null) {
-                return controller.getSecondUser(userName);
-            } else {
-                view.back();
-                view.back();
-                view.getPages().push(new BattleMenuPage());
-                return null;
-            }
-        } else {
-            view.printError(ErrorType.INVALID_COMMAND);
-            view.back();
-            view.back();
-            view.getPages().push(new BattleMenuPage());
-            return null;
-        }
+    public static void setFlags(int flags) {
+        BattleMenuPage.flags = flags;
     }
 }

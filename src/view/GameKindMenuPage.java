@@ -16,11 +16,11 @@ public class GameKindMenuPage extends ConsolePage {
     public void handleCommand(String command) {
         switch (command){
             case "1":
-                battleMenuPage.setGameKind("story");
+                BattleMenuPage.setGameKind("story");
                 view.getPages().push(new MissionsMenuPage());
                 break;
             case "2":
-                battleMenuPage.setGameKind("custom game");
+                BattleMenuPage.setGameKind("custom game");
                 view.getPages().push(new GameMoodMenuPage());
                 break;
             case "back":
@@ -28,6 +28,7 @@ public class GameKindMenuPage extends ConsolePage {
                 break;
             case "help":
                 help();
+                break;
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
@@ -37,10 +38,5 @@ public class GameKindMenuPage extends ConsolePage {
     public void showMenu() {
         view.show("Select Game Kind:");
         view.show("1: story\n2: custom game\n");
-    }
-
-    public boolean getNewCommand(){
-        String newCommand = view.getNewCommand();
-        return true;
     }
 }
