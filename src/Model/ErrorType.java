@@ -22,6 +22,7 @@ public enum ErrorType {
     EXTRA_HERO("you have a hero\nyou can't add more hero"),
     EXTRA_USABLEITEM("you have a item\nyou can't add more item"),
     REPETITIVE_CARD("this card is added before"),
+    INVALID_MOOD_NUM("invalid mood number"),
 
 
 

@@ -16,15 +16,18 @@ public class GameKindMenuPage extends ConsolePage {
     public void handleCommand(String command) {
         switch (command){
             case "1":
-                battleMenuPage.setGameKind("story");
+                BattleMenuPage.setGameKind("story");
                 view.getPages().push(new MissionsMenuPage());
                 break;
             case "2":
-                battleMenuPage.setGameKind("custom game");
+                BattleMenuPage.setGameKind("custom game");
                 view.getPages().push(new GameMoodMenuPage());
                 break;
             case "back":
                 view.back();
+                break;
+            case "help":
+                help();
                 break;
             default:
                 view.printError(ErrorType.INVALID_COMMAND);

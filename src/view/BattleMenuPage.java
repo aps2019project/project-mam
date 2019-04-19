@@ -2,21 +2,25 @@ package view;
 
 import Controller.Controller;
 import Model.ErrorType;
+import Model.User;
 
 public class BattleMenuPage extends ConsolePage {
-    Controller controller = Controller.getInstance();
+    private Controller controller = Controller.getInstance();
     View view = View.getInstance();
 
     private static final BattleMenuPage BATTLE_MENU_PAGE = new BattleMenuPage();
-    private String numOfPlayers;
-    private String gameKind = null;
-    private String gameMood = null;
-    private String mission = null;
-    private String secondPlayer = null;
+    private static String numOfPlayers = null;
+    private static String gameKind = null;
+    private static String gameMood = null;
+    private static String mission = null;
+    private User secondUser = null;
+    private User firstUser = controller.getFirstUser();
+    private static int flags;
 
-    public static BattleMenuPage getInstance(){
+    public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;
     }
+
     @Override
     public void help() {
         view.showHelpForBattleMenu();
@@ -37,74 +41,74 @@ public class BattleMenuPage extends ConsolePage {
         }
         switch (command) {
             case "1":
-                view.getPages().push(new GameKindMenuPage());
+                setNumOfPlayers("single player");
                 numOfPlayers = "single player";
+                view.getPages().push(new GameKindMenuPage());
                 break;
             case "2":
-                view.getPages().push(new GameMoodMenuPage());
+                setNumOfPlayers("multi player");
                 numOfPlayers = "multi player";
+                view.getPages().push(new SelectUserMenuPage());
                 break;
             case "exit":
                 view.back();
                 break;
+            case "help":
+                help();
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
     }
 
-    public String getNumOfPlayers() {
+    public static String getNumOfPlayers() {
         return numOfPlayers;
     }
 
-    public String getGameKind() {
+    public static String getGameKind() {
         return gameKind;
     }
 
-    public String getGameMood() {
+    public static String getGameMood() {
         return gameMood;
     }
 
-    public String getMission() {
+    public static String getMission() {
         return mission;
     }
 
-    public String getSecondPlayer() {
-        return secondPlayer;
+    public User getFirstUser() {
+        return firstUser;
     }
 
-    public void setNumOfPlayers(String numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
+    public User getSecondUser() {
+        return secondUser;
     }
 
-    public void setGameKind(String gameKind) {
-        this.gameKind = gameKind;
+    public static int getFlags() {
+        return flags;
     }
 
-    public void setGameMood(String gameMood) {
-        this.gameMood = gameMood;
+    public static void setNumOfPlayers(String numOfPlayers) {
+        BattleMenuPage.numOfPlayers = numOfPlayers;
     }
 
-    public void setMission(String mission) {
-        this.mission = mission;
+    public static void setGameKind(String gameKind) {
+        BattleMenuPage.gameKind = gameKind;
     }
 
-    public void setSecondPlayer(String secondPlayer) {
-        this.secondPlayer = secondPlayer;
+    public static void setGameMood(String gameMood) {
+        BattleMenuPage.gameMood = gameMood;
     }
 
-    public void showMission() {
-        view.show("1\n2\n3\n");
+    public static void setMission(String mission) {
+        BattleMenuPage.mission = mission;
     }
 
-    public void showFirstMenu() {
-        view.show("1: single player\n2: multi player\n");
+    public void setSecondUser(User secondUser) {
+        this.secondUser = secondUser;
     }
 
-    public void showKinds() {
-        view.show("1: story\n2: custom game");
-    }
-
-    public void showMoods() {
-        view.show("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
+    public static void setFlags(int flags) {
+        BattleMenuPage.flags = flags;
     }
 }

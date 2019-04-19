@@ -22,8 +22,23 @@ public class Controller {
     //private Collection collection = new Collection();
     private User user = new User();
 
+    public User getFirstUser() {
+        return user;
+    }
 
-//------------------------------user account -----------------------------
+    public User getSecondUser(String userName) {
+        if (isUserNameValid(userName)){
+            return User.getUser(userName);
+        } else view.printError(ErrorType.INVALID_USERNAME);
+        return null;
+    }
+
+    public boolean isUserNameValid (String userName){
+        return !User.isUserNameNew(userName) && !user.getName().equalsIgnoreCase(userName);
+    }
+
+
+    //------------------------------user account -----------------------------
 
     public void saveAccount(String string) {
     }
@@ -57,7 +72,14 @@ public class Controller {
     }
 
     public void showUsers() {
-
+        StringBuilder info = new StringBuilder();
+        info.append("Accounts:\n");
+        for (User users : User.getUsers()) {
+            if (!users.getName().equalsIgnoreCase(user.getName())){
+                info.append("\t").append(users.getName()).append("\n");
+            }
+        }
+        view.show(info.toString());
     }
 
     //--------------------------------------collection------------------------------
@@ -93,42 +115,36 @@ public class Controller {
     }
 
     public void addCardToDeck(String cardId, String deckName) {
-        if (!user.getCollection().checkIsExistDeck(deckName)){
+        if (!user.getCollection().checkIsExistDeck(deckName)) {
             view.printError(ErrorType.NOT_FOUND_DECK);
             return;
         }
         int cardID = Integer.parseInt(cardId);
         if (user.getCollection().getCard(cardID) != null) {
             if (!user.getCollection().getCard(cardID).getCardType().equalsIgnoreCase("hero")) {
-                if (user.getCollection().getDeck(deckName).getCards().size() < 20){
+                if (user.getCollection().getDeck(deckName).getCards().size() < 20) {
                     if (!user.getCollection().getDeck(deckName).cardIsExist(cardID)) {
                         user.getCollection().addCardToDeck(user.getCollection().getCard(cardID), deckName);
-                    }
-                    else view.printError(ErrorType.REPETITIVE_CARD);
-                }
-                else view.printError(ErrorType.TWENTY_CARD);
-            }
-            else if (user.getCollection().getCard(cardID).getCardType().equalsIgnoreCase("hero")){
-                if (user.getCollection().getDeck(deckName).getHero() != null){
+                    } else view.printError(ErrorType.REPETITIVE_CARD);
+                } else view.printError(ErrorType.TWENTY_CARD);
+            } else if (user.getCollection().getCard(cardID).getCardType().equalsIgnoreCase("hero")) {
+                if (user.getCollection().getDeck(deckName).getHero() != null) {
                     user.getCollection().addHeroToDeck(user.getCollection().getCard(cardID), deckName);
-                }
-                else view.printError(ErrorType.EXTRA_HERO);
+                } else view.printError(ErrorType.EXTRA_HERO);
             }
-        }
-        else if (user.getCollection().getItem(cardID) != null){
-            if (user.getCollection().getDeck(deckName).getItem() != null){
+        } else if (user.getCollection().getItem(cardID) != null) {
+            if (user.getCollection().getDeck(deckName).getItem() != null) {
                 user.getCollection().addItemToDeck(user.getCollection().getItem(cardID), deckName);
-            }
-            else view.printError(ErrorType.EXTRA_USABLEITEM);
-        }
-        else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM_IN_COLLECTION);
+            } else view.printError(ErrorType.EXTRA_USABLEITEM);
+        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM_IN_COLLECTION);
     }
 
     public void selectMainDeck(String deckName) {
 
     }
 
-    public void isDeckValid(String deckName) {
+    public boolean isDeckValid(String deckName) {
+        return true;
     }
 
     public void showAllDecks() {

@@ -36,6 +36,7 @@ public class User {
         this.idCounter = idCounter;
     }
 
+
     public static ArrayList<User> getUsers() {
         return users;
     }
@@ -74,13 +75,6 @@ public class User {
 
     public ArrayList<StringBuilder> getLastGames() {
         return lastGames;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "money=" + money +
-                '}';
     }
 
     public static void addUser(User user) {
@@ -152,6 +146,14 @@ public class User {
         return this.collection.getDecks().get(index);
     }
 
+    public static User getUser(String userName) {
+        for (User user : User.getUsers()) {
+            if (user.getName().equalsIgnoreCase(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
 }
 

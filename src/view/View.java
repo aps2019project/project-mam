@@ -70,20 +70,24 @@ public class View {
                 "\nvalidate deck [deck name] \nselect deck [deck name] \nshow all decks \nshow deck [deck name]\n");
     }
     public void showHelpForBattleMenu(){
-        System.out.println("1: single player\n2: multi player\n");
+        System.out.println("for select num of player enter its number");
     }
     public void showHelpForShopMenu(){
         System.out.print("Exit \nShow collection \nSearch [item name | card name] \nSearch Collection [item name | card name]\nbuy [card name | item name] \n" +
                 "sell [card id | card id] \nshow\n");
     }
     public void showHelpForGameMoodMenu(){
-        System.out.println("1: kill opponent hero\n2: collect and keep flags\n3: collect half flags\n");
+        System.out.println("for playing at single player enter \"Start game [deck name] [mode] [number of flags]\"" +
+                "\nfor playing at multi player enter \"Start multiplayer game [mode] [number of flags]\"");
     }
     public void showHelpForGameKindMenu(){
-        System.out.println("1: story\n2: custom game\n");
+        System.out.println("for select a game kind enter its number");
     }
     public void showHelpForMissionMenu(){
-        System.out.println("1\n2\n3\n");
+        System.out.println("for select a mission enter its number");
+    }
+    public void showHelpForSelectUserMenu(){
+        System.out.println("for select a user from the account list enter \"Select user [user name]\"");
     }
 
     public void show(String string){
