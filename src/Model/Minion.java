@@ -102,4 +102,11 @@ public class Minion extends Card{
                 itr.remove();
         }
     }
+
+    public String getImportantInfo(){
+        StringBuilder info = new StringBuilder();
+        info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
+                append(getRow()).append(", ").append(getColumn()).append("),  power : ").append(getAP());
+        return info.toString();
+    }
 }

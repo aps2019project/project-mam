@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
 
 public class Game {
     private static final String SINGLE_PLAYER = "single player";
@@ -14,8 +16,8 @@ public class Game {
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
     private Map map;
-    private Deck myDeck;
-    private Deck oppDeck;
+    private Deck firstPlayerDeck;
+    private Deck secondPlayerDeck;
 
     private User firstUser;
     private User secondUser;
@@ -27,7 +29,8 @@ public class Game {
     private HashMap<Integer, Card> secondPlayerHand;
 
     private Card currentCard = null;
-    private Card NextCard = null;
+    private Card nextfirstPlayerCard = null;
+    private Card nextSecondPlayerCard = null;
 
 
     private String firstPlayerName;
@@ -42,9 +45,10 @@ public class Game {
     private int secondPlayerMana;
 
 
-    public Game(Deck myDeck, Deck oppDeck, String firstPlayerName, String secondPlayerName, String mode, int flagCount) {
-        this.myDeck = myDeck;
-        this.oppDeck = oppDeck;
+    public Game(Deck firstPlayerDeck, Deck secondPlayerDeck, String firstPlayerName,
+                String secondPlayerName, String mode, int flagCount) {
+        this.firstPlayerDeck = firstPlayerDeck;
+        this.secondPlayerDeck = secondPlayerDeck;
         this.firstPlayerName = firstPlayerName;
         this.secondPlayerName = secondPlayerName;
         this.mode = mode;
@@ -75,12 +79,12 @@ public class Game {
         return map;
     }
 
-    public Deck getMyDeck() {
-        return myDeck;
+    public Deck getFirstPlayerDeck() {
+        return firstPlayerDeck;
     }
 
-    public Deck getOppDeck() {
-        return oppDeck;
+    public Deck getSecondPlayerDeck() {
+        return secondPlayerDeck;
     }
 
     public ArrayList<Card> getSecondPlayerGraveYard() {
@@ -144,42 +148,193 @@ public class Game {
     }
 
     public void changeTurn() {
-        if (turn == SECOND_PLAYER_TURN)
-            turn = FIRST_PLAYER_TURN;
-        else
-            turn = SECOND_PLAYER_TURN;
-    }
-
-    public void removeCardFromDeck(int turn, int cardId) {
+        turn++;
     }
 
     public boolean isGameEnded() {
         return false;
     }
 
-    public void SelectCard(int cardId){
-        if(getTurn() == FIRST_PLAYER_TURN)
-            currentCard = map.getFirstPlayerCellCard().get(cardId);
+    public void SelectCard(int cardId) {
+        if (getTurn() % 2 == FIRST_PLAYER_TURN)
+            currentCard = map.getFirstPlayerCellCard().get(cardId).getCard();
         else
-            currentCard = map.getSecondPlayerCellCard().get(cardId);
+            currentCard = map.getSecondPlayerCellCard().get(cardId).getCard();
     }
 
-    public boolean isCardInMap(int cardId){
-
-
+    public boolean isCardInFirstPlayerCellCard(int cardId) {
+        return map.getFirstPlayerCellCard().get(cardId) != null;
     }
 
-    public void moveCurrentCardTo(int x, int y){
-        map.getCells()[x][y].setCard(currentCard);
-        currentCard.setRow(x);
+    public boolean isCardInSecondPlayerCellCard(int cardId) {
+        return map.getSecondPlayerCellCard().get(cardId) != null;
+    }
+
+    public void moveCurrentCardTo(int x, int y) {
+        map.getCells()[x][y] =
+
+                currentCard.setRow(x);
         currentCard.setColumn(y);
     }
 
+    public void setPlayersHand() {
+        Random random = new Random();
+        int rand;
+        while (firstPlayerHand.size() <= 5) {
+            rand = random.nextInt(firstPlayerDeck.getCards().size());
+            addRandomCardFromFirstPlayerDeckToHand(rand);
+        }
+        while (secondPlayerHand.size() <= 5) {
+            rand = random.nextInt(secondPlayerDeck.getCards().size());
+            addRandomCardFromSecondPlayerDeckToHand(rand);
+        }
+    }
+
+    public void addRandomCardFromFirstPlayerDeckToHand(int rand) {
+        if (firstPlayerDeck.getCards().size() != 0) {
+            firstPlayerHand.put(firstPlayerDeck.getCards().get(rand).getId(), firstPlayerDeck.getCards().get(rand));
+            firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
+        }
+    }
+
+    public void addRandomCardFromSecondPlayerDeckToHand(int rand) {
+        if (secondPlayerDeck.getCards().size() != 0) {
+            firstPlayerHand.put(firstPlayerDeck.getCards().get(rand).getId(), firstPlayerDeck.getCards().get(rand));
+            firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
+        }
+    }
+
+    public void updateFirstPlayerHand() {
+        if (nextfirstPlayerCard != null) {
+            firstPlayerHand.put(nextfirstPlayerCard.getId(), nextfirstPlayerCard);
+            nextfirstPlayerCard = null;
+            Random random = new Random();
+            while (firstPlayerHand.size() < 5) {
+                addRandomCardFromFirstPlayerDeckToHand(random.nextInt());
+            }
+        }
+    }
+
+    public void updateSecondPlayerHand() {
+        if (nextSecondPlayerCard != null) {
+            secondPlayerHand.put(nextSecondPlayerCard.getId(), nextSecondPlayerCard);
+            nextSecondPlayerCard = null;
+            Random rand = new Random();
+            while (secondPlayerHand.size() < 5)
+                addRandomCardFromSecondPlayerDeckToHand(rand.nextInt());
+        }
+    }
+
+    public void setNextfirstPlayerCard() {
+        if (firstPlayerHand.size() < 5) {
+            if (firstPlayerDeck.getCards().size() != 0) {
+                Random random = new Random();
+                nextfirstPlayerCard = firstPlayerDeck.getCards().get(random.nextInt());
+            } else
+                nextfirstPlayerCard = null;
+        }
+    }
+
+    public void setNextSecondPlayerCard() {
+        if (secondPlayerHand.size() < 5) {
+            if (secondPlayerDeck.getCards().size() != 0) {
+                Random random = new Random();
+                int rand = random.nextInt();
+                nextSecondPlayerCard = secondPlayerDeck.getCards().get(rand);
+            } else
+                nextSecondPlayerCard = null;
+        }
+    }
+
+    public boolean isCardInPlayer1Hand(String cardName) {
+        for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
+            if (entry.getValue().getName().equals(cardName))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isCardInplayer2Hand(String cardName) {
+        for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
+            if (entry.getValue().getName().equals(cardName))
+                return true;
+        }
+        return false;
+    }
+
+    public String getGameInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("first player mana : ").append(firstPlayerMana).append("\nsecond player mana : ").
+                append(secondPlayerMana);
+        switch (mode) {
+            case "2":
+                info.append("\nflag location : ").append(map.getFlags().get(0).getRow()).append(", ").
+                        append(map.getFlags().get(0).getColumn()).append("\nflag keeper : ").
+                        append(map.getFlags().get(0).getCard().getName());
+                break;
+            case "3":
+                info.append("flag keeper from first team :\n");
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet())
+                    if (entry.getValue().getFlagCount() != 0)
+                        info.append(entry.getValue().getCard().getName()).append(" | ");
+                info.append("flag keeper from second team :\n");
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet())
+                    if (entry.getValue().getFlagCount() != 0)
+                        info.append(entry.getValue().getCard().getName()).append(" | ");
+        }
+        return info.toString();
+    }
+
+    public String showMinions(ArrayList<Card> cards) {
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            info.append(card.getImportantInfo());
+            info.append("\n");
+        }
+        return info.toString();
+    }
+
+    public String showHand(ArrayList<Card> hand) {
+        StringBuilder info = new StringBuilder();
+        for (Card card : hand) {
+            info.append(card.getImportantInfo());
+            info.append("\n");
+        }
+        if (turn % 2 == 1)
+            info.append(nextfirstPlayerCard.getImportantInfo());
+        else info.append(nextSecondPlayerCard.getImportantInfo());
+        return info.toString();
+    }
+
+    private void insertCard(String cardName, int x, int y, HashMap<Integer, Card> Hand) {
+        for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet())
+            if (entry.getValue().getName().equals(cardName)) {
+                map.getCells()[x][y].setCard(entry.getValue());
+                entry.getValue().setRow(x);
+                entry.getValue().setColumn(y);
+                if (turn % 2 == 1)
+                    map.getFirstPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
+                else
+                    map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
+                Hand.remove(entry.getValue().getId());
+                break;
+            }
+    }
+
+    public void insertPlayer2Card(String cardName, int x, int y) {
+        insertCard(cardName, x, y, secondPlayerHand);
+    }
+
+    public void insertPlayer1Card(String cardName, int x, int y) {
+        insertCard(cardName, x, y, firstPlayerHand);
+    }
+
+    public void endTurn() {
 
 
+        changeTurn();
 
-
-
+    }
 
 
 }

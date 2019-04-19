@@ -48,4 +48,8 @@ public class Deck {
         }
         return false;
     }
+
+    public void removeCard(Card card){
+        cards.remove(card);
+    }
 }

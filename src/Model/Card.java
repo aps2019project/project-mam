@@ -82,4 +82,8 @@ public class Card {
         buff.setSign(sign);
         buffs.add(buff);
     }
+
+    public String getImportantInfo(){
+        return "card";
+    }
 }
