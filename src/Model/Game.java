@@ -171,9 +171,17 @@ public class Game {
     }
 
     public void moveCurrentCardTo(int x, int y) {
-        map.getCells()[x][y] =
-
-                currentCard.setRow(x);
+        if (turn % 2 == 1) {
+            map.getCells()[x][y] = map.getFirstPlayerCellCard().get(currentCard.getId());
+            map.getFirstPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
+            map.getFirstPlayerCellCard().get(currentCard.getId()).setCard(null);
+        }
+        else {
+            map.getCells()[x][y] = map.getSecondPlayerCellCard().get(currentCard.getId());
+            map.getSecondPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
+            map.getSecondPlayerCellCard().get(currentCard.getId()).setCard(null);
+        }
+        currentCard.setRow(x);
         currentCard.setColumn(y);
     }
 
