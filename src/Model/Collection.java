@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Collection {
     private ArrayList<Card> cards = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<UsableItem> items = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
 
@@ -16,7 +16,7 @@ public class Collection {
         cards.add(card);
     }
 
-    public void addItem(Item item) {
+    public void addItem(UsableItem item) {
         items.add(item);
     }
 
@@ -36,7 +36,7 @@ public class Collection {
         return cards;
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<UsableItem> getItems() {
         return items;
     }
 
@@ -118,8 +118,9 @@ public class Collection {
         return null;
     }
 
-    public Item getItem(int itemID) {
-        for (Item item : items) {
+
+    public UsableItem getItem(int itemID) {
+        for (UsableItem item : items) {
             if (item.getId() == itemID) {
                 return item;
             }
@@ -214,7 +215,7 @@ public class Collection {
         }
     }
 
-    public void addHeroToDeck(Hero hero, String deckName) {
+    public void addHeroToDeck(Card hero, String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 deck.setHero(hero);

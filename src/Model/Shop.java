@@ -122,7 +122,7 @@ public class Shop {
     }
 
     public void buyItem(String itemName, User user) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);

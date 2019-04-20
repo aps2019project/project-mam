@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Deck {
     private ArrayList<Card> cards = new ArrayList<>();
     private  ArrayList<UsableItem>  items=new ArrayList<>();
-    private Hero hero;
+    private Card hero;
     private String name;
 
     public void setName(String name) {
@@ -67,7 +67,7 @@ public class Deck {
 
     public void removeItem(UsableItem item) { this.items.remove(item); }
 
-    public void setHero(Hero hero) {
+    public void setHero(Card hero) {
         this.hero = hero;
     }
 
@@ -87,7 +87,7 @@ public class Deck {
         return items;
     }
 
-    public Hero getHero() {
+    public Card getHero() {
         return hero;
     }
 
@@ -100,7 +100,4 @@ public class Deck {
         return false;
     }
 
-    public void removeCard(Card card){
-        cards.remove(card);
-    }
 }
