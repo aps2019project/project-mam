@@ -87,10 +87,14 @@ public class Collection {
     }
 
     public void showAllDecks() {
+        int i=0;
         for (Deck deck : decks) {
-      deck.showDeck();
+            StringBuilder allInfo = new StringBuilder();
+            allInfo.append(i++).append("deck_").append(i++).append(":\n").append(deck.showDeck());
+            allInfo.append("\t");
         }
     }
+
     public int getCardId(String cardName) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
@@ -264,7 +268,7 @@ public class Collection {
     public boolean validateDeck(String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
-                if(deck.getCards().size()==20 && deck.getHero()!=null)
+                if (deck.getCards().size() == 20 && deck.getHero() != null)
                     return true;
             }
         }
@@ -275,7 +279,7 @@ public class Collection {
         this.mainDeck = mainDeck;
     }
 
-    public boolean isValidMainDeck(String deckName){
+    public boolean isValidMainDeck(String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 return true;
