@@ -29,6 +29,16 @@ public class Shop {
         return info.toString();
     }
 
+    public String getCardInfo(String cardName) {
+        StringBuilder info = new StringBuilder();
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)) {
+                info.append(card.getInfo()).append("\n");
+                return info.toString();
+            }
+        }
+        return null;
+    }
 
     public String getHeroInfo() {
         StringBuilder info = new StringBuilder();
