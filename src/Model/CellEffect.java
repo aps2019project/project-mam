@@ -2,7 +2,7 @@ package Model;
 
 public enum CellEffect {
     HOLY,
-    POSION,
+    POISON,
     FIERY,
     NONE,
 }

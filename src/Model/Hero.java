@@ -18,7 +18,7 @@ public class Hero extends Card {
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
-        super(name, price, MP);
+        super(name, MP, price);
         this.AP = AP;
         this.HP = HP;
         TargetCommunity = targetCommunity;
@@ -49,6 +49,14 @@ public class Hero extends Card {
 
     public ImpactType getHeroClass() {
         return heroClass;
+    }
+
+    public int getFlagCount() {
+        return flagCount;
+    }
+
+    public void setFlagCount(int flagCount) {
+        this.flagCount = flagCount;
     }
 
     public void addBuffToSpecialPower(Buff buff){

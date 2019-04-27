@@ -56,7 +56,7 @@ public class Shop {
     public String getItemInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
-        for (Item item : items) {
+        for (UsableItem item : items) {
             info.append("\t\t").append(counter).append(" : ");
             info.append(item.getInfo()).append("\n");
             counter++;
@@ -66,7 +66,7 @@ public class Shop {
 
     public String getItemInfo(String itemName) {
         StringBuilder info = new StringBuilder();
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 info.append(item.getInfo()).append("\n");
                 return info.toString();
@@ -93,7 +93,7 @@ public class Shop {
     }
 
     public boolean searchItem(String itemName) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -102,7 +102,7 @@ public class Shop {
     }
 
     public boolean checkIsItem(String name) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equals(name)) {
                 return true;
             }
@@ -113,8 +113,9 @@ public class Shop {
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
-                card.setId(user.getIdCounter());
-                user.getCollection().addCard(card);
+                Card newCard = card;
+                newCard.setId(user.getIdCounter());
+                user.getCollection().addCard(newCard);
                 user.setMoney(user.getMoney() - card.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
             }
@@ -122,7 +123,7 @@ public class Shop {
     }
 
     public void buyItem(String itemName, User user) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
@@ -165,7 +166,7 @@ public class Shop {
     }
 
     public boolean itemNameIsAvailable(String itemName) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -191,7 +192,7 @@ public class Shop {
     }
 
     public boolean sellItem(int itemId, User user) {
-        for (Item item : user.getCollection().getItems()) {
+        for (UsableItem item : user.getCollection().getItems()) {
             if (item.getId() == itemId) {
                 user.getCollection().removeItem(item);
                 user.setMoney(user.getMoney() + item.getPrice());
@@ -208,6 +209,11 @@ public class Shop {
     public static void importCards() {
         Card card = new Spell("Total Disarm", 1000, 0);
         card.addBuff(new Buff(DISARM, 100, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Spell("Area Dispel", 2500, 2);
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
         cards.add(card);
 
         card = new Spell("Empower", 250, 1);
@@ -231,7 +237,7 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("poison Lake", 900, 5);
-        card.addBuff(new Buff(CELL_EFFECT_POSION, 1, 1, THREE_IN_THREE));
+        card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 1, THREE_IN_THREE));
         cards.add(card);
 
         card = new Spell("Madness", 650, 0);
@@ -244,7 +250,12 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("All Poison", 1500, 8);
-        card.addBuff(new Buff(POSION, 4, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
+        cards.add(card);
+
+        card = new Spell("Dispel", 2100, 0);
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, ALL_INSIDER_FORCES));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
         card = new Spell("Health with profit", 2250, 0);
@@ -256,15 +267,7 @@ public class Shop {
         card.addBuff(new Buff(ATTACK_POWER, 0, 6, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Dispel", 2100, 0);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, ALL_INSIDER_FORCES));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, ALL_ENEMY_FORCES));
-        cards.add(card);
 
-        card = new Spell("Area Dispel", 2500, 2);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
-        cards.add(card);
 
 
         //----------------------------minions-----------------------
@@ -284,10 +287,31 @@ public class Shop {
         cards.add(card);
 
         card = new Minion("pahlavan fars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
-        //???????????????????????
+      //  card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5, ONE_ENEMY_FORCE));
         cards.add(card);
 
+        card = new Minion("sepah salar fars", 800, 7, 12, 4, 0, MELEE, COMBO);
+        cards.add(card);
 
+        card = new Minion("kamandar torani", 500, 1, 3, 4, 5, RANGED, NULL);
+        cards.add(card);
+
+        card = new Minion("ghlab sangdar torani", 600, 1, 4, 2, 7, RANGED, NULL);
+        cards.add(card);
+
+        card = new Minion("neyzedaran torani", 600, 1, 4, 4, 7, HYBRID, NULL);
+        cards.add(card);
+
+        card = new Minion("jasosan torani", 700, 4, 6, 6, 0, MELEE, NULL);
+        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Minion("gorazda torani", 450, 2, 3, 10, 7, MELEE, NULL);
+        cards.add(card);
+
+        card = new Minion("shahzade torani", 800, 6, 6, 10, 7, MELEE, COMBO);
+        cards.add(card);
         //-----------------------------heros-----------------------------------------
 
         card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
@@ -295,12 +319,102 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
-        //card.addBuff(new Buff(""));
+        card.addBuff(new Buff(STUN,1,0,ALL_ENEMY_FORCES));
+        cards.add(card);
+
+        card = new Hero("ezhdehayeHaftsar", 8000, 50, 4, MELEE, 0, 0, 1);
+        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("rakhsh", 8000, 50, 4, MELEE, 0, 1, 2);
+        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("zahak", 10000, 50, 2, MELEE, 0, 0, 0);
+        card.addBuff(new Buff(POISON, 3, 0, ENEMY_OR_INSIDER_FORCE));
+        cards.add(card);
+
+        card = new Hero("kaveh", 8000, 50, 4, MELEE, 0, 1, 3);
+        card.addBuff(new Buff(CELL_EFFECT_HOLY, 3, 0, ONE_CELL));
+        cards.add(card);
+
+        card = new Hero("arash", 10000, 30, 2, RANGED, 6, 2, 2);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 0, ALL_ENEMY_FORCES_IN_ROW));
+        cards.add(card);
+
+        card = new Hero("afsane", 11000, 40, 3, RANGED, 3, 1, 2);
+        card.addBuff(new Buff(DISPEL, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
+       // card.addBuff(new Buff(HOLY, 100, 3, ALL_INSIDER_FORCES));
+        cards.add(card);
+
+        card = new Hero("rostam", 8000, 55, 7, HYBRID, 4, 0, 0);
+        cards.add(card);
+
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
         items.add(item);
 
+        item = new UsableItem("namosSpar", 4000, "12");
+        items.add(item);
+
+        item = new UsableItem("kamanDamol", 30000, " ");
+        items.add(item);
+
+        item = new UsableItem("noshDaroo", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("tirDoshakh", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("parSimorgh", 3500, "12");
+        items.add(item);
+
+        item = new UsableItem("eksir", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("majonMana", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("majonRoiintani", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("nefrinMarg", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("randomdamage", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("terrorHood", 5000, "12");
+        items.add(item);
+
+        item = new UsableItem("bladesOfAgility", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("kingWisdom", 9000, "12");
+        items.add(item);
+
+        item = new UsableItem("assassinationDagger", 15000, "12");
+        items.add(item);
+
+        item = new UsableItem("poisonousDagger", 7000, "12");
+        items.add(item);
+
+        item = new UsableItem("shockHammer", 15000, "12");
+        items.add(item);
+
+        item = new UsableItem("soulEater", 4000, "12");
+        items.add(item);
+
+        item = new UsableItem("ghoslTamid", 20000, "12");
+        items.add(item);
+
+        item = new UsableItem("shamshirChini", 0, "12");
+        items.add(item);
     }
+
 }
 
 

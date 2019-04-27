@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Deck {
     private ArrayList<Card> cards = new ArrayList<>();
-    private  ArrayList<UsableItem>  items=new ArrayList<>();
-    private Hero hero;
+    private UsableItem item;
+    private Card hero;
     private String name;
 
     public void setName(String name) {
@@ -25,33 +25,70 @@ public class Deck {
         return info.toString();
     }
 
-    public String getHeroInfo() {
+    public String getCardsInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
-        if(hero!=null) {
-            info.append("\t\t").append(counter).append(" : ");
-            info.append(hero.getInfo()).append("\n");
-            counter++;
+        for (Card card : cards) {
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
         }
         return info.toString();
+    }
+
+    public String getHeroInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("\t\t");
+        if (hero != null) {
+            info.append(hero.getInfo());
+            return info.toString();
+        }
+        return "";
     }
 
     public String getItemInfo() {
         StringBuilder info = new StringBuilder();
-        int counter = 1;
-        for (Item item : items) {
-            info.append("\t\t").append(counter).append(" : ");
-            info.append(item.getInfo()).append("\n");
-            counter++;
+        info.append("\t\t");
+        if (item != null) {
+            info.append(item.getInfo());
+            return info.toString();
         }
-        return info.toString();
+        return "";
     }
 
     public String showDeck() {
         StringBuilder allInfo = new StringBuilder();
-        allInfo.append("Heroes :\n").append(getHeroInfo());
-        allInfo.append("\nItems :\n").append(getItemInfo());
-        allInfo.append("\nCards :\n").append(getCardInfo());
+        allInfo.append("Hero :\n");
+        if (getHeroInfo() != null) {
+            allInfo.append(getHeroInfo());
+        }
+        allInfo.append("\nItem :\n");
+        if (getItemInfo() != null) {
+            allInfo.append(getItemInfo());
+        }
+        allInfo.append("\nCards :\n");
+        if (getCardInfo() != null) {
+            allInfo.append(getCardInfo());
+        }
+        return allInfo.toString();
+    }
+
+    public String showDecks() {
+        StringBuilder allInfo = new StringBuilder();
+        allInfo.append("\t\tHero :\n");
+        if (getHeroInfo() != null) {
+            allInfo.append("\t\t").append(getHeroInfo());
+        }
+        allInfo.append("\n\t\tItem :\n");
+        if (getItemInfo() != null) {
+            allInfo.append("\t\t").append(getItemInfo());
+        }
+        allInfo.append("\n\t\tCards :\n");
+        if (getCardInfo() != null) {
+            allInfo.append(getCardsInfo());
+        }
         return allInfo.toString();
     }
 
@@ -62,12 +99,14 @@ public class Deck {
     public void removeCard(Card card) {this.cards.remove(card); }
 
     public void addItem(UsableItem item) {
-        this.items.add(item);
+        this.item = item;
     }
 
-    public void removeItem(UsableItem item) { this.items.remove(item); }
+    public void removeItem(UsableItem item) {
+        this.item = item;
+    }
 
-    public void setHero(Hero hero) {
+    public void setHero(Card hero) {
         this.hero = hero;
     }
 
@@ -83,21 +122,20 @@ public class Deck {
         return cards;
     }
 
-    public ArrayList getItem() {
-        return items;
+    public UsableItem getItem() {
+        return item;
     }
 
-    public Hero getHero() {
+    public Card getHero() {
         return hero;
     }
 
-    public boolean cardIsExist(int cardId){
+    public boolean cardIsExist(int cardId) {
         for (Card card : cards) {
-            if (card.getId() == cardId){
+            if (card.getId() == cardId) {
                 return true;
             }
         }
         return false;
     }
-
 }

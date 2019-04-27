@@ -18,12 +18,14 @@ public enum ErrorType {
     NOT_FOUND_DECK("deck not found"),
     FOUND_CARD("card found:"),
     FOUND_ITEM("item found:"),
-    TWENTY_CARD("you have 20 card in your deck\nyou can't add more card"),
-    EXTRA_HERO("you have a hero\nyou can't add more hero"),
-    EXTRA_USABLEITEM("you have a item\nyou can't add more item"),
+    TWENTY_CARD("you have 20 card in your deck\n  you can't add more card"),
+    EXTRA_HERO("you have a hero\n  you can't add more hero"),
+    EXTRA_USABLEITEM("you have a item\n  you can't add more item"),
     REPETITIVE_CARD("this card is added before"),
     INVALID_MOOD_NUM("invalid mood number"),
-
+    SUCCESSFUL_ADDING_CARD("add card successful"),
+    SUCCESSFUL_ADDING_ITEM("add item successful"),
+    SUCCESSFUL_ADDING_HERO("add hero successful"),
 
 
     ;

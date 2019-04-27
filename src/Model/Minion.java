@@ -128,6 +128,15 @@ public class Minion extends Card{
         }
     }
 
+    @Override
+    public Card copyCard(Card card) {
+        Card newCard = new Minion(card.getName(), card.getPrice(), card.getMP(), card.getHP(),
+                card.getAP(), card.getTargetCommunity(), card.getMinionClass(),
+                card.getSPActivationTime());
+        return newCard;
+
+    }
+
     public String getImportantInfo(){
         StringBuilder info = new StringBuilder();
         info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").

@@ -18,7 +18,7 @@ public class CollectionMenuPage extends ConsolePage {
         if (command.matches("show"))
             controller.showCollection();
         else if (command.matches("search .*"))
-            controller.searchInCollection(command.split(" ")[1]);
+            controller.searchInCollection(command.substring(7));
         else if (command.matches("save"))
             controller.saveCollection();
         else if (command.matches("create deck .*"))

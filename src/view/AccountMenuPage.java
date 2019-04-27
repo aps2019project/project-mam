@@ -17,12 +17,11 @@ public class AccountMenuPage extends ConsolePage{
             controller.createAccount(command);
         else if (command.matches("save"))
             controller.saveAccount(command);
-        else if (command.matches("logout"))
-            controller.logoutAccount(command);
+
         else if (command.matches("login .*"))
             controller.loginAccount(command);
         else if (command.matches("show leaderboard"))
-            controller.showLeaderBoard(command);
+            controller.showLeaderBoard();
         else if (command.matches("help"))
             view.showHelpForAccountMenu();
         else
