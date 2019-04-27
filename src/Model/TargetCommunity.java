@@ -11,6 +11,9 @@ public enum TargetCommunity {
     ENEMY_HERO,
     INSIDER_HERO,
     TWO_IN_TWO,
+    ONE_CELL,
     THREE_IN_THREE,
     OWN,
+    ALL_ENEMY_FORCES_IN_ROW,
+    NONE,
 }

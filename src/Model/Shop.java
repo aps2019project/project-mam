@@ -249,7 +249,7 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("All Poison", 1500, 8);
-        card.addBuff(new Buff(POSION, 4, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
         card = new Spell("Dispel", 2100, 0);
@@ -297,7 +297,40 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
-        //card.addBuff(new Buff(""));
+        card.addBuff(new Buff(STUN,1,0,ALL_ENEMY_FORCES));
+        cards.add(card);
+
+        card = new Hero("ezhdehayeHaftsar", 8000, 50, 4, MELEE, 0, 0, 1);
+        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("rakhsh", 8000, 50, 4, MELEE, 0, 1, 2);
+        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("zahak", 10000, 50, 2, MELEE, 0, 0, 0);
+        card.addBuff(new Buff(POISON, 3, 0, ENEMY_OR_INSIDER_FORCE));
+        cards.add(card);
+
+        card = new Hero("kaveh", 8000, 50, 4, MELEE, 0, 1, 3);
+        card.addBuff(new Buff(CELL_EFFECT_HOLY, 3, 0, ONE_CELL));
+        cards.add(card);
+
+        card = new Hero("arash", 10000, 30, 2, RANGED, 6, 2, 2);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 0, ALL_ENEMY_FORCES_IN_ROW));
+        cards.add(card);
+
+        card = new Hero("afsane", 11000, 40, 3, RANGED, 3, 1, 2);
+        card.addBuff(new Buff(DISPEL, 1, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
+       // card.addBuff(new Buff(HOLY, 100, 3, ALL_INSIDER_FORCES));
+        cards.add(card);
+
+        card = new Hero("rostam", 8000, 55, 7, HYBRID, 4, 0, 0);
+        cards.add(card);
+
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
         items.add(item);
