@@ -277,7 +277,7 @@ public class Collection {
     public boolean validateDeck(String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
-                if(deck.getCards().size()==20 && deck.getHero()!=null)
+                if (deck.getCards().size() == 20 && deck.getHero() != null)
                     return true;
             }
         }
@@ -288,7 +288,7 @@ public class Collection {
         this.mainDeck = mainDeck;
     }
 
-    public boolean isValidMainDeck(String deckName){
+    public boolean isValidMainDeck(String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 return true;

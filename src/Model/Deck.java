@@ -16,20 +16,11 @@ public class Deck {
         StringBuilder info = new StringBuilder();
         int counter = 1;
         for (Card card : cards) {
-            info.append("\t\t").append(counter).append(" : ");
-            info.append(card.getInfo()).append("\n");
-            counter++;
-        }
-        return info.toString();
-    }
-
-    public String getCardsInfo() {
-        StringBuilder info = new StringBuilder();
-        int counter = 1;
-        for (Card card : cards) {
-            info.append("\t\t\t\t").append(counter).append(" : ");
-            info.append(card.getInfo()).append("\n");
-            counter++;
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
         }
         return info.toString();
     }
@@ -83,7 +74,7 @@ public class Deck {
         }
         allInfo.append("\n\t\tCards :\n");
         if (getCardInfo() != null) {
-            allInfo.append(getCardsInfo());
+            allInfo.append(getCardInfo());
         }
         return allInfo.toString();
     }
@@ -92,9 +83,7 @@ public class Deck {
         this.cards.add(card);
     }
 
-    public void removeCard(Card card) {
-        this.cards.remove(card);
-    }
+    public void removeCard(Card card) {this.cards.remove(card); }
 
     public void addItem(UsableItem item) {
         this.item = item;

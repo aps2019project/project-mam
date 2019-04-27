@@ -36,6 +36,10 @@ public class Cell {
         return collectableItem;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
     public void setFlagCount(int flagCount) {
         this.flagCount = flagCount;
     }
@@ -54,5 +58,9 @@ public class Cell {
 
     public boolean haveCollectableItem(){
         return false;
+    }
+
+    public boolean isCellEmpty(){
+        return card != null;
     }
 }

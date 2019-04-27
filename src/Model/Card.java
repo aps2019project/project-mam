@@ -29,6 +29,14 @@ public class Card {
         return MP;
     }
 
+    public int getHP(){
+        return -1;
+    }
+
+    public int getAP(){
+        return -1;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -68,6 +76,18 @@ public class Card {
         return -1;
     }
 
+    public int getTargetCommunity() {
+        return -1;
+    }
+
+    public ImpactType getMinionClass() {
+        return ImpactType._NULL;
+    }
+
+    public Model.SPActivationTime getSPActivationTime() {
+        return SPActivationTime.NULL;
+    }
+
     public void setRow(int row) {
     }
 
@@ -82,6 +102,11 @@ public class Card {
         buff.setSign(sign);
         buffs.add(buff);
     }
+
+    public String getImportantInfo(){
+        return "card";
+    }
+
 
     public Card copyCard(Card card){
         return null;
