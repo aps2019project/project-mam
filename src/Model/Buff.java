@@ -45,7 +45,7 @@ public class Buff {
 
     public void oneEnemyForce(Card card){
         switch (type){
-            case POSION:
+            case POISON:
                 card.decrementOfHp(buffPower);
                 break;
             case ATTACK_WEAKNESS:

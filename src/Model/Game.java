@@ -414,7 +414,7 @@ public class Game {
     private void activePoisonBuffs(HashMap<Integer, Cell> cards) {
         for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
             for (Buff buff : entry.getValue().getCard().getBuffs())
-                if (buff.getType() == BuffType.POSION)
+                if (buff.getType() == BuffType.POISON)
                     entry.getValue().getCard().decrementOfHp(1);
     }
 

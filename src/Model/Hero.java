@@ -51,14 +51,6 @@ public class Hero extends Card {
         return heroClass;
     }
 
-    public int getFlagCount() {
-        return flagCount;
-    }
-
-    public void setFlagCount(int flagCount) {
-        this.flagCount = flagCount;
-    }
-
     public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);
     }

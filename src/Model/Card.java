@@ -98,8 +98,6 @@ public class Card {
     public void setCanAttack(boolean canAttack) {
     }
 
-
-        public void setRow(int row) {
     public int getTargetCommunity() {
         return -1;
     }
@@ -143,10 +141,6 @@ public class Card {
         buffs.add(buff);
     }
 
-    public void addBuff(Buff buff, String sign) {
-        buff.setSign(sign);
-        buffs.add(buff);
-    }
 
     public String getImportantInfo(){
         return "card";
