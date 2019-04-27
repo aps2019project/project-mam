@@ -210,6 +210,11 @@ public class Shop {
         card.addBuff(new Buff(DISARM, 100, 0, ONE_ENEMY_FORCE));
         cards.add(card);
 
+        card = new Spell("Area Dispel", 2500, 2);
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
+        cards.add(card);
+
         card = new Spell("Empower", 250, 1);
         card.addBuff(new Buff(ATTACK_POWER, 100, 2, ONE_INSIDER_FORCE));
         cards.add(card);
@@ -247,6 +252,11 @@ public class Shop {
         card.addBuff(new Buff(POSION, 4, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
+        card = new Spell("Dispel", 2100, 0);
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, ALL_INSIDER_FORCES));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, ALL_ENEMY_FORCES));
+        cards.add(card);
+
         card = new Spell("Health with profit", 2250, 0);
         card.addBuff(new Buff(HEALTH_WEAKNESS, 0, 1, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(HOLY, 3, 2, ONE_INSIDER_FORCE));
@@ -256,15 +266,7 @@ public class Shop {
         card.addBuff(new Buff(ATTACK_POWER, 0, 6, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Dispel", 2100, 0);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, ALL_INSIDER_FORCES));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, ALL_ENEMY_FORCES));
-        cards.add(card);
 
-        card = new Spell("Area Dispel", 2500, 2);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
-        cards.add(card);
 
 
         //----------------------------minions-----------------------
@@ -300,7 +302,64 @@ public class Shop {
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
         items.add(item);
 
+        item = new UsableItem("namosSpar", 4000, "12");
+        items.add(item);
+
+        item = new UsableItem("kamanDamol", 30000, " ");
+        items.add(item);
+
+        item = new UsableItem("noshDaroo", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("tirDoshakh", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("parSimorgh", 3500, "12");
+        items.add(item);
+
+        item = new UsableItem("eksir", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("majonMana", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("majonRoiintani", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("nefrinMarg", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("randomdamage", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("terrorHood", 5000, "12");
+        items.add(item);
+
+        item = new UsableItem("bladesOfAgility", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("kingWisdom", 9000, "12");
+        items.add(item);
+
+        item = new UsableItem("assassinationDagger", 15000, "12");
+        items.add(item);
+
+        item = new UsableItem("poisonousDagger", 7000, "12");
+        items.add(item);
+
+        item = new UsableItem("shockHammer", 15000, "12");
+        items.add(item);
+
+        item = new UsableItem("soulEater", 4000, "12");
+        items.add(item);
+
+        item = new UsableItem("ghoslTamid", 20000, "12");
+        items.add(item);
+
+        item = new UsableItem("shamshirChini", 0, "12");
+        items.add(item);
     }
+
 }
 
 
