@@ -64,7 +64,7 @@ public class Controller {
         } else view.printError(ErrorType.INVALID_USERNAME);
     }
 
-    public void logoutAccount(String command) {
+    public void logoutAccount() {
         user = null;
     }
 
