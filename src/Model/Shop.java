@@ -56,7 +56,7 @@ public class Shop {
     public String getItemInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
-        for (Item item : items) {
+        for (UsableItem item : items) {
             info.append("\t\t").append(counter).append(" : ");
             info.append(item.getInfo()).append("\n");
             counter++;
@@ -66,7 +66,7 @@ public class Shop {
 
     public String getItemInfo(String itemName) {
         StringBuilder info = new StringBuilder();
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 info.append(item.getInfo()).append("\n");
                 return info.toString();
@@ -93,7 +93,7 @@ public class Shop {
     }
 
     public boolean searchItem(String itemName) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -102,7 +102,7 @@ public class Shop {
     }
 
     public boolean checkIsItem(String name) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equals(name)) {
                 return true;
             }
@@ -113,8 +113,9 @@ public class Shop {
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
-                card.setId(user.getIdCounter());
-                user.getCollection().addCard(card);
+                Card newCard = card;
+                newCard.setId(user.getIdCounter());
+                user.getCollection().addCard(newCard);
                 user.setMoney(user.getMoney() - card.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
             }
@@ -122,7 +123,7 @@ public class Shop {
     }
 
     public void buyItem(String itemName, User user) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
@@ -165,7 +166,7 @@ public class Shop {
     }
 
     public boolean itemNameIsAvailable(String itemName) {
-        for (Item item : items) {
+        for (UsableItem item : items) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -191,7 +192,7 @@ public class Shop {
     }
 
     public boolean sellItem(int itemId, User user) {
-        for (Item item : user.getCollection().getItems()) {
+        for (UsableItem item : user.getCollection().getItems()) {
             if (item.getId() == itemId) {
                 user.getCollection().removeItem(item);
                 user.setMoney(user.getMoney() + item.getPrice());

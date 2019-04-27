@@ -102,4 +102,10 @@ public class Minion extends Card{
                 itr.remove();
         }
     }
+
+    @Override
+    public Card copyCard(Card card) {
+        Card newCard = new Minion(card.getName(), card.getPrice(), card.getMP(), card.get)
+
+    }
 }

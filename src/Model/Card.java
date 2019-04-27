@@ -82,4 +82,8 @@ public class Card {
         buff.setSign(sign);
         buffs.add(buff);
     }
+
+    public Card copyCard(Card card){
+        return null;
+    }
 }
