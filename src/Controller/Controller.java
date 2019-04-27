@@ -29,13 +29,13 @@ public class Controller {
     }
 
     public User getSecondUser(String userName) {
-        if (isUserNameValid(userName)){
+        if (isUserNameValid(userName)) {
             return User.getUser(userName);
         } else view.printError(ErrorType.INVALID_USERNAME);
         return null;
     }
 
-    public boolean isUserNameValid (String userName){
+    public boolean isUserNameValid(String userName) {
         return !User.isUserNameNew(userName) && !user.getName().equalsIgnoreCase(userName);
     }
 
@@ -78,7 +78,7 @@ public class Controller {
         StringBuilder info = new StringBuilder();
         info.append("Accounts:\n");
         for (User users : User.getUsers()) {
-            if (!users.getName().equalsIgnoreCase(user.getName())){
+            if (!users.getName().equalsIgnoreCase(user.getName())) {
                 info.append("\t").append(users.getName()).append("\n");
             }
         }
@@ -146,7 +146,9 @@ public class Controller {
     }
 
     public void selectMainDeck(String deckName) {
-
+        if (user.getCollection().checkIsExistDeck(deckName)) {
+            user.getCollection().setMainDeck(deckName);
+        } else view.printError(ErrorType.NOT_FOUND_DECK);
     }
 
     public boolean isDeckValid(String deckName) {
@@ -158,10 +160,9 @@ public class Controller {
     }
 
     public void showDeck(String deckName) {
-        if (user.getCollection().checkIsExistDeck(deckName)){
+        if (user.getCollection().checkIsExistDeck(deckName)) {
             view.show(user.getCollection().showDeck(deckName));
-        }
-        else view.printError(ErrorType.NOT_FOUND_DECK);
+        } else view.printError(ErrorType.NOT_FOUND_DECK);
     }
 
     //------------------------------------------Shop-----------------------

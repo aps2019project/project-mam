@@ -237,7 +237,7 @@ public class Collection {
         }
     }
 
-    public void removeHeroToDeck(Hero hero, String deckName) {
+    public void removeHeroFromDeck(Hero hero, String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 deck.removeHero(hero);
@@ -284,8 +284,12 @@ public class Collection {
         return false;
     }
 
-    public void setMainDeck(Deck mainDeck) {
-        this.mainDeck = mainDeck;
+    public void setMainDeck(String deckName) {
+        for (Deck deck : decks) {
+            if (deck.getName().equalsIgnoreCase(deckName)){
+                this.mainDeck = deck;
+            }
+        }
     }
 
     public boolean isValidMainDeck(String deckName) {
