@@ -286,10 +286,31 @@ public class Shop {
         cards.add(card);
 
         card = new Minion("pahlavan fars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
-        //???????????????????????
+      //  card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5, ONE_ENEMY_FORCE));
         cards.add(card);
 
+        card = new Minion("sepah salar fars", 800, 7, 12, 4, 0, MELEE, COMBO);
+        cards.add(card);
 
+        card = new Minion("kamandar torani", 500, 1, 3, 4, 5, RANGED, NULL);
+        cards.add(card);
+
+        card = new Minion("ghlab sangdar torani", 600, 1, 4, 2, 7, RANGED, NULL);
+        cards.add(card);
+
+        card = new Minion("neyzedaran torani", 600, 1, 4, 4, 7, HYBRID, NULL);
+        cards.add(card);
+
+        card = new Minion("jasosan torani", 700, 4, 6, 6, 0, MELEE, NULL);
+        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Minion("gorazda torani", 450, 2, 3, 10, 7, MELEE, NULL);
+        cards.add(card);
+
+        card = new Minion("shahzade torani", 800, 6, 6, 10, 7, MELEE, COMBO);
+        cards.add(card);
         //-----------------------------heros-----------------------------------------
 
         card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
