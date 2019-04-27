@@ -10,10 +10,12 @@ public class Minion extends Card{
     private int AP;
     private int HP;
     private int TargetCommunity;
-    private int flagCount;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
     private ArrayList<Buff> specialPower = new ArrayList<>();
+    private boolean canMove = true;
+    private boolean canAttack = true;
+    private boolean canCounterAttack = true;
 
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
@@ -24,7 +26,6 @@ public class Minion extends Card{
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
-        flagCount = 0;
     }
 
     public Minion(String name, int price,int MP,int HP, int AP, int targetCommunity, ImpactType minionClass,
@@ -50,12 +51,36 @@ public class Minion extends Card{
         return column;
     }
 
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public boolean canCounterAttack(){
+        return canCounterAttack;
+    }
+
     public void setRow(int row) {
         this.row = row;
     }
 
     public void setColumn(int column) {
         this.column = column;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public void setCanCounterAttack(boolean canCounterAttack) {
+        this.canCounterAttack = canCounterAttack;
     }
 
     public String getInfo() {
@@ -108,5 +133,21 @@ public class Minion extends Card{
         info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
                 append(getRow()).append(", ").append(getColumn()).append("),  power : ").append(getAP());
         return info.toString();
+    }
+
+    public void incrementOfHp(int number){
+        this.HP -= number;
+    }
+
+    public void decrementOfHp(int number){
+        this.HP += number;
+    }
+
+    public void incrementOfAp(int number){
+        AP += number;
+    }
+
+    public void decrementOfAp(int number){
+        AP -= number;
     }
 }

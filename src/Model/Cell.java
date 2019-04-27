@@ -63,4 +63,10 @@ public class Cell {
     public boolean isCellEmpty(){
         return card != null;
     }
+
+    public void incrementOfFlag(int number){
+        flagCount += number;
+    }
+
+
 }

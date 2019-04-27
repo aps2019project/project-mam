@@ -12,7 +12,9 @@ public class Hero extends Card {
     private int cooldown;
     private ImpactType heroClass;
     private ArrayList<Buff> specialPower = new ArrayList<>();
-    private int flagCount;
+    private boolean canMove = true;
+    private boolean canAttack = true;
+    private boolean canCounterAttack = true;
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
@@ -49,14 +51,6 @@ public class Hero extends Card {
         return heroClass;
     }
 
-    public int getFlagCount() {
-        return flagCount;
-    }
-
-    public void setFlagCount(int flagCount) {
-        this.flagCount = flagCount;
-    }
-
     public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);
     }
@@ -69,12 +63,52 @@ public class Hero extends Card {
         return column;
     }
 
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
     public void setRow(int row) {
         this.row = row;
     }
 
     public void setColumn(int column) {
         this.column = column;
+    }
+
+    public void setCanCounterAttack(boolean canCounterAttack) {
+        this.canCounterAttack = canCounterAttack;
+    }
+
+    public void incrementOfHp(int number){
+        this.HP -= number;
+    }
+
+    public void decrementOfHp(int number){
+        this.HP += number;
+    }
+
+    public void incrementOfAp(int number){
+        AP += number;
+    }
+
+    public void decrementOfAp(int number){
+        AP -= number;
+    }
+
+    public boolean canCounterAttack(){
+        return canCounterAttack;
     }
 
     public void updateBuffList(){

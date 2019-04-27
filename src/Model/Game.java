@@ -11,10 +11,10 @@ public class Game {
     private static final String FIRST_MODE = "1";
     private static final String SECOND_MODE = "2";
     private static final String THIRD_MODE = "3";
-    private static final int BASIC_MANA = 2;
     private static final int BASIC_FLAG_COUNT = 7;
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
+    private static int basicMana = 2;
     private Map map;
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
@@ -56,9 +56,9 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        currentTurnMana = BASIC_MANA;
-        firstPlayerMana = BASIC_MANA;
-        secondPlayerMana = BASIC_MANA;
+        currentTurnMana = basicMana;
+        firstPlayerMana = basicMana;
+        secondPlayerMana = basicMana;
     }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
@@ -70,9 +70,9 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        currentTurnMana = BASIC_MANA;
-        firstPlayerMana = BASIC_MANA;
-        secondPlayerMana = BASIC_MANA;
+        currentTurnMana = basicMana;
+        firstPlayerMana = basicMana;
+        secondPlayerMana = basicMana;
     }
 
     public Map getMap() {
@@ -172,15 +172,17 @@ public class Game {
 
     public void moveCurrentCardTo(int x, int y) {
         if (turn % 2 == 1) {
-            map.getCells()[x][y] = map.getFirstPlayerCellCard().get(currentCard.getId());
+            map.getCells()[x][y].setCard(currentCard);
+            map.getCells()[x][y].incrementOfFlag(map.getFirstPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getFirstPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
             map.getFirstPlayerCellCard().get(currentCard.getId()).setCard(null);
-        }
-        else {
-            map.getCells()[x][y] = map.getSecondPlayerCellCard().get(currentCard.getId());
+        } else {
+            map.getCells()[x][y].setCard(currentCard);
+            map.getCells()[x][y].incrementOfFlag(map.getSecondPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getSecondPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
             map.getSecondPlayerCellCard().get(currentCard.getId()).setCard(null);
         }
+        currentCard.setCanMove(false);
         currentCard.setRow(x);
         currentCard.setColumn(y);
     }
@@ -208,7 +210,7 @@ public class Game {
     public void addRandomCardFromSecondPlayerDeckToHand(int rand) {
         if (secondPlayerDeck.getCards().size() != 0) {
             firstPlayerHand.put(firstPlayerDeck.getCards().get(rand).getId(), firstPlayerDeck.getCards().get(rand));
-            firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
+            secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
         }
     }
 
@@ -324,6 +326,7 @@ public class Game {
                     map.getFirstPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
                 else
                     map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
+                currentCard = entry.getValue();
                 Hand.remove(entry.getValue().getId());
                 break;
             }
@@ -338,11 +341,56 @@ public class Game {
     }
 
     public void endTurn() {
-
-
+        if (turn % 2 == 1) {
+            firstPlayerMana = basicMana;
+            updateFirstPlayerHand();
+            updateCellCard(map.getFirstPlayerCellCard());
+        } else {
+            basicMana++;
+            secondPlayerMana = basicMana;
+            updateSecondPlayerHand();
+            updateCellCard(map.getSecondPlayerCellCard());
+        }
         changeTurn();
+    }
+
+    public void updateCellCard(HashMap<Integer, Cell> cards) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet()) {
+            entry.getValue().getCard().setCanMove(true);
+            entry.getValue().getCard().setCanAttack(true);
+        }
+    }
+
+    public void attack(int cardId) {
+        currentCard.setCanAttack(false);
+        currentCard.setCanMove(false);
+        if (turn % 2 == 1) {
+            map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAp());
+
+        } else {
+            map.getFirstPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAp());
+        }
+        counterAttack(cardId, currentCard.getId());
+    }
+
+    private void counterAttack(int attackerId, int defenderId){
 
     }
+    //----------------------------------buffs--------------------------------
+
+    private void activeBuffs(Card attacker, Card defender){
+        for (Buff buff : attacker.getSpecialPower()) {
+            if (buff.getType() != BuffType.HOLY && buff.getType() != BuffType.ATTACK_POWER &&
+            buff.getType() != BuffType.HEALTH_POWER)
+                defender.getBuffs().add(buff);
+            else attacker.getBuffs().add(buff);
+        }
+    }
+
+    private void activeHolyBuffs()
+
+
+
 
 
 }

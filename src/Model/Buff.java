@@ -1,10 +1,15 @@
 package Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Buff {
     private BuffType type;
     private int time;
     private int buffPower;
-    private String sign;
+    private boolean isPositive;
+    private boolean isContinuous;
+    private boolean isStarted;
     private TargetCommunity targetCommunity;
 
     public Buff(BuffType type, int time, int buffPower, Model.TargetCommunity targetCommunity) {
@@ -26,11 +31,50 @@ public class Buff {
         return buffPower;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
+    public void setSign(boolean sign) {
+        this.isPositive = sign;
     }
 
     public void decrementOfTime() {
         time--;
     }
+
+    //-----------------------------effect-----------------------------
+
+    public void oneEnemyForce(Card card){
+        switch (type){
+            case POSION:
+                card.decrementOfHp(buffPower);
+                break;
+            case ATTACK_WEAKNESS:
+                card.decrementOfAp(buffPower);
+                break;
+            case HEALTH_WEAKNESS:
+                card.decrementOfHp(buffPower);
+            case STUN:
+                card.setCanMove(false);
+                card.setCanAttack(false);
+                break;
+            case DISARM:
+                card.setCanCounterAttack(false);
+                break;
+        }
+    }
+
+    public void oneInsiderForce(Card card){
+        switch (type){
+            case ATTACK_POWER:
+                card.incrementOfAp(buffPower);
+                break;
+            case HEALTH_POWER:
+                card.incrementOfHp(buffPower);
+                break;
+        }
+    }
+
+    public void holyBuff(Card card){
+        card.incrementOfHp(buffPower);
+    }
+
+
 }

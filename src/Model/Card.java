@@ -68,18 +68,62 @@ public class Card {
         return -1;
     }
 
-    public void setRow(int row) {
+    public int getAp(){
+        return 0;
+    }
+
+    public ArrayList<Buff> getSpecialPower(){
+        return null;
+    }
+
+    public boolean isCanMove() {
+        return true;
+    }
+
+    public boolean isCanAttack() {
+        return true;
+    }
+
+    public void setCanMove(boolean canMove) {
+    }
+
+    public void setCanAttack(boolean canAttack) {
+    }
+
+
+        public void setRow(int row) {
     }
 
     public void setColumn(int column) {
+    }
+
+    public void incrementOfHp(int number){
+    }
+
+    public void decrementOfHp(int number){
+    }
+
+    public void incrementOfAp(int number){
+
+    }
+
+    public void decrementOfAp(int number){
+    }
+
+    public boolean canCounterAttack(){
+        return true;
+    }
+
+    public void setCanCounterAttack(boolean canCounterAttack){
+
     }
 
     public void addBuff(Buff buff) {
         buffs.add(buff);
     }
 
-    public void addBuff(Buff buff, String sign) {
-        buff.setSign(sign);
+    public void addBuff(Buff buff, boolean isPositive) {
+        buff.setSign(isPositive);
         buffs.add(buff);
     }
 
