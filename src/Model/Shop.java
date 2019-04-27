@@ -236,7 +236,7 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("poison Lake", 900, 5);
-        card.addBuff(new Buff(CELL_EFFECT_POSION, 1, 1, THREE_IN_THREE));
+        card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 1, THREE_IN_THREE));
         cards.add(card);
 
         card = new Spell("Madness", 650, 0);
