@@ -345,11 +345,13 @@ public class Game {
             firstPlayerMana = basicMana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
+            activeStunBuffs(map.getFirstPlayerCellCard());
         } else {
             basicMana++;
             secondPlayerMana = basicMana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
+            activeStunBuffs(map.getSecondPlayerCellCard());
         }
         changeTurn();
     }
@@ -373,24 +375,76 @@ public class Game {
         counterAttack(cardId, currentCard.getId());
     }
 
-    private void counterAttack(int attackerId, int defenderId){
+    private void counterAttack(int attackerId, int defenderId) {
 
     }
     //----------------------------------buffs--------------------------------
 
-    private void activeBuffs(Card attacker, Card defender){
+    private void activeSPower(Card attacker, Card defender) {
         for (Buff buff : attacker.getSpecialPower()) {
             if (buff.getType() != BuffType.HOLY && buff.getType() != BuffType.ATTACK_POWER &&
-            buff.getType() != BuffType.HEALTH_POWER)
+                    buff.getType() != BuffType.HEALTH_POWER)
                 defender.getBuffs().add(buff);
             else attacker.getBuffs().add(buff);
         }
     }
 
-    private void activeHolyBuffs()
+    private void activeHolyBuffs(Card card) {
+        card.incrementOfHp(1);
+    }
+
+    private void activeStunBuffs(HashMap<Integer, Cell> cards) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
+            for (Buff buff : entry.getValue().getCard().getBuffs())
+                if (buff.getType() == BuffType.STUN) {
+                    entry.getValue().getCard().setCanMove(false);
+                    entry.getValue().getCard().setCanAttack(false);
+                }
 
 
+    }
 
+    private void activeDisarmBuffs(HashMap<Integer, Cell> cards) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
+            for (Buff buff : entry.getValue().getCard().getBuffs())
+                if (buff.getType() == BuffType.DISARM)
+                    entry.getValue().getCard().setCanCounterAttack(false);
+    }
+
+    private void activePoisonBuffs(HashMap<Integer, Cell> cards) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
+            for (Buff buff : entry.getValue().getCard().getBuffs())
+                if (buff.getType() == BuffType.POSION)
+                    entry.getValue().getCard().decrementOfHp(1);
+    }
+
+    private void activePowerBuffs(Card card) {
+        for (Buff buff : card.getBuffs())
+            if (buff.getType() == BuffType.HEALTH_POWER && !buff.isStarted()) {
+                card.incrementOfHp(buff.getBuffPower());
+                buff.setStarted(true);
+
+            } else if (buff.getType() == BuffType.ATTACK_POWER && !buff.isStarted()) {
+                card.incrementOfAp(buff.getBuffPower());
+                buff.setStarted(true);
+            }
+    }
+
+    private void activeWeaknessBuffs(Card card) {
+        for (Buff buff : card.getBuffs())
+            if (buff.getType() == BuffType.ATTACK_WEAKNESS && !buff.isStarted()) {
+                card.decrementOfAp(buff.getBuffPower());
+                buff.setStarted(true);
+
+            } else if (buff.getType() == BuffType.HEALTH_WEAKNESS && !buff.isStarted()) {
+                card.decrementOfAp(buff.getBuffPower());
+                buff.setStarted(true);
+            }
+    }
 
 
 }
+
+
+
+

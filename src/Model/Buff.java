@@ -7,8 +7,6 @@ public class Buff {
     private BuffType type;
     private int time;
     private int buffPower;
-    private boolean isPositive;
-    private boolean isContinuous;
     private boolean isStarted;
     private TargetCommunity targetCommunity;
 
@@ -17,6 +15,14 @@ public class Buff {
         this.time = time;
         this.buffPower = buffPower;
         this.targetCommunity = targetCommunity;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
     }
 
     public BuffType getType() {
@@ -29,10 +35,6 @@ public class Buff {
 
     public int getBuffPower() {
         return buffPower;
-    }
-
-    public void setSign(boolean sign) {
-        this.isPositive = sign;
     }
 
     public void decrementOfTime() {
