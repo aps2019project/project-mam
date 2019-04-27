@@ -25,6 +25,19 @@ public class Deck {
         return info.toString();
     }
 
+    public String getCardsInfo() {
+        StringBuilder info = new StringBuilder();
+        int counter = 1;
+        for (Card card : cards) {
+            if (card.getCardType().equals("minion") || card.getCardType().equals("spell")) {
+                info.append("\t\t\t\t").append(counter).append(" : ");
+                info.append(card.getInfo()).append("\n");
+                counter++;
+            }
+        }
+        return info.toString();
+    }
+
     public String getHeroInfo() {
         StringBuilder info = new StringBuilder();
         info.append("\t\t");
@@ -74,7 +87,7 @@ public class Deck {
         }
         allInfo.append("\n\t\tCards :\n");
         if (getCardInfo() != null) {
-            allInfo.append(getCardInfo());
+            allInfo.append(getCardsInfo());
         }
         return allInfo.toString();
     }

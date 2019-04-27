@@ -17,7 +17,7 @@ public class User {
 
     public User(String name, String password) {
         this.name = name;
-        this.money = 15000;
+        this.money = 150000;
         this.numberOfWin = 0;
         this.password = password;
         collection = new Collection();

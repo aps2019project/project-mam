@@ -99,7 +99,7 @@ public class Collection {
         StringBuilder allInfo = new StringBuilder();
         int counter = 1;
         for (Deck deck : decks) {
-            allInfo.append(counter).append(" : deck_").append(counter).append(" : \n");
+            allInfo.append(counter).append(" : ").append(deck.getName()).append(" : \n");
             allInfo.append(deck.showDecks());
             counter++;
         }

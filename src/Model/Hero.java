@@ -16,7 +16,7 @@ public class Hero extends Card {
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
-        super(name, price, MP);
+        super(name, MP, price);
         this.AP = AP;
         this.HP = HP;
         TargetCommunity = targetCommunity;
@@ -76,6 +76,8 @@ public class Hero extends Card {
     public void setColumn(int column) {
         this.column = column;
     }
+
+
 
     public void updateBuffList(){
         Iterator itr = getBuffs().iterator();
