@@ -15,13 +15,12 @@ public class AccountMenuPage extends ConsolePage{
     public void handleCommand(String command) {
         if (command.matches("create account .*"))
             controller.createAccount(command);
-        else if (command.matches("save"))
-            controller.saveAccount(command);
-
         else if (command.matches("login .*"))
             controller.loginAccount(command);
         else if (command.matches("show leaderboard"))
             controller.showLeaderBoard();
+        else if (command.matches("exit"))
+            view.exit();
         else if (command.matches("help"))
             view.showHelpForAccountMenu();
         else

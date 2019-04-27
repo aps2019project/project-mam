@@ -27,11 +27,14 @@ public class MainMenuPage extends ConsolePage {
             case "4": //Exit
                 view.exit();
                 break;
-            case "5": //logout
+            case "5": //save
+                controller.saveAccount();
+                break;
+            case "6": //logout
                 controller.logoutAccount();
                 view.back();
                 break;
-            case "6": //Help
+            case "7": //Help
                 view.showHelpForMainMenu();
                 break;
             default:
@@ -42,6 +45,6 @@ public class MainMenuPage extends ConsolePage {
     @Override
     public void showMenu() {
         view.show("----------<Main Menu>---------");
-        view.show("1: Collection\n2: Shop\n3: Battle\n4: Exit\n5: Logout\n6: Help");
+        view.show("1: Collection\n2: Shop\n3: Battle\n4: Exit\n5: Save\n6: Logout\n7: Help");
     }
 }

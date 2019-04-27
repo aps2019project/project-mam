@@ -42,7 +42,7 @@ public class Controller {
 
     //------------------------------user account -----------------------------
 
-    public void saveAccount(String string) {
+    public void saveAccount() {
     }
 
     public void createAccount(String command) {
