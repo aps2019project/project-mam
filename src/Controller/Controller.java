@@ -151,8 +151,10 @@ public class Controller {
         } else view.printError(ErrorType.NOT_FOUND_DECK);
     }
 
-    public boolean isDeckValid(String deckName) {
-        return true;
+    public void validateDeck(String deckName) {
+        if (user.getCollection().isValidDeck(deckName)) {
+            view.printError(ErrorType.VALID_DECK);
+        } else view.printError(ErrorType.INVALID_DECK);
     }
 
     public void showAllDecks() {

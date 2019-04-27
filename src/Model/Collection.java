@@ -274,7 +274,7 @@ public class Collection {
         return false;
     }
 
-    public boolean validateDeck(String deckName) {
+    public boolean isValidDeck(String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 if (deck.getCards().size() == 20 && deck.getHero() != null)

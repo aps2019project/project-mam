@@ -18,7 +18,7 @@ public class GameMoodMenuPage extends ConsolePage {
     public void handleCommand(String command) {
         if (command.matches("start game (\\S*) \\d( \\d+)?")
                 || command.matches("start multiplayer game \\d( \\d+)?")) {
-            if (controller.isDeckValid(command.split(" ")[2])
+            if (controller.isMainDeckValid(command.split(" ")[2])
                     || command.split(" ")[1].equalsIgnoreCase("multiplayer")) {
                 switch (command.split(" ")[3]) {
                     case "1":
