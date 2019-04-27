@@ -4,6 +4,8 @@ import Model.*;
 import view.*;
 
 import java.lang.String;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Controller {
 
@@ -68,7 +70,8 @@ public class Controller {
         user = null;
     }
 
-    public void showLeaderBoard(String command) {
+    public void showLeaderBoard() {
+        view.show(User.showUsers());
     }
 
     public void showUsers() {

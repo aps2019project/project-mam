@@ -3,6 +3,7 @@ package Model;
 import view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class User {
@@ -23,6 +24,9 @@ public class User {
         collection = new Collection();
         lastGames = new ArrayList<>();
         idCounter = 1;
+
+
+        this.numberOfWin = Integer.parseInt(password);
     }
 
     public User() {
@@ -153,6 +157,18 @@ public class User {
             }
         }
         return null;
+    }
+
+    public static String showUsers(){
+        StringBuilder info = new StringBuilder();
+        Collections.sort(User.getUsers(), new SortUsers());
+        int counter = 1;
+        for (User users : User.getUsers()) {
+            info.append(counter).append(" - UserName : ").append(users.getName());
+            info.append(" - Wins : ").append(users.getNumberOfWin()).append("\n");
+            counter++;
+        }
+        return info.toString();
     }
 
 }

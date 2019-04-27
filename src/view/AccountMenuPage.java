@@ -21,7 +21,7 @@ public class AccountMenuPage extends ConsolePage{
         else if (command.matches("login .*"))
             controller.loginAccount(command);
         else if (command.matches("show leaderboard"))
-            controller.showLeaderBoard(command);
+            controller.showLeaderBoard();
         else if (command.matches("help"))
             view.showHelpForAccountMenu();
         else
