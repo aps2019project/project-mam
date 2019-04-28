@@ -292,13 +292,8 @@ public class Collection {
         }
     }
 
-    public boolean isValidMainDeck(String deckName) {
-        for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isValidMainDeck() {
+        return isValidDeck(mainDeck.getName());
     }
 
     public void removeFromDeck(String command) {

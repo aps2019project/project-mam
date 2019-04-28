@@ -212,11 +212,27 @@ public class Controller {
     //----------------------------------battle-------------------------------------
 
     public boolean isMainDeckValid() {
-        return true;
+        if (user.getMainDeck() != null) {
+            if (user.getCollection().isValidMainDeck()){
+                return true;
+            } else {
+                view.printError(ErrorType.INVALID_DECK);
+                return false;
+            }
+        }
+        view.printError(ErrorType.NOT_SELECT_MAIN_DECK);
+        return false;
     }
 
     public boolean isMainDeckValid(String userName) {
-        return true;
+        return User.getUser(userName).getCollection().isValidMainDeck();
+    }
+
+    public boolean isDeckValid(String deckName){
+        if (user.getCollection().isValidDeck(deckName)){
+            return true;
+        }
+        return false;
     }
 
 }

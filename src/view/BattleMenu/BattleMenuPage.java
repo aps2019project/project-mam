@@ -37,7 +37,6 @@ public class BattleMenuPage extends ConsolePage {
     @Override
     public void handleCommand(String command) {
         if (!controller.isMainDeckValid()) {
-            view.printError(ErrorType.INVALID_DECK);
             view.back();
             return;
         }

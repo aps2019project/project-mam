@@ -140,10 +140,6 @@ public class User {
         return arr;
     }
 
-    public boolean isMainDeckValid() {
-        return true;
-    }
-
     public Deck getRandomDeck() {
         Random random = new Random();
         int index = random.nextInt(this.collection.getDecks().size());
