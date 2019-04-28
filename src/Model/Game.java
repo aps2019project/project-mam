@@ -15,7 +15,7 @@ public class Game {
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
     private static int basicMana = 2;
-    private Map map;
+    private Map map = new Map();
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
 
@@ -40,9 +40,13 @@ public class Game {
 
     private int turn;
     private int flagCount;
+    private int havingFlagCount = 0;
     private int currentTurnMana;
     private int firstPlayerMana;
     private int secondPlayerMana;
+
+    private boolean isGameEnd = false;
+    private int winner;
 
 
     public Game(Deck firstPlayerDeck, Deck secondPlayerDeck, String firstPlayerName,
@@ -67,6 +71,8 @@ public class Game {
         this.mode = mode;
         this.flagCount = flagCount;
         this.kind = kind;
+        this.firstPlayerDeck = firstUser.getMainDeck();
+        this.secondPlayerDeck = secondUser.getMainDeck();
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
@@ -123,6 +129,10 @@ public class Game {
         return flagCount;
     }
 
+    public boolean isGameEnd() {
+        return isGameEnd;
+    }
+
     public int getFirstPlayerMana() {
         return firstPlayerMana;
     }
@@ -151,8 +161,57 @@ public class Game {
         turn++;
     }
 
-    public boolean isGameEnded() {
-        return false;
+    public void startGame() {
+        map.getCells()[2][0].setCard(firstPlayerDeck.getHero());
+        map.getCells()[2][8].setCard(secondPlayerDeck.getHero());
+        map.getFirstPlayerCellCard().put(firstPlayerDeck.getHero().getId(), map.getCells()[2][0]);
+        map.getSecondPlayerCellCard().put(secondPlayerDeck.getHero().getId(), map.getCells()[2][8]);
+        if (flagCount == 1)
+            map.getCells()[2][4].setFlagCount(1);
+        else {
+            Random rand = new Random();
+            int x, y;
+            for (int i = 0; i < flagCount / 2; i++) {
+                x = rand.nextInt(5);
+                y = rand.nextInt(9);
+                map.getCells()[x][y].incrementOfFlag(1);
+                map.getCells()[4 - x][8 - y].incrementOfFlag(1);
+            }
+            if (flagCount % 2 == 1)
+                map.getCells()[2][4].incrementOfFlag(1);
+        }
+    }
+
+    public int getWinner() {
+        return winner;
+    }
+
+    public void checkGameResult() {
+        if (mode.equals("2")) {
+
+        } else if (mode.equals("3")) {
+            if (getPlayer1FlagCount() > flagCount / 2) {
+                isGameEnd = true;
+                winner = 1;
+            } else if (getPlayer2FlagCount() > flagCount / 2) {
+                isGameEnd = true;
+                winner = 2;
+            }
+        }
+    }
+
+    public int getPlayer1FlagCount() {
+        int count = 0;
+        for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet())
+            count += entry.getValue().getFlagCount();
+        return count;
+    }
+
+    public int getPlayer2FlagCount() {
+        int count = 0;
+        for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet())
+            count += entry.getValue().getFlagCount();
+        return count;
     }
 
     public void SelectCard(int cardId) {
@@ -377,8 +436,8 @@ public class Game {
         }
         if (canCounterAttack(currentCard.getId(), cardId))
             counterAttack(cardId, currentCard.getId());
-        checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard);
-        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard);
+        checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
+        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);
     }
 
     public boolean isOppAvailableForAttack(int targetId, int attackerId) {
@@ -445,19 +504,19 @@ public class Game {
             defender = map.getSecondPlayerCellCard().get(defenderId).getCard();
             for (int id : attackerId)
                 attackers.add(map.getFirstPlayerCellCard().get(id).getCard());
-        }else {
+        } else {
             defender = map.getFirstPlayerCellCard().get(defenderId).getCard();
             for (int id : attackerId)
                 attackers.add(map.getSecondPlayerCellCard().get(id).getCard());
         }
-        if (canComboAttack(defender, attackers)){
+        if (canComboAttack(defender, attackers)) {
             for (Card attacker : attackers) {
                 defender.decrementOfHp(attacker.getAP());
                 attacker.setCanAttack(false);
                 attacker.setCanMove(false);
             }
             counterAttack(attackers.get(0).getId(), defenderId);
-        }else {
+        } else {
             defender.decrementOfHp(attackers.get(0).getAP());
             attackers.get(0).setCanAttack(false);
             attackers.get(0).setCanMove(false);
@@ -533,10 +592,15 @@ public class Game {
 
     //--------------------------------------------------------------------------------
 
-    private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard) {
+    private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard, int player) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCard().getHP() <= 0) {
+                if (entry.getValue().getCard().getCardType().equals("hero")){
+                    winner = player;
+                    isGameEnd = true;
+                }
                 graveYard.add(entry.getValue().getCard());
+                map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
                 cells.remove(entry);
             }
         }

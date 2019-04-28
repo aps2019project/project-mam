@@ -132,7 +132,7 @@ public class Minion extends Card{
     @Override
     public Card copyCard() {
         Card newCard = new Minion(this.getName(), this.getPrice(), this.getMP(), this.getHP(),
-                this.getAP(), this.getMinionClass(), this.getTargetCommunity(),
+                this.getAP(), this.getCardClass(), this.getTargetCommunity(),
                 this.getDesc(), this.getSPActivationTime(), this.specialPower);
         return newCard;
 
