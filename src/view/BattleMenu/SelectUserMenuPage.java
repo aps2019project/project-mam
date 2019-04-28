@@ -1,7 +1,11 @@
-package view;
+package view.BattleMenu;
 
+import view.BattleMenu.BattleMenuPage;
+import view.BattleMenu.GameMoodMenuPage;
 import Controller.Controller;
 import Model.ErrorType;
+import view.ConsolePage;
+import view.View;
 
 public class SelectUserMenuPage extends ConsolePage {
 

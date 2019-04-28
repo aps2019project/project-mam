@@ -1,5 +1,6 @@
 package view;
 
+import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
 import Model.ErrorType;
 

@@ -26,7 +26,7 @@ public class User {
         idCounter = 1;
 
 
-        this.numberOfWin = Integer.parseInt(password);
+       // this.numberOfWin = Integer.parseInt(password);
     }
 
     public User() {

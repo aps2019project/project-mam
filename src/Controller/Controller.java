@@ -71,6 +71,7 @@ public class Controller {
     }
 
     public void showLeaderBoard() {
+        view.show("*LeaderBoard* :");
         view.show(User.showUsers());
     }
 

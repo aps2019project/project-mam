@@ -1,8 +1,9 @@
-package view;
+package view.BattleMenu;
 
-import Model.ErrorType;
+import view.ConsolePage;
+import view.View;
 
-public class NumOfPlayersMenuPage extends ConsolePage{
+public class NumOfPlayersMenuPage extends ConsolePage {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();

@@ -1,8 +1,10 @@
-package view;
+package view.BattleMenu;
 
 import Controller.Controller;
 import Model.ErrorType;
 import Model.User;
+import view.ConsolePage;
+import view.View;
 
 public class BattleMenuPage extends ConsolePage {
     private Controller controller = Controller.getInstance();
