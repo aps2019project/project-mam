@@ -262,4 +262,10 @@ public class Controller {
         view.show(game.showHand());
     }
 
+    public void selectCard(String cardId){
+        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))) {
+            game.selectCard(Integer.parseInt(cardId));
+        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
+    }
+
 }

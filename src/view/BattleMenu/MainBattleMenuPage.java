@@ -37,6 +37,7 @@ public class MainBattleMenuPage extends ConsolePage {
         }
         else if (command.matches("select .*")){  //card
             view.getPages().push(new SelectCardMenu());
+            controller.selectCard(command.split(" ")[1]);
         }
         else if (command.matches("show hand")){
             controller.showHand();

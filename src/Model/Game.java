@@ -155,7 +155,7 @@ public class Game {
         return false;
     }
 
-    public void SelectCard(int cardId) {
+    public void selectCard(int cardId) {
         if (getTurn() % 2 == FIRST_PLAYER_TURN)
             currentCard = map.getFirstPlayerCellCard().get(cardId).getCard();
         else
