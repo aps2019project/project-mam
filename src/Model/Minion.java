@@ -149,7 +149,7 @@ public class Minion extends Card {
         StringBuilder info = new StringBuilder();
         info.append("Minion:").append("\nName: ").append(getName());
         info.append("\nHP: ").append(getHP()).append("  AP: ").append(getAP()).append("  MP: ").append(getMP());
-        info.append("\nRange: ").append(getMinionClass());
+        info.append("\nRange: ").append(getCardClass());
         if (haveComboAbility())
             info.append("\nCombo-ability: Yes");
         else info.append("\nCombo-ability: No");

@@ -1,6 +1,7 @@
 package view.BattleMenu;
 
 import Controller.Controller;
+import Model.AI;
 import Model.ErrorType;
 import Model.User;
 import view.ConsolePage;
@@ -15,7 +16,7 @@ public class BattleMenuPage extends ConsolePage {
     private static String gameKind = null;
     private static String gameMood = null;
     private static String mission = null;
-    private User secondUser = null;
+    private User secondUser = AI.getAI();
     private User firstUser = controller.getFirstUser();
     private static int flags;
 
