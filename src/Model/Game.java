@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
+
 public class Game {
     private static final String SINGLE_PLAYER = "single player";
     private static final String MULTI_PLAYER = "multi player";
@@ -77,6 +80,10 @@ public class Game {
 
     public Map getMap() {
         return map;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
     }
 
     public Deck getFirstPlayerDeck() {
@@ -187,6 +194,51 @@ public class Game {
         currentCard.setColumn(y);
     }
 
+    public boolean cardCanMove(int x, int y) {
+        if (map.getManhatanDistance(currentCard.getColumn(), currentCard.getRow(), x, y) > 2) {
+            return false;
+        }
+        if (!map.isCellEmpty(x, y)) {
+            return false;
+        }
+        if (!map.isTargetInMap(x, y)) {
+            return false;
+        }
+        if (!checkOpCardInRout(x, y)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkOpCardInRout(int x, int y) {
+        if (abs(currentCard.getColumn() - x) == 2 && abs(currentCard.getRow() - y) == 0) {
+            if (!map.isCellEmpty((currentCard.getColumn() + x) / 2, y)) {
+                return false;
+            }
+        } else if (abs(currentCard.getColumn() - x) == 0 && abs(currentCard.getRow() - y) == 2) {
+            if (!map.isCellEmpty(x, (currentCard.getRow() + y) / 2)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == 1) {
+            if (!map.isCellEmpty(x, y + 1) && !map.isCellEmpty(x - 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == -1) {
+            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x - 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == 1) {
+            if (!map.isCellEmpty(x, y + 1) && !map.isCellEmpty(x + 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == -1) {
+            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x + 1, y)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void setPlayersHand() {
         Random random = new Random();
         int rand;
@@ -281,13 +333,13 @@ public class Game {
                 int hero1 = 0;
                 int hero2 = 0;
                 for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
-                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")){
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")) {
                         hero1 = entry.getValue().getCard().getHP();
                         break;
                     }
                 }
                 for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
-                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")){
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")) {
                         hero2 = entry.getValue().getCard().getHP();
                         break;
                     }
@@ -315,12 +367,11 @@ public class Game {
 
     public String showMyMinions() {
         StringBuilder info = new StringBuilder();
-        if (getTurn()%2 == 1){
+        if (getTurn() % 2 == 1) {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
                 info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
             }
-        }
-        else {
+        } else {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
                 info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
             }
@@ -330,12 +381,11 @@ public class Game {
 
     public String showOpMinions() {
         StringBuilder info = new StringBuilder();
-        if (getTurn()%2 == 0){
+        if (getTurn() % 2 == 0) {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
                 info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
             }
-        }
-        else {
+        } else {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
                 info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
             }
@@ -343,17 +393,16 @@ public class Game {
         return info.toString();
     }
 
-    public String showCardInfo(int cardId){
-        if (getTurn()%2 == 1) {
+    public String showCardInfo(int cardId) {
+        if (getTurn() % 2 == 1) {
             for (Card card : firstPlayerDeck.getCards()) {
                 if (card.getId() == cardId) {
                     return card.getCardInfoInGame();
                 }
             }
-        }
-        else {
+        } else {
             for (Card card : secondPlayerDeck.getCards()) {
-                if (card.getId() == cardId){
+                if (card.getId() == cardId) {
                     return card.getCardInfoInGame();
                 }
             }
@@ -368,8 +417,7 @@ public class Game {
                 info.append(entry.getValue().getImportantInfo()).append("\n");
             }
             info.append(nextfirstPlayerCard.getImportantInfo());
-        }
-        else {
+        } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
                 info.append(entry.getValue().getImportantInfo()).append("\n");
             }

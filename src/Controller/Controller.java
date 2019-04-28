@@ -268,4 +268,15 @@ public class Controller {
         } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
+    public void moveCard(String x, String y){
+        if (game.cardCanMove(Integer.parseInt(x), Integer.parseInt(y))){
+            game.moveCurrentCardTo(Integer.parseInt(x), Integer.parseInt(y));
+            StringBuilder message = new StringBuilder();
+            message.append(game.getCurrentCard().getId()).append(" moved to ");
+            message.append(x).append(" ").append(y);
+            ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
+            view.printError(ErrorType.SUCCESSFUL_MOVING_CARD);
+        } else view.printError(ErrorType.INVALID_TARGET);
+    }
+
 }

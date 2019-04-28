@@ -18,7 +18,7 @@ public class SelectCardMenu extends ConsolePage {
     @Override
     public void handleCommand(String command) {
         if (command.matches("move to \\d \\d")){
-
+            controller.moveCard(command.split(" ")[2], command.split(" ")[3]);
         }
         else if (command.matches("attack \\d+")){
 
