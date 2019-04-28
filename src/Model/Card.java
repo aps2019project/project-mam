@@ -158,4 +158,8 @@ public class Card {
    public Card copyCard(){
        return null;
    }
+
+   public String getCardInfoInGame(){
+        return null;
+   }
 }

@@ -37,4 +37,13 @@ public class Spell extends Card{
         Card newCard = new Spell(this.getName(), this.getPrice(), this.getMP(), this.getBuffs());
         return newCard;
     }
+
+    @Override
+    public String getCardInfoInGame() {
+        StringBuilder info = new StringBuilder();
+        info.append("Spell:").append("\nName: ").append(this.getName());
+        info.append("\nMP: ").append(this.getMP()).append("\nCost: ").append(this.getPrice());
+        info.append("\nDesc: ").append(this.getDesc()).append("\n");
+        return info.toString();
+    }
 }

@@ -277,6 +277,24 @@ public class Game {
         info.append("first player mana : ").append(firstPlayerMana).append("\nsecond player mana : ").
                 append(secondPlayerMana);
         switch (mode) {
+            case "1":
+                int hero1 = 0;
+                int hero2 = 0;
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")){
+                        hero1 = entry.getValue().getCard().getHP();
+                        break;
+                    }
+                }
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")){
+                        hero2 = entry.getValue().getCard().getHP();
+                        break;
+                    }
+                }
+                info.append("first player hero HP: ").append(hero1).append("\n");
+                info.append("second player hero HP: ").append(hero2);
+                break;
             case "2":
                 info.append("\nflag location : ").append(map.getFlags().get(0).getRow()).append(", ").
                         append(map.getFlags().get(0).getColumn()).append("\nflag keeper : ").
@@ -295,13 +313,52 @@ public class Game {
         return info.toString();
     }
 
-    public String showMinions(ArrayList<Card> cards) {
+    public String showMyMinions() {
         StringBuilder info = new StringBuilder();
-        for (Card card : cards) {
-            info.append(card.getImportantInfo());
-            info.append("\n");
+        if (getTurn()%2 == 1){
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
+        }
+        else {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
         }
         return info.toString();
+    }
+
+    public String showOpMinions() {
+        StringBuilder info = new StringBuilder();
+        if (getTurn()%2 == 0){
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
+        }
+        else {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
+        }
+        return info.toString();
+    }
+
+    public String showCardInfo(int cardId){
+        if (getTurn()%2 == 1) {
+            for (Card card : firstPlayerDeck.getCards()) {
+                if (card.getId() == cardId) {
+                    return card.getCardInfoInGame();
+                }
+            }
+        }
+        else {
+            for (Card card : secondPlayerDeck.getCards()) {
+                if (card.getId() == cardId){
+                    return card.getCardInfoInGame();
+                }
+            }
+        }
+        return "";
     }
 
     public String showHand(ArrayList<Card> hand) {

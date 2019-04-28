@@ -23,6 +23,11 @@ public class Controller {
     private Shop shop = Shop.getInstance();
     //private Collection collection = new Collection();
     private User user = new User();
+    private Game game;
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public User getFirstUser() {
         return user;
@@ -233,6 +238,24 @@ public class Controller {
             return true;
         }
         return false;
+    }
+
+    public void showGameInfo(){
+        view.show(game.getGameInfo());
+    }
+
+    public void showMyMinions(){
+        view.show(game.showMyMinions());
+    }
+
+    public void showOpMinions(){
+        view.show(game.showOpMinions());
+    }
+
+    public void showCardInfo(String cardId){
+        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))){
+            view.show(game.showCardInfo(Integer.parseInt(cardId)));
+        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
 }
