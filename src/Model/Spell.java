@@ -11,8 +11,8 @@ public class Spell extends Card{
     public Spell(){}
 
     public Spell(String name, int price, int MP, ArrayList<Buff> buffs) {
-        super(name, price, MP);
-        //this.buffs = buffs;
+        super(name, MP, price);
+        this.setBuffs(buffs);
     }
 
     public Spell(String name, int price,int MP) {
@@ -30,5 +30,11 @@ public class Spell extends Card{
         info.append("Type : Spell - Name : ").append(getName()).append(" - MP : ").append(getMP());
         info.append(" - Description : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
+    }
+
+    @Override
+    public Card copyCard() {
+        Card newCard = new Spell(this.getName(), this.getPrice(), this.getMP(), this.getBuffs());
+        return newCard;
     }
 }

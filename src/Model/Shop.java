@@ -113,7 +113,7 @@ public class Shop {
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
-                Card newCard = card;
+                Card newCard = card.copyCard();
                 newCard.setId(user.getIdCounter());
                 user.getCollection().addCard(newCard);
                 user.setMoney(user.getMoney() - card.getPrice());

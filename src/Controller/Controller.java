@@ -148,6 +148,7 @@ public class Controller {
     public void selectMainDeck(String deckName) {
         if (user.getCollection().checkIsExistDeck(deckName)) {
             user.getCollection().setMainDeck(deckName);
+            view.printError(ErrorType.SELECT_MAIN_DECK);
         } else view.printError(ErrorType.NOT_FOUND_DECK);
     }
 

@@ -27,7 +27,7 @@ public enum ErrorType {
     SUCCESSFUL_ADDING_CARD("add card successful"),
     SUCCESSFUL_ADDING_ITEM("add item successful"),
     SUCCESSFUL_ADDING_HERO("add hero successful"),
-
+    SELECT_MAIN_DECK("main deck selected"),
 
 
     ;

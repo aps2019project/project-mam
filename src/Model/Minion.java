@@ -19,13 +19,14 @@ public class Minion extends Card{
 
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
-                  Model.SPActivationTime SPActivationTime, String desc) {
+            String desc, Model.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
         super(name, price, MP, desc);
         this.AP = AP;
         this.HP = HP;
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
+        this.specialPower = buffs;
     }
 
     public Minion(String name, int price,int MP,int HP, int AP, int targetCommunity, ImpactType minionClass,
@@ -129,14 +130,13 @@ public class Minion extends Card{
     }
 
     @Override
-    public Card copyCard(Card card) {
-        Card newCard = new Minion(card.getName(), card.getPrice(), card.getMP(), card.getHP(),
-                card.getAP(), card.getTargetCommunity(), card.getMinionClass(),
-                card.getSPActivationTime());
+    public Card copyCard() {
+        Card newCard = new Minion(this.getName(), this.getPrice(), this.getMP(), this.getHP(),
+                this.getAP(), this.getMinionClass(), this.getTargetCommunity(),
+                this.getDesc(), this.getSPActivationTime(), this.specialPower);
         return newCard;
 
     }
-
     public String getImportantInfo(){
         StringBuilder info = new StringBuilder();
         info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
