@@ -2,8 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
+
 
 public class Game {
     private static final String SINGLE_PLAYER = "single player";
@@ -322,10 +322,13 @@ public class Game {
                 map.getCells()[x][y].setCard(entry.getValue());
                 entry.getValue().setRow(x);
                 entry.getValue().setColumn(y);
-                if (turn % 2 == 1)
+                if (turn % 2 == 1) {
                     map.getFirstPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
-                else
+                    firstPlayerMana -= entry.getValue().getMP();
+                } else {
                     map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
+                    secondPlayerMana -= entry.getValue().getMP();
+                }
                 currentCard = entry.getValue();
                 Hand.remove(entry.getValue().getId());
                 break;
@@ -372,12 +375,98 @@ public class Game {
         } else {
             map.getFirstPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAp());
         }
-        counterAttack(cardId, currentCard.getId());
+        if (canCounterAttack(currentCard.getId(), cardId))
+            counterAttack(cardId, currentCard.getId());
+        checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard);
+        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard);
+    }
+
+    public boolean isOppAvailableForAttack(int targetId, int attackerId) {
+        int distance;
+        Card attacker;
+        if (getTurn() % 2 == 1) {
+            attacker = map.getFirstPlayerCellCard().get(attackerId).getCard();
+            Cell target = map.getSecondPlayerCellCard().get(targetId);
+            distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
+                    target.getColumn());
+        } else {
+            attacker = map.getSecondPlayerCellCard().get(attackerId).getCard();
+            Cell target = map.getFirstPlayerCellCard().get(targetId);
+            distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
+                    target.getColumn());
+        }
+        if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
+            return true;
+        if (attacker.getCardClass() == ImpactType.RANGED && distance > 1)
+            return true;
+        if (attacker.getCardClass() == ImpactType.HYBRID)
+            return true;
+        return false;
+
+    }
+
+    public boolean isCardIdValidForAttack(int cardId) {
+        if (getTurn() % 2 == 1 && map.getSecondPlayerCellCard().get(cardId) == null)
+            return false;
+        return getTurn() % 2 != 0 || map.getFirstPlayerCellCard().get(cardId) != null;
+    }
+
+    public boolean canCounterAttack(int targetId, int CountererId) {
+        return isOppAvailableForAttack(targetId, CountererId);
     }
 
     private void counterAttack(int attackerId, int defenderId) {
+        if (turn % 2 == 1) {
+            map.getFirstPlayerCellCard().get(defenderId).getCard().
+                    decrementOfHp(map.getSecondPlayerCellCard().get(attackerId).getCard().getAp());
+
+        } else {
+            map.getSecondPlayerCellCard().get(defenderId).getCard().
+                    decrementOfHp(map.getFirstPlayerCellCard().get(attackerId).getCard().getAp());
+        }
+    }
+
+    public boolean canComboAttack(Card defender, ArrayList<Card> attackers) {
+        if (!isCardIdValidForAttack(defender.getId()))
+            return false;
+        for (Card attacker : attackers) {
+            if (!attacker.isCanAttack())
+                return false;
+            if (!isOppAvailableForAttack(defender.getId(), attacker.getId()))
+                return false;
+        }
+        return true;
+    }
+
+    public void comboAttack(int defenderId, int... attackerId) {
+        ArrayList<Card> attackers = new ArrayList<>();
+        Card defender;
+        if (getTurn() % 2 == 1) {
+            defender = map.getSecondPlayerCellCard().get(defenderId).getCard();
+            for (int id : attackerId)
+                attackers.add(map.getFirstPlayerCellCard().get(id).getCard());
+        }else {
+            defender = map.getFirstPlayerCellCard().get(defenderId).getCard();
+            for (int id : attackerId)
+                attackers.add(map.getSecondPlayerCellCard().get(id).getCard());
+        }
+        if (canComboAttack(defender, attackers)){
+            for (Card attacker : attackers) {
+                defender.decrementOfHp(attacker.getAP());
+                attacker.setCanAttack(false);
+                attacker.setCanMove(false);
+            }
+            counterAttack(attackers.get(0).getId(), defenderId);
+        }else {
+            defender.decrementOfHp(attackers.get(0).getAP());
+            attackers.get(0).setCanAttack(false);
+            attackers.get(0).setCanMove(false);
+            counterAttack(attackers.get(0).getId(), defenderId);
+        }
 
     }
+
+
     //----------------------------------buffs--------------------------------
 
     private void activeSPower(Card attacker, Card defender) {
@@ -440,6 +529,23 @@ public class Game {
                 card.decrementOfAp(buff.getBuffPower());
                 buff.setStarted(true);
             }
+    }
+
+    //--------------------------------------------------------------------------------
+
+    private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
+            if (entry.getValue().getCard().getHP() <= 0) {
+                graveYard.add(entry.getValue().getCard());
+                cells.remove(entry);
+            }
+        }
+    }
+
+    public boolean haveEnoughMana(int number) {
+        if (getTurn() % 2 == 1 && firstPlayerMana >= number)
+            return true;
+        else return getTurn() % 2 == 0 && secondPlayerMana >= number;
     }
 
 

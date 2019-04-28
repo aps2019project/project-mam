@@ -85,7 +85,7 @@ public class Minion extends Card{
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();
-        info.append("Type : Minion - Name : ").append(getName()).append(" - Class : ").append(getMinionClass());
+        info.append("Type : Minion - Name : ").append(getName()).append(" - Class : ").append(getCardClass());
         info.append(" - AP : ").append(getAP()).append(" - HP : ").append(getHP()).append(" - MP : ").append(getMP());
         info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
@@ -105,7 +105,7 @@ public class Minion extends Card{
         return TargetCommunity;
     }
 
-    public ImpactType getMinionClass() {
+    public ImpactType getCardClass() {
         return minionClass;
     }
 
@@ -131,7 +131,7 @@ public class Minion extends Card{
     @Override
     public Card copyCard(Card card) {
         Card newCard = new Minion(card.getName(), card.getPrice(), card.getMP(), card.getHP(),
-                card.getAP(), card.getTargetCommunity(), card.getMinionClass(),
+                card.getAP(), card.getTargetCommunity(), card.getCardClass(),
                 card.getSPActivationTime());
         return newCard;
 

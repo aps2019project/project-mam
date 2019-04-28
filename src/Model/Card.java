@@ -102,7 +102,7 @@ public class Card {
         return -1;
     }
 
-    public ImpactType getMinionClass() {
+    public ImpactType getCardClass() {
         return ImpactType._NULL;
     }
 

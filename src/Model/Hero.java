@@ -47,7 +47,7 @@ public class Hero extends Card {
         return cooldown;
     }
 
-    public ImpactType getHeroClass() {
+    public ImpactType getCardClass() {
         return heroClass;
     }
 
@@ -123,7 +123,7 @@ public class Hero extends Card {
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Name : ").append(getName()).append(" - AP : ").append(getAP());
-        info.append(" - HP : ").append(getHP()).append(" - Class : ").append(getHeroClass());
+        info.append(" - HP : ").append(getHP()).append(" - Class : ").append(getCardClass());
         info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
     }
