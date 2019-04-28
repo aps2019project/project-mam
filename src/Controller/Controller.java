@@ -258,4 +258,8 @@ public class Controller {
         } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
+    public void showHand(){
+        view.show(game.showHand());
+    }
+
 }

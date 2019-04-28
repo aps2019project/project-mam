@@ -361,15 +361,20 @@ public class Game {
         return "";
     }
 
-    public String showHand(ArrayList<Card> hand) {
+    public String showHand() {
         StringBuilder info = new StringBuilder();
-        for (Card card : hand) {
-            info.append(card.getImportantInfo());
-            info.append("\n");
-        }
-        if (turn % 2 == 1)
+        if (turn % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
+                info.append(entry.getValue().getImportantInfo()).append("\n");
+            }
             info.append(nextfirstPlayerCard.getImportantInfo());
-        else info.append(nextSecondPlayerCard.getImportantInfo());
+        }
+        else {
+            for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
+                info.append(entry.getValue().getImportantInfo()).append("\n");
+            }
+            info.append(nextSecondPlayerCard.getImportantInfo());
+        }
         return info.toString();
     }
 

@@ -39,7 +39,7 @@ public class MainBattleMenuPage extends ConsolePage {
             view.getPages().push(new SelectCardMenu());
         }
         else if (command.matches("show hand")){
-
+            controller.showHand();
         }
         else if (command.matches("insert (\\S*) in \\(\\d, \\d\\)")){
 
