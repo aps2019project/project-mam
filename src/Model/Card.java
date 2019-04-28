@@ -20,6 +20,10 @@ public class Card {
         this.desc = desc;
     }
 
+    public void setBuffs(ArrayList<Buff> buffs) {
+        this.buffs = buffs;
+    }
+
     Card(String name, int MP, int price) {
         this.MP = MP;
         this.price = price;
@@ -55,6 +59,10 @@ public class Card {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public ArrayList<Buff> getBuffs() {
@@ -147,7 +155,7 @@ public class Card {
     }
 
 
-    public Card copyCard(Card card){
-        return null;
-    }
+   public Card copyCard(){
+       return null;
+   }
 }

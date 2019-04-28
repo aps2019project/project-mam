@@ -1,6 +1,8 @@
-package view;
+package view.BattleMenu;
 
 import Model.ErrorType;
+import view.ConsolePage;
+import view.View;
 
 public class MissionsMenuPage extends ConsolePage {
 

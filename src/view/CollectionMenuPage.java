@@ -28,7 +28,7 @@ public class CollectionMenuPage extends ConsolePage {
         else if (command.matches("add \\d+ to deck .*"))
             controller.addCardToDeck(command.split(" ")[1], command.split(" ")[4]);
         else if (command.matches("validate deck .*"))
-            controller.isDeckValid(command.split(" ")[2]);
+            controller.validateDeck(command.split(" ")[2]);
         else if (command.matches("select deck .*"))
             controller.selectMainDeck(command.split(" ")[2]);
         else if (command.matches("show all decks"))

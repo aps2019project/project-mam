@@ -59,10 +59,10 @@ public class View {
     }
 
     public void showHelpForAccountMenu(){
-        System.out.print("create account [user name]\nlogin [user name] \nshow leaderboard \nsave \nlogout\n");
+        System.out.print("create account [user name]\nlogin [user name] \nshow leaderboard \nExit\n");
     }
     public void showHelpForMainMenu(){
-        System.out.print("Collection\nShop\nBattle\nExit\nLogout\n");
+        System.out.print("Collection\nShop\nBattle\nExit\nSave\nLogout\n");
     }
     public void showHelpForCollectionMenu(){
         System.out.print("Exit \nshow \nsearch [card name | item name] \nsave \ncreate deck [deck name] \n" +

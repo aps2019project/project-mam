@@ -26,6 +26,18 @@ public class Hero extends Card {
         this.heroClass = heroClass;
     }
 
+    public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
+                int MP, int cooldown, String desc, ArrayList<Buff> buffs){
+        super(name, MP, price);
+        this.AP = AP;
+        this.HP = HP;
+        this.TargetCommunity = targetCommunity;
+        this.cooldown = cooldown;
+        this.heroClass = heroClass;
+        this.setDesc(desc);
+        this.specialPower = buffs;
+    }
+
     @Override
     public String getCardType() {
         return "hero";
@@ -126,6 +138,13 @@ public class Hero extends Card {
         info.append(" - HP : ").append(getHP()).append(" - Class : ").append(getCardClass());
         info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
+    }
+
+    @Override
+    public Card copyCard() {
+        Card newCard = new Hero(this.getName(), this.getPrice(), this.HP, this.AP, this.heroClass, this.TargetCommunity,
+                this.HP, this.cooldown, this.getDesc(), this.specialPower);
+        return newCard;
     }
 }
 

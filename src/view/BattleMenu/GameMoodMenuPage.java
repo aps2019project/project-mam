@@ -1,7 +1,9 @@
-package view;
+package view.BattleMenu;
 
 import Controller.Controller;
 import Model.ErrorType;
+import view.ConsolePage;
+import view.View;
 
 public class GameMoodMenuPage extends ConsolePage {
 

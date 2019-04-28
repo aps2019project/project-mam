@@ -26,7 +26,7 @@ public class User {
         idCounter = 1;
 
 
-        this.numberOfWin = Integer.parseInt(password);
+       // this.numberOfWin = Integer.parseInt(password);
     }
 
     public User() {
@@ -138,10 +138,6 @@ public class User {
                     arr[j - 1] = temp;
                 }
         return arr;
-    }
-
-    public boolean isMainDeckValid() {
-        return true;
     }
 
     public Deck getRandomDeck() {
