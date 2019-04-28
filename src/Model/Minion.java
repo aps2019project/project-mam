@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Minion extends Card{
+public class Minion extends Card {
 
     private int row;
     private int column;
@@ -19,7 +19,7 @@ public class Minion extends Card{
 
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
-            String desc, Model.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
+                  String desc, Model.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
         super(name, price, MP, desc);
         this.AP = AP;
         this.HP = HP;
@@ -29,7 +29,7 @@ public class Minion extends Card{
         this.specialPower = buffs;
     }
 
-    public Minion(String name, int price,int MP,int HP, int AP, int targetCommunity, ImpactType minionClass,
+    public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
                   Model.SPActivationTime SPActivationTime) {
         super(name, MP, price);
         this.AP = AP;
@@ -44,7 +44,7 @@ public class Minion extends Card{
         return "minion";
     }
 
-    public int getRow(){
+    public int getRow() {
         return row;
     }
 
@@ -60,7 +60,7 @@ public class Minion extends Card{
         return canAttack;
     }
 
-    public boolean canCounterAttack(){
+    public boolean canCounterAttack() {
         return canCounterAttack;
     }
 
@@ -120,9 +120,9 @@ public class Minion extends Card{
         specialPower.add(buff);
     }
 
-    public void updateBuffList(){
+    public void updateBuffList() {
         Iterator itr = getBuffs().iterator();
-        while (itr.hasNext()){
+        while (itr.hasNext()) {
             Buff temp = (Buff) itr;
             if (temp.getTime() == 0)
                 itr.remove();
@@ -137,7 +137,6 @@ public class Minion extends Card{
         return newCard;
 
     }
-
     public String getImportantInfo(){
         StringBuilder info = new StringBuilder();
         info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
@@ -145,19 +144,36 @@ public class Minion extends Card{
         return info.toString();
     }
 
-    public void incrementOfHp(int number){
+    @Override
+    public String getCardInfoInGame() {
+        StringBuilder info = new StringBuilder();
+        info.append("Minion:").append("\nName: ").append(getName());
+        info.append("\nHP: ").append(getHP()).append("  AP: ").append(getAP()).append("  MP: ").append(getMP());
+        info.append("\nRange: ").append(getMinionClass());
+        if (haveComboAbility())
+            info.append("\nCombo-ability: Yes");
+        else info.append("\nCombo-ability: No");
+        info.append("\nCost: ").append(getPrice()).append("\nDesc: ").append(getDesc());
+        return info.toString();
+    }
+
+    public void incrementOfHp(int number) {
         this.HP -= number;
     }
 
-    public void decrementOfHp(int number){
+    public void decrementOfHp(int number) {
         this.HP += number;
     }
 
-    public void incrementOfAp(int number){
+    public void incrementOfAp(int number) {
         AP += number;
     }
 
-    public void decrementOfAp(int number){
+    public void decrementOfAp(int number) {
         AP -= number;
+    }
+
+    public boolean haveComboAbility() {
+        return getSPActivationTime() == Model.SPActivationTime.COMBO;
     }
 }

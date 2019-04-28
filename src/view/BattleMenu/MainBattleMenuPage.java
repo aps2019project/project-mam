@@ -25,21 +25,22 @@ public class MainBattleMenuPage extends ConsolePage {
     @Override
     public void handleCommand(String command) {
         if (command.matches("game info")){
-
+            controller.showGameInfo();
         }else if (command.matches("show my minions")){
-
+            controller.showMyMinions();
         }
         else if (command.matches("show opponent minions")){
-
+            controller.showOpMinions();
         }
         else if (command.matches("show card info .*")){
-
+            controller.showCardInfo(command.split(" ")[3]);
         }
         else if (command.matches("select .*")){  //card
-
+            view.getPages().push(new SelectCardMenu());
+            controller.selectCard(command.split(" ")[1]);
         }
         else if (command.matches("show hand")){
-
+            controller.showHand();
         }
         else if (command.matches("insert (\\S*) in \\(\\d, \\d\\)")){
 
@@ -50,23 +51,27 @@ public class MainBattleMenuPage extends ConsolePage {
         else if (command.matches("show collectables")){
 
         }
-        else if (command.matches("select")){  //collectable
+        /*else if (command.matches("select .*")){  //collectable
 
-        }
+        }*/
         else if (command.matches("show next card")){
 
         }
         else if (command.matches("enter graveyard")){
-
+            view.getPages().push(new GraveyardMenu());
         }
         else if (command.matches("help")){
-
+            help();
+        }
+        else if (command.matches("exit")){
+            view.back();
         }
         else view.printError(ErrorType.INVALID_COMMAND);
     }
 
     @Override
     public void showMenu() {
+        controller.setGame(game);
         view.show("----------< BATTLE >---------");
         view.show(BattleMenuPage.getNumOfPlayers());
         view.show(BattleMenuPage.getGameKind());

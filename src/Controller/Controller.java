@@ -23,6 +23,11 @@ public class Controller {
     private Shop shop = Shop.getInstance();
     //private Collection collection = new Collection();
     private User user = new User();
+    private Game game;
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public User getFirstUser() {
         return user;
@@ -233,6 +238,45 @@ public class Controller {
             return true;
         }
         return false;
+    }
+
+    public void showGameInfo(){
+        view.show(game.getGameInfo());
+    }
+
+    public void showMyMinions(){
+        view.show(game.showMyMinions());
+    }
+
+    public void showOpMinions(){
+        view.show(game.showOpMinions());
+    }
+
+    public void showCardInfo(String cardId){
+        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))){
+            view.show(game.showCardInfo(Integer.parseInt(cardId)));
+        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
+    }
+
+    public void showHand(){
+        view.show(game.showHand());
+    }
+
+    public void selectCard(String cardId){
+        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))) {
+            game.selectCard(Integer.parseInt(cardId));
+        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
+    }
+
+    public void moveCard(String x, String y){
+        if (game.cardCanMove(Integer.parseInt(x), Integer.parseInt(y))){
+            game.moveCurrentCardTo(Integer.parseInt(x), Integer.parseInt(y));
+            StringBuilder message = new StringBuilder();
+            message.append(game.getCurrentCard().getId()).append(" moved to ");
+            message.append(x).append(" ").append(y);
+            ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
+            view.printError(ErrorType.SUCCESSFUL_MOVING_CARD);
+        } else view.printError(ErrorType.INVALID_TARGET);
     }
 
 }

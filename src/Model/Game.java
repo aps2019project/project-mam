@@ -2,7 +2,11 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
+
+
+import static java.lang.Math.abs;
 
 
 public class Game {
@@ -83,6 +87,10 @@ public class Game {
 
     public Map getMap() {
         return map;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
     }
 
     public Deck getFirstPlayerDeck() {
@@ -214,7 +222,7 @@ public class Game {
         return count;
     }
 
-    public void SelectCard(int cardId) {
+    public void selectCard(int cardId) {
         if (getTurn() % 2 == FIRST_PLAYER_TURN)
             currentCard = map.getFirstPlayerCellCard().get(cardId).getCard();
         else
@@ -244,6 +252,51 @@ public class Game {
         currentCard.setCanMove(false);
         currentCard.setRow(x);
         currentCard.setColumn(y);
+    }
+
+    public boolean cardCanMove(int x, int y) {
+        if (map.getManhatanDistance(currentCard.getColumn(), currentCard.getRow(), x, y) > 2) {
+            return false;
+        }
+        if (!map.isCellEmpty(x, y)) {
+            return false;
+        }
+        if (!map.isTargetInMap(x, y)) {
+            return false;
+        }
+        if (!checkOpCardInRout(x, y)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkOpCardInRout(int x, int y) {
+        if (abs(currentCard.getColumn() - x) == 2 && abs(currentCard.getRow() - y) == 0) {
+            if (!map.isCellEmpty((currentCard.getColumn() + x) / 2, y)) {
+                return false;
+            }
+        } else if (abs(currentCard.getColumn() - x) == 0 && abs(currentCard.getRow() - y) == 2) {
+            if (!map.isCellEmpty(x, (currentCard.getRow() + y) / 2)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == 1) {
+            if (!map.isCellEmpty(x, y + 1) && !map.isCellEmpty(x - 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == -1) {
+            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x - 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == 1) {
+            if (!map.isCellEmpty(x, y + 1) && !map.isCellEmpty(x + 1, y)) {
+                return false;
+            }
+        } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == -1) {
+            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x + 1, y)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setPlayersHand() {
@@ -336,6 +389,24 @@ public class Game {
         info.append("first player mana : ").append(firstPlayerMana).append("\nsecond player mana : ").
                 append(secondPlayerMana);
         switch (mode) {
+            case "1":
+                int hero1 = 0;
+                int hero2 = 0;
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")) {
+                        hero1 = entry.getValue().getCard().getHP();
+                        break;
+                    }
+                }
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                    if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero")) {
+                        hero2 = entry.getValue().getCard().getHP();
+                        break;
+                    }
+                }
+                info.append("first player hero HP: ").append(hero1).append("\n");
+                info.append("second player hero HP: ").append(hero2);
+                break;
             case "2":
                 info.append("\nflag location : ").append(map.getFlags().get(0).getRow()).append(", ").
                         append(map.getFlags().get(0).getColumn()).append("\nflag keeper : ").
@@ -354,24 +425,64 @@ public class Game {
         return info.toString();
     }
 
-    public String showMinions(ArrayList<Card> cards) {
+    public String showMyMinions() {
         StringBuilder info = new StringBuilder();
-        for (Card card : cards) {
-            info.append(card.getImportantInfo());
-            info.append("\n");
+        if (getTurn() % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
         }
         return info.toString();
     }
 
-    public String showHand(ArrayList<Card> hand) {
+    public String showOpMinions() {
         StringBuilder info = new StringBuilder();
-        for (Card card : hand) {
-            info.append(card.getImportantInfo());
-            info.append("\n");
+        if (getTurn() % 2 == 0) {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                info.append(entry.getValue().getCard().getImportantInfo()).append("\n");
+            }
         }
-        if (turn % 2 == 1)
+        return info.toString();
+    }
+
+    public String showCardInfo(int cardId) {
+        if (getTurn() % 2 == 1) {
+            for (Card card : firstPlayerDeck.getCards()) {
+                if (card.getId() == cardId) {
+                    return card.getCardInfoInGame();
+                }
+            }
+        } else {
+            for (Card card : secondPlayerDeck.getCards()) {
+                if (card.getId() == cardId) {
+                    return card.getCardInfoInGame();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String showHand() {
+        StringBuilder info = new StringBuilder();
+        if (turn % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
+                info.append(entry.getValue().getImportantInfo()).append("\n");
+            }
             info.append(nextfirstPlayerCard.getImportantInfo());
-        else info.append(nextSecondPlayerCard.getImportantInfo());
+        } else {
+            for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
+                info.append(entry.getValue().getImportantInfo()).append("\n");
+            }
+            info.append(nextSecondPlayerCard.getImportantInfo());
+        }
         return info.toString();
     }
 

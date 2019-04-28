@@ -146,6 +146,14 @@ public class Hero extends Card {
                 this.HP, this.cooldown, this.getDesc(), this.specialPower);
         return newCard;
     }
+
+    @Override
+    public String getCardInfoInGame() {
+        StringBuilder info = new StringBuilder();
+        info.append("Hero:").append("\nName: ").append(this.getName());
+        info.append("\nCost: ").append(this.getPrice()).append("\nDesc: ").append(this.getDesc());
+        return info.toString();
+    }
 }
 
 

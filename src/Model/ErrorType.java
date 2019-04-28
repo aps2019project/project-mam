@@ -27,8 +27,10 @@ public enum ErrorType {
     SUCCESSFUL_ADDING_CARD("add card successful"),
     SUCCESSFUL_ADDING_ITEM("add item successful"),
     SUCCESSFUL_ADDING_HERO("add hero successful"),
+    SUCCESSFUL_MOVING_CARD(""),
     SELECT_MAIN_DECK("main deck selected"),
     NOT_SELECT_MAIN_DECK("main deck did'nt select"),
+    INVALID_TARGET("target is invalid"),
 
 
     ;
@@ -37,6 +39,10 @@ public enum ErrorType {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     ErrorType(String message) {
