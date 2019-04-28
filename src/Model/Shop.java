@@ -268,8 +268,6 @@ public class Shop {
         cards.add(card);
 
 
-
-
         //----------------------------minions-----------------------
 
 
@@ -287,7 +285,7 @@ public class Shop {
         cards.add(card);
 
         card = new Minion("pahlavan fars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
-      //  card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5, ONE_ENEMY_FORCE));
+        //  card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5, ONE_ENEMY_FORCE));
         cards.add(card);
 
         card = new Minion("sepah salar fars", 800, 7, 12, 4, 0, MELEE, COMBO);
@@ -362,40 +360,40 @@ public class Shop {
         card = new Minion("goraz vahshi", 500, 6, 10, 14, 0, MELEE, ON_DEFEND);
         cards.add(card);
 
-      //  card = new Minion("piran", 400, 8, 20, 12, 7, MELEE, COMBO);
-        //cards.add(card);
-
-        card = new Minion("give", 450, 4, 5, 7, 7, MELEE, COMBO);
+        card = new Minion("piran", 400, 8, 20, 12, 0, MELEE, ON_DEFEND);
         cards.add(card);
 
-        card = new Minion("bahman", 450, 8, 16, 9, 7, MELEE, COMBO);
+        card = new Minion("give", 450, 4, 5, 7, 5, RANGED, ON_DEFEND);
         cards.add(card);
 
-        card = new Minion("ashkbos", 400, 7, 14, 8, 7, MELEE, COMBO);
+        card = new Minion("bahman", 450, 8, 16, 9, 0, MELEE, ON_SPAWN);
         cards.add(card);
 
-        card = new Minion("iraj", 500, 4, 6, 20, 7, MELEE, COMBO);
+        card = new Minion("ashkbos", 400, 7, 14, 8, 0, MELEE, ON_DEFEND);
         cards.add(card);
 
-        card = new Minion("ghol bozorg", 600, 9, 30, 8, 7, MELEE, COMBO);
+        card = new Minion("iraj", 500, 4, 6, 20, 3, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("ghol do sar", 550, 4, 10, 4, 7, MELEE, COMBO);
+        card = new Minion("ghol bozorg", 600, 9, 30, 8, 2, HYBRID, NULL);
         cards.add(card);
 
-        card = new Minion("nanae sarma", 500, 3, 3, 4, 7, MELEE, COMBO);
+        card = new Minion("ghol do sar", 550, 4, 10, 4, 0, MELEE, ON_ATTACK);
         cards.add(card);
 
-        card = new Minion("folad zereh", 650, 3, 1, 1, 7, MELEE, COMBO);
+        card = new Minion("nanae sarma", 500, 3, 3, 4, 5, RANGED, ON_SPAWN);
         cards.add(card);
 
-        card = new Minion("siavosh", 350, 4, 8, 5, 7, MELEE, COMBO);
+        card = new Minion("folad zereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
         cards.add(card);
 
-        card = new Minion("shah ghol", 600, 5, 10, 4, 7, MELEE, COMBO);
+        card = new Minion("siavosh", 350, 4, 8, 5, 0, MELEE, ON_DEATH);
         cards.add(card);
 
-        card = new Minion("arzhang div", 600, 3, 6, 6, 7, MELEE, COMBO);
+        card = new Minion("shah ghol", 600, 5, 10, 4, 0, MELEE, COMBO);
+        cards.add(card);
+
+        card = new Minion("arzhang div", 600, 3, 6, 6, 0, MELEE, COMBO);
         cards.add(card);
         //-----------------------------heros-----------------------------------------
 
@@ -404,7 +402,7 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
-        card.addBuff(new Buff(STUN,1,0,ALL_ENEMY_FORCES));
+        card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
         card = new Hero("ezhdehayeHaftsar", 8000, 50, 4, MELEE, 0, 0, 1);
@@ -432,7 +430,7 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
-       // card.addBuff(new Buff(HOLY, 100, 3, ALL_INSIDER_FORCES));
+        // card.addBuff(new Buff(HOLY, 100, 3, ALL_INSIDER_FORCES));
         cards.add(card);
 
         card = new Hero("rostam", 8000, 55, 7, HYBRID, 4, 0, 0);
