@@ -30,10 +30,14 @@ public enum ErrorType {
     SUCCESSFUL_ADDING_HERO("add hero successful"),
     SUCCESSFUL_MOVING_CARD(""),
     SUCCESSFUL_INSERTING_CARD(""),
+    SUCCESSFUL_ATTACK("attack to opp card successful"),
     SELECT_MAIN_DECK("main deck selected"),
     NOT_SELECT_MAIN_DECK("main deck did'nt select"),
     INVALID_TARGET("target is invalid"),
     INVALID_CARD_NAME("invalid card name"),
+    INVALID_CARD_ID("invalid card id"),
+    UNAVAILABLE_OPP_ATTACK("opponent minion is unavailable for attack"),
+    CARD_CAN_NOT_ATTACK(""),
 
 
     ;

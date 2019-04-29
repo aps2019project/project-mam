@@ -237,6 +237,14 @@ public class Game {
         }
     }
 
+    public boolean isCardInOppPlayerCellCard(int cardId) {
+        if (getTurn() % 2 == 0) {
+            return map.getFirstPlayerCellCard().get(cardId) != null;
+        } else {
+            return map.getSecondPlayerCellCard().get(cardId) != null;
+        }
+    }
+
     public void moveCurrentCardTo(int x, int y) {
         if (turn % 2 == 1) {
             map.getCells()[x][y].setCard(currentCard);

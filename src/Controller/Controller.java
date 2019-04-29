@@ -303,4 +303,20 @@ public class Controller {
         view.show(game.showNextCard());
     }
 
+    public void attack(String oppCardId) {
+        if (game.getCurrentCard().isCanAttack()) {
+            if (game.isOppAvailableForAttack(Integer.parseInt(oppCardId), game.getCurrentCard().getId())) {
+                if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
+                    game.attack(Integer.parseInt(oppCardId));
+                    view.printError(ErrorType.SUCCESSFUL_ATTACK);
+                } else view.printError(ErrorType.INVALID_CARD_ID);
+            } else view.printError(ErrorType.UNAVAILABLE_OPP_ATTACK);
+        } else {
+            StringBuilder message = new StringBuilder();
+            message.append("card with ").append(game.getCurrentCard().getId()).append(" can't attack");
+            ErrorType.CARD_CAN_NOT_ATTACK.setMessage(message.toString());
+            view.printError(ErrorType.CARD_CAN_NOT_ATTACK);
+        }
+    }
+
 }
