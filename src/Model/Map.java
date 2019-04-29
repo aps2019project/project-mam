@@ -46,14 +46,9 @@ public class Map {
         return abs(x1 - x2) + abs(y1 - y2);
     }
 
-    public boolean isCellEmpty(int row, int column){
+    public boolean isCellEmpty(int row, int column) {
         return cells[row][column].getCard() == null;
     }
-
-
-
-
-
 
 
 }

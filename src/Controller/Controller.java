@@ -294,11 +294,11 @@ public class Controller {
         } else view.printError(ErrorType.INVALID_CARD_NAME);
     }
 
-    public void endTurn(){
+    public void endTurn() {
         game.endTurn();
     }
 
-    public void showNextCard(){
+    public void showNextCard() {
         view.show("Next Card:");
         view.show(game.showNextCard());
     }
