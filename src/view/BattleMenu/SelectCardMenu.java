@@ -29,6 +29,9 @@ public class SelectCardMenu extends ConsolePage {
         else if (command.matches("use special power \\d \\d")){
 
         }
+        else if (command.matches("show collectables")){
+
+        }
         else if (command.matches("select .+")){
             view.getPages().push(new SelectCollectableMenu());
         }

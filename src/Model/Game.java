@@ -763,6 +763,12 @@ public class Game {
         return false;
     }
 
+    public String showNextCard(){
+        if (getTurn()%2 == 1){
+            return nextfirstPlayerCard.getCardInfoInGame();
+        }
+        else return nextSecondPlayerCard.getCardInfoInGame();
+    }
 
 }
 

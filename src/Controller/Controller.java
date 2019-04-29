@@ -298,4 +298,9 @@ public class Controller {
         game.endTurn();
     }
 
+    public void showNextCard(){
+        view.show("Next Card:");
+        view.show(game.showNextCard());
+    }
+
 }

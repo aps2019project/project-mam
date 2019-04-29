@@ -48,14 +48,14 @@ public class MainBattleMenuPage extends ConsolePage {
         else if (command.matches("end turn")){
             controller.endTurn();
         }
-        else if (command.matches("show collectables")){
+        /*else if (command.matches("show collectables")){
 
-        }
+        }*/
         /*else if (command.matches("select .*")){  //collectable
 
         }*/
         else if (command.matches("show next card")){
-
+            controller.showNextCard();
         }
         else if (command.matches("enter graveyard")){
             view.getPages().push(new GraveyardMenu());
