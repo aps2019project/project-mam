@@ -10,7 +10,8 @@ public enum ErrorType {
     INVALID_DECK("selected deck is invalid"),
     INVALID_DECK_2("selected deck for second player is invalid"),
     UNAVAILABLE_CARD_OR_ITEM("card or item is'nt available"),
-    MONEY_IS_NOT_ENOUGH("you have'nt enough money for buy this card or item"),
+    MONEY_IS_NOT_ENOUGH("you dont have enough money for buy this card or item"),
+    MANA_IS_NOT_ENOUGH("you dont have enough mana to insert this card or item"),
     THREE_ITEM("you have 3 item\nyou can't buy more item"),
     SUCCESSFUL_BUY("buy successful"),
     SUCCESSFUL_SELL("sell successful"),
@@ -28,9 +29,11 @@ public enum ErrorType {
     SUCCESSFUL_ADDING_ITEM("add item successful"),
     SUCCESSFUL_ADDING_HERO("add hero successful"),
     SUCCESSFUL_MOVING_CARD(""),
+    SUCCESSFUL_INSERTING_CARD(""),
     SELECT_MAIN_DECK("main deck selected"),
     NOT_SELECT_MAIN_DECK("main deck did'nt select"),
     INVALID_TARGET("target is invalid"),
+    INVALID_CARD_NAME("invalid card name"),
 
 
     ;

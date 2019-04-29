@@ -229,12 +229,12 @@ public class Game {
             currentCard = map.getSecondPlayerCellCard().get(cardId).getCard();
     }
 
-    public boolean isCardInFirstPlayerCellCard(int cardId) {
-        return map.getFirstPlayerCellCard().get(cardId) != null;
-    }
-
-    public boolean isCardInSecondPlayerCellCard(int cardId) {
-        return map.getSecondPlayerCellCard().get(cardId) != null;
+    public boolean isCardInPlayerCellCard(int cardId) {
+        if (getTurn() % 2 == 1) {
+            return map.getFirstPlayerCellCard().get(cardId) != null;
+        } else {
+            return map.getSecondPlayerCellCard().get(cardId) != null;
+        }
     }
 
     public void moveCurrentCardTo(int x, int y) {
@@ -368,18 +368,17 @@ public class Game {
         }
     }
 
-    public boolean isCardInPlayer1Hand(String cardName) {
-        for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
-            if (entry.getValue().getName().equals(cardName))
-                return true;
-        }
-        return false;
-    }
-
-    public boolean isCardInplayer2Hand(String cardName) {
-        for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
-            if (entry.getValue().getName().equals(cardName))
-                return true;
+    public boolean isCardInPlayerHand(String cardName) {
+        if (getTurn() % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
+                if (entry.getValue().getName().equals(cardName))
+                    return true;
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
+                if (entry.getValue().getName().equals(cardName))
+                    return true;
+            }
         }
         return false;
     }
@@ -505,12 +504,12 @@ public class Game {
             }
     }
 
-    public void insertPlayer2Card(String cardName, int x, int y) {
-        insertCard(cardName, x, y, secondPlayerHand);
-    }
-
-    public void insertPlayer1Card(String cardName, int x, int y) {
-        insertCard(cardName, x, y, firstPlayerHand);
+    public void insertPlayerCard(String cardName, int x, int y) {
+        if (getTurn() % 2 == 1) {
+            insertCard(cardName, x, y, firstPlayerHand);
+        } else {
+            insertCard(cardName, x, y, secondPlayerHand);
+        }
     }
 
     public void endTurn() {
@@ -706,7 +705,7 @@ public class Game {
     private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard, int player) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCard().getHP() <= 0) {
-                if (entry.getValue().getCard().getCardType().equals("hero")){
+                if (entry.getValue().getCard().getCardType().equals("hero")) {
                     winner = player;
                     isGameEnd = true;
                 }
@@ -717,14 +716,56 @@ public class Game {
         }
     }
 
-    public boolean haveEnoughMana(int number) {
-        if (getTurn() % 2 == 1 && firstPlayerMana >= number)
+    public boolean haveEnoughMana(String cardName) {
+        if (getTurn() % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
+                if (entry.getValue().getName().equals(cardName)) {
+                    if (entry.getValue().getMP() <= firstPlayerMana) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
+                if (entry.getValue().getName().equals(cardName)) {
+                    if (entry.getValue().getMP() <= secondPlayerMana) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isValidCellForInsert(int x, int y) {
+        if (map.isCellEmpty(x, y) && map.isTargetInMap(x, y) && isInsiderForceAbutment(x, y)) {
             return true;
-        else return getTurn() % 2 == 0 && secondPlayerMana >= number;
+        }
+        return false;
+    }
+
+    public boolean isInsiderForceAbutment(int x, int y) {
+        if (getTurn() % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                if ((abs(entry.getValue().getColumn() - x) == 1 && abs(entry.getValue().getRow() - y) == 0)
+                        || (abs(entry.getValue().getColumn() - x) == 0 && abs(entry.getValue().getRow() - y) == 1)) {
+                    return true;
+                }
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
+                if ((abs(entry.getValue().getColumn() - x) == 1 && abs(entry.getValue().getRow() - y) == 0)
+                        || (abs(entry.getValue().getColumn() - x) == 0 && abs(entry.getValue().getRow() - y) == 1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
 }
+
 
 
 

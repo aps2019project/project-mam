@@ -42,8 +42,8 @@ public class MainBattleMenuPage extends ConsolePage {
         else if (command.matches("show hand")){
             controller.showHand();
         }
-        else if (command.matches("insert (\\S*) in \\(\\d, \\d\\)")){
-
+        else if (command.matches("insert (\\S*) in \\d \\d")){
+            controller.insertCard(command.split("")[1], command.split(" ")[3], command.split(" ")[4]);
         }
         else if (command.matches("end turn")){
 
