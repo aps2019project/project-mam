@@ -294,4 +294,8 @@ public class Controller {
         } else view.printError(ErrorType.INVALID_CARD_NAME);
     }
 
+    public void endTurn(){
+        game.endTurn();
+    }
+
 }

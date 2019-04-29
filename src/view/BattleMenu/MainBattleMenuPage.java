@@ -46,7 +46,7 @@ public class MainBattleMenuPage extends ConsolePage {
             controller.insertCard(command.split("")[1], command.split(" ")[3], command.split(" ")[4]);
         }
         else if (command.matches("end turn")){
-
+            controller.endTurn();
         }
         else if (command.matches("show collectables")){
 
