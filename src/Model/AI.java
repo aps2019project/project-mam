@@ -8,4 +8,9 @@ public class AI {
         return ai;
     }
 
+    private String command = null;
+
+    public String getCommand() {
+        return command;
+    }
 }

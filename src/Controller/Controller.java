@@ -23,6 +23,7 @@ public class Controller {
     private Shop shop = Shop.getInstance();
     //private Collection collection = new Collection();
     private User user = new User();
+    private AI ai = new AI();
     private Game game;
 
     public void setGame(Game game) {
@@ -89,6 +90,12 @@ public class Controller {
             }
         }
         view.show(info.toString());
+    }
+
+    //------------------------------------AI------------------------------------
+
+    public String getAiCommand(){
+        return ai.getCommand();
     }
 
     //--------------------------------------collection------------------------------
