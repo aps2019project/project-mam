@@ -10,6 +10,7 @@ import static java.lang.Math.abs;
 
 
 public class Game {
+    private static final Game GAME = new Game();
     private static final String SINGLE_PLAYER = "single player";
     private static final String MULTI_PLAYER = "multi player";
     private static final String FIRST_MODE = "1";
@@ -52,7 +53,8 @@ public class Game {
     private boolean isGameEnd = false;
     private int winner;
 
-
+    private Game() {
+    }
     public Game(Deck firstPlayerDeck, Deck secondPlayerDeck, String firstPlayerName,
                 String secondPlayerName, String mode, int flagCount) {
         this.firstPlayerDeck = firstPlayerDeck;
@@ -83,6 +85,9 @@ public class Game {
         currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
+    }
+    public static Game getInstance() {
+        return GAME;
     }
 
     public Map getMap() {

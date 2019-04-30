@@ -30,6 +30,8 @@ public class Controller {
         this.game = game;
     }
 
+    public Game getGame(Game game) { return game; }
+
     public User getFirstUser() {
         return user;
     }
