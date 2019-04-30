@@ -30,7 +30,7 @@ public class Controller {
         this.game = game;
     }
 
-    public Game getGame(Game game) { return game; }
+    public Game getGame() { return game; }
 
     public User getFirstUser() {
         return user;
@@ -97,6 +97,7 @@ public class Controller {
     //------------------------------------AI------------------------------------
 
     public String getAiCommand(){
+
         return ai.getCommand();
     }
 
