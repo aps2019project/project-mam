@@ -50,7 +50,7 @@ public class Buff {
 
     //-----------------------------effect-----------------------------
 
-    public void oneEnemyForce(Card card) {
+    public void doEffect(Card card) {
         switch (type) {
             case POISON:
                 card.decrementOfHp(buffPower);
@@ -67,11 +67,6 @@ public class Buff {
             case DISARM:
                 card.setCanCounterAttack(false);
                 break;
-        }
-    }
-
-    public void oneInsiderForce(Card card) {
-        switch (type) {
             case ATTACK_POWER:
                 card.incrementOfAp(buffPower);
                 break;

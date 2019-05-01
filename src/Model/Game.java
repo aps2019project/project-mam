@@ -567,7 +567,7 @@ public class Game {
         }
         if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
             return true;
-        if (attacker.getCardClass() == ImpactType.RANGED && distance > 1)
+        if (attacker.getCardClass() == ImpactType.RANGED && distance <= attacker.getTargetCommunity())
             return true;
         if (attacker.getCardClass() == ImpactType.HYBRID)
             return true;
