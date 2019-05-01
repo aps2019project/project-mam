@@ -21,12 +21,15 @@ public class SelectCardMenu extends ConsolePage {
             controller.moveCard(command.split(" ")[2], command.split(" ")[3]);
         }
         else if (command.matches("attack \\d+")){
-
+            controller.attack(command.split(" ")[1]);
         }
         else if (command.matches("attack combo \\d+( \\d+)+")){
 
         }
         else if (command.matches("use special power \\d \\d")){
+
+        }
+        else if (command.matches("show collectables")){
 
         }
         else if (command.matches("select .+")){

@@ -23,11 +23,14 @@ public class Controller {
     private Shop shop = Shop.getInstance();
     //private Collection collection = new Collection();
     private User user = new User();
+    private AI ai = new AI();
     private Game game;
 
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public Game getGame() { return game; }
 
     public User getFirstUser() {
         return user;
@@ -89,6 +92,13 @@ public class Controller {
             }
         }
         view.show(info.toString());
+    }
+
+    //------------------------------------AI------------------------------------
+
+    public String getAiCommand(){
+
+        return ai.getCommand();
     }
 
     //--------------------------------------collection------------------------------
@@ -218,7 +228,7 @@ public class Controller {
 
     public boolean isMainDeckValid() {
         if (user.getMainDeck() != null) {
-            if (user.getCollection().isValidMainDeck()){
+            if (user.getCollection().isValidMainDeck()) {
                 return true;
             } else {
                 view.printError(ErrorType.INVALID_DECK);
@@ -233,43 +243,43 @@ public class Controller {
         return User.getUser(userName).getCollection().isValidMainDeck();
     }
 
-    public boolean isDeckValid(String deckName){
-        if (user.getCollection().isValidDeck(deckName)){
+    public boolean isDeckValid(String deckName) {
+        if (user.getCollection().isValidDeck(deckName)) {
             return true;
         }
         return false;
     }
 
-    public void showGameInfo(){
+    public void showGameInfo() {
         view.show(game.getGameInfo());
     }
 
-    public void showMyMinions(){
+    public void showMyMinions() {
         view.show(game.showMyMinions());
     }
 
-    public void showOpMinions(){
+    public void showOpMinions() {
         view.show(game.showOpMinions());
     }
 
-    public void showCardInfo(String cardId){
-        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))){
+    public void showCardInfo(String cardId) {
+        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))) {
             view.show(game.showCardInfo(Integer.parseInt(cardId)));
         } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
-    public void showHand(){
+    public void showHand() {
         view.show(game.showHand());
     }
 
-    public void selectCard(String cardId){
-        if (user.getMainDeck().cardIsExist(Integer.parseInt(cardId))) {
+    public void selectCard(String cardId) {
+        if (game.isCardInPlayerCellCard(Integer.parseInt(cardId))) {
             game.selectCard(Integer.parseInt(cardId));
         } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
     }
 
-    public void moveCard(String x, String y){
-        if (game.cardCanMove(Integer.parseInt(x), Integer.parseInt(y))){
+    public void moveCard(String x, String y) {
+        if (game.cardCanMove(Integer.parseInt(x), Integer.parseInt(y))) {
             game.moveCurrentCardTo(Integer.parseInt(x), Integer.parseInt(y));
             StringBuilder message = new StringBuilder();
             message.append(game.getCurrentCard().getId()).append(" moved to ");
@@ -277,6 +287,46 @@ public class Controller {
             ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
             view.printError(ErrorType.SUCCESSFUL_MOVING_CARD);
         } else view.printError(ErrorType.INVALID_TARGET);
+    }
+
+    public void insertCard(String cardName, String x, String y) {
+        if (game.isCardInPlayerHand(cardName)) {
+            if (game.haveEnoughMana(cardName)) {
+                if (game.isValidCellForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
+                    game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
+                    StringBuilder message = new StringBuilder();
+                    message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
+                    message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
+                    ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
+                    view.printError(ErrorType.SUCCESSFUL_INSERTING_CARD);
+                } else view.printError(ErrorType.INVALID_TARGET);
+            } else view.printError(ErrorType.MANA_IS_NOT_ENOUGH);
+        } else view.printError(ErrorType.INVALID_CARD_NAME);
+    }
+
+    public void endTurn() {
+        game.endTurn();
+    }
+
+    public void showNextCard() {
+        view.show("Next Card:");
+        view.show(game.showNextCard());
+    }
+
+    public void attack(String oppCardId) {
+        if (game.getCurrentCard().isCanAttack()) {
+            if (game.isOppAvailableForAttack(Integer.parseInt(oppCardId), game.getCurrentCard().getId())) {
+                if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
+                    game.attack(Integer.parseInt(oppCardId));
+                    view.printError(ErrorType.SUCCESSFUL_ATTACK);
+                } else view.printError(ErrorType.INVALID_CARD_ID);
+            } else view.printError(ErrorType.UNAVAILABLE_OPP_ATTACK);
+        } else {
+            StringBuilder message = new StringBuilder();
+            message.append("card with ").append(game.getCurrentCard().getId()).append(" can't attack");
+            ErrorType.CARD_CAN_NOT_ATTACK.setMessage(message.toString());
+            view.printError(ErrorType.CARD_CAN_NOT_ATTACK);
+        }
     }
 
 }
