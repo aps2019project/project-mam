@@ -92,7 +92,20 @@ public class Minion extends Card {
         return info.toString();
     }
 
+    @Override
+    public int getMP() {
+        return super.getMP();
+    }
 
+    @Override
+    public int getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public ArrayList<Buff> getSpecialPower() {
+        return super.getSpecialPower();
+    }
 
     public int getAP() {
         return AP;

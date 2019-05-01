@@ -84,9 +84,6 @@ public class Card {
         return -1;
     }
 
-    public int getAp(){
-        return 0;
-    }
 
     public ArrayList<Buff> getSpecialPower(){
         return null;

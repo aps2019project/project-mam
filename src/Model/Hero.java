@@ -63,6 +63,17 @@ public class Hero extends Card {
         return heroClass;
     }
 
+
+    @Override
+    public ArrayList<Buff> getSpecialPower() {
+        return super.getSpecialPower();
+    }
+
+    @Override
+    public SPActivationTime getSPActivationTime() {
+        return super.getSPActivationTime();
+    }
+
     public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);
     }
@@ -104,11 +115,11 @@ public class Hero extends Card {
     }
 
     public void incrementOfHp(int number){
-        this.HP -= number;
+        this.HP += number;
     }
 
     public void decrementOfHp(int number){
-        this.HP += number;
+        this.HP -= number;
     }
 
     public void incrementOfAp(int number){
@@ -152,6 +163,14 @@ public class Hero extends Card {
         StringBuilder info = new StringBuilder();
         info.append("Hero:").append("\nName: ").append(this.getName());
         info.append("\nCost: ").append(this.getPrice()).append("\nDesc: ").append(this.getDesc());
+        return info.toString();
+    }
+
+    @Override
+    public String getImportantInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
+                append(getRow()).append(", ").append(getColumn()).append("),  power : ").append(getAP());
         return info.toString();
     }
 }
