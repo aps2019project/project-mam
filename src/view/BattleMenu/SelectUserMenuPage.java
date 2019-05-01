@@ -24,8 +24,8 @@ public class SelectUserMenuPage extends ConsolePage {
             String userName = command.split(" ")[2];
             if (controller.isUserNameValid(userName)) {
                 if (controller.isMainDeckValid(userName)) {
-                    view.getPages().push(new GameMoodMenuPage());
                     battleMenuPage.setSecondUser(controller.getSecondUser(userName));
+                    view.getPages().push(new GameMoodMenuPage());
                 } else view.printError(ErrorType.INVALID_DECK_2);
             } else view.printError(ErrorType.INVALID_USERNAME);
         }else if (command.equalsIgnoreCase("help")) {

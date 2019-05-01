@@ -18,7 +18,7 @@ public class Game {
     private static final int BASIC_FLAG_COUNT = 7;
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
-    private static int basicMana = 2;
+    private static int basicMana = 10;
     private Map map = new Map();
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
@@ -82,6 +82,12 @@ public class Game {
         currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
+        firstPlayerHand = new HashMap<>();
+        secondPlayerHand = new HashMap<>();
+        setPlayersHand();
+        setNextfirstPlayerCard();
+        setNextSecondPlayerCard();
+        startGame();
     }
 
     public Map getMap() {
@@ -169,8 +175,10 @@ public class Game {
     }
 
     public void startGame() {
+
         map.getCells()[2][0].setCard(firstPlayerDeck.getHero());
         map.getCells()[2][8].setCard(secondPlayerDeck.getHero());
+
         map.getFirstPlayerCellCard().put(firstPlayerDeck.getHero().getId(), map.getCells()[2][0]);
         map.getSecondPlayerCellCard().put(secondPlayerDeck.getHero().getId(), map.getCells()[2][8]);
         if (flagCount == 1)
@@ -187,6 +195,7 @@ public class Game {
             if (flagCount % 2 == 1)
                 map.getCells()[2][4].incrementOfFlag(1);
         }
+
     }
 
     public int getWinner() {
@@ -309,14 +318,14 @@ public class Game {
     public void setPlayersHand() {
         Random random = new Random();
         int rand;
-        while (firstPlayerHand.size() <= 5) {
+        do {
             rand = random.nextInt(firstPlayerDeck.getCards().size());
             addRandomCardFromFirstPlayerDeckToHand(rand);
-        }
-        while (secondPlayerHand.size() <= 5) {
+        } while (firstPlayerHand.size() <= 4);
+        do {
             rand = random.nextInt(secondPlayerDeck.getCards().size());
             addRandomCardFromSecondPlayerDeckToHand(rand);
-        }
+        } while (secondPlayerHand.size() <= 4);
     }
 
     public void addRandomCardFromFirstPlayerDeckToHand(int rand) {
@@ -328,7 +337,7 @@ public class Game {
 
     public void addRandomCardFromSecondPlayerDeckToHand(int rand) {
         if (secondPlayerDeck.getCards().size() != 0) {
-            firstPlayerHand.put(firstPlayerDeck.getCards().get(rand).getId(), firstPlayerDeck.getCards().get(rand));
+            secondPlayerHand.put(secondPlayerDeck.getCards().get(rand).getId(), secondPlayerDeck.getCards().get(rand));
             secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
         }
     }
@@ -355,20 +364,21 @@ public class Game {
     }
 
     public void setNextfirstPlayerCard() {
-        if (firstPlayerHand.size() < 5) {
+        if (firstPlayerHand.size() <= 5) {
             if (firstPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
-                nextfirstPlayerCard = firstPlayerDeck.getCards().get(random.nextInt());
+                nextfirstPlayerCard = firstPlayerDeck.getCards().
+                        get(random.nextInt(firstPlayerDeck.getCards().size()));
             } else
                 nextfirstPlayerCard = null;
         }
     }
 
     public void setNextSecondPlayerCard() {
-        if (secondPlayerHand.size() < 5) {
+        if (secondPlayerHand.size() <= 5) {
             if (secondPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
-                int rand = random.nextInt();
+                int rand = random.nextInt(secondPlayerDeck.getCards().size());
                 nextSecondPlayerCard = secondPlayerDeck.getCards().get(rand);
             } else
                 nextSecondPlayerCard = null;
@@ -378,7 +388,7 @@ public class Game {
     public boolean isCardInPlayerHand(String cardName) {
         if (getTurn() % 2 == 1) {
             for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
-                if (entry.getValue().getName().equals(cardName))
+                if (entry.getValue().getName().equalsIgnoreCase(cardName))
                     return true;
             }
         } else {
@@ -480,14 +490,14 @@ public class Game {
         StringBuilder info = new StringBuilder();
         if (turn % 2 == 1) {
             for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
-                info.append(entry.getValue().getImportantInfo()).append("\n");
+                info.append(entry.getValue().getInfo()).append("\n");
             }
-            info.append(nextfirstPlayerCard.getImportantInfo());
+            info.append("next card: ").append(nextfirstPlayerCard.getInfo());
         } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
-                info.append(entry.getValue().getImportantInfo()).append("\n");
+                info.append(entry.getValue().getInfo()).append("\n");
             }
-            info.append(nextSecondPlayerCard.getImportantInfo());
+            info.append("next card:").append(nextSecondPlayerCard.getInfo());
         }
         return info.toString();
     }
@@ -726,7 +736,7 @@ public class Game {
     public boolean haveEnoughMana(String cardName) {
         if (getTurn() % 2 == 1) {
             for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
-                if (entry.getValue().getName().equals(cardName)) {
+                if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
                     if (entry.getValue().getMP() <= firstPlayerMana) {
                         return true;
                     }
@@ -754,15 +764,15 @@ public class Game {
     public boolean isInsiderForceAbutment(int x, int y) {
         if (getTurn() % 2 == 1) {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
-                if ((abs(entry.getValue().getColumn() - x) == 1 && abs(entry.getValue().getRow() - y) == 0)
-                        || (abs(entry.getValue().getColumn() - x) == 0 && abs(entry.getValue().getRow() - y) == 1)) {
+                if ((abs(entry.getValue().getRow() - x) == 1 && abs(entry.getValue().getColumn() - y) == 0)
+                        || (abs(entry.getValue().getRow() - x) == 0 && abs(entry.getValue().getColumn() - y) == 1)) {
                     return true;
                 }
             }
         } else {
             for (java.util.Map.Entry<Integer, Cell> entry : map.getSecondPlayerCellCard().entrySet()) {
-                if ((abs(entry.getValue().getColumn() - x) == 1 && abs(entry.getValue().getRow() - y) == 0)
-                        || (abs(entry.getValue().getColumn() - x) == 0 && abs(entry.getValue().getRow() - y) == 1)) {
+                if ((abs(entry.getValue().getRow() - x) == 1 && abs(entry.getValue().getColumn() - y) == 0)
+                        || (abs(entry.getValue().getRow() - x) == 0 && abs(entry.getValue().getColumn() - y) == 1)) {
                     return true;
                 }
             }
@@ -770,11 +780,10 @@ public class Game {
         return false;
     }
 
-    public String showNextCard(){
-        if (getTurn()%2 == 1){
+    public String showNextCard() {
+        if (getTurn() % 2 == 1) {
             return nextfirstPlayerCard.getCardInfoInGame();
-        }
-        else return nextSecondPlayerCard.getCardInfoInGame();
+        } else return nextSecondPlayerCard.getCardInfoInGame();
     }
 
 }

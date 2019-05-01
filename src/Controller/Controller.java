@@ -21,7 +21,7 @@ public class Controller {
 
     private View view = View.getInstance();
     private Shop shop = Shop.getInstance();
-    //private Collection collection = new Collection();
+   // private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
     private Game game;
@@ -96,10 +96,10 @@ public class Controller {
 
     //------------------------------------AI------------------------------------
 
-    public String getAiCommand(){
+    /*public String getAiCommand(){
 
         return ai.getCommand();
-    }
+    }*/
 
     //--------------------------------------collection------------------------------
 

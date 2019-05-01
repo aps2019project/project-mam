@@ -207,11 +207,11 @@ public class Shop {
     }
 
     public static void importCards() {
-        Card card = new Spell("Total Disarm", 1000, 0);
+        Card card = new Spell("Total_Disarm", 1000, 0);
         card.addBuff(new Buff(DISARM, 100, 0, ONE_ENEMY_FORCE));
         cards.add(card);
 
-        card = new Spell("Area Dispel", 2500, 2);
+        card = new Spell("Area_Dispel", 2500, 2);
         card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
         cards.add(card);
@@ -220,15 +220,15 @@ public class Shop {
         card.addBuff(new Buff(ATTACK_POWER, 100, 2, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Fire Ball", 400, 1);
+        card = new Spell("Fire_Ball", 400, 1);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 0, 4, ONE_ENEMY_FORCE));
         cards.add(card);
 
-        card = new Spell("God Strength", 450, 2);
+        card = new Spell("God_Strength", 450, 2);
         card.addBuff(new Buff(ATTACK_POWER, 100, 4, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Hell Fire", 600, 3);
+        card = new Spell("Hell_Fire", 600, 3);
         card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 2, TWO_IN_TWO));
         cards.add(card);
 

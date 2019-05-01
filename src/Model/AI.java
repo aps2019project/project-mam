@@ -9,7 +9,7 @@ import static java.lang.Math.abs;
 public class AI {
 
 
-    private Game game = Controller.getInstance().getGame();
+    private Game game;// = Controller.getInstance().getGame();
     private static final User ai = new User("AI", "0");
 
     public static User getAI() {
