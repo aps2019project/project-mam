@@ -14,7 +14,6 @@ public class Minion extends Card {
     private int TargetCommunity;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
-    private ArrayList<Buff> specialPower = new ArrayList<>();
     private boolean canMove = true;
     private boolean canAttack = true;
     private boolean canCounterAttack = true;
@@ -28,7 +27,6 @@ public class Minion extends Card {
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
-        this.specialPower = buffs;
     }
 
     public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
@@ -149,28 +147,11 @@ public class Minion extends Card {
         this.SPActivationTime = SPActivationTime;
     }
 
-    public void setSpecialPower(ArrayList<Buff> specialPower) {
-        this.specialPower = specialPower;
-    }
-
-    public void addBuffToSpecialPower(Buff buff){
-        specialPower.add(buff);
-    }
-
-    public void updateBuffList() {
-        Iterator itr = getBuffs().iterator();
-        while (itr.hasNext()) {
-            Buff temp = (Buff) itr;
-            if (temp.getTime() == 0)
-                itr.remove();
-        }
-    }
-
     @Override
     public Card copyCard() {
         Card newCard = new Minion(this.getName(), this.getPrice(), this.getMP(), this.getHP(),
                 this.getAP(), this.getCardClass(), this.getTargetCommunity(),
-                this.getDesc(), this.getSPActivationTime(), this.specialPower);
+                this.getDesc(), this.getSPActivationTime(), this.getSpecialPower());
         return newCard;
 
     }
@@ -195,11 +176,12 @@ public class Minion extends Card {
     }
 
     public void incrementOfHp(int number) {
-        this.HP -= number;
+        this.HP += number;
     }
 
     public void decrementOfHp(int number) {
-        this.HP += number;
+        this.HP -= number;
+        Buff.activeholyBuff(this);
     }
 
     public void incrementOfAp(int number) {

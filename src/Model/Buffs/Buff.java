@@ -1,9 +1,6 @@
 package Model.Buffs;
 
-import Model.BuffType;
-import Model.Card;
-import Model.Cell;
-import Model.TargetCommunity;
+import Model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,6 +97,10 @@ public class Buff {
         return activationTime;
     }
 
+    public Buff copy(){
+        return null;
+    }
+
 
 
     //-----------------------------effect-----------------------------
@@ -135,8 +136,11 @@ public class Buff {
         }
     }
 
-    public void holyBuff(Card card) {
-        card.incrementOfHp(buffPower);
+    public static void activeholyBuff(Card card) {
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof Holy)
+                card.incrementOfHp(buff.getBuffPower());
+        }
     }
 
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
@@ -188,6 +192,15 @@ public class Buff {
                     if (entry.getValue().getColumn() == attacker.getColumn())
                         cells.add(entry.getValue());
                     break;
+            case ALL_ENEMY_FORCES_CLOSE:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
+                    if (map.getManhatanDistance(entry.getValue(), attacker) == 1 ||
+                            (map.getManhatanDistance(entry.getValue(), attacker) == 2 && entry.getValue().getRow() != attacker
+                            .getRow() && entry.getValue().getColumn() != attacker.getColumn())){
+                        cells.add(entry.getValue());
+                    }
+                }
+                break;
         }
         return cells;
     }
@@ -206,6 +219,18 @@ public class Buff {
             buff.decrementOfTime();
             if (buff.getTime() == 0){
                 buff.removeBuff();
+            }
+        }
+    }
+
+    public static void activePassiveBuff(HashMap<Integer, Cell> cells){
+        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
+            if (entry.getValue().getCard().getSPActivationTime() == SPActivationTime.PASSIVE){
+                for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
+                    Buff newBuff = buff.copy();
+                    newBuff.setCard(entry.getValue().getCard());
+                    Buff.addBuff(newBuff);
+                }
             }
         }
     }

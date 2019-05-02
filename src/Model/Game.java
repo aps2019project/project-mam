@@ -5,6 +5,7 @@ import Model.Buffs.Buff;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 
 import static java.lang.Math.abs;
@@ -558,15 +559,14 @@ public class Game {
             firstPlayerMana = basicMana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
-            activeStunBuffs(map.getFirstPlayerCellCard());
         } else {
             basicMana++;
             secondPlayerMana = basicMana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
-            activeStunBuffs(map.getSecondPlayerCellCard());
         }
         changeTurn();
+        activePassiveBuffs();
     }
 
     public void updateCellCard(HashMap<Integer, Cell> cards) {
@@ -581,14 +581,29 @@ public class Game {
         currentCard.setCanMove(false);
         if (turn % 2 == 1) {
             map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
+            if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK){
+                for (Buff buff : currentCard.getSpecialPower()) {
+                    Buff newBuff = buff.copy();
+                    newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
+                    Buff.addBuff(newBuff);
+                }
+            }
 
         } else {
             map.getFirstPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
+            if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)
+                for (Buff buff : currentCard.getSpecialPower()) {
+                    Buff newBuff = buff.copy();
+                    newBuff.setCard(map.getFirstPlayerCellCard().get(cardId).getCard());
+                    Buff.addBuff(newBuff);
+                }
         }
+        Buff.updateBuffs();
         if (canCounterAttack(currentCard.getId(), cardId))
             counterAttack(cardId, currentCard.getId());
         checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
         checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);
+        Buff.updateBuffs();
     }
 
     public boolean isOppAvailableForAttack(int targetId, int attackerId) {
@@ -679,73 +694,31 @@ public class Game {
 
     //----------------------------------buffs--------------------------------
 
-    private void activeSPower(Card attacker, Card defender) {
-        for (Buff buff : attacker.getSpecialPower()) {
-            if (buff.getType() != BuffType.HOLY && buff.getType() != BuffType.ATTACK_POWER &&
-                    buff.getType() != BuffType.HEALTH_POWER)
-                defender.getBuffs().add(buff);
-            else attacker.getBuffs().add(buff);
+    private void activePassiveBuffs(){
+        if (getTurn() % 2 == 1){
+            Buff.activePassiveBuff(map.getFirstPlayerCellCard());
+        }else {
+            Buff.activePassiveBuff(map.getSecondPlayerCellCard());
         }
     }
 
-    private void activeHolyBuffs(Card card) {
-        card.incrementOfHp(1);
-    }
 
-    private void activeStunBuffs(HashMap<Integer, Cell> cards) {
-        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
-            for (Buff buff : entry.getValue().getCard().getBuffs())
-                if (buff.getType() == BuffType.STUN) {
-                    entry.getValue().getCard().setCanMove(false);
-                    entry.getValue().getCard().setCanAttack(false);
-                }
-
-
-    }
-
-    private void activeDisarmBuffs(HashMap<Integer, Cell> cards) {
-        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
-            for (Buff buff : entry.getValue().getCard().getBuffs())
-                if (buff.getType() == BuffType.DISARM)
-                    entry.getValue().getCard().setCanCounterAttack(false);
-    }
-
-    private void activePoisonBuffs(HashMap<Integer, Cell> cards) {
-        for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet())
-            for (Buff buff : entry.getValue().getCard().getBuffs())
-                if (buff.getType() == BuffType.POISON)
-                    entry.getValue().getCard().decrementOfHp(1);
-    }
-
-    private void activePowerBuffs(Card card) {
-        for (Buff buff : card.getBuffs())
-            if (buff.getType() == BuffType.HEALTH_POWER && !buff.isStarted()) {
-                card.incrementOfHp(buff.getBuffPower());
-                buff.setStarted(true);
-
-            } else if (buff.getType() == BuffType.ATTACK_POWER && !buff.isStarted()) {
-                card.incrementOfAp(buff.getBuffPower());
-                buff.setStarted(true);
-            }
-    }
-
-    private void activeWeaknessBuffs(Card card) {
-        for (Buff buff : card.getBuffs())
-            if (buff.getType() == BuffType.ATTACK_WEAKNESS && !buff.isStarted()) {
-                card.decrementOfAp(buff.getBuffPower());
-                buff.setStarted(true);
-
-            } else if (buff.getType() == BuffType.HEALTH_WEAKNESS && !buff.isStarted()) {
-                card.decrementOfAp(buff.getBuffPower());
-                buff.setStarted(true);
-            }
-    }
 
     //--------------------------------------------------------------------------------
 
     private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard, int player) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCard().getHP() <= 0) {
+                for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
+                    for (Cell cell : buff.getSpecialPowerTargetCells(entry.getValue(), null,
+                            getMyTeam(entry.getValue()),
+                            getOppTeam(entry.getValue()), map)) {
+                        Buff newBuff = buff.copy();
+                        newBuff.setCard(cell.getCard());
+                        Buff.addBuff(newBuff);
+                    }
+                }
+                Buff.updateBuffs();
                 if (entry.getValue().getCard().getCardType().equals("hero")) {
                     winner = player;
                     isGameEnd = true;
@@ -755,6 +728,20 @@ public class Game {
                 cells.remove(entry);
             }
         }
+    }
+
+    private HashMap<Integer, Cell> getMyTeam(Cell cell){
+        if (map.getFirstPlayerCellCard().containsValue(cell))
+            return map.getFirstPlayerCellCard();
+        else
+            return map.getSecondPlayerCellCard();
+    }
+
+    private HashMap<Integer, Cell> getOppTeam(Cell cell){
+        if (map.getFirstPlayerCellCard().containsValue(cell))
+            return map.getSecondPlayerCellCard();
+        else
+            return map.getFirstPlayerCellCard();
     }
 
     public boolean haveEnoughMana(String cardName) {
@@ -810,7 +797,19 @@ public class Game {
         } else return nextSecondPlayerCard.getCardInfoInGame();
     }
 
+    public void useSP(int x, int y){
+
+    }
+
 }
+
+
+
+
+
+
+
+
 
 
 

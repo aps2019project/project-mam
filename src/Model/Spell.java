@@ -14,7 +14,6 @@ public class Spell extends Card{
 
     public Spell(String name, int price, int MP, ArrayList<Buff> buffs) {
         super(name, MP, price);
-        this.setBuffs(buffs);
     }
 
     public Spell(String name, int price,int MP) {
@@ -36,7 +35,7 @@ public class Spell extends Card{
 
     @Override
     public Card copyCard() {
-        Card newCard = new Spell(this.getName(), this.getPrice(), this.getMP(), this.getBuffs());
+        Card newCard = new Spell(this.getName(), this.getPrice(), this.getMP(), this.getSpecialPower());
         return newCard;
     }
 

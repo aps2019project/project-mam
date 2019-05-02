@@ -10,7 +10,7 @@ public class Card {
     private int price;
     private String name;
     private String desc;
-    private ArrayList<Buff> buffs = new ArrayList<>();
+    private ArrayList<Buff> specialPower = new ArrayList<>();
 
     Card() {
     }
@@ -22,8 +22,8 @@ public class Card {
         this.desc = desc;
     }
 
-    public void setBuffs(ArrayList<Buff> buffs) {
-        this.buffs = buffs;
+    public void setSpecialPower(ArrayList<Buff> specialPower) {
+        this.specialPower = specialPower;
     }
 
     Card(String name, int MP, int price) {
@@ -80,9 +80,6 @@ public class Card {
     }
 
 
-    public ArrayList<Buff> getBuffs() {
-        return buffs;
-    }
 
     public String getCardType() {
         return null;
@@ -101,7 +98,7 @@ public class Card {
 
 
     public ArrayList<Buff> getSpecialPower(){
-        return null;
+        return specialPower;
     }
 
     public boolean isCanMove() {
@@ -157,10 +154,9 @@ public class Card {
 
     }
 
-    public void addBuff(Buff buff) {
-        buffs.add(buff);
+    public void addBuff(Buff buff){
+        specialPower.add(buff);
     }
-
 
     public String getImportantInfo(){
         return "card";
@@ -174,4 +170,12 @@ public class Card {
    public String getCardInfoInGame(){
         return null;
    }
+
+    public int getBASE_COOL_DOWN() {
+        return -1;
+    }
+
+    public int getCooldown(){
+        return -1;
+    }
 }

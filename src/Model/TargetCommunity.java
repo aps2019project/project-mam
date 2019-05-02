@@ -15,5 +15,6 @@ public enum TargetCommunity {
     THREE_IN_THREE,
     OWN,
     ALL_ENEMY_FORCES_IN_ROW,
+    ALL_ENEMY_FORCES_CLOSE,
     NONE,
 }
