@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Buffs.Buff;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -127,7 +129,29 @@ public class Minion extends Card {
         return SPActivationTime;
     }
 
+    public void setAP(int AP) {
+        this.AP = AP;
+    }
 
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public void setTargetCommunity(int targetCommunity) {
+        TargetCommunity = targetCommunity;
+    }
+
+    public void setMinionClass(ImpactType minionClass) {
+        this.minionClass = minionClass;
+    }
+
+    public void setSPActivationTime(Model.SPActivationTime SPActivationTime) {
+        this.SPActivationTime = SPActivationTime;
+    }
+
+    public void setSpecialPower(ArrayList<Buff> specialPower) {
+        this.specialPower = specialPower;
+    }
 
     public void addBuffToSpecialPower(Buff buff){
         specialPower.add(buff);

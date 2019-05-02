@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Buffs.Buff;
+
 import java.util.ArrayList;
 
 public class Card {
@@ -64,6 +66,19 @@ public class Card {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public void setMP(int MP) {
+        this.MP = MP;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public ArrayList<Buff> getBuffs() {
         return buffs;
