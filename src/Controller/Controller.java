@@ -21,7 +21,7 @@ public class Controller {
 
     private View view = View.getInstance();
     private Shop shop = Shop.getInstance();
-   // private Collection collection = new Collection();
+    // private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
     private Game game;
@@ -30,7 +30,9 @@ public class Controller {
         this.game = game;
     }
 
-    public Game getGame() { return game; }
+    public Game getGame() {
+        return game;
+    }
 
     public User getFirstUser() {
         return user;
@@ -288,7 +290,7 @@ public class Controller {
                 ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
                 view.printError(ErrorType.SUCCESSFUL_MOVING_CARD);
             } else view.printError(ErrorType.INVALID_TARGET);
-        }else view.printError(ErrorType.CARD_CAN_NOT_MOVE);
+        } else view.printError(ErrorType.CARD_CAN_NOT_MOVE);
     }
 
     public void insertCard(String cardName, String x, String y) {
@@ -317,12 +319,12 @@ public class Controller {
 
     public void attack(String oppCardId) {
         if (game.getCurrentCard().isCanAttack()) {
-            if (game.isOppAvailableForAttack(Integer.parseInt(oppCardId), game.getCurrentCard().getId())) {
-                if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
+            if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
+                if (game.isOppAvailableForAttack(Integer.parseInt(oppCardId), game.getCurrentCard().getId())) {
                     game.attack(Integer.parseInt(oppCardId));
                     view.printError(ErrorType.SUCCESSFUL_ATTACK);
-                } else view.printError(ErrorType.INVALID_CARD_ID);
-            } else view.printError(ErrorType.UNAVAILABLE_OPP_ATTACK);
+                } else view.printError(ErrorType.UNAVAILABLE_OPP_ATTACK);
+            } else view.printError(ErrorType.INVALID_CARD_ID);
         } else {
             StringBuilder message = new StringBuilder();
             message.append("card with ").append(game.getCurrentCard().getId()).append(" can't attack");
