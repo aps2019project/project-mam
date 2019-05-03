@@ -44,6 +44,14 @@ public class Cell {
         this.flagCount = flagCount;
     }
 
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     public void setCellEffect(CellEffect cellEffect) {
         this.cellEffect = cellEffect;
     }

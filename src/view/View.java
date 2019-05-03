@@ -35,10 +35,10 @@ public class View {
                     break;
                 currentPage.showMenu();
             }
-           /* if (!BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai"))
+            /*if (!BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai"))
                 currentPage.handleCommand(getNewCommand());
             else currentPage.handleCommand(getNewAiCommand());*/
-           currentPage.handleCommand(getNewCommand());
+            currentPage.handleCommand(getNewCommand());
         }
     }
 

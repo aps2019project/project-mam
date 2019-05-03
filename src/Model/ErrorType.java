@@ -38,6 +38,7 @@ public enum ErrorType {
     INVALID_CARD_ID("invalid card id"),
     UNAVAILABLE_OPP_ATTACK("opponent minion is unavailable for attack"),
     CARD_CAN_NOT_ATTACK(""),
+    CARD_CAN_NOT_MOVE("card can't move!"),
 
 
     ;

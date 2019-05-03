@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.tan;
 
 public class Map {
     private static final int ROW_NUMBER = 5;
     private static final int COLUMN_NUMBER = 9;
     private Cell[][] cells;
-    private HashMap<Integer, Cell> firstPlayerCellCard;
-    private HashMap<Integer, Cell> secondPlayerCellCard;
+    private HashMap<Integer, Cell> firstPlayerCellCard = new HashMap<>();
+    private HashMap<Integer, Cell> secondPlayerCellCard = new HashMap<>();
     private ArrayList<Cell> flags = new ArrayList<>();
 
 
     public Map() {
         cells = new Cell[ROW_NUMBER][COLUMN_NUMBER];
+        for (int i = 0 ; i < ROW_NUMBER; i++)
+            for (int j = 0; j < COLUMN_NUMBER; j++)
+                cells[i][j] = new Cell(i, j, 0, CellEffect.NONE, null);
     }
 
     public Cell[][] getCells() {
@@ -47,7 +51,13 @@ public class Map {
     }
 
     public boolean isCellEmpty(int row, int column) {
-        return cells[row][column].getCard() == null;
+        try {
+            if (cells[row][column].getCard() == null)
+                return true;
+        }catch (NullPointerException e){
+            return true;
+        }
+        return false;
     }
 
 

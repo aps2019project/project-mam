@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Buffs.Buff;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,7 +14,6 @@ public class Minion extends Card {
     private int TargetCommunity;
     private ImpactType minionClass;
     private SPActivationTime SPActivationTime;
-    private ArrayList<Buff> specialPower = new ArrayList<>();
     private boolean canMove = true;
     private boolean canAttack = true;
     private boolean canCounterAttack = true;
@@ -26,7 +27,6 @@ public class Minion extends Card {
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
-        this.specialPower = buffs;
     }
 
     public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
@@ -86,13 +86,26 @@ public class Minion extends Card {
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();
-        info.append("Type : Minion - Name : ").append(getName()).append(" - Class : ").append(getCardClass());
+        info.append("Type : Minion - Name : ").append(getName()).append(" ID : ").append(getId()).append(" - Class : ").append(getCardClass());
         info.append(" - AP : ").append(getAP()).append(" - HP : ").append(getHP()).append(" - MP : ").append(getMP());
         info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
         return info.toString();
     }
 
+    @Override
+    public int getMP() {
+        return super.getMP();
+    }
 
+    @Override
+    public int getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public ArrayList<Buff> getSpecialPower() {
+        return super.getSpecialPower();
+    }
 
     public int getAP() {
         return AP;
@@ -114,26 +127,31 @@ public class Minion extends Card {
         return SPActivationTime;
     }
 
-
-
-    public void addBuffToSpecialPower(Buff buff){
-        specialPower.add(buff);
+    public void setAP(int AP) {
+        this.AP = AP;
     }
 
-    public void updateBuffList() {
-        Iterator itr = getBuffs().iterator();
-        while (itr.hasNext()) {
-            Buff temp = (Buff) itr;
-            if (temp.getTime() == 0)
-                itr.remove();
-        }
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public void setTargetCommunity(int targetCommunity) {
+        TargetCommunity = targetCommunity;
+    }
+
+    public void setMinionClass(ImpactType minionClass) {
+        this.minionClass = minionClass;
+    }
+
+    public void setSPActivationTime(Model.SPActivationTime SPActivationTime) {
+        this.SPActivationTime = SPActivationTime;
     }
 
     @Override
     public Card copyCard() {
         Card newCard = new Minion(this.getName(), this.getPrice(), this.getMP(), this.getHP(),
                 this.getAP(), this.getCardClass(), this.getTargetCommunity(),
-                this.getDesc(), this.getSPActivationTime(), this.specialPower);
+                this.getDesc(), this.getSPActivationTime(), this.getSpecialPower());
         return newCard;
 
     }
@@ -158,11 +176,12 @@ public class Minion extends Card {
     }
 
     public void incrementOfHp(int number) {
-        this.HP -= number;
+        this.HP += number;
     }
 
     public void decrementOfHp(int number) {
-        this.HP += number;
+        this.HP -= number;
+        Buff.activeholyBuff(this);
     }
 
     public void incrementOfAp(int number) {

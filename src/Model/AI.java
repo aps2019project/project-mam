@@ -9,7 +9,7 @@ import static java.lang.Math.abs;
 public class AI {
 
 
-    private Game game;
+    private Game game;// = Controller.getInstance().getGame();
     private static final User ai = new User("AI", "0");
 
     public static User getAI() {
@@ -17,10 +17,6 @@ public class AI {
     }
 
     private String command = null;
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     private ArrayList<Card> selectedCard;
 

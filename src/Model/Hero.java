@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Buffs.Buff;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,8 +12,8 @@ public class Hero extends Card {
     private int HP;
     private int TargetCommunity;
     private int cooldown;
+    private final int BASE_COOL_DOWN;
     private ImpactType heroClass;
-    private ArrayList<Buff> specialPower = new ArrayList<>();
     private boolean canMove = true;
     private boolean canAttack = true;
     private boolean canCounterAttack = true;
@@ -21,9 +23,14 @@ public class Hero extends Card {
         super(name, MP, price);
         this.AP = AP;
         this.HP = HP;
+        BASE_COOL_DOWN = cooldown;
         TargetCommunity = targetCommunity;
         this.cooldown = cooldown;
         this.heroClass = heroClass;
+    }
+
+    public int getBASE_COOL_DOWN() {
+        return BASE_COOL_DOWN;
     }
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
@@ -33,9 +40,9 @@ public class Hero extends Card {
         this.HP = HP;
         this.TargetCommunity = targetCommunity;
         this.cooldown = cooldown;
+        BASE_COOL_DOWN = cooldown;
         this.heroClass = heroClass;
         this.setDesc(desc);
-        this.specialPower = buffs;
     }
 
     @Override
@@ -63,8 +70,15 @@ public class Hero extends Card {
         return heroClass;
     }
 
-    public void addBuffToSpecialPower(Buff buff){
-        specialPower.add(buff);
+
+    @Override
+    public ArrayList<Buff> getSpecialPower() {
+        return super.getSpecialPower();
+    }
+
+    @Override
+    public SPActivationTime getSPActivationTime() {
+        return super.getSPActivationTime();
     }
 
     public int getRow(){
@@ -104,11 +118,12 @@ public class Hero extends Card {
     }
 
     public void incrementOfHp(int number){
-        this.HP -= number;
+        this.HP += number;
     }
 
     public void decrementOfHp(int number){
-        this.HP += number;
+        this.HP -= number;
+        Buff.activeholyBuff(this);
     }
 
     public void incrementOfAp(int number){
@@ -123,15 +138,6 @@ public class Hero extends Card {
         return canCounterAttack;
     }
 
-    public void updateBuffList(){
-        Iterator itr = getBuffs().iterator();
-        while (itr.hasNext()){
-            Buff temp = (Buff) itr;
-            if (temp.getTime() == 0)
-                itr.remove();
-        }
-    }
-
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Name : ").append(getName()).append(" - AP : ").append(getAP());
@@ -143,7 +149,7 @@ public class Hero extends Card {
     @Override
     public Card copyCard() {
         Card newCard = new Hero(this.getName(), this.getPrice(), this.HP, this.AP, this.heroClass, this.TargetCommunity,
-                this.HP, this.cooldown, this.getDesc(), this.specialPower);
+                this.HP, this.cooldown, this.getDesc(), this.getSpecialPower());
         return newCard;
     }
 
@@ -152,6 +158,14 @@ public class Hero extends Card {
         StringBuilder info = new StringBuilder();
         info.append("Hero:").append("\nName: ").append(this.getName());
         info.append("\nCost: ").append(this.getPrice()).append("\nDesc: ").append(this.getDesc());
+        return info.toString();
+    }
+
+    @Override
+    public String getImportantInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
+                append(getRow()).append(", ").append(getColumn()).append("),  power : ").append(getAP());
         return info.toString();
     }
 }

@@ -1,4 +1,6 @@
-package Model;
+package Model.Buffs;
+
+import Model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,16 +9,31 @@ import java.util.Map;
 import static Model.TargetCommunity.*;
 
 public class Buff {
+    private static ArrayList<Buff> buffs;
     private BuffType type;
-    private int time;
+    private int remainTime;
     private int buffPower;
-    private boolean isStarted;
+    private int activationTime;
+    private boolean isStarted = false;
+    private boolean isUsed = false;
     private TargetCommunity targetCommunity;
+    private Card card;
 
     public Buff(BuffType type, int time, int buffPower, Model.TargetCommunity targetCommunity) {
         this.type = type;
-        this.time = time;
+        this.remainTime = time;
         this.buffPower = buffPower;
+        this.targetCommunity = targetCommunity;
+    }
+
+
+    public Buff(BuffType type, int remainTime, int buffPower, int activationTime,
+                boolean isStarted, TargetCommunity targetCommunity) {
+        this.type = type;
+        this.remainTime = remainTime;
+        this.buffPower = buffPower;
+        this.activationTime = activationTime;
+        this.isStarted = isStarted;
         this.targetCommunity = targetCommunity;
     }
 
@@ -33,7 +50,7 @@ public class Buff {
     }
 
     public int getTime() {
-        return time;
+        return remainTime;
     }
 
     public int getBuffPower() {
@@ -45,8 +62,46 @@ public class Buff {
     }
 
     public void decrementOfTime() {
-        time--;
+        remainTime--;
     }
+
+    public static void addBuff(Buff buff){
+        buffs.add(buff);
+    }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public static ArrayList<Buff> getBuffs() {
+        return buffs;
+    }
+
+    public int getRemainTime() {
+        return remainTime;
+    }
+
+    public int getActivationTime() {
+        return activationTime;
+    }
+
+    public Buff copy(){
+        return null;
+    }
+
+
 
     //-----------------------------effect-----------------------------
 
@@ -76,8 +131,26 @@ public class Buff {
         }
     }
 
-    public void holyBuff(Card card) {
-        card.incrementOfHp(buffPower);
+    public static void activeholyBuff(Card card) {
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof Holy)
+                buff.doEffect();
+        }
+    }
+
+    public static void activeStunBuff(Card card){
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof Stun){
+                buff.doEffect();
+            }
+        }
+    }
+
+    public static void activeDisarmBuff(Card card){
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof  Disarm)
+                buff.doEffect();
+        }
     }
 
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
@@ -129,10 +202,56 @@ public class Buff {
                     if (entry.getValue().getColumn() == attacker.getColumn())
                         cells.add(entry.getValue());
                     break;
+            case ALL_ENEMY_FORCES_CLOSE:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
+                    if (map.getManhatanDistance(entry.getValue(), attacker) == 1 ||
+                            (map.getManhatanDistance(entry.getValue(), attacker) == 2 && entry.getValue().getRow() != attacker
+                            .getRow() && entry.getValue().getColumn() != attacker.getColumn())){
+                        cells.add(entry.getValue());
+                    }
+                }
+                break;
         }
         return cells;
     }
 
+    public static void doEffects(){
+        for (Buff buff : buffs) {
+            if (buff.isUsed() && buff.isStarted()){
+                buff.doEffect();
+                buff.setUsed(true);
+            }
+        }
+    }
+    public static void updateBuffs(){
+        for (Buff buff : buffs) {
+            buff.setUsed(false);
+            buff.decrementOfTime();
+            if (buff.getTime() == 0){
+                buff.removeBuff();
+            }
+        }
+    }
+
+    public static void activePassiveBuff(HashMap<Integer, Cell> cells){
+        for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
+            if (entry.getValue().getCard().getSPActivationTime() == SPActivationTime.PASSIVE){
+                for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
+                    Buff newBuff = buff.copy();
+                    newBuff.setCard(entry.getValue().getCard());
+                    Buff.addBuff(newBuff);
+                }
+            }
+        }
+    }
+
+    public void doEffect(){}
+    public void doEffect(Card card){}
+    public void doEffect(Cell cell){}
+    public void addBuff(Cell cell){}
+    public void removeBuff(){
+        buffs.remove(this);
+    }
 }
 
 

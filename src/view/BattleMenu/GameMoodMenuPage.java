@@ -24,18 +24,19 @@ public class GameMoodMenuPage extends ConsolePage {
                     || command.split(" ")[1].equalsIgnoreCase("multiplayer")) {
                 switch (command.split(" ")[3]) {
                     case "1":
-                        view.getPages().push(new MainBattleMenuPage());
+                       // controller.selectMainDeck();
                         BattleMenuPage.setGameMood("1");
+                        view.getPages().push(new MainBattleMenuPage());
                         break;
                     case "2":
-                        view.getPages().push(new MainBattleMenuPage());
                         BattleMenuPage.setGameMood("2");
                         BattleMenuPage.setFlags(1);
+                        view.getPages().push(new MainBattleMenuPage());
                         break;
                     case "3":
-                        view.getPages().push(new MainBattleMenuPage());
                         BattleMenuPage.setGameMood("3");
                         BattleMenuPage.setFlags(Integer.parseInt(command.split(" ")[4]));
+                        view.getPages().push(new MainBattleMenuPage());
                         break;
                     default:
                         view.printError(ErrorType.INVALID_MOOD_NUM);

@@ -4,8 +4,8 @@ import Controller.Controller;
 import Model.ErrorType;
 
 public class AccountMenuPage extends ConsolePage{
-    Controller controller = Controller.getInstance();
-    View view = View.getInstance();
+    private Controller controller = Controller.getInstance();
+    private View view = View.getInstance();
 
     public void help(){
         view.showHelpForAccountMenu();

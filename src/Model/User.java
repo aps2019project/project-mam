@@ -24,7 +24,7 @@ public class User {
         collection = new Collection();
         lastGames = new ArrayList<>();
         idCounter = 1;
-
+        User.addUser(this);
 
        // this.numberOfWin = Integer.parseInt(password);
     }
