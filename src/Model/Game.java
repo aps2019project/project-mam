@@ -915,7 +915,16 @@ public class Game {
     }
 
     public void selectCollectableItem(int id){
-
+        if (getTurn() % 2 == 1)
+            for (CollectableItem item : player1Collectable) {
+                if (item.getId() == id)
+                    currentItem = item;
+            }
+        else
+            for (CollectableItem item : player2Collectable) {
+                if (item.getId() == id)
+                    currentItem = item;
+            }
     }
 
     public String showCollectables(){
