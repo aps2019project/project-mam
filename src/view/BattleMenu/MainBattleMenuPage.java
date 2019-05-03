@@ -23,6 +23,11 @@ public class MainBattleMenuPage extends ConsolePage {
 
     @Override
     public void handleCommand(String command) {
+        if (controller.isEnded()){
+            controller.showEnd();
+            view.back();
+        }
+
         if (command.matches("game info")) {
             controller.showGameInfo();
         } else if (command.matches("show my minions")) {

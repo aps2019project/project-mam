@@ -334,4 +334,13 @@ public class Controller {
         }
     }
 
+    public boolean isEnded(){
+        return game.isGameEnd();
+    }
+
+    public void showEnd(){
+        view.show("ended");
+        view.show(String.valueOf(game.getWinner()));
+    }
+
 }

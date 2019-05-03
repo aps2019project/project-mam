@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static Model.TargetCommunity.*;
-
 public class Buff {
     private static ArrayList<Buff> buffs;
     private BuffType type;
@@ -111,6 +109,7 @@ public class Buff {
     }
 
     public static void activeholyBuff(Card card) {
+        if (buffs != null)
         for (Buff buff : buffs) {
             if (buff.getCard().equals(card) && buff instanceof Holy)
                 buff.doEffect();
@@ -203,6 +202,7 @@ public class Buff {
         }
     }
     public static void updateBuffs(){
+        if (buffs != null)
         for (Buff buff : buffs) {
             buff.setUsed(false);
             buff.decrementOfTime();

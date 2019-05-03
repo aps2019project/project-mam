@@ -39,5 +39,14 @@ public class Item {
         buffs.add(buff);
     }
 
-    public String getInfo() {return null;}
+    public String getInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("name : ").append(name).append(" id : ").append(id).append(" desc : ").append(desc);
+        return info.toString();
+    }
 }
+
+
+
+
+

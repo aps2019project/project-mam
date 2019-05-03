@@ -51,6 +51,7 @@ public class Game {
 
     private ArrayList<CollectableItem> player1Collectable = new ArrayList<>();
     private ArrayList<CollectableItem> player2Collectable = new ArrayList<>();
+    private Item currentItem;
 
     private boolean isGameEnd = false;
     private int winner;
@@ -85,9 +86,6 @@ public class Game {
         currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
-
-        setPlayersHand();
-
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         setPlayersHand();
@@ -208,14 +206,34 @@ public class Game {
 
     }
 
+    public void updateHavingFlagCount() {
+        if (havingFlagCount != 0)
+            havingFlagCount++;
+        if (mode.equals(SECOND_MODE) && (getPlayer1FlagCount() == 1 ||
+                getPlayer2FlagCount() == 1) && havingFlagCount == 0)
+            havingFlagCount = 1;
+    }
+
     public int getWinner() {
         return winner;
     }
 
     public void checkGameResult() {
-        if (mode.equals("2")) {
+        if (mode.equals(SECOND_MODE)) {
+            if (havingFlagCount == 6) {
+                for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
+                    if (entry.getValue().getFlagCount() == 1) {
+                        winner = 1;
+                        isGameEnd = true;
+                    }
+                }
+                if (!isGameEnd) {
+                    winner = 2;
+                    isGameEnd = true;
+                }
+            }
 
-        } else if (mode.equals("3")) {
+        } else if (mode.equals(THIRD_MODE)) {
             if (getPlayer1FlagCount() > flagCount / 2) {
                 isGameEnd = true;
                 winner = 1;
@@ -268,8 +286,10 @@ public class Game {
         currentCard.setRow(x);
         currentCard.setColumn(y);
         if (turn % 2 == 1) {
-            if (map.getCells()[x][y].haveCollectableItem())
+            if (map.getCells()[x][y].haveCollectableItem()) {
                 player1Collectable.add(map.getCells()[x][y].getCollectableItem());
+                map.getCells()[x][y].setCollectableItem(null);
+            }
             map.getCells()[currentCard.getRow()][currentCard.getColumn()].setCard(null);
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getFirstPlayerCellCard().get(currentCard.getId()).getFlagCount());
@@ -277,8 +297,10 @@ public class Game {
             map.getFirstPlayerCellCard().get(currentCard.getId()).setRow(x);
             map.getFirstPlayerCellCard().get(currentCard.getId()).setColumn(y);
         } else {
-            if (map.getCells()[x][y].haveCollectableItem())
+            if (map.getCells()[x][y].haveCollectableItem()) {
                 player2Collectable.add(map.getCells()[x][y].getCollectableItem());
+                map.getCells()[x][y].setCollectableItem(null);
+            }
             map.getCells()[currentCard.getRow()][currentCard.getColumn()].setCard(null);
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getSecondPlayerCellCard().get(currentCard.getId()).getFlagCount());
@@ -548,6 +570,9 @@ public class Game {
                     map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
                     secondPlayerMana -= entry.getValue().getMP();
                 }
+                if (map.getCells()[x][y].getFlagCount() != 0) {
+
+                }
                 currentCard = entry.getValue();
                 Hand.remove(entry.getValue().getId());
                 break;
@@ -573,7 +598,9 @@ public class Game {
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
         }
+        updateHavingFlagCount();
         changeTurn();
+        checkGameResult();
         activePassiveBuffs();
     }
 
@@ -596,7 +623,7 @@ public class Game {
                     newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
                     Buff.addBuff(newBuff);
                 }
-                if (currentCard.getName().equals("zahak")){
+                if (currentCard.getName().equals("zahak")) {
                     if (getTurn() % 2 == 1)
                         firstPlayerMana -= currentCard.getMP();
                     else
@@ -733,10 +760,13 @@ public class Game {
                     }
                 }
                 Buff.updateBuffs();
-                if (entry.getValue().getCard().getCardType().equals("hero")) {
+                if (entry.getValue().getCard() instanceof Hero) {
                     winner = player;
                     isGameEnd = true;
+                    break;
                 }
+                if (entry.getValue().getFlagCount() != 0)
+                    havingFlagCount = 0;
                 graveYard.add(entry.getValue().getCard());
                 map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
                 cells.remove(entry);
@@ -844,14 +874,53 @@ public class Game {
         return null;
     }
 
-    public void addCollectable(CollectableItem item){
+    public void addCollectable(CollectableItem item) {
         if (getTurn() % 2 == 1)
             player1Collectable.add(item);
         else
             player2Collectable.add(item);
     }
 
+    //-------------------------grave Yard ----------------------
 
+    public String getInfoINGraveYard(int cardId) {
+        if (getTurn() % 2 == 1) {
+            for (Card card : firstPlayerGraveYard) {
+                if (card.getId() == cardId)
+                    return card.getCardInfoInGame();
+            }
+        } else
+            for (Card card : secondPlayerGraveYard) {
+                if (card.getId() == cardId)
+                    return card.getCardInfoInGame();
+            }
+        return " ";
+    }
+
+    public String showInGraveYard() {
+        StringBuilder info = new StringBuilder();
+        if (getTurn() % 2 == 1)
+            for (Card card : firstPlayerGraveYard) {
+                info.append(card.getCardInfoInGame()).append("\n");
+            }
+        else
+            for (Card card : secondPlayerGraveYard) {
+                info.append(card.getCardInfoInGame()).append("\n");
+            }
+        return info.toString();
+    }
+
+    public String getItemInfo(){
+        return currentItem.getInfo();
+    }
+
+    public void selectCollectableItem(int id){
+
+    }
+
+    public String showCollectables(){
+        return " ";
+    }
 
 
 }
