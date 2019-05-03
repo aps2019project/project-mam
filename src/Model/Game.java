@@ -5,8 +5,6 @@ import Model.Buffs.Buff;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.regex.Pattern;
-
 
 import static java.lang.Math.abs;
 
@@ -84,6 +82,9 @@ public class Game {
         currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
+
+        setPlayersHand();
+
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         setPlayersHand();
@@ -581,7 +582,8 @@ public class Game {
         currentCard.setCanMove(false);
         if (turn % 2 == 1) {
             map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
-            if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK) {
+            if ((currentCard instanceof Minion && currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)
+                    || currentCard.getName().equals("zahak")) {
                 for (Buff buff : currentCard.getSpecialPower()) {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
@@ -622,7 +624,7 @@ public class Game {
         }
         if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
             return true;
-        if (attacker.getCardClass() == ImpactType.RANGED && distance > 1)
+        if (attacker.getCardClass() == ImpactType.RANGED && distance <= attacker.getTargetCommunity())
             return true;
         if (attacker.getCardClass() == ImpactType.HYBRID)
             return true;
@@ -797,7 +799,8 @@ public class Game {
     }
 
     public void useSP(int x, int y) {
-        if (currentCard.getSPActivationTime() == SPActivationTime.ON_SPAWN) {
+        if ((currentCard instanceof Minion && currentCard.getSPActivationTime() == SPActivationTime.ON_SPAWN) ||
+                (currentCard instanceof Hero && currentCard.getCooldown() == 0)) {
             Card target = map.getCells()[x][y].getCard();
             for (Buff buff : currentCard.getSpecialPower()) {
                 Buff newBuff = buff.copy();
@@ -805,8 +808,24 @@ public class Game {
                 Buff.addBuff(newBuff);
             }
             Buff.updateBuffs();
+            if (currentCard instanceof Hero)
+                currentCard.setCooldown(currentCard.getBASE_COOL_DOWN());
         }
     }
+
+    public void updateCoolDown(Card hero) {
+        if (hero.getCooldown() != 0)
+            hero.decrementOfCoolDown(1);
+    }
+
+    public Card getHero(HashMap<Integer, Cell> cell) {
+        for (java.util.Map.Entry<Integer, Cell> entry : cell.entrySet()) {
+            if (entry.getValue().getCard() instanceof Hero)
+                return entry.getValue().getCard();
+        }
+        return null;
+    }
+
 
 }
 

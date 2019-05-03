@@ -16,6 +16,7 @@ public class Buff {
     private int activationTime;
     private boolean isStarted = false;
     private boolean isUsed = false;
+    private boolean isContinous = false;
     private TargetCommunity targetCommunity;
     private Card card;
 
@@ -43,6 +44,10 @@ public class Buff {
 
     public void setStarted(boolean started) {
         isStarted = started;
+    }
+
+    public void setContinous(boolean continous) {
+        isContinous = continous;
     }
 
     public BuffType getType() {
@@ -93,42 +98,16 @@ public class Buff {
         return remainTime;
     }
 
+    public boolean isContinous() {
+        return isContinous;
+    }
+
     public int getActivationTime() {
         return activationTime;
     }
 
     public Buff copy(){
         return null;
-    }
-
-
-
-    //-----------------------------effect-----------------------------
-
-    public void doEffect(Card card) {
-        switch (type) {
-            case POISON:
-                card.decrementOfHp(buffPower);
-                break;
-            case ATTACK_WEAKNESS:
-                card.decrementOfAp(buffPower);
-                break;
-            case HEALTH_WEAKNESS:
-                card.decrementOfHp(buffPower);
-            case STUN:
-                card.setCanMove(false);
-                card.setCanAttack(false);
-                break;
-            case DISARM:
-                card.setCanCounterAttack(false);
-                break;
-            case ATTACK_POWER:
-                card.incrementOfAp(buffPower);
-                break;
-            case HEALTH_POWER:
-                card.incrementOfHp(buffPower);
-                break;
-        }
     }
 
     public static void activeholyBuff(Card card) {
@@ -246,7 +225,6 @@ public class Buff {
     }
 
     public void doEffect(){}
-    public void doEffect(Card card){}
     public void doEffect(Cell cell){}
     public void addBuff(Cell cell){}
     public void removeBuff(){

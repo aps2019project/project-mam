@@ -4,7 +4,23 @@ import Model.BuffType;
 import Model.TargetCommunity;
 
 public class DestroyNegatives extends Buff {
-    public DestroyNegatives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted, TargetCommunity targetCommunity) {
+    public DestroyNegatives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
+                            TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
+    }
+
+    @Override
+    public Buff copy() {
+        return new DestroyNegatives(BuffType.REMOVE_INSIDERS_BUFFS, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(),
+                this.isStarted(), this.getTargetCommunity());
+    }
+
+    @Override
+    public void doEffect() {
+        for (Buff buff : Buff.getBuffs()) {
+            if (buff.getCard().equals(getCard()) && !buff.isContinous()){
+                buff.removeBuff();
+            }
+        }
     }
 }

@@ -97,6 +97,14 @@ public class Hero extends Card {
         return canAttack;
     }
 
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    public void decrementOfCoolDown(int number){
+        cooldown -= number;
+    }
+
     public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }

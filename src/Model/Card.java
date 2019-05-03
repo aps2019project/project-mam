@@ -178,4 +178,10 @@ public class Card {
     public int getCooldown(){
         return -1;
     }
+
+    public void setCooldown(int cooldown) {
+    }
+
+    public void decrementOfCoolDown(int number){
+    }
 }
