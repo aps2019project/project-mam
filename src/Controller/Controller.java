@@ -19,12 +19,13 @@ public class Controller {
         return CONTROLLER;
     }
 
-    private View view = View.getInstance();
+
     private Shop shop = Shop.getInstance();
     //private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
     private Game game;
+    private View view = View.getInstance();
 
     public void setGame(Game game) {
         this.game = game;

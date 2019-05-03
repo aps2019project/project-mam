@@ -82,6 +82,7 @@ public class Game {
         currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
+        setPlayersHand();
     }
 
     public Map getMap() {
