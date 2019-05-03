@@ -13,7 +13,8 @@ public class DestroyPositives extends Buff {
     @Override
     public void doEffect() {
         for (Buff buff : Buff.getBuffs()) {
-            if (buff.getCard().equals(getCard()) && !buff.isContinous())
+            if (buff.getCard().equals(getCard()) && !buff.isContinous() && buff.getType() == BuffType.ATTACK_POWER &&
+            buff.getType() == BuffType.HOLY && buff.getType() == BuffType.HEALTH_POWER)
                 buff.removeBuff();
         }
     }

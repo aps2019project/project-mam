@@ -18,7 +18,7 @@ public class Game {
     private static final int BASIC_FLAG_COUNT = 7;
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
-    private static int basicMana = 10;
+    private static int basicMana = 2;
     private Map map = new Map();
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
@@ -48,6 +48,9 @@ public class Game {
     private int currentTurnMana;
     private int firstPlayerMana;
     private int secondPlayerMana;
+
+    private ArrayList<CollectableItem> player1Collectable = new ArrayList<>();
+    private ArrayList<CollectableItem> player2Collectable = new ArrayList<>();
 
     private boolean isGameEnd = false;
     private int winner;
@@ -265,21 +268,21 @@ public class Game {
         currentCard.setRow(x);
         currentCard.setColumn(y);
         if (turn % 2 == 1) {
+            if (map.getCells()[x][y].haveCollectableItem())
+                player1Collectable.add(map.getCells()[x][y].getCollectableItem());
             map.getCells()[currentCard.getRow()][currentCard.getColumn()].setCard(null);
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getFirstPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getFirstPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
-            /*map.getFirstPlayerCellCard().get(currentCard.getId()).getCard().setRow(x);
-            map.getFirstPlayerCellCard().get(currentCard.getId()).getCard().setColumn(y);*/
             map.getFirstPlayerCellCard().get(currentCard.getId()).setRow(x);
             map.getFirstPlayerCellCard().get(currentCard.getId()).setColumn(y);
         } else {
+            if (map.getCells()[x][y].haveCollectableItem())
+                player2Collectable.add(map.getCells()[x][y].getCollectableItem());
             map.getCells()[currentCard.getRow()][currentCard.getColumn()].setCard(null);
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getSecondPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getSecondPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
-            /*map.getSecondPlayerCellCard().get(currentCard.getId()).getCard().setRow(x);
-            map.getSecondPlayerCellCard().get(currentCard.getId()).getCard().setColumn(y);*/
             map.getSecondPlayerCellCard().get(currentCard.getId()).setRow(x);
             map.getSecondPlayerCellCard().get(currentCard.getId()).setColumn(y);
         }
@@ -535,9 +538,13 @@ public class Game {
                 entry.getValue().setRow(x);
                 entry.getValue().setColumn(y);
                 if (turn % 2 == 1) {
+                    if (map.getCells()[x][y].haveCollectableItem())
+                        player1Collectable.add(map.getCells()[x][y].getCollectableItem());
                     map.getFirstPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
                     firstPlayerMana -= entry.getValue().getMP();
                 } else {
+                    if (map.getCells()[x][y].haveCollectableItem())
+                        player2Collectable.add(map.getCells()[x][y].getCollectableItem());
                     map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
                     secondPlayerMana -= entry.getValue().getMP();
                 }
@@ -588,6 +595,12 @@ public class Game {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
                     Buff.addBuff(newBuff);
+                }
+                if (currentCard.getName().equals("zahak")){
+                    if (getTurn() % 2 == 1)
+                        firstPlayerMana -= currentCard.getMP();
+                    else
+                        secondPlayerMana -= currentCard.getMP();
                 }
             }
 
@@ -808,8 +821,13 @@ public class Game {
                 Buff.addBuff(newBuff);
             }
             Buff.updateBuffs();
-            if (currentCard instanceof Hero)
+            if (currentCard instanceof Hero) {
                 currentCard.setCooldown(currentCard.getBASE_COOL_DOWN());
+                if (getTurn() % 2 == 1)
+                    firstPlayerMana -= currentCard.getMP();
+                else
+                    secondPlayerMana -= currentCard.getMP();
+            }
         }
     }
 
@@ -825,6 +843,15 @@ public class Game {
         }
         return null;
     }
+
+    public void addCollectable(CollectableItem item){
+        if (getTurn() % 2 == 1)
+            player1Collectable.add(item);
+        else
+            player2Collectable.add(item);
+    }
+
+
 
 
 }

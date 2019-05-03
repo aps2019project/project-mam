@@ -65,7 +65,7 @@ public class Cell {
     }
 
     public boolean haveCollectableItem(){
-        return false;
+        return collectableItem != null;
     }
 
     public boolean isCellEmpty(){
