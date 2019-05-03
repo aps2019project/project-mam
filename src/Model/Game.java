@@ -350,7 +350,7 @@ public class Game {
     }
 
     public void addRandomCardFromSecondPlayerDeckToHand(int rand) {
-        if (secondPlayerDeck.getCards().size() != 0){
+        if (secondPlayerDeck.getCards().size() != 0) {
             secondPlayerHand.put(secondPlayerDeck.getCards().get(rand).getId(), secondPlayerDeck.getCards().get(rand));
             secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
         }
@@ -373,7 +373,7 @@ public class Game {
                 Random random = new Random();
                 addRandomCardFromFirstPlayerDeckToNextCard(random.
                         nextInt(firstPlayerDeck.getCards().size()));
-            }else nextfirstPlayerCard = null;
+            } else nextfirstPlayerCard = null;
         }
     }
 
@@ -385,7 +385,7 @@ public class Game {
                 addRandomCardFromSecondPlayerDeckToNextCard(rand.
                         nextInt(secondPlayerDeck.getCards().size()));
             }
-        }else nextSecondPlayerCard = null;
+        } else nextSecondPlayerCard = null;
     }
 
     public void setNextfirstPlayerCard() {
@@ -581,7 +581,7 @@ public class Game {
         currentCard.setCanMove(false);
         if (turn % 2 == 1) {
             map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
-            if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK){
+            if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK) {
                 for (Buff buff : currentCard.getSpecialPower()) {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
@@ -694,14 +694,13 @@ public class Game {
 
     //----------------------------------buffs--------------------------------
 
-    private void activePassiveBuffs(){
-        if (getTurn() % 2 == 1){
+    private void activePassiveBuffs() {
+        if (getTurn() % 2 == 1) {
             Buff.activePassiveBuff(map.getFirstPlayerCellCard());
-        }else {
+        } else {
             Buff.activePassiveBuff(map.getSecondPlayerCellCard());
         }
     }
-
 
 
     //--------------------------------------------------------------------------------
@@ -730,14 +729,14 @@ public class Game {
         }
     }
 
-    private HashMap<Integer, Cell> getMyTeam(Cell cell){
+    private HashMap<Integer, Cell> getMyTeam(Cell cell) {
         if (map.getFirstPlayerCellCard().containsValue(cell))
             return map.getFirstPlayerCellCard();
         else
             return map.getSecondPlayerCellCard();
     }
 
-    private HashMap<Integer, Cell> getOppTeam(Cell cell){
+    private HashMap<Integer, Cell> getOppTeam(Cell cell) {
         if (map.getFirstPlayerCellCard().containsValue(cell))
             return map.getSecondPlayerCellCard();
         else
@@ -797,8 +796,16 @@ public class Game {
         } else return nextSecondPlayerCard.getCardInfoInGame();
     }
 
-    public void useSP(int x, int y){
-
+    public void useSP(int x, int y) {
+        if (currentCard.getSPActivationTime() == SPActivationTime.ON_SPAWN) {
+            Card target = map.getCells()[x][y].getCard();
+            for (Buff buff : currentCard.getSpecialPower()) {
+                Buff newBuff = buff.copy();
+                newBuff.setCard(target);
+                Buff.addBuff(newBuff);
+            }
+            Buff.updateBuffs();
+        }
     }
 
 }

@@ -139,7 +139,22 @@ public class Buff {
     public static void activeholyBuff(Card card) {
         for (Buff buff : buffs) {
             if (buff.getCard().equals(card) && buff instanceof Holy)
-                card.incrementOfHp(buff.getBuffPower());
+                buff.doEffect();
+        }
+    }
+
+    public static void activeStunBuff(Card card){
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof Stun){
+                buff.doEffect();
+            }
+        }
+    }
+
+    public static void activeDisarmBuff(Card card){
+        for (Buff buff : buffs) {
+            if (buff.getCard().equals(card) && buff instanceof  Disarm)
+                buff.doEffect();
         }
     }
 
@@ -236,6 +251,7 @@ public class Buff {
     }
 
     public void doEffect(){}
+    public void doEffect(Card card){}
     public void doEffect(Cell cell){}
     public void addBuff(Cell cell){}
     public void removeBuff(){
