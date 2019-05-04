@@ -11,7 +11,8 @@ public enum ErrorType {
     INVALID_DECK_2("selected deck for second player is invalid"),
     UNAVAILABLE_CARD_OR_ITEM("card or item is'nt available"),
     MONEY_IS_NOT_ENOUGH("you dont have enough money for buy this card or item"),
-    MANA_IS_NOT_ENOUGH("you dont have enough mana to insert this card or item"),
+    MANA_IS_NOT_ENOUGH_INSERT("you dont have enough mana to insert this card or item"),
+    MANA_IS_NOT_ENOUGH_USE_SP("you dont have enough mana to use special power"),
     THREE_ITEM("you have 3 item\nyou can't buy more item"),
     SUCCESSFUL_BUY("buy successful"),
     SUCCESSFUL_SELL("sell successful"),
@@ -39,6 +40,7 @@ public enum ErrorType {
     UNAVAILABLE_OPP_ATTACK("opponent minion is unavailable for attack"),
     CARD_CAN_NOT_ATTACK(""),
     CARD_CAN_NOT_MOVE("card can't move!"),
+    CARD_HAVE_NOT_SP("card have'nt special power"),
 
 
     ;

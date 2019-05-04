@@ -5,8 +5,6 @@ import view.*;
 
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Controller {
 
@@ -306,7 +304,7 @@ public class Controller {
                     ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
                     view.printError(ErrorType.SUCCESSFUL_INSERTING_CARD);
                 } else view.printError(ErrorType.INVALID_TARGET);
-            } else view.printError(ErrorType.MANA_IS_NOT_ENOUGH);
+            } else view.printError(ErrorType.MANA_IS_NOT_ENOUGH_INSERT);
         } else view.printError(ErrorType.INVALID_CARD_NAME);
     }
 
@@ -335,47 +333,54 @@ public class Controller {
         }
     }
 
-    public void comboAttack(String oppCardId, ArrayList<String> myCardsId){
+    public void comboAttack(String oppCardId, ArrayList<String> myCardsId) {
         int[] attackersId = new int[myCardsId.size()];
         int counter = 0;
         for (String cardId : myCardsId) {
             attackersId[counter] = Integer.parseInt(cardId);
             counter++;
         }
-        if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))){
+        if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
             game.comboAttack(Integer.parseInt(oppCardId), attackersId);
-        }else view.printError(ErrorType.INVALID_CARD_ID);
+        } else view.printError(ErrorType.INVALID_CARD_ID);
     }
 
-    public boolean isEnded(){
+    public void useSP(String x, String y) {
+        if (game.getCurrentCard() instanceof Minion && game.getCurrentCard().getSPActivationTime() == SPActivationTime.ON_SPAWN) {
+            if (game.getCurrentCard() instanceof Hero && game.getCurrentCard().getCooldown() == 0) {
+                game.useSP(Integer.parseInt(x), Integer.parseInt(y));
+            } else view.printError(ErrorType.MANA_IS_NOT_ENOUGH_USE_SP);
+        } else view.printError(ErrorType.CARD_HAVE_NOT_SP);
+    }
+
+    public boolean isEnded() {
         return game.isGameEnd();
     }
 
-    public void showEnd(){
+    public void showEnd() {
         view.show("ended");
         view.show(String.valueOf(game.getWinner()));
     }
 
-    public void showInfoInGraveyard(String cardId){
+    public void showInfoInGraveyard(String cardId) {
         view.show(game.getInfoInGraveYard(Integer.parseInt(cardId)));
     }
 
-    public void showCardsInGraveyard(){
+    public void showCardsInGraveyard() {
         view.show(game.showInGraveYard());
     }
 
-    public void selectCollectible(String itemId){
+    public void selectCollectible(String itemId) {
         game.selectCollectableItem(Integer.parseInt(itemId));
     }
 
-    public void showCollectibles(){
+    public void showCollectibles() {
         view.show(game.showCollectables());
     }
 
-    public void showCollectibleInfo(){
+    public void showCollectibleInfo() {
         view.show(game.getItemInfo());
     }
-
 
 
 }

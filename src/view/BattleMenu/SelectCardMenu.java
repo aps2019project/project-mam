@@ -38,6 +38,7 @@ public class SelectCardMenu extends ConsolePage {
             view.back();
         }
         else if (command.matches("use special power \\d \\d")){
+            controller.useSP(command.split(" ")[3], command.split(" ")[4]);
             view.back();
         }
 
