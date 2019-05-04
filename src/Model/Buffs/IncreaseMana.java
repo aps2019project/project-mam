@@ -26,8 +26,17 @@ public class IncreaseMana extends Buff {
     @Override
     public void doEffect() {
         if (game.getTurn() % 2 == 1)
-            game.setFirstPlayerMana(getBuffPower() + game.getBasicMana());
+            game.setExtraPlayer1Mana(getBuffPower());
         else
-            game.setSecondPlayerMana(getBuffPower() + game.getBasicMana());
+            game.setExtraPlayer2Mana(getBuffPower());
+    }
+
+    @Override
+    public void removeBuff() {
+        if (game.getTurn() % 2 == 1)
+            game.setExtraPlayer1Mana(0);
+        else
+            game.setExtraPlayer2Mana(0);
+        getBuffs().remove(this);
     }
 }

@@ -19,6 +19,8 @@ public class Game {
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
     private int basicMana = 2;
+    private int extraPlayer1Mana = 0;
+    private int extraPlayer2Mana = 0;
     private Map map = new Map();
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
@@ -164,6 +166,22 @@ public class Game {
 
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
+    }
+
+    public int getExtraPlayer1Mana() {
+        return extraPlayer1Mana;
+    }
+
+    public void setExtraPlayer1Mana(int extraPlayer1Mana) {
+        this.extraPlayer1Mana = extraPlayer1Mana;
+    }
+
+    public int getExtraPlayer2Mana() {
+        return extraPlayer2Mana;
+    }
+
+    public void setExtraPlayer2Mana(int extraPlayer2Mana) {
+        this.extraPlayer2Mana = extraPlayer2Mana;
     }
 
     public void setFirstPlayerMana(int firstPlayerMana) {
@@ -560,6 +578,15 @@ public class Game {
     private void insertCard(String cardName, int x, int y, HashMap<Integer, Card> Hand) {
         for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet())
             if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
+                if (getTurn() % 2 == 1 && firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
+                    for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
+                        buffAlocator(map.getFirstPlayerCellCard().get(entry.getKey()), buff);
+                    }
+                else if (getTurn() % 2== 0 && secondPlayerDeck.getItem().
+                        getSpActivationTime() == SPActivationTime.ON_INSERT)
+                    for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
+                        buffAlocator(map.getSecondPlayerCellCard().get(entry.getKey()), buff);
+                    }
                 map.getCells()[x][y].setCard(entry.getValue());
                 entry.getValue().setRow(x);
                 entry.getValue().setColumn(y);
@@ -592,13 +619,13 @@ public class Game {
     }
 
     public void endTurn() {
-        if (turn % 2 == 1) {
-            firstPlayerMana = basicMana;
+        if (turn % 2 == 0) {
+            basicMana++;
+            firstPlayerMana = basicMana + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
         } else {
-            basicMana++;
-            secondPlayerMana = basicMana;
+            secondPlayerMana = basicMana + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
         }
@@ -619,6 +646,11 @@ public class Game {
         currentCard.setCanAttack(false);
         currentCard.setCanMove(false);
         if (turn % 2 == 1) {
+            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_ATTACK){
+                for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getFirstPlayerCellCard().get(currentCard.getId()), buff);
+                }
+            }
             map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
             if ((currentCard instanceof Minion && currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)
                     || currentCard.getName().equals("zahak")) {
@@ -636,6 +668,11 @@ public class Game {
             }
 
         } else {
+            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_ATTACK){
+                for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getSecondPlayerCellCard().get(currentCard.getId()), buff);
+                }
+            }
             map.getFirstPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
             if (currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)
                 for (Buff buff : currentCard.getSpecialPower()) {
@@ -754,15 +791,14 @@ public class Game {
     private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard, int player) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
             if (entry.getValue().getCard().getHP() <= 0) {
-                for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
-                    for (Cell cell : buff.getSpecialPowerTargetCells(entry.getValue(), null,
-                            getMyTeam(entry.getValue()),
-                            getOppTeam(entry.getValue()), map)) {
-                        Buff newBuff = buff.copy();
-                        newBuff.setCard(cell.getCard());
-                        Buff.addBuff(newBuff);
+                if (player == 1 && firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_DEATH) {
+                    for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
+                        buffAlocator(entry.getValue(), buff);
                     }
-                }
+                } else if (player == 2 && secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_DEATH)
+                    for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
+                        buffAlocator(entry.getValue(), buff);
+                    }
                 Buff.updateBuffs();
                 if (entry.getValue().getCard() instanceof Hero) {
                     winner = player;
@@ -775,6 +811,16 @@ public class Game {
                 map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
                 cells.remove(entry);
             }
+        }
+    }
+
+    private void buffAlocator(Cell entry, Buff buff) {
+        for (Cell cell : buff.getSpecialPowerTargetCells(entry, null,
+                getMyTeam(entry),
+                getOppTeam(entry), map)) {
+            Buff newBuff = buff.copy();
+            newBuff.setCard(cell.getCard());
+            Buff.addBuff(newBuff);
         }
     }
 

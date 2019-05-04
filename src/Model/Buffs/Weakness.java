@@ -26,4 +26,13 @@ public class Weakness extends Buff {
         else
             getCard().decrementOfHp(getBuffPower());
     }
+
+    @Override
+    public void removeBuff() {
+        if (getType() == BuffType.ATTACK_WEAKNESS)
+            getCard().incrementOfAp(getBuffPower());
+        else
+            getCard().incrementOfHp(getBuffPower());
+        getBuffs().remove(this);
+    }
 }

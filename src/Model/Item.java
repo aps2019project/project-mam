@@ -35,6 +35,10 @@ public class Item {
         return desc;
     }
 
+    public SPActivationTime getSpActivationTime() {
+        return null;
+    }
+
     public ArrayList<Buff> getBuffs() {
         return buffs;
     }

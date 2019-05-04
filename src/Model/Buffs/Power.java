@@ -27,4 +27,12 @@ public class Power extends Buff {
                     this.isStarted(), this.getTargetCommunity());
     }
 
+    @Override
+    public void removeBuff() {
+        if (getType() == BuffType.ATTACK_POWER)
+            getCard().decrementOfAp(getBuffPower());
+        else
+            getCard().decrementOfHp(getBuffPower());
+        getBuffs().remove(this);
+    }
 }
