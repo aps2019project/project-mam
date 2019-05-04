@@ -4,6 +4,8 @@ import Controller.Controller;
 import view.ConsolePage;
 import view.View;
 
+import java.util.ArrayList;
+
 public class SelectCardMenu extends ConsolePage {
 
     private Controller controller = Controller.getInstance();
@@ -26,6 +28,13 @@ public class SelectCardMenu extends ConsolePage {
             view.back();
         }
         else if (command.matches("attack combo \\d+( \\d+)+")){
+            ArrayList<String> cardsId = new ArrayList<>();
+            int counter = 3;
+            while (command.split(" ")[counter] != null){
+                cardsId.add(command.split(" ")[counter]);
+                counter++;
+            }
+            controller.comboAttack(command.split(" ")[2], cardsId);
             view.back();
         }
         else if (command.matches("use special power \\d \\d")){

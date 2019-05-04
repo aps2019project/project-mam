@@ -4,6 +4,7 @@ import Model.*;
 import view.*;
 
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -332,6 +333,18 @@ public class Controller {
             ErrorType.CARD_CAN_NOT_ATTACK.setMessage(message.toString());
             view.printError(ErrorType.CARD_CAN_NOT_ATTACK);
         }
+    }
+
+    public void comboAttack(String oppCardId, ArrayList<String> myCardsId){
+        int[] attackersId = new int[myCardsId.size()];
+        int counter = 0;
+        for (String cardId : myCardsId) {
+            attackersId[counter] = Integer.parseInt(cardId);
+            counter++;
+        }
+        if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))){
+            game.comboAttack(Integer.parseInt(oppCardId), attackersId);
+        }else view.printError(ErrorType.INVALID_CARD_ID);
     }
 
     public boolean isEnded(){
