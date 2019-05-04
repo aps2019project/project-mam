@@ -343,4 +343,26 @@ public class Controller {
         view.show(String.valueOf(game.getWinner()));
     }
 
+    public void showInfoInGraveyard(String cardId){
+        view.show(game.getInfoInGraveYard(Integer.parseInt(cardId)));
+    }
+
+    public void showCardsInGraveyard(){
+        view.show(game.showInGraveYard());
+    }
+
+    public void selectCollectible(String itemId){
+        game.selectCollectableItem(Integer.parseInt(itemId));
+    }
+
+    public void showCollectibles(){
+        view.show(game.showCollectables());
+    }
+
+    public void showCollectibleInfo(){
+        view.show(game.getItemInfo());
+    }
+
+
+
 }

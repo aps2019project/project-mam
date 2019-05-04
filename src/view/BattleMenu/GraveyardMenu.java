@@ -18,10 +18,10 @@ public class GraveyardMenu extends ConsolePage {
     @Override
     public void handleCommand(String command) {
         if (command.matches("show info \\d+")){
-
+            controller.showInfoInGraveyard(command.split(" ")[2]);
         }
         else if (command.matches("show cards")){
-
+            controller.showCardsInGraveyard();
         }
         else if (command.matches("help")){
             help();

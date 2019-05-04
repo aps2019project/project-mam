@@ -19,22 +19,19 @@ public class SelectCardMenu extends ConsolePage {
     public void handleCommand(String command) {
         if (command.matches("move to \\d \\d")){
             controller.moveCard(command.split(" ")[2], command.split(" ")[3]);
+            view.back();
         }
         else if (command.matches("attack \\d+")){
             controller.attack(command.split(" ")[1]);
+            view.back();
         }
         else if (command.matches("attack combo \\d+( \\d+)+")){
-
+            view.back();
         }
         else if (command.matches("use special power \\d \\d")){
+            view.back();
+        }
 
-        }
-        else if (command.matches("show collectables")){
-
-        }
-        else if (command.matches("select .+")){
-            view.getPages().push(new SelectCollectableMenu());
-        }
         else if (command.matches("help")){
             help();
         }
@@ -45,6 +42,8 @@ public class SelectCardMenu extends ConsolePage {
 
     @Override
     public void showMenu() {
-        view.show("----------<Select Card>---------");
+        StringBuilder menu = new StringBuilder();
+        menu.append("-----<").append(controller.getGame().getCurrentCard().getId()).append(" selected>-----");
+        view.show(menu.toString());
     }
 }

@@ -4,7 +4,7 @@ import Controller.Controller;
 import view.ConsolePage;
 import view.View;
 
-public class SelectCollectableMenu extends ConsolePage {
+public class SelectCollectibleMenu extends ConsolePage {
 
     private Controller controller = Controller.getInstance();
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
@@ -18,7 +18,7 @@ public class SelectCollectableMenu extends ConsolePage {
     @Override
     public void handleCommand(String command) {
         if (command.matches("show info")){
-
+            controller.showCollectibleInfo();
         }
         else if (command.matches("use \\d \\d")){
 
@@ -33,6 +33,6 @@ public class SelectCollectableMenu extends ConsolePage {
 
     @Override
     public void showMenu() {
-        view.show("----------<Select Collectable>---------");
+        view.show("----------<Select Collectible>---------");
     }
 }

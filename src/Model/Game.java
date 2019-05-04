@@ -883,7 +883,7 @@ public class Game {
 
     //-------------------------grave Yard ----------------------
 
-    public String getInfoINGraveYard(int cardId) {
+    public String getInfoInGraveYard(int cardId) {
         if (getTurn() % 2 == 1) {
             for (Card card : firstPlayerGraveYard) {
                 if (card.getId() == cardId)
