@@ -35,6 +35,10 @@ public class Item {
         return desc;
     }
 
+    public ArrayList<Buff> getBuffs() {
+        return buffs;
+    }
+
     public void addBuff(Buff buff){
         buffs.add(buff);
     }

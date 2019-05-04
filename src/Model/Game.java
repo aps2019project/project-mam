@@ -910,11 +910,11 @@ public class Game {
         return info.toString();
     }
 
-    public String getItemInfo(){
+    public String getItemInfo() {
         return currentItem.getInfo();
     }
 
-    public void selectCollectableItem(int id){
+    public void selectCollectableItem(int id) {
         if (getTurn() % 2 == 1)
             for (CollectableItem item : player1Collectable) {
                 if (item.getId() == id)
@@ -927,8 +927,34 @@ public class Game {
             }
     }
 
-    public String showCollectables(){
-        return " ";
+    public String showCollectables() {
+        StringBuilder info = new StringBuilder();
+        if (getTurn() % 2 == 1) {
+            for (CollectableItem item : player1Collectable) {
+                info.append(item.getInfo()).append("\n");
+            }
+        } else
+            for (CollectableItem item : player2Collectable) {
+                info.append(item.getInfo()).append("\n");
+            }
+        return info.toString();
+    }
+
+    public void useCollectible() {
+        ArrayList<Cell> cells;
+        for (Buff buff : currentItem.getBuffs()) {
+            if (getTurn() % 2 == 1)
+                cells = buff.getSpecialPowerTargetCells(null, null, map.getFirstPlayerCellCard()
+                        , map.getSecondPlayerCellCard(), map);
+            else
+                cells = buff.getSpecialPowerTargetCells(null, null, map.getSecondPlayerCellCard()
+                        , map.getFirstPlayerCellCard(), map);
+            for (Cell cell : cells) {
+                Buff newBuff = buff.copy();
+                newBuff.setCard(cell.getCard());
+                Buff.addBuff(newBuff);
+            }
+        }
     }
 
 

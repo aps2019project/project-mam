@@ -1,10 +1,12 @@
 package Model.Buffs;
 
 import Model.*;
+import com.sun.deploy.nativesandbox.NativeSandboxBroker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Buff {
     private static ArrayList<Buff> buffs;
@@ -188,6 +190,22 @@ public class Buff {
                         cells.add(entry.getValue());
                     }
                 }
+                break;
+            case RANGED_HYBRID:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet()) {
+                    if (entry.getValue().getCard().getCardClass() != ImpactType.MELEE) {
+                        cells.add(entry.getValue());
+                        break;
+                    }
+                }
+                break;
+            case ONE_ENEMY_FORCE_RANDOM:
+                Random rand = new Random();
+                cells.add(defenderTeam.get(rand.nextInt(defenderTeam.size())));
+                break;
+            case ONE_INSIDER_FORCE_RANDOM:
+                Random random = new Random();
+                cells.add(attackerTeam.get(random.nextInt(attackerTeam.size())));
                 break;
         }
         return cells;
