@@ -18,7 +18,7 @@ public class Game {
     private static final int BASIC_FLAG_COUNT = 7;
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
-    private static int basicMana = 2;
+    private int basicMana = 2;
     private Map map = new Map();
     private Deck firstPlayerDeck;
     private Deck secondPlayerDeck;
@@ -120,6 +120,10 @@ public class Game {
 
     public HashMap<Integer, Card> getSecondPlayerHand() {
         return secondPlayerHand;
+    }
+
+    public int getBasicMana() {
+        return basicMana;
     }
 
     public ArrayList<Card> getGraveYard() {

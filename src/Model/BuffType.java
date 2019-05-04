@@ -15,6 +15,7 @@ public enum BuffType {
     REMOVE_ENEMIES_BUFFS,
     REMOVE_INSIDERS_BUFFS,
     KILL,
+    INCREASE_MANA,
     NONE,
 
 }

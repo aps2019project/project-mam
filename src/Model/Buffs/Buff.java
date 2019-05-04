@@ -242,6 +242,9 @@ public class Buff {
         }
     }
 
+    public void setGame(Game game) {
+    }
+
     public void doEffect(){}
     public void doEffect(Cell cell){}
     public void addBuff(Cell cell){}
