@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Buffs.Buff;
+import Model.Buffs.IncreaseMana;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Shop {
 
     private static ArrayList<Card> cards = new ArrayList<>();
     private static ArrayList<UsableItem> items = new ArrayList<>();
+    private static ArrayList<CollectableItem> collectibles = new ArrayList<>();
 
     private Shop() {
     }
@@ -448,34 +450,10 @@ public class Shop {
         item = new UsableItem("kamanDamol", 30000, " ");
         items.add(item);
 
-        item = new UsableItem("noshDaroo", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("tirDoshakh", 0, "12");
-        items.add(item);
-
         item = new UsableItem("parSimorgh", 3500, "12");
         items.add(item);
 
-        item = new UsableItem("eksir", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("majonMana", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("majonRoiintani", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("nefrinMarg", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("randomdamage", 0, "12");
-        items.add(item);
-
         item = new UsableItem("terrorHood", 5000, "12");
-        items.add(item);
-
-        item = new UsableItem("bladesOfAgility", 0, "12");
         items.add(item);
 
         item = new UsableItem("kingWisdom", 9000, "12");
@@ -496,26 +474,72 @@ public class Shop {
         item = new UsableItem("ghoslTamid", 20000, "12");
         items.add(item);
 
-        item = new UsableItem("shamshirChini", 0, "12");
+        /*item = new UsableItem("noshDaroo", 0, "12");
+        items.add(item);*/
+
+        /*item = new UsableItem("tirDoshakh", 0, "12");
+        items.add(item);*/
+
+        /*item = new UsableItem("eksir", 0, "12");
         items.add(item);
+
+        item = new UsableItem("majonMana", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("majonRoiintani", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("nefrinMarg", 0, "12");
+        items.add(item);
+
+        item = new UsableItem("randomdamage", 0, "12");
+        items.add(item);*/
+
+        /*item = new UsableItem("bladesOfAgility", 0, "12");
+        items.add(item);*/
+
+
+        /*item = new UsableItem("shamshirChini", 0, "12");
+        items.add(item);*/
+
+        //-----------------------------collectible--------------------------------------
+
+        CollectableItem collectableItem = new CollectableItem("noshDaroo", "12");
+        collectableItem.addBuff(new Buff(HEALTH_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("tirDoshakh","12");
+        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 2, RANGED_HYBRID));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("eksir","12");
+        collectableItem.addBuff(new Buff(HEALTH_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("majonMana","12");
+        collectableItem.addBuff(new Buff(INCREASE_MANA, 1, 3, TargetCommunity.NONE));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("majonRoiintani","12");
+        collectableItem.addBuff(new Buff(HOLY, 2, 10, ONE_INSIDER_FORCE_RANDOM));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("nefrinMarg","12");
+        collectableItem.addBuff(new Buff(POISON, -1, 8, ONE_ENEMY_FORCE_RANDOM));//?
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("randomDamage","12");
+        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("bladesOfAgility","12");
+        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
+        collectibles.add(collectableItem);
+
+        collectableItem = new CollectableItem("shamshirChini","12");
+        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 5, JUST_MELEE));
+        collectibles.add(collectableItem);
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

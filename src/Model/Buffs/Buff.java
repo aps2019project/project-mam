@@ -27,6 +27,14 @@ public class Buff {
         this.targetCommunity = targetCommunity;
     }
 
+    public Buff(BuffType type, int buffPower, int activationTime,
+                 boolean isContinous, TargetCommunity targetCommunity) {
+        this.type = type;
+        this.buffPower = buffPower;
+        this.activationTime = activationTime;
+        this.isContinous = isContinous;
+        this.targetCommunity = targetCommunity;
+    }
 
     public Buff(BuffType type, int remainTime, int buffPower, int activationTime,
                 boolean isStarted, TargetCommunity targetCommunity) {

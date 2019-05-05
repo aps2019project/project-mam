@@ -18,5 +18,6 @@ public enum TargetCommunity {
     ALL_ENEMY_FORCES_IN_ROW,
     ALL_ENEMY_FORCES_CLOSE,
     RANGED_HYBRID,
+    JUST_MELEE,
     NONE,
 }
