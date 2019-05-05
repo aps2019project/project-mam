@@ -212,66 +212,90 @@ public class Shop {
     }
 
     public static void importCards() {
-        Card card = new Spell("Total_Disarm", 1000, 0);
-        card.addBuff(new Buff(DISARM, 100, 0, ONE_ENEMY_FORCE));
+        Card card = new Spell("TotalDisarm", 1000, 0);
+        card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
 
-        card = new Spell("Area_Dispel", 2500, 2);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, TWO_IN_TWO));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, TWO_IN_TWO));
+        card = new Spell("AreaDispel", 1500, 2);
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, TWO_IN_TWO));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, TWO_IN_TWO));
         cards.add(card);
 
         card = new Spell("Empower", 250, 1);
-        card.addBuff(new Buff(ATTACK_POWER, 100, 2, ONE_INSIDER_FORCE));
+        card.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Fire_Ball", 400, 1);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 0, 4, ONE_ENEMY_FORCE));
+        card = new Spell("FireBall", 400, 1);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ONE_ENEMY_FORCE));
         cards.add(card);
 
-        card = new Spell("God_Strength", 450, 2);
-        card.addBuff(new Buff(ATTACK_POWER, 100, 4, ONE_INSIDER_FORCE));
+        card = new Spell("GodStrength", 450, 2);
+        card.addBuff(new Buff(ATTACK_POWER, -1, 4, INSIDER_HERO));
         cards.add(card);
 
-        card = new Spell("Hell_Fire", 600, 3);
-        card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 2, TWO_IN_TWO));
+        card = new Spell("HellFire", 600, 3);
+        card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 0, TWO_IN_TWO));
         cards.add(card);
 
-        card = new Spell("Lighting Bolt", 1250, 2);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 0, 8, ONE_ENEMY_FORCE));
+        card = new Spell("LightingBolt", 1250, 2);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 8, ENEMY_HERO));
         cards.add(card);
 
-        card = new Spell("poison Lake", 900, 5);
-        card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 1, THREE_IN_THREE));
+        card = new Spell("poisonLake", 900, 5);
+        card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
         cards.add(card);
 
         card = new Spell("Madness", 650, 0);
         card.addBuff(new Buff(ATTACK_POWER, 3, 4, ONE_INSIDER_FORCE));
-        card.addBuff(new Buff(DISARM, 3, 0, OWN));
+        card.addBuff(new Buff(DISARM, 3, 0, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("All Disarm", 2000, 9);
+        card = new Spell("AllDisarm", 2000, 9);
         card.addBuff(new Buff(DISARM, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
-        card = new Spell("All Poison", 1500, 8);
+        card = new Spell("AllPoison", 1500, 8);
         card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
         card = new Spell("Dispel", 2100, 0);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 0, 0, ALL_INSIDER_FORCES));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 0, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, ALL_INSIDER_FORCES));
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
 
-        card = new Spell("Health with profit", 2250, 0);
-        card.addBuff(new Buff(HEALTH_WEAKNESS, 0, 1, ONE_INSIDER_FORCE));
+        card = new Spell("HealthWithProfit", 2250, 0);
+        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(HOLY, 3, 2, ONE_INSIDER_FORCE));
         cards.add(card);
 
-        card = new Spell("Power Up", 2500, 2);
-        card.addBuff(new Buff(ATTACK_POWER, 0, 6, ONE_INSIDER_FORCE));
+        card = new Spell("PowerUp", 2500, 2);
+        card.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE));
         cards.add(card);
 
+        card = new Spell("AllPower", 2000, 4);
+        card.addBuff(new Buff(ATTACK_POWER, -1, 2, ALL_INSIDER_FORCES));
+        cards.add(card);
+
+        card = new Spell("AllAttack", 1500, 4);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ALL_ENEMY_FORCES_IN_COLUMN));
+        cards.add(card);
+
+        card = new Spell("Weakening", 1000, 1);
+        card.addBuff(new Buff(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
+        cards.add(card);
+
+        card = new Spell("Sacrifice", 1600, 2);
+        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
+        card.addBuff(new Buff(ATTACK_POWER, 1, 8, ONE_INSIDER_FORCE));
+        cards.add(card);
+
+        card = new Spell("KingsGuard", 1750, 9);
+        card.addBuff(new Buff(KILL, 1, 0, ONE_ENEMY_FORCE_RANDOM));
+        cards.add(card);
+
+        card = new Spell("Shock", 1200, 1);
+        card.addBuff(new Buff(STUN, 2, 0, ONE_ENEMY_FORCE));
+        cards.add(card);
 
         //----------------------------minions-----------------------
 
