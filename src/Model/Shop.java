@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Buffs.Buff;
+import Model.Buffs.CellEffect;
 import Model.Buffs.IncreaseMana;
 
 import java.util.ArrayList;
@@ -275,131 +276,158 @@ public class Shop {
         //----------------------------minions-----------------------
 
 
-        card = new Minion("kamandar fars", 300, 2, 6, 4, 7, RANGED, NULL);
+        card = new Minion("kamandarFars", 300, 2, 6, 4, 7, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("shamshirZan fars", 400, 2, 4, 6, 0, MELEE, ON_ATTACK);
-        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));
+        card = new Minion("shamshirzanFars", 400, 2, 6, 4, 0, MELEE, ON_ATTACK);
+        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
 
-        card = new Minion("neyzehDar fars", 500, 1, 5, 3, 0, HYBRID, NULL);
+        card = new Minion("neyzehdarFars", 500, 1, 5, 3, 3, HYBRID, NULL);
         cards.add(card);
 
-        card = new Minion("asbSavar fars", 200, 4, 10, 6, 0, MELEE, NULL);
+        card = new Minion("asbSavarFars", 200, 4, 10, 6, 0, MELEE, NULL);
         cards.add(card);
 
-        card = new Minion("pahlavan fars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
-        //  card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5, ONE_ENEMY_FORCE));
+        card = new Minion("pahlavanFars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5 + card.getAP(), ONE_ENEMY_FORCE));//????????????????
         cards.add(card);
 
-        card = new Minion("sepah salar fars", 800, 7, 12, 4, 0, MELEE, COMBO);
+        card = new Minion("sepahSalarFars", 800, 7, 12, 4, 0, MELEE, COMBO);
         cards.add(card);
 
-        card = new Minion("kamandar torani", 500, 1, 3, 4, 5, RANGED, NULL);
+        card = new Minion("kamandarTorani", 500, 1, 3, 4, 5, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("ghlab sangdar torani", 600, 1, 4, 2, 7, RANGED, NULL);
+        card = new Minion("gholabSangdarTorani", 600, 1, 4, 2, 7, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("neyzedaran torani", 600, 1, 4, 4, 3, HYBRID, NULL);
+        card = new Minion("neyzedaranTorani", 600, 1, 4, 4, 3, HYBRID, NULL);
         cards.add(card);
 
-        card = new Minion("jasosan torani", 700, 4, 6, 6, 0, MELEE, NULL);
+        card = new Minion("jasosanTorani", 700, 4, 6, 6, 0, MELEE, NULL);
         card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
-        card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
 
-        card = new Minion("gorazda torani", 450, 2, 3, 10, 0, MELEE, NULL);
+        card = new Minion("gorazdarTorani", 450, 2, 3, 10, 0, MELEE, NULL);
         cards.add(card);
 
-        card = new Minion("shahzade torani", 800, 6, 6, 10, 0, MELEE, COMBO);
+        card = new Minion("shahzadeTorani", 800, 6, 6, 10, 0, MELEE, COMBO);
         cards.add(card);
 
-        card = new Minion("Dive siah", 300, 9, 14, 10, 7, HYBRID, NULL);
+        card = new Minion("DiveSiah", 300, 9, 14, 10, 7, HYBRID, NULL);
         cards.add(card);
 
-        card = new Minion("ghol sang andaz", 300, 9, 12, 12, 7, RANGED, NULL);
+        card = new Minion("gholSangAndaz", 300, 9, 12, 12, 7, RANGED, NULL);
         cards.add(card);
 
         card = new Minion("oghab", 200, 2, 0, 2, 3, RANGED, PASSIVE);
-        //card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Buff(HEALTH_POWER, -1, 10, OWN));
         cards.add(card);
 
-        card = new Minion("Dive goraz savar", 300, 6, 16, 8, 0, MELEE, NULL);
+        card = new Minion("DiveGorazSavar", 300, 6, 16, 8, 0, MELEE, NULL);
         cards.add(card);
 
-        card = new Minion("ghol tak cheshm", 500, 7, 12, 11, 3, HYBRID, ON_DEATH);
+        card = new Minion("gholTakCheshm", 500, 7, 12, 11, 3, HYBRID, ON_DEATH);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 2, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
 
-        card = new Minion("mar sami", 300, 4, 5, 6, 4, RANGED, ON_ATTACK);
+        card = new Minion("marSami", 300, 4, 5, 6, 4, RANGED, ON_ATTACK);
+        card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));
         cards.add(card);
 
-        card = new Minion("ezhdehaye atash andaz", 250, 5, 9, 5, 4, RANGED, NULL);
+        card = new Minion("ezhdehayeAtashAndaz", 250, 5, 9, 5, 4, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("shir darande", 600, 2, 1, 8, 0, MELEE, ON_ATTACK);
+        card = new Minion("shirDarande", 600, 2, 1, 8, 0, MELEE, ON_ATTACK);
+        //card.addBuff(new Buff());??????????????????
         cards.add(card);
 
-        card = new Minion("mar ghol peykar", 500, 8, 14, 7, 5, RANGED, ON_SPAWN);
+        card = new Minion("marGholPeykar", 500, 8, 14, 7, 5, RANGED, ON_SPAWN);
+        //??????????????????
         cards.add(card);
 
-        card = new Minion("gorg sefid", 400, 5, 8, 2, 0, MELEE, ON_ATTACK);
+        card = new Minion("gorgSefid", 400, 5, 8, 2, 0, MELEE, ON_ATTACK);
+        Buff buff = new Buff(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
+        buff.setBuffPower(-8 + 4 / buff.getTime());
+        buff.setUsed(true);
+        buff.setStarted(true);
+        card.addBuff(buff);
         cards.add(card);
 
         card = new Minion("palang", 400, 4, 6, 2, 0, MELEE, ON_ATTACK);
+        buff = new Buff(HEALTH_POWER, 1, -8, ONE_ENEMY_FORCE);
+        buff.setStarted(true);
+        buff.setUsed(true);
+        card.addBuff(buff);
         cards.add(card);
 
         card = new Minion("gorg", 400, 3, 6, 1, 0, MELEE, ON_ATTACK);
+        buff = new Buff(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
+        buff.setStarted(true);
+        buff.setUsed(true);
+        card.addBuff(buff);
         cards.add(card);
 
         card = new Minion("jadogar", 550, 4, 5, 4, 3, RANGED, PASSIVE);
+        card.addBuff(new Buff(ATTACK_POWER, 1, 2, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 1, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
 
-        card = new Minion("jadogar azam", 550, 6, 6, 6, 5, RANGED, PASSIVE);
+        card = new Minion("jadogarAzam", 550, 6, 6, 6, 5, RANGED, PASSIVE);
+        card.addBuff(new Buff(ATTACK_POWER, 2, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Buff(HOLY, 0, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
 
-        card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_ATTACK);
+        card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_INSERT);//?????????
+        card.addBuff(new Buff(ATTACK_POWER, 1, -1, true, ALL_INSIDER_FORCES));
         cards.add(card);
 
-        card = new Minion("goraz vahshi", 500, 6, 10, 14, 0, MELEE, ON_DEFEND);
-        cards.add(card);
+        card = new Minion("gorazVahshi", 500, 6, 10, 14, 0, MELEE, ON_DEFEND);
+        cards.add(card);//????????????
 
         card = new Minion("piran", 400, 8, 20, 12, 0, MELEE, ON_DEFEND);
-        cards.add(card);
+        cards.add(card);//???????????
 
         card = new Minion("give", 450, 4, 5, 7, 5, RANGED, ON_DEFEND);
-        cards.add(card);
+        cards.add(card);//???????????
 
         card = new Minion("bahman", 450, 8, 16, 9, 0, MELEE, ON_SPAWN);
+        card.addBuff(new Buff(HEALTH_POWER, -1, -16, ONE_ENEMY_FORCE_RANDOM));
         cards.add(card);
 
         card = new Minion("ashkbos", 400, 7, 14, 8, 0, MELEE, ON_DEFEND);
-        cards.add(card);
+        cards.add(card);//???????????
 
         card = new Minion("iraj", 500, 4, 6, 20, 3, RANGED, NULL);
         cards.add(card);
 
-        card = new Minion("ghol bozorg", 600, 9, 30, 8, 2, HYBRID, NULL);
+        card = new Minion("gholBozorg", 600, 9, 30, 8, 2, HYBRID, NULL);
         cards.add(card);
 
-        card = new Minion("ghol do sar", 550, 4, 10, 4, 0, MELEE, ON_ATTACK);
+        card = new Minion("gholTwoSar", 550, 4, 10, 4, 0, MELEE, ON_ATTACK);
+        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ONE_ENEMY_FORCE));//?????????????????
         cards.add(card);
 
-        card = new Minion("nanae sarma", 500, 3, 3, 4, 5, RANGED, ON_SPAWN);
+        card = new Minion("naneSarma", 500, 3, 3, 4, 5, RANGED, ON_SPAWN);
+        card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
 
-        card = new Minion("folad zereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
+        card = new Minion("foladZereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
+        card.addBuff(new Buff(HOLY, 12, -1, true, OWN));
         cards.add(card);
 
         card = new Minion("siavosh", 350, 4, 8, 5, 0, MELEE, ON_DEATH);
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ENEMY_HERO));
         cards.add(card);
 
-        card = new Minion("shah ghol", 600, 5, 10, 4, 0, MELEE, COMBO);
+        card = new Minion("shahGhol", 600, 5, 10, 4, 0, MELEE, COMBO);
         cards.add(card);
 
-        card = new Minion("arzhang div", 600, 3, 6, 6, 0, MELEE, COMBO);
+        card = new Minion("arzhangDiv", 600, 3, 6, 6, 0, MELEE, COMBO);
         cards.add(card);
-        //-----------------------------heros-----------------------------------------
+        //-----------------------------heroes-----------------------------------------
 
         card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 4, OWN));

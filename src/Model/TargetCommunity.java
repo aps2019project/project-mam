@@ -19,5 +19,6 @@ public enum TargetCommunity {
     ALL_ENEMY_FORCES_CLOSE,
     RANGED_HYBRID,
     JUST_MELEE,
+    OWN_AND_INSIDER_FORCES_CLOSE,
     NONE,
 }

@@ -46,6 +46,10 @@ public class Buff {
         this.targetCommunity = targetCommunity;
     }
 
+    public void setBuffPower(int buffPower) {
+        this.buffPower = buffPower;
+    }
+
     public boolean isStarted() {
         return isStarted;
     }
