@@ -9,6 +9,7 @@ public class AI {
 
 
     private Game game;// = Controller.getInstance().getGame();
+    private Cell cell;
     private static final User ai = new User("AI", "0");
     private int counter;
 
@@ -16,13 +17,15 @@ public class AI {
         return ai;
     }
 
-    private boolean selected =false;
+    private boolean selected = false;
 
     private String command = null;
 
     private Card selectedCard;
 
     private Cell moveTarget = null;
+
+    private Card selectTarget = null;
 
     private Cell attackTarget = null;
 
@@ -31,14 +34,39 @@ public class AI {
     private Cell insertTarget = null;
 
     public String getCommand() {
+        select();
         if (firstCheckCardsCanMove())
             move();
         if (firstCheckCardsCanAttack())
             attack();
         commandInsertCard();
+        endTurn();
         return command;
     }
+    public  void endTurn(){
+        StringBuilder newCommand = new StringBuilder();
+        newCommand.append("End turn");
+        command = newCommand.toString();
+    }
 
+    public boolean cardCanSelect() {
+        for (Cell[] cells : game.getMap().getCells()) {
+            for (Cell cell : cells) {
+                if (cell.getCard() == null) {
+                    selectTarget = cell.getCard();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void select() {
+        StringBuilder newCommand = new StringBuilder();
+        newCommand.append("selected ").append(selectTarget.getName());
+        command = newCommand.toString();
+
+    }
 
     public void commandMoveCard(int x, int y) {
         StringBuilder newCommand = new StringBuilder();
