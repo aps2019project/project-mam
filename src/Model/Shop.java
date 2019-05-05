@@ -402,7 +402,7 @@ public class Shop {
         //-----------------------------heros-----------------------------------------
 
         card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
-        card.addBuff(new Buff(ATTACK_POWER, 100, 4, OWN));
+        card.addBuff(new Buff(ATTACK_POWER, -1, 4, OWN));
         cards.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
@@ -418,7 +418,7 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("zahak", 10000, 50, 2, MELEE, 0, 0, 0);
-        card.addBuff(new Buff(POISON, 3, 0, ENEMY_OR_INSIDER_FORCE));
+        card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));//?????????????????????
         cards.add(card);
 
         card = new Hero("kaveh", 8000, 50, 4, MELEE, 0, 1, 3);
@@ -426,7 +426,7 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("arash", 10000, 30, 2, RANGED, 6, 2, 2);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 0, ALL_ENEMY_FORCES_IN_ROW));
+        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ALL_ENEMY_FORCES_IN_ROW));
         cards.add(card);
 
         card = new Hero("afsane", 11000, 40, 3, RANGED, 3, 1, 2);
@@ -434,7 +434,7 @@ public class Shop {
         cards.add(card);
 
         card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
-        // card.addBuff(new Buff(HOLY, 100, 3, ALL_INSIDER_FORCES));
+        card.addBuff(new Buff(HOLY, -1, 3,true, OWN));
         cards.add(card);
 
         card = new Hero("rostam", 8000, 55, 7, HYBRID, 4, 0, 0);
