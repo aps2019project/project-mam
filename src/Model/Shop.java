@@ -13,8 +13,11 @@ import static Model.SPActivationTime.*;
 
 public class Shop {
     private static final Shop SHOP = new Shop();
-
+    private static ArrayList<Deck> decks=new ArrayList<>();
+    private static ArrayList<Card> spells = new ArrayList<>();
     private static ArrayList<Card> cards = new ArrayList<>();
+    private static ArrayList<Card> heros = new ArrayList<>();
+    private static ArrayList<Card> minions = new ArrayList<>();
     private static ArrayList<UsableItem> items = new ArrayList<>();
     private static ArrayList<CollectableItem> collectibles = new ArrayList<>();
 
@@ -215,162 +218,203 @@ public class Shop {
         Card card = new Spell("TotalDisarm", 1000, 0);
         card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("AreaDispel", 1500, 2);
         card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, TWO_IN_TWO));
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, TWO_IN_TWO));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Empower", 250, 1);
         card.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("FireBall", 400, 1);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ONE_ENEMY_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("GodStrength", 450, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 4, INSIDER_HERO));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("HellFire", 600, 3);
         card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 0, TWO_IN_TWO));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("LightingBolt", 1250, 2);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 8, ENEMY_HERO));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("poisonLake", 900, 5);
         card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Madness", 650, 0);
         card.addBuff(new Buff(ATTACK_POWER, 3, 4, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(DISARM, 3, 0, ONE_INSIDER_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("AllDisarm", 2000, 9);
         card.addBuff(new Buff(DISARM, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("AllPoison", 1500, 8);
         card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Dispel", 2100, 0);
         card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, ALL_INSIDER_FORCES));
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("HealthWithProfit", 2250, 0);
         card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(HOLY, 3, 2, ONE_INSIDER_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("PowerUp", 2500, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("AllPower", 2000, 4);
         card.addBuff(new Buff(ATTACK_POWER, -1, 2, ALL_INSIDER_FORCES));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("AllAttack", 1500, 4);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ALL_ENEMY_FORCES_IN_COLUMN));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Weakening", 1000, 1);
         card.addBuff(new Buff(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Sacrifice", 1600, 2);
         card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(ATTACK_POWER, 1, 8, ONE_INSIDER_FORCE));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("KingsGuard", 1750, 9);
         card.addBuff(new Buff(KILL, 1, 0, ONE_ENEMY_FORCE_RANDOM));
         cards.add(card);
+        spells.add(card);
 
         card = new Spell("Shock", 1200, 1);
         card.addBuff(new Buff(STUN, 2, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        spells.add(card);
 
         //----------------------------minions-----------------------
 
 
         card = new Minion("kamandarFars", 300, 2, 6, 4, 7, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("shamshirzanFars", 400, 2, 6, 4, 0, MELEE, ON_ATTACK);
         card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("neyzehdarFars", 500, 1, 5, 3, 3, HYBRID, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("asbSavarFars", 200, 4, 10, 6, 0, MELEE, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("pahlavanFars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5 + card.getAP(), ONE_ENEMY_FORCE));//????????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("sepahSalarFars", 800, 7, 12, 4, 0, MELEE, COMBO);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("kamandarTorani", 500, 1, 3, 4, 5, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gholabSangdarTorani", 600, 1, 4, 2, 7, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("neyzedaranTorani", 600, 1, 4, 4, 3, HYBRID, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("jasosanTorani", 700, 4, 6, 6, 0, MELEE, NULL);
         card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
         card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gorazdarTorani", 450, 2, 3, 10, 0, MELEE, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("shahzadeTorani", 800, 6, 6, 10, 0, MELEE, COMBO);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("DiveSiah", 300, 9, 14, 10, 7, HYBRID, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gholSangAndaz", 300, 9, 12, 12, 7, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("oghab", 200, 2, 0, 2, 3, RANGED, PASSIVE);
         card.addBuff(new Buff(HEALTH_POWER, -1, 10, OWN));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("DiveGorazSavar", 300, 6, 16, 8, 0, MELEE, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gholTakCheshm", 500, 7, 12, 11, 3, HYBRID, ON_DEATH);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 2, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("marSami", 300, 4, 5, 6, 4, RANGED, ON_ATTACK);
         card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("ezhdehayeAtashAndaz", 250, 5, 9, 5, 4, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("shirDarande", 600, 2, 1, 8, 0, MELEE, ON_ATTACK);
         //card.addBuff(new Buff());??????????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("marGholPeykar", 500, 8, 14, 7, 5, RANGED, ON_SPAWN);
         //??????????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gorgSefid", 400, 5, 8, 2, 0, MELEE, ON_ATTACK);
         Buff buff = new Buff(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
@@ -379,6 +423,7 @@ public class Shop {
         buff.setStarted(true);
         card.addBuff(buff);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("palang", 400, 4, 6, 2, 0, MELEE, ON_ATTACK);
         buff = new Buff(HEALTH_POWER, 1, -8, ONE_ENEMY_FORCE);
@@ -386,6 +431,7 @@ public class Shop {
         buff.setUsed(true);
         card.addBuff(buff);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gorg", 400, 3, 6, 1, 0, MELEE, ON_ATTACK);
         buff = new Buff(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
@@ -393,104 +439,131 @@ public class Shop {
         buff.setUsed(true);
         card.addBuff(buff);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("jadogar", 550, 4, 5, 4, 3, RANGED, PASSIVE);
         card.addBuff(new Buff(ATTACK_POWER, 1, 2, OWN_AND_INSIDER_FORCES_CLOSE));
         card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 1, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("jadogarAzam", 550, 6, 6, 6, 5, RANGED, PASSIVE);
         card.addBuff(new Buff(ATTACK_POWER, 2, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
         card.addBuff(new Buff(HOLY, 0, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_INSERT);//?????????
         card.addBuff(new Buff(ATTACK_POWER, 1, -1, true, ALL_INSIDER_FORCES));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gorazVahshi", 500, 6, 10, 14, 0, MELEE, ON_DEFEND);
         cards.add(card);//????????????
+        minions.add(card);
 
         card = new Minion("piran", 400, 8, 20, 12, 0, MELEE, ON_DEFEND);
         cards.add(card);//???????????
+        minions.add(card);
 
         card = new Minion("give", 450, 4, 5, 7, 5, RANGED, ON_DEFEND);
         cards.add(card);//???????????
+        minions.add(card);
 
         card = new Minion("bahman", 450, 8, 16, 9, 0, MELEE, ON_SPAWN);
         card.addBuff(new Buff(HEALTH_POWER, -1, -16, ONE_ENEMY_FORCE_RANDOM));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("ashkbos", 400, 7, 14, 8, 0, MELEE, ON_DEFEND);
         cards.add(card);//???????????
+        minions.add(card);
 
         card = new Minion("iraj", 500, 4, 6, 20, 3, RANGED, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gholBozorg", 600, 9, 30, 8, 2, HYBRID, NULL);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("gholTwoSar", 550, 4, 10, 4, 0, MELEE, ON_ATTACK);
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ONE_ENEMY_FORCE));//?????????????????
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("naneSarma", 500, 3, 3, 4, 5, RANGED, ON_SPAWN);
         card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("foladZereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
         card.addBuff(new Buff(HOLY, 12, -1, true, OWN));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("siavosh", 350, 4, 8, 5, 0, MELEE, ON_DEATH);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ENEMY_HERO));
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("shahGhol", 600, 5, 10, 4, 0, MELEE, COMBO);
         cards.add(card);
+        minions.add(card);
 
         card = new Minion("arzhangDiv", 600, 3, 6, 6, 0, MELEE, COMBO);
         cards.add(card);
+        minions.add(card);
         //-----------------------------heroes-----------------------------------------
 
         card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 4, OWN));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
         card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("ezhdehayeHaftsar", 8000, 50, 4, MELEE, 0, 0, 1);
         card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("rakhsh", 8000, 50, 4, MELEE, 0, 1, 2);
         card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("zahak", 10000, 50, 2, MELEE, 0, 0, 0);
         card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));//?????????????????????
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("kaveh", 8000, 50, 4, MELEE, 0, 1, 3);
         card.addBuff(new Buff(CELL_EFFECT_HOLY, 3, 0, ONE_CELL));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("arash", 10000, 30, 2, RANGED, 6, 2, 2);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ALL_ENEMY_FORCES_IN_ROW));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("afsane", 11000, 40, 3, RANGED, 3, 1, 2);
         card.addBuff(new Buff(DISPEL, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
         card.addBuff(new Buff(HOLY, -1, 3,true, OWN));
         cards.add(card);
+        heros.add(card);
 
         card = new Hero("rostam", 8000, 55, 7, HYBRID, 4, 0, 0);
         cards.add(card);
+        heros.add(card);
 
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
@@ -575,6 +648,13 @@ public class Shop {
         collectableItem = new CollectableItem("shamshirChini","12");
         collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 5, JUST_MELEE));
         collectibles.add(collectableItem);
+
+        //-----------------------------mode--------------------------------------
+         Deck deck1=new Deck();
+         decks.add(deck1);
+         deck1.setHero(heros.get(1));
+         deck1.addCard(spells.get(1));
+
     }
 
 }
