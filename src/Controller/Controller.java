@@ -382,5 +382,9 @@ public class Controller {
         view.show(game.getItemInfo());
     }
 
+    public void useCollectible(){
+        game.useCollectible();
+    }
+
 
 }

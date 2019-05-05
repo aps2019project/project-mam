@@ -96,6 +96,10 @@ public class Game {
         startGame();
     }
 
+    public Item getCurrentItem() {
+        return currentItem;
+    }
+
     public Map getMap() {
         return map;
     }

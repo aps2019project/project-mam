@@ -20,8 +20,8 @@ public class SelectCollectibleMenu extends ConsolePage {
         if (command.matches("show info")){
             controller.showCollectibleInfo();
         }
-        else if (command.matches("use \\d \\d")){
-
+        else if (command.matches("use")){
+            controller.useCollectible();
         }
         else if (command.matches("help")){
             help();
@@ -33,6 +33,8 @@ public class SelectCollectibleMenu extends ConsolePage {
 
     @Override
     public void showMenu() {
-        view.show("----------<Select Collectible>---------");
+        StringBuilder menu = new StringBuilder();
+        menu.append("-----<").append(controller.getGame().getCurrentItem().getId()).append(" selected>-----");
+        view.show(menu.toString());
     }
 }
