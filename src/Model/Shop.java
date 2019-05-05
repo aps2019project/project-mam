@@ -442,65 +442,48 @@ public class Shop {
 
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
+        item.addBuff(new Buff(INCREASE_MANA, 3, 1, TargetCommunity.NONE));
         items.add(item);
 
         item = new UsableItem("namosSpar", 4000, "12");
+        item.addBuff(new Buff(HOLY, -1, 12, INSIDER_HERO));
         items.add(item);
 
         item = new UsableItem("kamanDamol", 30000, " ");
+        item.addBuff(new Buff(DISARM, 1, 0, INSIDER_HERO));//???????????????
         items.add(item);
 
         item = new UsableItem("parSimorgh", 3500, "12");
+        item.addBuff(new Buff(ATTACK_POWER, -1, -2, ENEMY_HERO));//???????????????????
         items.add(item);
 
         item = new UsableItem("terrorHood", 5000, "12");
+        item.addBuff(new Buff(ATTACK_WEAKNESS, 1, 2, ONE_ENEMY_FORCE_RANDOM));
         items.add(item);
 
         item = new UsableItem("kingWisdom", 9000, "12");
+        item.addBuff(new Buff(INCREASE_MANA, -1, 1, TargetCommunity.NONE));
         items.add(item);
 
         item = new UsableItem("assassinationDagger", 15000, "12");
+        item.addBuff(new Buff(ATTACK_INSERT, -1, 1, ENEMY_HERO));//???????????????
         items.add(item);
 
         item = new UsableItem("poisonousDagger", 7000, "12");
+        //item.addBuff(new Buff());  ??????????????????????
         items.add(item);
 
         item = new UsableItem("shockHammer", 15000, "12");
+        //???????????????????????
         items.add(item);
 
         item = new UsableItem("soulEater", 4000, "12");
+        //?????????????????????
         items.add(item);
 
         item = new UsableItem("ghoslTamid", 20000, "12");
+        //???????????????
         items.add(item);
-
-        /*item = new UsableItem("noshDaroo", 0, "12");
-        items.add(item);*/
-
-        /*item = new UsableItem("tirDoshakh", 0, "12");
-        items.add(item);*/
-
-        /*item = new UsableItem("eksir", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("majonMana", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("majonRoiintani", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("nefrinMarg", 0, "12");
-        items.add(item);
-
-        item = new UsableItem("randomdamage", 0, "12");
-        items.add(item);*/
-
-        /*item = new UsableItem("bladesOfAgility", 0, "12");
-        items.add(item);*/
-
-
-        /*item = new UsableItem("shamshirChini", 0, "12");
-        items.add(item);*/
 
         //-----------------------------collectible--------------------------------------
 

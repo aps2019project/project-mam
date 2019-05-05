@@ -16,6 +16,7 @@ public enum BuffType {
     REMOVE_INSIDERS_BUFFS,
     KILL,
     INCREASE_MANA,
+    ATTACK_INSERT,
     NONE,
 
 }
