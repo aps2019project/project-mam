@@ -28,7 +28,10 @@ public class MainBattleMenuPage extends ConsolePage {
     public void handleCommand(String command) {
         if (controller.isEnded()) {
             controller.showEnd();
-            view.getPages().push(new MainMenuPage());
+            view.back();
+            view.back();
+            view.back();
+            view.back();
         }
 
         if (command.matches("game info")) {
@@ -60,7 +63,10 @@ public class MainBattleMenuPage extends ConsolePage {
         } else if (command.matches("help")) {
             help();
         } else if (command.matches("exit")) {
-            view.getPages().push(new MainMenuPage());
+            view.back();
+            view.back();
+            view.back();
+            view.back();
         } else view.printError(ErrorType.INVALID_COMMAND);
     }
 

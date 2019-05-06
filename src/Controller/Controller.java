@@ -373,8 +373,10 @@ public class Controller {
     }
 
     public void showEnd() {
-        view.show("ended");
-        view.show(String.valueOf(game.getWinner()));
+        view.show("Ended\nWinner: ");
+        view.show(game.getWinnerName());
+        view.show("Price: ");
+        view.show(String.valueOf(game.getPrice()));
     }
 
     public void showInfoInGraveyard(String cardId) {

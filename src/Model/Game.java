@@ -57,6 +57,8 @@ public class Game {
 
     private boolean isGameEnd = false;
     private int winner;
+    private String winnerName;
+    private int price = 1000;
 
     public Game(Deck firstPlayerDeck, Deck secondPlayerDeck, String firstPlayerName,
                 String secondPlayerName, String mode, int flagCount) {
@@ -97,6 +99,11 @@ public class Game {
         setNextfirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
+    }
+
+
+    public int getPrice() {
+        return price;
     }
 
     public Item getCurrentItem() {
@@ -261,16 +268,30 @@ public class Game {
         return winner;
     }
 
+    public String getWinnerName() {
+        return winnerName;
+    }
+
     public void checkGameResult() {
         if (mode.equals(SECOND_MODE)) {
             if (havingFlagCount == 6) {
                 for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
                     if (entry.getValue().getFlagCount() == 1) {
+                        if (kind != null && kind.equalsIgnoreCase("1"))
+                            price = 1000;
+                        winnerName = firstUser.getName();
+                        firstUser.setMoney(price);
+                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
                         winner = 1;
                         isGameEnd = true;
                     }
                 }
                 if (!isGameEnd) {
+                    if (kind != null && kind.equalsIgnoreCase("1"))
+                        price = 1000;
+                    winnerName = secondUser.getName();
+                    secondUser.setMoney(price);
+                    secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
                     winner = 2;
                     isGameEnd = true;
                 }
@@ -278,9 +299,17 @@ public class Game {
 
         } else if (mode.equals(THIRD_MODE)) {
             if (getPlayer1FlagCount() > flagCount / 2) {
+                if (kind != null && kind.equalsIgnoreCase("1"))
+                    price = 1500;
+                firstUser.setMoney(price);
+                firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
                 isGameEnd = true;
                 winner = 1;
             } else if (getPlayer2FlagCount() > flagCount / 2) {
+                if (kind != null && kind.equalsIgnoreCase("1"))
+                    price = 1500;
+                secondUser.setMoney(price);
+                secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
                 isGameEnd = true;
                 winner = 2;
             }
@@ -721,6 +750,8 @@ public class Game {
                 }
         }
         Buff.refreshBuffs();
+        checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
+        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);
         if (canCounterAttack(currentCard.getId(), cardId))
             counterAttack(cardId, currentCard.getId());
         checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
@@ -840,6 +871,18 @@ public class Game {
                     }
                 Buff.refreshBuffs();
                 if (entry.getValue().getCard() instanceof Hero) {
+                    if (kind != null && kind.equalsIgnoreCase("1"))
+                        price = 500;
+                    if (player == 1) {
+                        winnerName = firstUser.getName();
+                        firstUser.setMoney(price);
+                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
+                    }
+                    else {
+                        winnerName = secondUser.getName();
+                        secondUser.setMoney(price);
+                        secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
+                    }
                     winner = player;
                     isGameEnd = true;
                     break;

@@ -27,7 +27,7 @@ public class Buff {
     }
 
     public Buff(BuffType type, int buffPower, int activationTime,
-                 boolean isContinous, TargetCommunity targetCommunity) {
+                boolean isContinous, TargetCommunity targetCommunity) {
         this.type = type;
         this.buffPower = buffPower;
         this.activationTime = activationTime;
@@ -81,7 +81,7 @@ public class Buff {
         remainTime--;
     }
 
-    public static void addBuff(Buff buff){
+    public static void addBuff(Buff buff) {
         buffs.add(buff);
     }
 
@@ -117,16 +117,16 @@ public class Buff {
         return activationTime;
     }
 
-    public Buff copy(){
+    public Buff copy() {
         return null;
     }
 
     public static void activeholyBuff(Card card) {
         if (buffs != null)
-        for (Buff buff : buffs) {
-            if (buff.getCard().equals(card) && buff instanceof Holy)
-                buff.doEffect();
-        }
+            for (Buff buff : buffs) {
+                if (buff.getCard().equals(card) && buff instanceof Holy)
+                    buff.doEffect();
+            }
     }
 
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
@@ -172,17 +172,17 @@ public class Buff {
                 for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet())
                     if (entry.getValue().getRow() == attacker.getRow())
                         cells.add(entry.getValue());
-                    break;
+                break;
             case ALL_ENEMY_FORCES_IN_COLUMN:
                 for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet())
                     if (entry.getValue().getColumn() == attacker.getColumn())
                         cells.add(entry.getValue());
-                    break;
+                break;
             case ALL_ENEMY_FORCES_CLOSE:
                 for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
                     if (map.getManhatanDistance(entry.getValue(), attacker) == 1 ||
                             (map.getManhatanDistance(entry.getValue(), attacker) == 2 && entry.getValue().getRow() != attacker
-                            .getRow() && entry.getValue().getColumn() != attacker.getColumn())){
+                                    .getRow() && entry.getValue().getColumn() != attacker.getColumn())) {
                         cells.add(entry.getValue());
                     }
                 }
@@ -207,29 +207,30 @@ public class Buff {
         return cells;
     }
 
-    public static void updateBuffs(){
+    public static void updateBuffs() {
         if (buffs != null)
-        for (Buff buff : buffs) {
-            buff.setUsed(false);
-            buff.decrementOfTime();
-            if (buff.getTime() == 0){
-                buff.removeBuff();
+            for (Buff buff : buffs) {
+                buff.setUsed(false);
+                buff.decrementOfTime();
+                if (buff.getTime() == 0) {
+                    buff.removeBuff();
+                }
             }
-        }
     }
 
-    public static void refreshBuffs(){
-        for (Buff buff : buffs) {
-            if (!buff.isUsed && buff.isStarted){
-                buff.doEffect();
-                buff.isUsed = true;
+    public static void refreshBuffs() {
+        if (buffs != null)
+            for (Buff buff : buffs) {
+                if (!buff.isUsed && buff.isStarted) {
+                    buff.doEffect();
+                    buff.isUsed = true;
+                }
             }
-        }
     }
 
-    public static void activePassiveBuff(HashMap<Integer, Cell> cells){
+    public static void activePassiveBuff(HashMap<Integer, Cell> cells) {
         for (java.util.Map.Entry<Integer, Cell> entry : cells.entrySet()) {
-            if (entry.getValue().getCard().getSPActivationTime() == SPActivationTime.PASSIVE){
+            if (entry.getValue().getCard().getSPActivationTime() == SPActivationTime.PASSIVE) {
                 for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(entry.getValue().getCard());
@@ -242,10 +243,16 @@ public class Buff {
     public void setGame(Game game) {
     }
 
-    public void addBuff(Cell cell) {}
-    public void doEffect(){}
-    public void doEffect(Cell cell){}
-    public void removeBuff(){
+    public void addBuff(Cell cell) {
+    }
+
+    public void doEffect() {
+    }
+
+    public void doEffect(Cell cell) {
+    }
+
+    public void removeBuff() {
         buffs.remove(this);
     }
 }
