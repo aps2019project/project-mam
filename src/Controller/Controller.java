@@ -23,7 +23,7 @@ public class Controller {
     // private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
-    private Game game;
+    private Game game = new Game();
     private View view = View.getInstance();
 
     public void setGame(Game game) {
@@ -56,6 +56,7 @@ public class Controller {
     }
 
     public void createAccount(String command) {
+        view = View.getInstance();
         String userName = command.substring(15);
         view.show("password :");
         String password = view.getPassword();
@@ -98,10 +99,10 @@ public class Controller {
 
     //------------------------------------AI------------------------------------
 
-    /*public String getAiCommand(){
+    public String getAiCommand(){
 
         return ai.getCommand();
-    }*/
+    }
 
     //--------------------------------------collection------------------------------
 

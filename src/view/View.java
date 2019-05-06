@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class View {
 
-    //private Controller controller = Controller.getInstance();
+    private Controller controller = Controller.getInstance();
     private Scanner scanner = new Scanner(System.in);
     private static final View VIEW = new View();
     private boolean isEnded = false;
@@ -35,10 +35,10 @@ public class View {
                     break;
                 currentPage.showMenu();
             }
-            /*if (!BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai"))
+            if (!BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai"))
                 currentPage.handleCommand(getNewCommand());
-            else currentPage.handleCommand(getNewAiCommand());*/
-            currentPage.handleCommand(getNewCommand());
+            else currentPage.handleCommand(getNewAiCommand());
+            //currentPage.handleCommand(getNewCommand());
         }
     }
 
@@ -54,9 +54,9 @@ public class View {
         return scanner.nextLine().toLowerCase().trim();
     }
 
-    /*public String getNewAiCommand() {
+    public String getNewAiCommand() {
         return controller.getAiCommand();
-    }*/
+    }
 
     public String getPassword() {
         return scanner.nextLine();

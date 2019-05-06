@@ -6,7 +6,7 @@ public class Collection {
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<UsableItem> items = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-    private Deck mainDeck;
+    private Deck mainDeck = new Deck();
 
     public ArrayList<Deck> getDecks() {
         return decks;

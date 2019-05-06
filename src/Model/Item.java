@@ -8,7 +8,7 @@ public class Item {
     private String name;
     private String desc;
     private int id;
-    private ArrayList<Buff> buffs;
+    private ArrayList<Buff> buffs = new ArrayList<>();
 
     public Item(String name, String desc) {
         this.name = name;

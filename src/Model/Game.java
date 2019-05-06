@@ -22,7 +22,7 @@ public class Game {
     private int extraPlayer1Mana = 0;
     private int extraPlayer2Mana = 0;
     private Map map = new Map();
-    private Deck firstPlayerDeck;
+    private Deck firstPlayerDeck = new Deck();
     private Deck secondPlayerDeck;
 
     private User firstUser;
@@ -73,6 +73,8 @@ public class Game {
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
     }
+
+    public Game(){}
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         this.firstUser = firstUser;
