@@ -22,7 +22,7 @@ public class Game {
     private int extraPlayer1Mana = 0;
     private int extraPlayer2Mana = 0;
     private Map map = new Map();
-    private Deck firstPlayerDeck;
+    private Deck firstPlayerDeck = new Deck();
     private Deck secondPlayerDeck;
 
     private User firstUser;
@@ -73,6 +73,8 @@ public class Game {
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
     }
+
+    public Game(){}
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         this.firstUser = firstUser;
@@ -369,11 +371,11 @@ public class Game {
                 return false;
             }
         } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == 1) {
-            if (!map.isCellEmpty(x, y + 1) && !map.isCellEmpty(x - 1, y)) {
+            if (!map.isCellEmpty(x, y + 1) && x - 1 >= 0 && !map.isCellEmpty(x - 1, y)) {
                 return false;
             }
         } else if (currentCard.getColumn() - x == -1 && currentCard.getRow() - y == -1) {
-            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x - 1, y)) {
+            if (y - 1 >= 0 && !map.isCellEmpty(x, y - 1) && x - 1 >= 0 && !map.isCellEmpty(x - 1, y)) {
                 return false;
             }
         } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == 1) {
@@ -381,7 +383,7 @@ public class Game {
                 return false;
             }
         } else if (currentCard.getColumn() - x == 1 && currentCard.getRow() - y == -1) {
-            if (!map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x + 1, y)) {
+            if (y - 1 >= 0 && !map.isCellEmpty(x, y - 1) && !map.isCellEmpty(x + 1, y)) {
                 return false;
             }
         }
@@ -880,7 +882,7 @@ public class Game {
     }
 
     public boolean isValidCellForInsert(int x, int y) {
-        if (map.isCellEmpty(x, y) && map.isTargetInMap(x, y) && isInsiderForceAbutment(x, y)) {
+        if (map.isTargetInMap(x, y) && map.isCellEmpty(x, y) && isInsiderForceAbutment(x, y)) {
             return true;
         }
         return false;

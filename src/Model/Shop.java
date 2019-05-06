@@ -24,6 +24,10 @@ public class Shop {
     private Shop() {
     }
 
+    public static ArrayList<Deck> getDecks() {
+        return decks;
+    }
+
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
@@ -494,7 +498,7 @@ public class Shop {
         minions.add(card);
         //-----------------------------heroes-----------------------------------------
 
-        card = new Hero("div sfid", 8000, 50, 4, MELEE, 0, 1, 2);
+        card = new Hero("divsfid", 8000, 50, 4, MELEE, 0, 1, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 4, OWN));
         cards.add(card);
         heros.add(card);
@@ -627,36 +631,36 @@ public class Shop {
         collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 5, JUST_MELEE));
         collectibles.add(collectableItem);
 
-        //-----------------------------mode--------------------------------------
+        //-----------------------------mission deck--------------------------------------
          Deck deck1=new Deck();
          decks.add(deck1);
-         deck1.setHero(heros.get(1));
-         deck1.addCard(spells.get(1)).addCard(spells.get(7)).addCard(spells.get(10)).addCard(spells.get(10))
-                 .addCard(spells.get(11)).addCard(spells.get(12)).addCard(spells.get(18)).addCard(spells.get(20))
-                 .addCard(minions.get(1)).addCard(minions.get(9)).addCard(minions.get(11)).addCard(minions.get(11))
-                 .addCard(minions.get(13)).addCard(minions.get(17)).addCard(minions.get(18)).addCard(minions.get(21))
-                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(38)).addCard(minions.get(36))
-                 .addCard(minions.get(40)).addItem(items.get(1));
+         deck1.setHero(heros.get(0));
+         deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
+                 .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
+                 .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
+                 .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
+                 .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
+                 .addCard(minions.get(39)).addItem(items.get(0));
 
         Deck deck2=new Deck();
         decks.add(deck2);
-        deck2.setHero(heros.get(5));
-        deck2.addCard(spells.get(2)).addCard(spells.get(3)).addCard(spells.get(5)).addCard(spells.get(9))
-                .addCard(spells.get(8)).addCard(spells.get(13)).addCard(spells.get(19))
-                .addCard(minions.get(2)).addCard(minions.get(3)).addCard(minions.get(5)).addCard(minions.get(8))
-                .addCard(minions.get(12)).addCard(minions.get(15)).addCard(minions.get(15)).addCard(minions.get(19))
-                .addCard(minions.get(23)).addCard(minions.get(27)).addCard(minions.get(30)).addCard(minions.get(33))
-                .addCard(minions.get(39)).addItem(items.get(18));
+        deck2.setHero(heros.get(4));
+        deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
+                .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
+                .addCard(minions.get(1)).addCard(minions.get(2)).addCard(minions.get(4)).addCard(minions.get(7))
+                .addCard(minions.get(11)).addCard(minions.get(14)).addCard(minions.get(14)).addCard(minions.get(18))
+                .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(29)).addCard(minions.get(32))
+                .addCard(minions.get(38)).addItem(items.get(9));
 
         Deck deck3=new Deck();
         decks.add(deck3);
-        deck3.setHero(heros.get(7));
-        deck3.addCard(spells.get(6)).addCard(spells.get(10)).addCard(spells.get(12)).addCard(spells.get(14))
-                .addCard(spells.get(15)).addCard(spells.get(16)).addCard(spells.get(1)).addCard(spells.get(7))
-                .addCard(minions.get(25)).addCard(minions.get(28)).addCard(minions.get(29)).addCard(minions.get(31))
-                .addCard(minions.get(34)).addCard(minions.get(6)).addCard(minions.get(7)).addCard(minions.get(10))
-                .addCard(minions.get(14)).addCard(minions.get(16)).addCard(minions.get(16)).addCard(minions.get(20))
-                .addCard(minions.get(24)).addItem(items.get(12));
+        deck3.setHero(heros.get(6));
+        deck3.addCard(spells.get(5)).addCard(spells.get(9)).addCard(spells.get(11)).addCard(spells.get(13))
+                .addCard(spells.get(14)).addCard(spells.get(15)).addCard(spells.get(16))
+                .addCard(minions.get(24)).addCard(minions.get(27)).addCard(minions.get(28)).addCard(minions.get(30))
+                .addCard(minions.get(33)).addCard(minions.get(5)).addCard(minions.get(6)).addCard(minions.get(9))
+                .addCard(minions.get(13)).addCard(minions.get(15)).addCard(minions.get(15)).addCard(minions.get(19))
+                .addCard(minions.get(23)).addItem(items.get(4));
 
     }
 

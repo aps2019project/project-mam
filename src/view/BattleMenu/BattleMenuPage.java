@@ -16,7 +16,7 @@ public class BattleMenuPage extends ConsolePage {
     private static String gameKind = null;
     private static String gameMood = null;
     private static String mission = null;
-    private User secondUser = AI.getAI();
+    private User secondUser = new User("notAi");
     private User firstUser = controller.getFirstUser();
     private static int flags;
 
@@ -45,6 +45,7 @@ public class BattleMenuPage extends ConsolePage {
             case "1":
                 setNumOfPlayers("single player");
                 numOfPlayers = "single player";
+                //secondUser = AI.getAI();
                 view.getPages().push(new GameKindMenuPage());
                 break;
             case "2":
@@ -79,7 +80,7 @@ public class BattleMenuPage extends ConsolePage {
     }
 
     public User getFirstUser() {
-        return firstUser;
+        return controller.getFirstUser();
     }
 
     public User getSecondUser() {
