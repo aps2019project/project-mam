@@ -1,7 +1,6 @@
 package Model.Buffs;
 
 import Model.*;
-import com.sun.deploy.nativesandbox.NativeSandboxBroker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,21 +129,6 @@ public class Buff {
         }
     }
 
-    public static void activeStunBuff(Card card){
-        for (Buff buff : buffs) {
-            if (buff.getCard().equals(card) && buff instanceof Stun){
-                buff.doEffect();
-            }
-        }
-    }
-
-    public static void activeDisarmBuff(Card card){
-        for (Buff buff : buffs) {
-            if (buff.getCard().equals(card) && buff instanceof  Disarm)
-                buff.doEffect();
-        }
-    }
-
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
                                                       HashMap<Integer, Cell> attackerTeam,
                                                       HashMap<Integer, Cell> defenderTeam,
@@ -223,14 +207,6 @@ public class Buff {
         return cells;
     }
 
-    public static void doEffects(){
-        for (Buff buff : buffs) {
-            if (buff.isUsed() && buff.isStarted()){
-                buff.doEffect();
-                buff.setUsed(true);
-            }
-        }
-    }
     public static void updateBuffs(){
         if (buffs != null)
         for (Buff buff : buffs) {
@@ -238,6 +214,15 @@ public class Buff {
             buff.decrementOfTime();
             if (buff.getTime() == 0){
                 buff.removeBuff();
+            }
+        }
+    }
+
+    public static void refreshBuffs(){
+        for (Buff buff : buffs) {
+            if (!buff.isUsed && buff.isStarted){
+                buff.doEffect();
+                buff.isUsed = true;
             }
         }
     }
@@ -257,9 +242,9 @@ public class Buff {
     public void setGame(Game game) {
     }
 
+    public void addBuff(Cell cell) {}
     public void doEffect(){}
     public void doEffect(Cell cell){}
-    public void addBuff(Cell cell){}
     public void removeBuff(){
         buffs.remove(this);
     }
