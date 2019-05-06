@@ -25,8 +25,6 @@ public class User {
         lastGames = new ArrayList<>();
         idCounter = 1;
         User.addUser(this);
-
-       // this.numberOfWin = Integer.parseInt(password);
     }
 
     public User() {
@@ -83,6 +81,14 @@ public class User {
 
     public ArrayList<StringBuilder> getLastGames() {
         return lastGames;
+    }
+
+    public void incrementOfMoney(int number){
+        money += number;
+    }
+
+    public void incrementOfNumberOfWin(){
+        numberOfWin += 1;
     }
 
     public static void addUser(User user) {
