@@ -653,7 +653,32 @@ public class Shop {
          Deck deck1=new Deck();
          decks.add(deck1);
          deck1.setHero(heros.get(1));
-         deck1.addCard(spells.get(1));
+         deck1.addCard(spells.get(1)).addCard(spells.get(7)).addCard(spells.get(10)).addCard(spells.get(10))
+                 .addCard(spells.get(11)).addCard(spells.get(12)).addCard(spells.get(18)).addCard(spells.get(20))
+                 .addCard(minions.get(1)).addCard(minions.get(9)).addCard(minions.get(11)).addCard(minions.get(11))
+                 .addCard(minions.get(13)).addCard(minions.get(17)).addCard(minions.get(18)).addCard(minions.get(21))
+                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(38)).addCard(minions.get(36))
+                 .addCard(minions.get(40)).addItem(items.get(1));
+
+        Deck deck2=new Deck();
+        decks.add(deck2);
+        deck2.setHero(heros.get(5));
+        deck2.addCard(spells.get(2)).addCard(spells.get(3)).addCard(spells.get(5)).addCard(spells.get(9))
+                .addCard(spells.get(8)).addCard(spells.get(13)).addCard(spells.get(19))
+                .addCard(minions.get(2)).addCard(minions.get(3)).addCard(minions.get(5)).addCard(minions.get(8))
+                .addCard(minions.get(12)).addCard(minions.get(15)).addCard(minions.get(15)).addCard(minions.get(19))
+                .addCard(minions.get(23)).addCard(minions.get(27)).addCard(minions.get(30)).addCard(minions.get(33))
+                .addCard(minions.get(39)).addItem(items.get(18));
+
+        Deck deck3=new Deck();
+        decks.add(deck3);
+        deck3.setHero(heros.get(7));
+        deck3.addCard(spells.get(6)).addCard(spells.get(10)).addCard(spells.get(12)).addCard(spells.get(14))
+                .addCard(spells.get(15)).addCard(spells.get(16)).addCard(spells.get(1)).addCard(spells.get(7))
+                .addCard(minions.get(25)).addCard(minions.get(28)).addCard(minions.get(29)).addCard(minions.get(31))
+                .addCard(minions.get(34)).addCard(minions.get(6)).addCard(minions.get(7)).addCard(minions.get(10))
+                .addCard(minions.get(14)).addCard(minions.get(16)).addCard(minions.get(16)).addCard(minions.get(20))
+                .addCard(minions.get(24)).addItem(items.get(12));
 
     }
 

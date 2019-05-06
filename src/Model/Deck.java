@@ -92,8 +92,9 @@ public class Deck {
         return allInfo.toString();
     }
 
-    public void addCard(Card card) {
+    public Deck addCard(Card card) {
         this.cards.add(card);
+        return this;
     }
 
     public void removeCard(Card card) {this.cards.remove(card); }
