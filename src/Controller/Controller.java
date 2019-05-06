@@ -323,6 +323,7 @@ public class Controller {
     }
 
     public void endTurn() {
+        view.show("---<End turn>---");
         game.endTurn();
     }
 
