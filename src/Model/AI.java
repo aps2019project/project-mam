@@ -20,6 +20,7 @@ public class AI {
         return ai;
     }
 
+    private boolean allSelected = false;
     private boolean inserted = false;
     private boolean selected = false;
     private boolean reselected = false;
@@ -34,7 +35,7 @@ public class AI {
 
     public String getCommand() {
         game = Controller.getGame();
-        if (cardsCanInsert() && insertTarget() && !inserted){
+        if (cardsCanInsert() && insertTarget() && !inserted) {
             commandInsert();
             inserted = true;
             return command;
@@ -48,30 +49,36 @@ public class AI {
                 return command;
             }
         }
-        if (cardCanMove() && moveTarget() && !moved && selected){
+        if (cardCanMove() && moveTarget() && !moved && selected) {
             moved = true;
             commandMove();
             return command;
         }
-        if (cardCanAttack() && attackTarget() && !attacked && selected && !reselected){
+        if (cardCanAttack() && attackTarget() && !attacked && selected && !reselected) {
             reselected = true;
             commandSelect();
             return command;
         }
-        if (cardCanAttack() && attackTarget() && !attacked && selected){
+        if (cardCanAttack() && attackTarget() && !attacked && selected) {
             attacked = true;
             selected = false;
             commandAttack();
             return command;
         }
-        endTurn();
-        return command;
+        if (allSelected) {
+            endTurn();
+            return command;
+        }else {
+            selected = false;
+            return "";
+        }
     }
 
-    public void endTurn(){
+    public void endTurn() {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
             entry.getValue().getCard().setSelected(false);
         }
+        allSelected = false;
         inserted = false;
         selected = false;
         reselected = false;
@@ -82,7 +89,7 @@ public class AI {
 
     public boolean cardsCanInsert() {
         for (Map.Entry<Integer, Card> entry : game.getSecondPlayerHand().entrySet()) {
-            if (entry.getValue().getMP() <= game.getSecondPlayerMana()){
+            if (entry.getValue().getMP() <= game.getSecondPlayerMana()) {
                 insertCard = entry.getValue();
                 return true;
             }
@@ -90,10 +97,10 @@ public class AI {
         return false;
     }
 
-    public boolean insertTarget(){
-        for (int i = 0; i < 5; i++){
-            for (int j = 0; j < 9; j++){
-                if (game.getMap().isCellEmpty(i, j)){
+    public boolean insertTarget() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (game.isValidCellForInsert(i, j)) {
                     insertTarget = game.getMap().getCells()[i][j];
                     return true;
                 }
@@ -104,19 +111,20 @@ public class AI {
 
     public void commandInsert() {
         StringBuilder newCommand = new StringBuilder();
-        newCommand.append("insert ").append(insertCard.getName()).append(" in ").append(insertTarget.getColumn())
-                .append(" ").append(insertTarget.getRow());
+        newCommand.append("insert ").append(insertCard.getName()).append(" in ").append(insertTarget.getRow())
+                .append(" ").append(insertTarget.getColumn());
         command = newCommand.toString();
     }
 
     public boolean cardsCanSelect() {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (!entry.getValue().getCard().isSelected()){
+            if (!entry.getValue().getCard().isSelected()) {
                 entry.getValue().getCard().setSelected(true);
                 selectedCard = entry.getValue().getCard();
                 return true;
             }
         }
+        allSelected = true;
         return false;
     }
 
@@ -126,14 +134,14 @@ public class AI {
         command = newCommand.toString();
     }
 
-    public boolean cardCanMove(){
+    public boolean cardCanMove() {
         return selectedCard.isCanMove();
     }
 
-    public boolean moveTarget(){
-        for (int i = 0; i < 5; i++){
-            for (int j = 0; j < 9; j++){
-                if (game.cardCanMove(i, j)){
+    public boolean moveTarget() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (game.cardCanMove(i, j)) {
                     moveTarget = game.getMap().getCells()[i][j];
                     return true;
                 }
@@ -142,19 +150,19 @@ public class AI {
         return false;
     }
 
-    public void commandMove(){
+    public void commandMove() {
         StringBuilder newCommand = new StringBuilder();
         newCommand.append("move to ").append(moveTarget.getRow()).append(" ").append(moveTarget.getColumn());
         command = newCommand.toString();
     }
 
-    public boolean cardCanAttack(){
+    public boolean cardCanAttack() {
         return selectedCard.isCanAttack();
     }
 
-    public boolean attackTarget(){
+    public boolean attackTarget() {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            if (game.isOppAvailableForAttack(entry.getValue().getCard().getId(), selectedCard.getId())){
+            if (game.isOppAvailableForAttack(entry.getValue().getCard().getId(), selectedCard.getId())) {
                 attackTarget = entry.getValue().getCard();
                 return true;
             }
@@ -162,7 +170,7 @@ public class AI {
         return false;
     }
 
-    public void commandAttack(){
+    public void commandAttack() {
         StringBuilder newCommand = new StringBuilder();
         newCommand.append("attack ").append(attackTarget.getId());
         command = newCommand.toString();
