@@ -28,6 +28,10 @@ public class Shop {
         return decks;
     }
 
+    public static ArrayList<CollectableItem> getCollectibles() {
+        return collectibles;
+    }
+
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
@@ -221,87 +225,107 @@ public class Shop {
     public static void importCards() {
         Card card = new Spell("TotalDisarm", 1000, 0);
         card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("AreaDispel", 1500, 2);
         card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, TWO_IN_TWO));
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, TWO_IN_TWO));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Empower", 250, 1);
         card.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("FireBall", 400, 1);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ONE_ENEMY_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("GodStrength", 450, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 4, INSIDER_HERO));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("HellFire", 600, 3);
         card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 0, TWO_IN_TWO));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("LightingBolt", 1250, 2);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 8, ENEMY_HERO));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("poisonLake", 900, 5);
         card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Madness", 650, 0);
         card.addBuff(new Buff(ATTACK_POWER, 3, 4, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(DISARM, 3, 0, ONE_INSIDER_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("AllDisarm", 2000, 9);
         card.addBuff(new Buff(DISARM, 1, 0, ALL_ENEMY_FORCES));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("AllPoison", 1500, 8);
         card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Dispel", 2100, 0);
         card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, ALL_INSIDER_FORCES));
         card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ALL_ENEMY_FORCES));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("HealthWithProfit", 2250, 0);
         card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(HOLY, 3, 2, ONE_INSIDER_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("PowerUp", 2500, 2);
         card.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("AllPower", 2000, 4);
         card.addBuff(new Buff(ATTACK_POWER, -1, 2, ALL_INSIDER_FORCES));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("AllAttack", 1500, 4);
         card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ALL_ENEMY_FORCES_IN_COLUMN));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Weakening", 1000, 1);
         card.addBuff(new Buff(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Sacrifice", 1600, 2);
         card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
         card.addBuff(new Buff(ATTACK_POWER, 1, 8, ONE_INSIDER_FORCE));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("KingsGuard", 1750, 9);
         card.addBuff(new Buff(KILL, 1, 0, ONE_ENEMY_FORCE_RANDOM));
+        spells.add(card);
         cards.add(card);
 
         card = new Spell("Shock", 1200, 1);
         card.addBuff(new Buff(STUN, 2, 0, ONE_ENEMY_FORCE));
+        spells.add(card);
         cards.add(card);
 
         //----------------------------minions-----------------------

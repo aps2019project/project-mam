@@ -74,7 +74,8 @@ public class Game {
         secondPlayerMana = basicMana;
     }
 
-    public Game(){}
+    public Game() {
+    }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         this.firstUser = firstUser;
@@ -110,7 +111,7 @@ public class Game {
         return currentCard;
     }
 
-    public int getMana(){
+    public int getMana() {
         if (getTurn() % 2 == 1)
             return firstPlayerMana;
         else
@@ -224,6 +225,7 @@ public class Game {
 
         map.getFirstPlayerCellCard().put(firstPlayerDeck.getHero().getId(), map.getCells()[2][0]);
         map.getSecondPlayerCellCard().put(secondPlayerDeck.getHero().getId(), map.getCells()[2][8]);
+
         if (flagCount == 1)
             map.getCells()[2][4].setFlagCount(1);
         else {
@@ -238,10 +240,16 @@ public class Game {
             if (flagCount % 2 == 1)
                 map.getCells()[2][4].incrementOfFlag(1);
         }
+        insertCollectibleToMap();
+    }
+
+    private void insertCollectibleToMap(){
+        int x, y;
+        Random rand = new Random();
 
     }
 
-    public void updateHavingFlagCount() {
+    private void updateHavingFlagCount() {
         if (havingFlagCount != 0)
             havingFlagCount++;
         if (mode.equals(SECOND_MODE) && (getPlayer1FlagCount() == 1 ||
@@ -621,10 +629,17 @@ public class Game {
                     }
                     currentCard = entry.getValue();
                 }
-                if (entry.getValue().getSPActivationTime() == SPActivationTime.ON_INSERT){
+                if (entry.getValue().getSPActivationTime() == SPActivationTime.ON_INSERT) {
                     for (Buff buff : entry.getValue().getSpecialPower()) {                //spell
                         buffAlocator(map.getCells()[x][y], buff);
                     }
+                }
+                if (map.getCells()[x][y].haveCollectableItem()) {
+                    if (getTurn() % 2 == 1)
+                        player1Collectable.add(map.getCells()[x][y].getCollectableItem());
+                    else
+                        player2Collectable.add(map.getCells()[x][y].getCollectableItem());
+                    map.getCells()[x][y].setCollectableItem(null);
                 }
                 Hand.remove(entry.getValue().getId());
                 break;
@@ -642,6 +657,8 @@ public class Game {
     public void endTurn() {
         if (turn % 2 == 0) {
             basicMana++;
+            updateCoolDown(getHero(map.getFirstPlayerCellCard()));
+            updateCoolDown(getHero(map.getSecondPlayerCellCard()));
             firstPlayerMana = basicMana + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
