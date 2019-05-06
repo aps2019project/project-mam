@@ -292,6 +292,10 @@ public class Collection {
         }
     }
 
+    public void setMainDeck(Deck deck){
+        this.mainDeck = deck;
+    }
+
     public boolean isValidMainDeck() {
         return isValidDeck(mainDeck.getName());
     }

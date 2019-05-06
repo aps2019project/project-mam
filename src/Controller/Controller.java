@@ -23,14 +23,14 @@ public class Controller {
     // private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
-    private Game game = new Game();
+    private static Game game = new Game();
     private View view = View.getInstance();
 
     public void setGame(Game game) {
         this.game = game;
     }
 
-    public Game getGame() {
+    public static Game getGame() {
         return game;
     }
 
@@ -100,8 +100,21 @@ public class Controller {
     //------------------------------------AI------------------------------------
 
     public String getAiCommand(){
-
         return ai.getCommand();
+    }
+
+    public boolean isAiTurn(){
+        return game.getTurn() % 2 == 0;
+    }
+
+    public void setAiMainDeck(int mission){
+        AI.getAI().getCollection().setMainDeck(Shop.getDecks().get(mission));
+        int counter = 1;
+        for (Card card : AI.getAI().getCollection().getMainDeck().getCards()) {
+            card.setId(counter);
+            counter++;
+        }
+
     }
 
     //--------------------------------------collection------------------------------

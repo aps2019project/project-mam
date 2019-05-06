@@ -35,10 +35,9 @@ public class View {
                     break;
                 currentPage.showMenu();
             }
-            if (!BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai"))
-                currentPage.handleCommand(getNewCommand());
-            else currentPage.handleCommand(getNewAiCommand());
-            //currentPage.handleCommand(getNewCommand());
+            if (BattleMenuPage.getInstance().getSecondUser().getName().equalsIgnoreCase("ai") && controller.isAiTurn() && !controller.isEnded())
+                currentPage.handleCommand(getNewAiCommand());
+            else currentPage.handleCommand(getNewCommand());
         }
     }
 

@@ -45,7 +45,7 @@ public class BattleMenuPage extends ConsolePage {
             case "1":
                 setNumOfPlayers("single player");
                 numOfPlayers = "single player";
-                secondUser = AI.getAI();
+                //secondUser = AI.getAI();
                 view.getPages().push(new GameKindMenuPage());
                 break;
             case "2":

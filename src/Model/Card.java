@@ -12,6 +12,8 @@ public class Card {
     private String desc;
     private ArrayList<Buff> specialPower = new ArrayList<>();
 
+    private boolean selected = false;
+
     Card() {
     }
 
@@ -79,7 +81,13 @@ public class Card {
         this.name = name;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
 
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public String getCardType() {
         return null;
