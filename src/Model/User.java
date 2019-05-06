@@ -89,6 +89,14 @@ public class User {
         return lastGames;
     }
 
+    public void incrementOfMoney(int number){
+        money += number;
+    }
+
+    public void incrementOfNumberOfWin(){
+        numberOfWin += 1;
+    }
+
     public static void addUser(User user) {
         users.add(user);
     }

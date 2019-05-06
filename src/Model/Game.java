@@ -15,7 +15,6 @@ public class Game {
     private static final String FIRST_MODE = "1";
     private static final String SECOND_MODE = "2";
     private static final String THIRD_MODE = "3";
-    private static final int BASIC_FLAG_COUNT = 7;
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
     private int basicMana = 2;
@@ -47,7 +46,6 @@ public class Game {
     private int turn;
     private int flagCount;
     private int havingFlagCount = 0;
-    private int currentTurnMana;
     private int firstPlayerMana;
     private int secondPlayerMana;
 
@@ -71,7 +69,6 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
     }
@@ -90,7 +87,6 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        currentTurnMana = basicMana;
         firstPlayerMana = basicMana;
         secondPlayerMana = basicMana;
         firstPlayerHand = new HashMap<>();
@@ -213,10 +209,6 @@ public class Game {
         this.secondPlayerMana = secondPlayerMana;
     }
 
-    public void setCurrentTurnMana(int currentTurnMana) {
-        this.currentTurnMana = currentTurnMana;
-    }
-
     public void changeTurn() {
         turn++;
     }
@@ -253,7 +245,12 @@ public class Game {
     private void insertCollectibleToMap(){
         int x, y;
         Random rand = new Random();
-
+        for (int i = 0; i < 7; i ++){
+            x = rand.nextInt(5);
+            y = rand.nextInt(9);
+            map.getCells()[x][y].setCollectableItem(Shop.getCollectibles().get(i));
+            map.getCells()[4 - x][8 - y].setCollectableItem(Shop.getCollectibles().get(i));
+        }
     }
 
     private void updateHavingFlagCount() {
@@ -283,6 +280,7 @@ public class Game {
                         firstUser.setMoney(price);
                         firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
                         winner = 1;
+                        firstUser.incrementOfNumberOfWin();
                         isGameEnd = true;
                     }
                 }
@@ -293,6 +291,7 @@ public class Game {
                     secondUser.setMoney(price);
                     secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
                     winner = 2;
+                    secondUser.incrementOfNumberOfWin();
                     isGameEnd = true;
                 }
             }
@@ -313,6 +312,13 @@ public class Game {
                 isGameEnd = true;
                 winner = 2;
             }
+        }
+        if (winner == 1){
+            firstUser.addGameToLastGames(secondPlayerName, true, 0);
+            secondUser.addGameToLastGames(firstPlayerName, false, 0);
+        }else if (winner == 2){
+            firstUser.addGameToLastGames(secondPlayerName, false, 0);
+            secondUser.addGameToLastGames(firstPlayerName, true, 0);
         }
     }
 
