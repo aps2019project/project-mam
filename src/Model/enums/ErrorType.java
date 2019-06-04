@@ -1,4 +1,4 @@
-package Model;
+package Model.enums;
 
 public enum ErrorType {
     DUPLICATE_USERNAME("username is'nt new"),

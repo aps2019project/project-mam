@@ -1,10 +1,10 @@
-package Model;
+package Model.card;
 
 import Model.Buffs.Buff;
 
 import java.util.ArrayList;
 
-public class Spell extends Card{
+public class Spell extends Card {
 
     public Spell(String name, int price, int MP, String desc) {
         super(name, price, MP, desc);

@@ -1,4 +1,4 @@
-package Model;
+package Model.enums;
 
 public enum RequestType {
     EXIT, INVALID_COMMAND, HELP,

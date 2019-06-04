@@ -1,10 +1,11 @@
 package Model;
 
+import Model.enums.CellEffect;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.tan;
 
 public class Map {
     private static final int ROW_NUMBER = 5;

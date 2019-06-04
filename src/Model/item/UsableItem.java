@@ -1,4 +1,6 @@
-package Model;
+package Model.item;
+
+import Model.enums.SPActivationTime;
 
 public class UsableItem extends Item {
     private int price;

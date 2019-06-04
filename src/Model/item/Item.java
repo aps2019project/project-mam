@@ -1,6 +1,7 @@
-package Model;
+package Model.item;
 
 import Model.Buffs.Buff;
+import Model.enums.SPActivationTime;
 
 import java.util.ArrayList;
 

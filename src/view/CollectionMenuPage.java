@@ -1,7 +1,7 @@
 package view;
 
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 
 public class CollectionMenuPage extends ConsolePage {
     Controller controller = Controller.getInstance();

@@ -1,6 +1,7 @@
-package Model;
+package Model.user;
 
-import view.View;
+import Model.Collection;
+import Model.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;

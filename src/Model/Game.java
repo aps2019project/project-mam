@@ -1,6 +1,15 @@
 package Model;
 
 import Model.Buffs.Buff;
+import Model.card.Card;
+import Model.card.Hero;
+import Model.card.Minion;
+import Model.card.Spell;
+import Model.enums.ImpactType;
+import Model.enums.SPActivationTime;
+import Model.item.CollectableItem;
+import Model.item.Item;
+import Model.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

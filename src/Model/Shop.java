@@ -1,15 +1,21 @@
 package Model;
 
 import Model.Buffs.Buff;
-import Model.Buffs.CellEffect;
-import Model.Buffs.IncreaseMana;
+import Model.card.Card;
+import Model.card.Hero;
+import Model.card.Minion;
+import Model.card.Spell;
+import Model.enums.TargetCommunity;
+import Model.item.CollectableItem;
+import Model.item.UsableItem;
+import Model.user.User;
 
 import java.util.ArrayList;
 
-import static Model.TargetCommunity.*;
-import static Model.BuffType.*;
-import static Model.ImpactType.*;
-import static Model.SPActivationTime.*;
+import static Model.enums.TargetCommunity.*;
+import static Model.enums.BuffType.*;
+import static Model.enums.ImpactType.*;
+import static Model.enums.SPActivationTime.*;
 
 public class Shop {
     private static final Shop SHOP = new Shop();

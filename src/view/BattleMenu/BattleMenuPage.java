@@ -1,9 +1,8 @@
 package view.BattleMenu;
 
 import Controller.Controller;
-import Model.AI;
-import Model.ErrorType;
-import Model.User;
+import Model.enums.ErrorType;
+import Model.user.User;
 import view.ConsolePage;
 import view.View;
 

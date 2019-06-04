@@ -1,10 +1,9 @@
 package view.BattleMenu;
 
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 import Model.Game;
 import view.ConsolePage;
-import view.MainMenuPage;
 import view.View;
 
 public class MainBattleMenuPage extends ConsolePage {

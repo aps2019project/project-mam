@@ -1,7 +1,7 @@
 package Model.Buffs;
 
-import Model.BuffType;
-import Model.TargetCommunity;
+import Model.enums.BuffType;
+import Model.enums.TargetCommunity;
 
 public class Kill extends Buff {
     public Kill(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

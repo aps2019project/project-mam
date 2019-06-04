@@ -1,4 +1,4 @@
-package Model;
+package Model.enums;
 
 public enum TargetCommunity {
     ONE_ENEMY_FORCE,

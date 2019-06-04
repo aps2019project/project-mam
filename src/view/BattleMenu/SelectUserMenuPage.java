@@ -1,9 +1,7 @@
 package view.BattleMenu;
 
-import view.BattleMenu.BattleMenuPage;
-import view.BattleMenu.GameMoodMenuPage;
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 import view.ConsolePage;
 import view.View;
 

@@ -1,9 +1,9 @@
-package Model;
+package Model.card;
 
 import Model.Buffs.Buff;
+import Model.enums.ImpactType;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Minion extends Card {
 
@@ -13,14 +13,14 @@ public class Minion extends Card {
     private int HP;
     private int TargetCommunity;
     private ImpactType minionClass;
-    private SPActivationTime SPActivationTime;
+    private Model.enums.SPActivationTime SPActivationTime;
     private boolean canMove = true;
     private boolean canAttack = true;
     private boolean canCounterAttack = true;
 
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
-                  String desc, Model.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
+                  String desc, Model.enums.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
         super(name, price, MP, desc);
         this.AP = AP;
         this.HP = HP;
@@ -30,7 +30,7 @@ public class Minion extends Card {
     }
 
     public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
-                  Model.SPActivationTime SPActivationTime) {
+                  Model.enums.SPActivationTime SPActivationTime) {
         super(name, MP, price);
         this.AP = AP;
         this.HP = HP;
@@ -123,7 +123,7 @@ public class Minion extends Card {
         return minionClass;
     }
 
-    public Model.SPActivationTime getSPActivationTime() {
+    public Model.enums.SPActivationTime getSPActivationTime() {
         return SPActivationTime;
     }
 
@@ -143,7 +143,7 @@ public class Minion extends Card {
         this.minionClass = minionClass;
     }
 
-    public void setSPActivationTime(Model.SPActivationTime SPActivationTime) {
+    public void setSPActivationTime(Model.enums.SPActivationTime SPActivationTime) {
         this.SPActivationTime = SPActivationTime;
     }
 
@@ -193,6 +193,6 @@ public class Minion extends Card {
     }
 
     public boolean haveComboAbility() {
-        return getSPActivationTime() == Model.SPActivationTime.COMBO;
+        return getSPActivationTime() == Model.enums.SPActivationTime.COMBO;
     }
 }

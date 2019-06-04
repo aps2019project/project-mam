@@ -1,5 +1,9 @@
 package Model;
 
+import Model.card.Card;
+import Model.card.Hero;
+import Model.item.UsableItem;
+
 import java.util.ArrayList;
 
 public class Deck {

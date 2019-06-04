@@ -1,5 +1,9 @@
 package Model;
 
+import Model.card.Card;
+import Model.enums.CellEffect;
+import Model.item.CollectableItem;
+
 public class Cell {
     private int row;
     private int column;

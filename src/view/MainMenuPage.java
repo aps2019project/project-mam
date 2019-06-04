@@ -2,7 +2,7 @@ package view;
 
 import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 
 
 public class MainMenuPage extends ConsolePage {

@@ -1,7 +1,7 @@
 package view.BattleMenu;
 
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 import view.ConsolePage;
 import view.View;
 

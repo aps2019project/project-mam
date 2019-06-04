@@ -1,6 +1,11 @@
 package Model.Buffs;
 
 import Model.*;
+import Model.card.Card;
+import Model.enums.BuffType;
+import Model.enums.ImpactType;
+import Model.enums.SPActivationTime;
+import Model.enums.TargetCommunity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +24,7 @@ public class Buff {
     private TargetCommunity targetCommunity;
     private Card card;
 
-    public Buff(BuffType type, int time, int buffPower, Model.TargetCommunity targetCommunity) {
+    public Buff(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         this.type = type;
         this.remainTime = time;
         this.buffPower = buffPower;

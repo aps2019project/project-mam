@@ -1,8 +1,7 @@
 package Model.Buffs;
 
-import Model.BuffType;
-import Model.Cell;
-import Model.TargetCommunity;
+import Model.enums.BuffType;
+import Model.enums.TargetCommunity;
 
 public class DestroyPositives extends Buff {
     public DestroyPositives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

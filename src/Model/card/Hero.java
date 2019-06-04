@@ -1,9 +1,10 @@
-package Model;
+package Model.card;
 
 import Model.Buffs.Buff;
+import Model.enums.ImpactType;
+import Model.enums.SPActivationTime;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Hero extends Card {
     private int row;

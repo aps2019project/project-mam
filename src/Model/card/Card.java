@@ -1,6 +1,8 @@
-package Model;
+package Model.card;
 
 import Model.Buffs.Buff;
+import Model.enums.ImpactType;
+import Model.enums.SPActivationTime;
 
 import java.util.ArrayList;
 
@@ -131,7 +133,7 @@ public class Card {
         return ImpactType._NULL;
     }
 
-    public Model.SPActivationTime getSPActivationTime() {
+    public SPActivationTime getSPActivationTime() {
         return SPActivationTime.NULL;
     }
 

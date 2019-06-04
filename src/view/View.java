@@ -1,7 +1,7 @@
 package view;
 
 import Controller.Controller;
-import Model.ErrorType;
+import Model.enums.ErrorType;
 import view.BattleMenu.BattleMenuPage;
 
 import java.util.Deque;

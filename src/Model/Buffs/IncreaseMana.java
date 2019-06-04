@@ -1,8 +1,8 @@
 package Model.Buffs;
 
-import Model.BuffType;
+import Model.enums.BuffType;
 import Model.Game;
-import Model.TargetCommunity;
+import Model.enums.TargetCommunity;
 
 public class IncreaseMana extends Buff {
     private Game game;

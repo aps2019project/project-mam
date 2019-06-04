@@ -1,8 +1,8 @@
 package Model.Buffs;
 
-import Model.BuffType;
+import Model.enums.BuffType;
 import Model.Cell;
-import Model.TargetCommunity;
+import Model.enums.TargetCommunity;
 
 public class CellEffect extends Buff {
     public CellEffect(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

@@ -1,7 +1,7 @@
 package Model.Buffs;
 
-import Model.BuffType;
-import Model.TargetCommunity;
+import Model.enums.BuffType;
+import Model.enums.TargetCommunity;
 
 public class DestroyNegatives extends Buff {
     public DestroyNegatives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

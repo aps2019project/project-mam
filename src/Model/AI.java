@@ -1,8 +1,9 @@
 package Model;
 
 import Controller.Controller;
+import Model.card.Card;
+import Model.user.User;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import static java.lang.Math.abs;
