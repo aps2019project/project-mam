@@ -2,6 +2,8 @@ package Model;
 
 import Controller.Controller;
 import Model.card.Card;
+import Model.game.Cell;
+import Model.game.Game;
 import Model.user.User;
 
 import java.util.Map;

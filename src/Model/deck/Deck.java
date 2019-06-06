@@ -1,4 +1,4 @@
-package Model;
+package Model.deck;
 
 import Model.card.Card;
 import Model.card.Hero;

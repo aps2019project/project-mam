@@ -6,6 +6,8 @@ import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
+import Model.game.Game;
+import Model.shop.Shop;
 import Model.user.User;
 import view.*;
 

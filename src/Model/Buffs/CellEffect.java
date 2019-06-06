@@ -1,7 +1,7 @@
 package Model.Buffs;
 
 import Model.enums.BuffType;
-import Model.Cell;
+import Model.game.Cell;
 import Model.enums.TargetCommunity;
 
 public class CellEffect extends Buff {

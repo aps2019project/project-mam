@@ -1,10 +1,11 @@
-package Model;
+package Model.shop;
 
 import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
 import Model.card.Spell;
+import Model.deck.Deck;
 import Model.enums.TargetCommunity;
 import Model.item.CollectableItem;
 import Model.item.UsableItem;

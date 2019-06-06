@@ -1,7 +1,7 @@
 package Model.Buffs;
 
 import Model.enums.BuffType;
-import Model.Game;
+import Model.game.Game;
 import Model.enums.TargetCommunity;
 
 public class IncreaseMana extends Buff {

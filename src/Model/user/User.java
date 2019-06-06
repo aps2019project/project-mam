@@ -1,7 +1,7 @@
 package Model.user;
 
-import Model.Collection;
-import Model.Deck;
+import Model.collection.Collection;
+import Model.deck.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;

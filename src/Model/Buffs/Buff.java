@@ -1,11 +1,12 @@
 package Model.Buffs;
 
-import Model.*;
 import Model.card.Card;
 import Model.enums.BuffType;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
+import Model.game.Cell;
+import Model.game.Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,7 +138,7 @@ public class Buff {
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
                                                       HashMap<Integer, Cell> attackerTeam,
                                                       HashMap<Integer, Cell> defenderTeam,
-                                                      Model.Map map) {
+                                                      Model.game.Map map) {
         ArrayList<Cell> cells = null;
         switch (targetCommunity) {
             case ONE_ENEMY_FORCE:

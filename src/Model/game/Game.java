@@ -1,6 +1,8 @@
-package Model;
+package Model.game;
 
 import Model.Buffs.Buff;
+import Model.deck.Deck;
+import Model.shop.Shop;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;

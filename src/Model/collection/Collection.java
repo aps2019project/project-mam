@@ -1,5 +1,6 @@
-package Model;
+package Model.collection;
 
+import Model.deck.Deck;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.item.UsableItem;

@@ -1,4 +1,4 @@
-package Model;
+package Model.game;
 
 import Model.enums.CellEffect;
 

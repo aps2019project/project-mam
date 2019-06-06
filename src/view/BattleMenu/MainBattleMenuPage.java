@@ -2,7 +2,7 @@ package view.BattleMenu;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
-import Model.Game;
+import Model.game.Game;
 import view.ConsolePage;
 import view.View;
 
