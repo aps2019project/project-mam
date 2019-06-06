@@ -13,12 +13,11 @@ public class Map {
     private Cell[][] cells;
     private HashMap<Integer, Cell> firstPlayerCellCard = new HashMap<>();
     private HashMap<Integer, Cell> secondPlayerCellCard = new HashMap<>();
-    private ArrayList<Cell> flags = new ArrayList<>();
 
 
     public Map() {
         cells = new Cell[ROW_NUMBER][COLUMN_NUMBER];
-        for (int i = 0 ; i < ROW_NUMBER; i++)
+        for (int i = 0; i < ROW_NUMBER; i++)
             for (int j = 0; j < COLUMN_NUMBER; j++)
                 cells[i][j] = new Cell(i, j, 0, CellEffect.NONE, null);
     }
@@ -36,6 +35,11 @@ public class Map {
     }
 
     public ArrayList<Cell> getFlags() {
+        ArrayList<Cell> flags = new ArrayList<>();
+        for (int i = 0; i < ROW_NUMBER; i++)
+            for (int j = 0; j < COLUMN_NUMBER; j++)
+                if (cells[i][j].getFlagCount() != 0)
+                    flags.add(cells[i][j]);
         return flags;
     }
 
@@ -55,7 +59,7 @@ public class Map {
         try {
             if (cells[row][column].getCard() == null)
                 return true;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return true;
         }
         return false;

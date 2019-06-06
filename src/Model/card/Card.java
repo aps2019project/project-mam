@@ -6,7 +6,7 @@ import Model.enums.SPActivationTime;
 
 import java.util.ArrayList;
 
-public class Card {
+public abstract class Card {
     private int MP;
     private int id;
     private int price;
@@ -94,9 +94,7 @@ public class Card {
     public String getCardType() {
         return null;
     }
-    public String getInfo(){
-        return null;
-    }
+    public abstract String getInfo();
 
     public int getRow(){
         return -1;

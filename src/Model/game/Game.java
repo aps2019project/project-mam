@@ -44,10 +44,9 @@ public class Game {
     private HashMap<Integer, Card> firstPlayerHand;
     private HashMap<Integer, Card> secondPlayerHand;
 
-    private Card currentCard = null;
-    private Card nextfirstPlayerCard = null;
-    private Card nextSecondPlayerCard = null;
-
+    private Card currentCard;
+    private Card nextFirstPlayerCard;
+    private Card nextSecondPlayerCard;
 
     private String firstPlayerName;
     private String secondPlayerName;
@@ -67,22 +66,6 @@ public class Game {
     private int winner;
     private String winnerName;
     private int price = 1000;
-
-    public Game(Deck firstPlayerDeck, Deck secondPlayerDeck, String firstPlayerName,
-                String secondPlayerName, String mode, int flagCount) {
-        this.firstPlayerDeck = firstPlayerDeck;
-        this.secondPlayerDeck = secondPlayerDeck;
-        this.firstPlayerName = firstPlayerName;
-        this.secondPlayerName = secondPlayerName;
-        this.mode = mode;
-        this.flagCount = flagCount;
-        firstPlayerGraveYard = new ArrayList<>();
-        secondPlayerGraveYard = new ArrayList<>();
-        turn = FIRST_PLAYER_TURN;
-        mana = new int[2];
-        mana[0] = basicMana;
-        mana[1] = basicMana;
-    }
 
     public Game() {
     }
@@ -207,16 +190,7 @@ public class Game {
     }
 
     public void startGame() {
-
-        map.getCells()[2][0].setCard(firstPlayerDeck.getHero());
-        firstPlayerDeck.getHero().setRow(2);
-        firstPlayerDeck.getHero().setColumn(0);
-        map.getCells()[2][8].setCard(secondPlayerDeck.getHero());
-        secondPlayerDeck.getHero().setRow(2);
-        secondPlayerDeck.getHero().setColumn(8);
-
-        map.getFirstPlayerCellCard().put(firstPlayerDeck.getHero().getId(), map.getCells()[2][0]);
-        map.getSecondPlayerCellCard().put(secondPlayerDeck.getHero().getId(), map.getCells()[2][8]);
+        setMap();
 
         if (flagCount == 1)
             map.getCells()[2][4].setFlagCount(1);
@@ -233,6 +207,19 @@ public class Game {
                 map.getCells()[2][4].incrementOfFlag(1);
         }
         insertCollectibleToMap();
+    }
+
+    private void setMap() {
+        map.getCells()[2][0].setCard(firstPlayerDeck.getHero());
+        firstPlayerDeck.getHero().setRow(2);
+        firstPlayerDeck.getHero().setColumn(0);
+
+        map.getCells()[2][8].setCard(secondPlayerDeck.getHero());
+        secondPlayerDeck.getHero().setRow(2);
+        secondPlayerDeck.getHero().setColumn(8);
+
+        map.getFirstPlayerCellCard().put(firstPlayerDeck.getHero().getId(), map.getCells()[2][0]);
+        map.getSecondPlayerCellCard().put(secondPlayerDeck.getHero().getId(), map.getCells()[2][8]);
     }
 
     private void insertCollectibleToMap() {
@@ -454,7 +441,7 @@ public class Game {
     }
 
     public void addRandomCardFromFirstPlayerDeckToNextCard(int rand) {
-        nextfirstPlayerCard = firstPlayerDeck.getCards().get(rand);
+        nextFirstPlayerCard = firstPlayerDeck.getCards().get(rand);
         firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
     }
 
@@ -464,13 +451,13 @@ public class Game {
     }
 
     public void updateFirstPlayerHand() {
-        if (nextfirstPlayerCard != null && firstPlayerHand.size() < 5) {
-            firstPlayerHand.put(nextfirstPlayerCard.getId(), nextfirstPlayerCard);
+        if (nextFirstPlayerCard != null && firstPlayerHand.size() < 5) {
+            firstPlayerHand.put(nextFirstPlayerCard.getId(), nextFirstPlayerCard);
             if (firstPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
                 addRandomCardFromFirstPlayerDeckToNextCard(random.
                         nextInt(firstPlayerDeck.getCards().size()));
-            } else nextfirstPlayerCard = null;
+            } else nextFirstPlayerCard = null;
         }
     }
 
@@ -481,18 +468,18 @@ public class Game {
                 Random rand = new Random();
                 addRandomCardFromSecondPlayerDeckToNextCard(rand.
                         nextInt(secondPlayerDeck.getCards().size()));
-            }
-        } else nextSecondPlayerCard = null;
+            } else nextSecondPlayerCard = null;
+        }
     }
 
     public void setNextfirstPlayerCard() {
         if (firstPlayerHand.size() <= 5) {
             if (firstPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
-                nextfirstPlayerCard = firstPlayerDeck.getCards().
+                nextFirstPlayerCard = firstPlayerDeck.getCards().
                         get(random.nextInt(firstPlayerDeck.getCards().size()));
             } else
-                nextfirstPlayerCard = null;
+                nextFirstPlayerCard = null;
         }
     }
 
@@ -525,7 +512,7 @@ public class Game {
     public String getGameInfo() {
         StringBuilder info = new StringBuilder();
         info.append("first player mana : ").append(mana[1]).append("\nsecond player mana : ").
-                append(mana[0]);
+                append(mana[0]).append("\n");
         switch (mode) {
             case "1":
                 int hero1 = 0;
@@ -614,12 +601,20 @@ public class Game {
             for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
                 info.append(entry.getValue().getInfo()).append("\n");
             }
-            info.append("next card: ").append(nextfirstPlayerCard.getInfo());
+            try {
+                info.append("next card : ").append(nextFirstPlayerCard.getInfo());
+            } catch (NullPointerException e) {
+                info.append("next card : deck is empty");
+            }
         } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
                 info.append(entry.getValue().getInfo()).append("\n");
             }
-            info.append("next card:").append(nextSecondPlayerCard.getInfo());
+            try {
+                info.append("next card:").append(nextSecondPlayerCard.getInfo());
+            } catch (NullPointerException e) {
+                info.append("next card : deck is empty");
+            }
         }
         return info.toString();
     }
@@ -955,7 +950,7 @@ public class Game {
 
     public String showNextCard() {
         if (getTurn() % 2 == 1) {
-            return nextfirstPlayerCard.getCardInfoInGame();
+            return nextFirstPlayerCard.getCardInfoInGame();
         } else return nextSecondPlayerCard.getCardInfoInGame();
     }
 
