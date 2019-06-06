@@ -85,7 +85,7 @@ public class Game {
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         setPlayersHand();
-        setNextfirstPlayerCard();
+        setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
     }
@@ -403,7 +403,7 @@ public class Game {
         return true;
     }
 
-    public void setPlayersHand() {
+    private void setPlayersHand() {
         Random random = new Random();
         int rand;
         do {
@@ -416,31 +416,31 @@ public class Game {
         } while (secondPlayerHand.size() <= 4);
     }
 
-    public void addRandomCardFromFirstPlayerDeckToHand(int rand) {
+    private void addRandomCardFromFirstPlayerDeckToHand(int rand) {
         if (firstPlayerDeck.getCards().size() != 0) {
             firstPlayerHand.put(firstPlayerDeck.getCards().get(rand).getId(), firstPlayerDeck.getCards().get(rand));
             firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
         }
     }
 
-    public void addRandomCardFromSecondPlayerDeckToHand(int rand) {
+    private void addRandomCardFromSecondPlayerDeckToHand(int rand) {
         if (secondPlayerDeck.getCards().size() != 0) {
             secondPlayerHand.put(secondPlayerDeck.getCards().get(rand).getId(), secondPlayerDeck.getCards().get(rand));
             secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
         }
     }
 
-    public void addRandomCardFromFirstPlayerDeckToNextCard(int rand) {
+    private void addRandomCardFromFirstPlayerDeckToNextCard(int rand) {
         nextFirstPlayerCard = firstPlayerDeck.getCards().get(rand);
         firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(rand));
     }
 
-    public void addRandomCardFromSecondPlayerDeckToNextCard(int rand) {
+    private void addRandomCardFromSecondPlayerDeckToNextCard(int rand) {
         nextSecondPlayerCard = secondPlayerDeck.getCards().get(rand);
         secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
     }
 
-    public void updateFirstPlayerHand() {
+    private void updateFirstPlayerHand() {
         if (nextFirstPlayerCard != null && firstPlayerHand.size() < 5) {
             firstPlayerHand.put(nextFirstPlayerCard.getId(), nextFirstPlayerCard);
             if (firstPlayerDeck.getCards().size() != 0) {
@@ -451,7 +451,7 @@ public class Game {
         }
     }
 
-    public void updateSecondPlayerHand() {
+    private void updateSecondPlayerHand() {
         if (nextSecondPlayerCard != null && secondPlayerHand.size() < 5) {
             secondPlayerHand.put(nextSecondPlayerCard.getId(), nextSecondPlayerCard);
             if (secondPlayerDeck.getCards().size() != 0) {
@@ -462,7 +462,7 @@ public class Game {
         }
     }
 
-    public void setNextfirstPlayerCard() {
+    private void setNextFirstPlayerCard() {
         if (firstPlayerHand.size() <= 5) {
             if (firstPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
@@ -473,7 +473,7 @@ public class Game {
         }
     }
 
-    public void setNextSecondPlayerCard() {
+    private void setNextSecondPlayerCard() {
         if (secondPlayerHand.size() <= 5) {
             if (secondPlayerDeck.getCards().size() != 0) {
                 Random random = new Random();
@@ -678,7 +678,7 @@ public class Game {
         activePassiveBuffs();
     }
 
-    public void updateCellCard(HashMap<Integer, Cell> cards) {
+    private void updateCellCard(HashMap<Integer, Cell> cards) {
         for (java.util.Map.Entry<Integer, Cell> entry : cards.entrySet()) {
             entry.getValue().getCard().setCanMove(true);
             entry.getValue().getCard().setCanAttack(true);
@@ -756,13 +756,13 @@ public class Game {
 
     }
 
-    public boolean isCardIdValidForAttack(int cardId) {
+    private boolean isCardIdValidForAttack(int cardId) {
         if (getTurn() % 2 == 1 && map.getSecondPlayerCellCard().get(cardId) == null)
             return false;
         return getTurn() % 2 != 0 || map.getFirstPlayerCellCard().get(cardId) != null;
     }
 
-    public boolean canCounterAttack(int targetId, int CountererId) {
+    private boolean canCounterAttack(int targetId, int CountererId) {
         return isOppAvailableForAttack(targetId, CountererId);
     }
 

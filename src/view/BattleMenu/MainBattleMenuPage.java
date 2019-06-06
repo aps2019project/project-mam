@@ -19,7 +19,7 @@ public class MainBattleMenuPage extends ConsolePage {
     }
 
     private void init(){
-        if (controller.getSecondDeck() != null)
+        if (controller.getSecondDeck().getCards().size() != 0)
             battleMenuPage.getSecondUser().setMainDeck(controller.getSecondDeck());
         game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
                 BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);
