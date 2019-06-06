@@ -48,8 +48,6 @@ public class Game {
     private Card nextFirstPlayerCard;
     private Card nextSecondPlayerCard;
 
-    private String firstPlayerName;
-    private String secondPlayerName;
     private String mode;
     private String kind;
 
@@ -139,14 +137,6 @@ public class Game {
 
     public ArrayList<Card> getGraveYard() {
         return firstPlayerGraveYard;
-    }
-
-    public String getFirstPlayerName() {
-        return firstPlayerName;
-    }
-
-    public String getSecondPlayerName() {
-        return secondPlayerName;
     }
 
     public String getMode() {
@@ -294,11 +284,11 @@ public class Game {
             }
         }
         if (winner == 1) {
-            firstUser.addGameToLastGames(secondPlayerName, true, 0);
-            secondUser.addGameToLastGames(firstPlayerName, false, 0);
+            firstUser.addGameToLastGames(firstUser.getName(), true, 0);
+            secondUser.addGameToLastGames(secondUser.getName(), false, 0);
         } else if (winner == 2) {
-            firstUser.addGameToLastGames(secondPlayerName, false, 0);
-            secondUser.addGameToLastGames(firstPlayerName, true, 0);
+            firstUser.addGameToLastGames(secondUser.getName(), false, 0);
+            secondUser.addGameToLastGames(firstUser.getName(), true, 0);
         }
     }
 
@@ -502,7 +492,7 @@ public class Game {
             }
         } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
-                if (entry.getValue().getName().equals(cardName))
+                if (entry.getValue().getName().equalsIgnoreCase(cardName))
                     return true;
             }
         }
@@ -649,7 +639,7 @@ public class Game {
                     buffAlocator(map.getFirstPlayerCellCard().get(card), buff);
                 }
         } else if (getTurn() % 2 == 0) {
-            map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
+            map.getSecondPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
             if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
                 for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
                     buffAlocator(map.getSecondPlayerCellCard().get(card), buff);
@@ -912,7 +902,7 @@ public class Game {
             }
         } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
-                if (entry.getValue().getName().equals(cardName)) {
+                if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
                     if (entry.getValue().getMP() <= mana[0]) {
                         return true;
                     }

@@ -11,12 +11,19 @@ public class MainBattleMenuPage extends ConsolePage {
     private Controller controller = Controller.getInstance();
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
-
-    private Game game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
-            BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);
-
+    private Game game;
     private static boolean isStarted = false;
 
+    public MainBattleMenuPage() {
+        init();
+    }
+
+    private void init(){
+        if (controller.getSecondDeck() != null)
+            battleMenuPage.getSecondUser().setMainDeck(controller.getSecondDeck());
+        game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
+                BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);
+    }
 
     @Override
     public void help() {

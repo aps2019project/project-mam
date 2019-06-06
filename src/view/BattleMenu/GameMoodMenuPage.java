@@ -18,6 +18,9 @@ public class GameMoodMenuPage extends ConsolePage {
 
     @Override
     public void handleCommand(String command) {
+        if (command.matches("start game .*")){
+            controller.setSecondDeck(controller.getFirstUser().getCollection().getDeck(command.split(" ")[2]));
+        }
         if (command.matches("start game (\\S*) \\d( \\d+)?")
                 || command.matches("start multiplayer game \\d( \\d+)?")) {
             if (controller.isDeckValid(command.split(" ")[2])

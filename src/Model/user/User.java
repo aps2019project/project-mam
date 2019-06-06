@@ -16,6 +16,8 @@ public class User {
     private ArrayList<StringBuilder> lastGames;
     private int money;
     private int idCounter;
+    private Deck mainDeck;
+
 
     public User(String name, String password) {
         this.name = name;
@@ -25,12 +27,13 @@ public class User {
         collection = new Collection();
         lastGames = new ArrayList<>();
         idCounter = 1;
-       // User.addUser(this);
-
-       // this.numberOfWin = Integer.parseInt(password);
     }
 
     public User() {
+    }
+
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
     }
 
     public User(String name) {
@@ -79,6 +82,8 @@ public class User {
     }
 
     public Deck getMainDeck() {
+        if (mainDeck != null)
+            return mainDeck;
         return collection.getMainDeck();
     }
 

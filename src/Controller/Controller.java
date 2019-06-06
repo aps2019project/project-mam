@@ -4,6 +4,7 @@ import Model.*;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
+import Model.deck.Deck;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
@@ -28,11 +29,11 @@ public class Controller {
 
 
     private Shop shop = Shop.getInstance();
-    // private Collection collection = new Collection();
     private User user = new User();
     private AI ai = new AI();
     private static Game game = new Game();
     private View view = View.getInstance();
+    private Deck secondDeck = new Deck();
 
     public void setGame(Game game) {
         this.game = game;
@@ -40,6 +41,14 @@ public class Controller {
 
     public static Game getGame() {
         return game;
+    }
+
+    public Deck getSecondDeck() {
+        return secondDeck;
+    }
+
+    public void setSecondDeck(Deck secondDeck) {
+        this.secondDeck = secondDeck;
     }
 
     public User getFirstUser() {
@@ -116,9 +125,9 @@ public class Controller {
     }
 
     public void setAiMainDeck(int mission){
-        AI.getAI().getCollection().setMainDeck(Shop.getDecks().get(mission));
+        AI.getAI().setMainDeck(Shop.getDecks().get(mission - 1));
         int counter = 1;
-        for (Card card : AI.getAI().getCollection().getMainDeck().getCards()) {
+        for (Card card : AI.getAI().getMainDeck().getCards()) {
             card.setId(counter);
             counter++;
         }
