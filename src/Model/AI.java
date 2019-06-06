@@ -92,7 +92,7 @@ public class AI {
 
     public boolean cardsCanInsert() {
         for (Map.Entry<Integer, Card> entry : game.getSecondPlayerHand().entrySet()) {
-            if (entry.getValue().getMP() <= game.getSecondPlayerMana()) {
+            if (entry.getValue().getMP() <= game.getMana()) {
                 insertCard = entry.getValue();
                 return true;
             }

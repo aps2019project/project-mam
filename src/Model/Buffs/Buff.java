@@ -30,6 +30,7 @@ public class Buff {
         this.remainTime = time;
         this.buffPower = buffPower;
         this.targetCommunity = targetCommunity;
+        buffs = new ArrayList<>();
     }
 
     public Buff(BuffType type, int buffPower, int activationTime,
@@ -39,6 +40,7 @@ public class Buff {
         this.activationTime = activationTime;
         this.isContinous = isContinous;
         this.targetCommunity = targetCommunity;
+        buffs = new ArrayList<>();
     }
 
     public Buff(BuffType type, int remainTime, int buffPower, int activationTime,
@@ -49,6 +51,7 @@ public class Buff {
         this.activationTime = activationTime;
         this.isStarted = isStarted;
         this.targetCommunity = targetCommunity;
+        buffs = new ArrayList<>();
     }
 
     public void setBuffPower(int buffPower) {
@@ -139,7 +142,7 @@ public class Buff {
                                                       HashMap<Integer, Cell> attackerTeam,
                                                       HashMap<Integer, Cell> defenderTeam,
                                                       Model.game.Map map) {
-        ArrayList<Cell> cells = null;
+        ArrayList<Cell> cells = new ArrayList<>();
         switch (targetCommunity) {
             case ONE_ENEMY_FORCE:
                 cells.add(defender);

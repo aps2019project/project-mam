@@ -57,8 +57,7 @@ public class Game {
     private int turn;
     private int flagCount;
     private int havingFlagCount = 0;
-    private int firstPlayerMana;
-    private int secondPlayerMana;
+    private int[] mana;
 
     private ArrayList<CollectableItem> player1Collectable = new ArrayList<>();
     private ArrayList<CollectableItem> player2Collectable = new ArrayList<>();
@@ -80,8 +79,9 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        firstPlayerMana = basicMana;
-        secondPlayerMana = basicMana;
+        mana = new int[2];
+        mana[0] = basicMana;
+        mana[1] = basicMana;
     }
 
     public Game() {
@@ -98,8 +98,9 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        firstPlayerMana = basicMana;
-        secondPlayerMana = basicMana;
+        mana = new int[2];
+        mana[0] = basicMana;
+        mana[1] = basicMana;
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         setPlayersHand();
@@ -126,10 +127,7 @@ public class Game {
     }
 
     public int getMana() {
-        if (getTurn() % 2 == 1)
-            return firstPlayerMana;
-        else
-            return secondPlayerMana;
+        return mana[getTurn() % 2];
     }
 
     public Deck getFirstPlayerDeck() {
@@ -184,14 +182,6 @@ public class Game {
         return isGameEnd;
     }
 
-    public int getFirstPlayerMana() {
-        return firstPlayerMana;
-    }
-
-    public int getSecondPlayerMana() {
-        return secondPlayerMana;
-    }
-
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
     }
@@ -210,14 +200,6 @@ public class Game {
 
     public void setExtraPlayer2Mana(int extraPlayer2Mana) {
         this.extraPlayer2Mana = extraPlayer2Mana;
-    }
-
-    public void setFirstPlayerMana(int firstPlayerMana) {
-        this.firstPlayerMana = firstPlayerMana;
-    }
-
-    public void setSecondPlayerMana(int secondPlayerMana) {
-        this.secondPlayerMana = secondPlayerMana;
     }
 
     public void changeTurn() {
@@ -542,8 +524,8 @@ public class Game {
 
     public String getGameInfo() {
         StringBuilder info = new StringBuilder();
-        info.append("first player mana : ").append(firstPlayerMana).append("\nsecond player mana : ").
-                append(secondPlayerMana);
+        info.append("first player mana : ").append(mana[1]).append("\nsecond player mana : ").
+                append(mana[0]);
         switch (mode) {
             case "1":
                 int hero1 = 0;
@@ -645,6 +627,7 @@ public class Game {
     private void insertCard(String cardName, int x, int y, HashMap<Integer, Card> Hand) {
         for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet())
             if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
+                mana[getTurn() % 2] -= entry.getValue().getMP();
                 if (!(entry.getValue() instanceof Spell)) {
                     insertMinionsOrHero(entry.getValue(), x, y);
                 }
@@ -670,16 +653,13 @@ public class Game {
                 for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
                     buffAlocator(map.getFirstPlayerCellCard().get(card), buff);
                 }
-                firstPlayerMana -= card.getMP();
         } else if (getTurn() % 2 == 0) {
             map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
             if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
                 for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
                     buffAlocator(map.getSecondPlayerCellCard().get(card), buff);
                 }
-                secondPlayerMana -= card.getMP();
         }
-        addCollectible(map.getCells()[x][y]);
         if (map.getCells()[x][y].getFlagCount() != 0) {
             //TODO
         }
@@ -698,11 +678,11 @@ public class Game {
             basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
-            firstPlayerMana = basicMana + extraPlayer1Mana;
+            mana[1] = basicMana + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
         } else {
-            secondPlayerMana = basicMana + extraPlayer2Mana;
+            mana[0] = basicMana + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
         }
@@ -736,12 +716,6 @@ public class Game {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(map.getSecondPlayerCellCard().get(cardId).getCard());
                     Buff.addBuff(newBuff);
-                }
-                if (currentCard.getName().equals("zahak")) {
-                    if (getTurn() % 2 == 1)
-                        firstPlayerMana -= currentCard.getMP();
-                    else
-                        secondPlayerMana -= currentCard.getMP();
                 }
             }
 
@@ -783,15 +757,16 @@ public class Game {
                 distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
                         target.getColumn());
             }
+            if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
+                return true;
+            if (attacker.getCardClass() == ImpactType.RANGED && distance <= attacker.getTargetCommunity())
+                return true;
+            if (attacker.getCardClass() == ImpactType.HYBRID)
+                return true;
         } catch (NullPointerException e) {
             return false;
         }
-        if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
-            return true;
-        if (attacker.getCardClass() == ImpactType.RANGED && distance <= attacker.getTargetCommunity())
-            return true;
-        if (attacker.getCardClass() == ImpactType.HYBRID)
-            return true;
+
         return false;
 
     }
@@ -909,8 +884,7 @@ public class Game {
     }
 
     private void buffAlocator(Cell entry, Buff buff) {
-        for (Cell cell : buff.getSpecialPowerTargetCells(entry, null,
-                getMyTeam(entry),
+        for (Cell cell : buff.getSpecialPowerTargetCells(entry, null, getMyTeam(entry),
                 getOppTeam(entry), map)) {
             Buff newBuff = buff.copy();
             newBuff.setCard(cell.getCard());
@@ -936,7 +910,7 @@ public class Game {
         if (getTurn() % 2 == 1) {
             for (java.util.Map.Entry<Integer, Card> entry : firstPlayerHand.entrySet()) {
                 if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
-                    if (entry.getValue().getMP() <= firstPlayerMana) {
+                    if (entry.getValue().getMP() <= mana[1]) {
                         return true;
                     }
                 }
@@ -944,7 +918,7 @@ public class Game {
         } else {
             for (java.util.Map.Entry<Integer, Card> entry : secondPlayerHand.entrySet()) {
                 if (entry.getValue().getName().equals(cardName)) {
-                    if (entry.getValue().getMP() <= secondPlayerMana) {
+                    if (entry.getValue().getMP() <= mana[0]) {
                         return true;
                     }
                 }
@@ -997,10 +971,7 @@ public class Game {
             Buff.refreshBuffs();
             if (currentCard instanceof Hero) {
                 currentCard.setCooldown(currentCard.getBASE_COOL_DOWN());
-                if (getTurn() % 2 == 1)
-                    firstPlayerMana -= currentCard.getMP();
-                else
-                    secondPlayerMana -= currentCard.getMP();
+                mana[getTurn() % 2] -= currentCard.getMP();
             }
         }
     }
