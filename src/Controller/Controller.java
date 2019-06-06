@@ -318,7 +318,7 @@ public class Controller {
     public void insertCard(String cardName, String x, String y) {
         if (game.isCardInPlayerHand(cardName)) {
             if (game.haveEnoughMana(cardName)) {
-                if (game.isValidCellForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
+                if (game.isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
                     game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
                     StringBuilder message = new StringBuilder();
                     message.append(cardName).append(" with ").append(game.getCurrentCard().getId());

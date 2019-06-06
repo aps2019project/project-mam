@@ -253,10 +253,10 @@ public class Game {
         insertCollectibleToMap();
     }
 
-    private void insertCollectibleToMap(){
+    private void insertCollectibleToMap() {
         int x, y;
         Random rand = new Random();
-        for (int i = 0; i < 7; i ++){
+        for (int i = 0; i < 7; i++) {
             x = rand.nextInt(5);
             y = rand.nextInt(9);
             map.getCells()[x][y].setCollectableItem(Shop.getCollectibles().get(i));
@@ -324,10 +324,10 @@ public class Game {
                 winner = 2;
             }
         }
-        if (winner == 1){
+        if (winner == 1) {
             firstUser.addGameToLastGames(secondPlayerName, true, 0);
             secondUser.addGameToLastGames(firstPlayerName, false, 0);
-        }else if (winner == 2){
+        } else if (winner == 2) {
             firstUser.addGameToLastGames(secondPlayerName, false, 0);
             secondUser.addGameToLastGames(firstPlayerName, true, 0);
         }
@@ -646,50 +646,43 @@ public class Game {
         for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet())
             if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
                 if (!(entry.getValue() instanceof Spell)) {
-                    if (getTurn() % 2 == 1 && firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
-                        for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
-                            buffAlocator(map.getFirstPlayerCellCard().get(entry.getKey()), buff);
-                        }
-                    else if (getTurn() % 2 == 0 && secondPlayerDeck.getItem().
-                            getSpActivationTime() == SPActivationTime.ON_INSERT)
-                        for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
-                            buffAlocator(map.getSecondPlayerCellCard().get(entry.getKey()), buff);
-                        }
-
-                    map.getCells()[x][y].setCard(entry.getValue());
-                    entry.getValue().setRow(x);
-                    entry.getValue().setColumn(y);
-                    if (turn % 2 == 1) {
-                        if (map.getCells()[x][y].haveCollectableItem())
-                            player1Collectable.add(map.getCells()[x][y].getCollectableItem());
-                        map.getFirstPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
-                        firstPlayerMana -= entry.getValue().getMP();
-                    } else {
-                        if (map.getCells()[x][y].haveCollectableItem())
-                            player2Collectable.add(map.getCells()[x][y].getCollectableItem());
-                        map.getSecondPlayerCellCard().put(entry.getValue().getId(), map.getCells()[x][y]);
-                        secondPlayerMana -= entry.getValue().getMP();
-                    }
-                    if (map.getCells()[x][y].getFlagCount() != 0) {
-
-                    }
-                    currentCard = entry.getValue();
+                    insertMinionsOrHero(entry.getValue(), x, y);
                 }
                 if (entry.getValue().getSPActivationTime() == SPActivationTime.ON_INSERT) {
                     for (Buff buff : entry.getValue().getSpecialPower()) {                //spell
                         buffAlocator(map.getCells()[x][y], buff);
                     }
                 }
-                if (map.getCells()[x][y].haveCollectableItem()) {
-                    if (getTurn() % 2 == 1)
-                        player1Collectable.add(map.getCells()[x][y].getCollectableItem());
-                    else
-                        player2Collectable.add(map.getCells()[x][y].getCollectableItem());
-                    map.getCells()[x][y].setCollectableItem(null);
-                }
+                addCollectible(map.getCells()[x][y]);
+                currentCard = entry.getValue();
                 Hand.remove(entry.getValue().getId());
                 break;
             }
+    }
+
+    private void insertMinionsOrHero(Card card, int x, int y) {
+        map.getCells()[x][y].setCard(card);
+        card.setRow(x);
+        card.setColumn(y);
+        if (getTurn() % 2 == 1) {
+            map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
+            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
+                for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getFirstPlayerCellCard().get(card), buff);
+                }
+                firstPlayerMana -= card.getMP();
+        } else if (getTurn() % 2 == 0) {
+            map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
+            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_INSERT)
+                for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getSecondPlayerCellCard().get(card), buff);
+                }
+                secondPlayerMana -= card.getMP();
+        }
+        addCollectible(map.getCells()[x][y]);
+        if (map.getCells()[x][y].getFlagCount() != 0) {
+            //TODO
+        }
     }
 
     public void insertPlayerCard(String cardName, int x, int y) {
@@ -779,16 +772,19 @@ public class Game {
     public boolean isOppAvailableForAttack(int targetId, int attackerId) {
         int distance;
         Card attacker;
-        if (getTurn() % 2 == 1) {
-            attacker = map.getFirstPlayerCellCard().get(attackerId).getCard();
-            Cell target = map.getSecondPlayerCellCard().get(targetId);
-            distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
-                    target.getColumn());
-        } else {
-            attacker = map.getSecondPlayerCellCard().get(attackerId).getCard();
-            Cell target = map.getFirstPlayerCellCard().get(targetId);
-            distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
-                    target.getColumn());
+        try {
+            if (getTurn() % 2 == 1) {
+                attacker = map.getFirstPlayerCellCard().get(attackerId).getCard();
+                Cell target = map.getSecondPlayerCellCard().get(targetId);
+                distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(), target.getColumn());
+            } else {
+                attacker = map.getSecondPlayerCellCard().get(attackerId).getCard();
+                Cell target = map.getFirstPlayerCellCard().get(targetId);
+                distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(),
+                        target.getColumn());
+            }
+        } catch (NullPointerException e) {
+            return false;
         }
         if (attacker.getCardClass() == ImpactType.MELEE && distance == 1)
             return true;
@@ -894,8 +890,7 @@ public class Game {
                         winnerName = firstUser.getName();
                         firstUser.setMoney(price);
                         firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
-                    }
-                    else {
+                    } else {
                         winnerName = secondUser.getName();
                         secondUser.setMoney(price);
                         secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
@@ -958,7 +953,7 @@ public class Game {
         return false;
     }
 
-    public boolean isValidCellForInsert(int x, int y) {
+    public boolean isCellValidForInsert(int x, int y) {
         if (map.isTargetInMap(x, y) && map.isCellEmpty(x, y) && isInsiderForceAbutment(x, y)) {
             return true;
         }
@@ -1023,11 +1018,14 @@ public class Game {
         return null;
     }
 
-    public void addCollectable(CollectableItem item) {
-        if (getTurn() % 2 == 1)
-            player1Collectable.add(item);
-        else
-            player2Collectable.add(item);
+    private void addCollectible(Cell cell) {
+        try {
+            if (getTurn() % 2 == 1)
+                player1Collectable.add(cell.getCollectableItem());
+            else
+                player2Collectable.add(cell.getCollectableItem());
+        } catch (NullPointerException e) {
+        }
     }
 
     //-------------------------grave Yard ----------------------

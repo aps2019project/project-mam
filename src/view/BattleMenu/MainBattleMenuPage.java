@@ -20,7 +20,10 @@ public class MainBattleMenuPage extends ConsolePage {
 
     @Override
     public void help() {
-        super.help();
+        view.show("Game info\nshow my minions \nshow opponent minions \nShow card info [card id] \nSelect [card id]\n" +
+                "Use special power (x, y)\nShow hand\nInsert [card name] in (x, y)\nInsert [card name] in x y\nEnd turn\n" +
+                "Show collectables\nSelect [collectable id]\nShow info\nShow Next Card\nEnter graveyard\n");
+
     }
 
     @Override
@@ -61,7 +64,7 @@ public class MainBattleMenuPage extends ConsolePage {
             view.getPages().push(new GraveyardMenu());
         } else if (command.matches("help")) {
             help();
-        } else if (command.matches("exit")) {
+        } else if (command.matches("quit")) {
             view.back();
             view.back();
             view.back();
@@ -75,14 +78,10 @@ public class MainBattleMenuPage extends ConsolePage {
         if (!isStarted) {
             isStarted = true;
             view.show("----------< BATTLE >---------");
-            view.show("num of player:");
-            view.show(BattleMenuPage.getNumOfPlayers());
-            view.show("game kind:");
-            view.show(BattleMenuPage.getGameKind());
-            view.show("game mood:");
-            view.show(BattleMenuPage.getGameMood());
-            view.show("mission:");
-            view.show(BattleMenuPage.getMission());
+            view.show("num of player : " + BattleMenuPage.getNumOfPlayers());
+            view.show("game kind : " + BattleMenuPage.getGameKind());
+            view.show("game mood : " + BattleMenuPage.getGameMood());
+            view.show("mission : " + BattleMenuPage.getMission());
         }
     }
 }

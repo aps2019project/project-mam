@@ -103,7 +103,7 @@ public class AI {
     public boolean insertTarget() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                if (game.isValidCellForInsert(i, j)) {
+                if (game.isCellValidForInsert(i, j)) {
                     insertTarget = game.getMap().getCells()[i][j];
                     return true;
                 }

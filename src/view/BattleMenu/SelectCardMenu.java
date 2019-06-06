@@ -14,7 +14,8 @@ public class SelectCardMenu extends ConsolePage {
 
     @Override
     public void help() {
-        super.help();
+        view.show("move to x y \nattack id \nattack combo oppId myIds \nuse special power x y \n" +
+                "exit");
     }
 
     @Override
