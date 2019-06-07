@@ -1,10 +1,10 @@
 package view.BattleMenu;
 
 import Controller.Controller;
-import view.ConsolePage;
+import view.Page;
 import view.View;
 
-public class SelectCollectibleMenu extends ConsolePage {
+public class SelectCollectibleMenu extends Page {
 
     private Controller controller = Controller.getInstance();
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();

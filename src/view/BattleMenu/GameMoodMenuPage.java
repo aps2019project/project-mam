@@ -2,14 +2,19 @@ package view.BattleMenu;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
-import view.ConsolePage;
+import javafx.stage.Stage;
+import view.Page;
 import view.View;
 
-public class GameMoodMenuPage extends ConsolePage {
+public class GameMoodMenuPage extends Page {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
     private Controller controller = Controller.getInstance();
+
+    public GameMoodMenuPage(Stage stage) {
+        super(stage);
+    }
 
     @Override
     public void help() {

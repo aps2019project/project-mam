@@ -3,10 +3,10 @@ package view.BattleMenu;
 import Controller.Controller;
 import Model.AI;
 import Model.enums.ErrorType;
-import view.ConsolePage;
+import view.Page;
 import view.View;
 
-public class MissionsMenuPage extends ConsolePage {
+public class MissionsMenuPage extends Page {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private Controller controller = Controller.getInstance();

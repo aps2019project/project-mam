@@ -23,11 +23,10 @@ public class View {
     }
 
 
-    private Deque<ConsolePage> pages = new LinkedList<>();
+    private Deque<Page> pages = new LinkedList<>();
 
     public void start() {
-        pages.push(new AccountMenuPage());
-        ConsolePage currentPage = null;
+        Page currentPage = null;
         while (!isEnded) {
             if (currentPage != pages.peek()) {
                 currentPage = pages.peek();
@@ -61,7 +60,7 @@ public class View {
         return scanner.nextLine();
     }
 
-    public Deque<ConsolePage> getPages() {
+    public Deque<Page> getPages() {
         return pages;
     }
 

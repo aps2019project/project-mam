@@ -2,10 +2,10 @@ package view.BattleMenu;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
-import view.ConsolePage;
+import view.Page;
 import view.View;
 
-public class SelectUserMenuPage extends ConsolePage {
+public class SelectUserMenuPage extends Page {
 
     Controller controller = Controller.getInstance();
     View view = View.getInstance();
@@ -23,7 +23,7 @@ public class SelectUserMenuPage extends ConsolePage {
             if (controller.isUserNameValid(userName)) {
                 if (controller.isMainDeckValid(userName)) {
                     battleMenuPage.setSecondUser(controller.getSecondUser(userName));
-                    view.getPages().push(new GameMoodMenuPage());
+                    view.getPages().push(new GameMoodMenuPage(stage));
                 } else view.printError(ErrorType.INVALID_DECK_2);
             } else view.printError(ErrorType.INVALID_USERNAME);
         }else if (command.equalsIgnoreCase("help")) {

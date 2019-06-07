@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0"
+      prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <StackPane prefHeight="240.0" prefWidth="425.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="235.0" fitWidth="424.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../resources/main/codex/chapter17_background@2x.jpg" />
+               </image>
+            </ImageView>
+            <Group>
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutY="35.0" prefHeight="89.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <TextField alignment="CENTER" promptText="user name" />
+                        <PasswordField alignment="CENTER" promptText="password" />
+                        <Button fx:id="signIn" mnemonicParsing="false" text="sign in" textAlignment="CENTER" />
+                        <Label fx:id="msgLb" prefHeight="17.0" prefWidth="77.0" text="Label" textAlignment="CENTER" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+            </Group>
+         </children>
+      </StackPane>
+   </children>
+</VBox>

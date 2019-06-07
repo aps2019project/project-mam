@@ -3,10 +3,11 @@ package view.BattleMenu;
 import Controller.Controller;
 import Model.enums.ErrorType;
 import Model.user.User;
-import view.ConsolePage;
+import javafx.stage.Stage;
+import view.Page;
 import view.View;
 
-public class BattleMenuPage extends ConsolePage {
+public class BattleMenuPage extends Page {
     private Controller controller = Controller.getInstance();
     View view = View.getInstance();
 
@@ -18,6 +19,13 @@ public class BattleMenuPage extends ConsolePage {
     private User secondUser = new User("notAi");
     private User firstUser = controller.getFirstUser();
     private static int flags;
+
+    public BattleMenuPage(Stage stage) {
+        super(stage);
+    }
+
+    public BattleMenuPage() {
+    }
 
     public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;

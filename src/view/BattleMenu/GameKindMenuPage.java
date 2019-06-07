@@ -1,10 +1,10 @@
 package view.BattleMenu;
 
 import Model.enums.ErrorType;
-import view.ConsolePage;
+import view.Page;
 import view.View;
 
-public class GameKindMenuPage extends ConsolePage {
+public class GameKindMenuPage extends Page {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
@@ -23,7 +23,7 @@ public class GameKindMenuPage extends ConsolePage {
                 break;
             case "2":
                 BattleMenuPage.setGameKind("custom game");
-                view.getPages().push(new GameMoodMenuPage());
+                view.getPages().push(new GameMoodMenuPage(stage));
                 break;
             case "back":
                 view.back();

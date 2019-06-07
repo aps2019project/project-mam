@@ -89,7 +89,7 @@ public class Controller {
         if (!User.isUserNameNew(userName)) {
             if (User.isPassCorrect(userName, password)) {
                 user = User.login(userName, password);
-                view.getPages().push(new MainMenuPage());
+                //view.getPages().push(new MainMenuPage());
             } else view.printError(ErrorType.INCORRECT_PASSWORD);
         } else view.printError(ErrorType.INVALID_USERNAME);
     }

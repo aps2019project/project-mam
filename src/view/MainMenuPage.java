@@ -1,13 +1,18 @@
 package view;
 
+import javafx.stage.Stage;
 import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
 import Model.enums.ErrorType;
 
 
-public class MainMenuPage extends ConsolePage {
+public class MainMenuPage extends Page {
     Controller controller = Controller.getInstance();
     private View view = View.getInstance();
+
+    public MainMenuPage(Stage stage) {
+        super(stage);
+    }
 
     @Override
     public void help() {
@@ -17,10 +22,10 @@ public class MainMenuPage extends ConsolePage {
     public void handleCommand(String command) {
         switch (command) {
             case "1": //Collection
-                view.getPages().push(new CollectionMenuPage());
+                view.getPages().push(new CollectionMenuPage(stage));
                 break;
             case "2": //Shop
-                view.getPages().push(new ShopMenuPage());
+                view.getPages().push(new ShopMenuPage(stage));
                 break;
             case "3": //Battle
                 view.getPages().push(new BattleMenuPage());

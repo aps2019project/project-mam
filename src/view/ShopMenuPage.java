@@ -2,10 +2,15 @@ package view;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
+import javafx.stage.Stage;
 
-public class ShopMenuPage extends ConsolePage {
+public class ShopMenuPage extends Page {
     Controller controller = Controller.getInstance();
     View view = View.getInstance();
+
+    public ShopMenuPage(Stage stage) {
+        super(stage);
+    }
 
     @Override
     public void help() {
