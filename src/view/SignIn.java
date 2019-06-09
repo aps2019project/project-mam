@@ -4,10 +4,12 @@ import Controller.Controller;
 import Model.enums.ErrorType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -16,7 +18,7 @@ import java.io.IOException;
 
 public class SignIn extends Page {
     private View view = View.getInstance();
-    public ImageView imageView;
+    public ImageView imageView=new ImageView();
 
     public SignIn(Stage stage) {
         super(stage);
@@ -24,12 +26,16 @@ public class SignIn extends Page {
         stage.show();
     }
 
+    public SignIn(){
+        start();
+    }
+
     public void start() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("FXML/SignIn.fxml"));
-            /*Image image = new Image(new FileInputStream("resources/main/codex/chapter17_background@2x.jpg"));
-            imageView.setImage(image);*/
+            Pane root = FXMLLoader.load(getClass().getResource("FXML/SignIn.fxml"));
+            setBackGround(root,"resources/codex/chapter17_background@2x.jpg", 500, 250);
             Scene scene = new Scene(root);
+            stage.setResizable(false);
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,7 +47,7 @@ public class SignIn extends Page {
     }
 
 
-    public void handleCommand(String command) {
+    /*public void handleCommand(String command) {
         if (command.matches("create account .*"))
             controller.createAccount(command);
         else if (command.matches("login .*"))
@@ -55,7 +61,7 @@ public class SignIn extends Page {
         else
             view.printError(ErrorType.INVALID_COMMAND);
 
-    }
+    }*/
 
     @Override
     public void showMenu() {
