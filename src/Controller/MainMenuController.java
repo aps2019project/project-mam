@@ -1,32 +1,59 @@
 package Controller;
 
-import javafx.scene.image.Image;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import view.pages.MainMenuPage;
-
-import java.io.FileInputStream;
+import view.BattleMenu.BattleMenuPage;
+import view.pages.CollectionMenuPage;
+import view.pages.Page;
+import view.pages.ShopMenuPage;
 
 public class MainMenuController {
-    public ImageView battle ;
-    public ImageView shop = new ImageView();
-    public ImageView collection = new ImageView();
-    public ImageView custom = new ImageView();
-    public ImageView logout = new ImageView();
-    public ImageView exit = new ImageView();
+    public Label battleLbl;
+    public Label shopLbl;
+    public Label collectionLbl;
+    public Label saveLbl;
+    public Label customLbl;
+    public ImageView exit;
+    public ImageView logout;
 
     public MainMenuController() {
-        init();
+
     }
 
-    private void init(){
-        try {
-           battle.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));
-
-            MainMenuPage.getRoot().getChildren().addAll(battle);
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @FXML
+    public void onBattleClicked(){
+        Page.getPages().push(new BattleMenuPage());
     }
+
+    @FXML
+    public void onShopClicked(){
+        Page.getPages().push(new ShopMenuPage());
+    }
+
+    @FXML
+    public void onCollectionClicked(){
+        Page.getPages().push(new CollectionMenuPage());
+    }
+
+    @FXML
+    public void onSaveClicked(){
+
+    }
+
+    @FXML
+    public void onCustomClicked(){
+
+    }
+
+    @FXML
+    public void onLogoutClicked(){
+
+    }
+
+    @FXML
+    public void onExitClicked(){
+        Page.getStage().close();
+    }
+
 }

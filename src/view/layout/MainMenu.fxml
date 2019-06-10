@@ -1,57 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="222.0" spacing="10.0" GridPane.rowSpan="2">
          <children>
-            <ImageView fx:id="battle" fitHeight="34.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/ui/button_primary_right.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="shop" fitHeight="36.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/ui/button_primary_right.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="collection" fitHeight="35.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/ui/button_primary_right.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="custom" fitHeight="42.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/ui/button_primary_right.png" />
-               </image>
-            </ImageView>
+            <Label fx:id="battleLbl" alignment="CENTER" onMouseClicked="#onBattleClicked" prefHeight="40.0" prefWidth="100.0" text="Battle">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="shopLbl" alignment="CENTER" onMouseClicked="#onShopClicked" prefHeight="31.0" prefWidth="100.0" text="Shop">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="collectionLbl" alignment="CENTER" onMouseClicked="#onCollectionClicked" prefHeight="35.0" prefWidth="105.0" text="Collection">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="saveLbl" alignment="CENTER" onMouseClicked="#onSaveClicked" prefHeight="29.0" prefWidth="100.0" text="Save">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="customLbl" alignment="CENTER" onMouseClicked="#onCustomClicked" prefHeight="35.0" prefWidth="129.0" text="Custom" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
          </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
       </VBox>
-      <HBox alignment="CENTER" layoutX="400.0" layoutY="294.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+      <HBox alignment="CENTER" prefHeight="133.0" prefWidth="270.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <ImageView fx:id="logout" fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logout" fitHeight="51.0" fitWidth="48.0" onMouseClicked="#onLogoutClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/button_close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exit" fitHeight="43.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exit" fitHeight="43.0" fitWidth="39.0" onMouseClicked="#onExitClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/utility_menu/settings.png" />
                </image>
             </ImageView>
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="200.0" right="20.0" top="20.0" />
          </padding>
       </HBox>
    </children>
-</AnchorPane>
+</GridPane>

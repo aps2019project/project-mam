@@ -1,42 +1,31 @@
 package view.pages;
 
+import Controller.MainMenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import view.BattleMenu.BattleMenuPage;
-import Controller.Controller;
-import Model.enums.ErrorType;
-import view.View;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 public class MainMenuPage extends Page {
-    Controller controller = Controller.getInstance();
-    private View view = View.getInstance();
-
+    private MainMenuController controller;
+    private static MainMenuPage instance;
     private static Pane root = new Pane();
-
-    public MainMenuPage(Stage stage) {
-        super(stage);
-    }
 
     public MainMenuPage(){
         start();
     }
 
-    @Override
-    public void help() {
-        view.showHelpForMainMenu();
-    }
-
-
     public void start(){
         try {
-            root = FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
-            FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
-            setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/MainMenu.fxml"));
+            root = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+            initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
@@ -45,43 +34,32 @@ public class MainMenuPage extends Page {
         }
     }
 
+    private void initializeImage() throws FileNotFoundException {
+        setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+        setBackGround(controller.battleLbl, "resources/ui/button_primary_right.png");
+        setBackGround(controller.shopLbl, "resources/ui/button_primary_right.png");
+        setBackGround(controller.collectionLbl, "resources/ui/button_primary_right.png");
+        setBackGround(controller.saveLbl, "resources/ui/button_primary_right.png");
+        setBackGround(controller.customLbl, "resources/ui/button_primary_right.png");
+        controller.exit.setImage(new Image(new FileInputStream("resources/ui/utility_menu/settings.png")));
+        controller.logout.setImage(new Image(new FileInputStream("resources/ui/button_close.png")));
+    }
+
+    public MainMenuController getController()
+    {
+        return controller;
+    }
+
+    public static MainMenuPage getInstance()
+    {
+        if (instance == null)
+            instance = new MainMenuPage();
+        return instance;
+    }
 
     public static Pane getRoot() {
         return root;
     }
 
-    public void handleCommand(String command) {
-        switch (command) {
-            case "1": //Collection
-                view.getPages().push(new CollectionMenuPage(stage));
-                break;
-            case "2": //Shop
-                view.getPages().push(new ShopMenuPage(stage));
-                break;
-            case "3": //Battle
-                view.getPages().push(new BattleMenuPage());
-                break;
-            case "4": //Exit
-                view.exit();
-                break;
-            case "5": //save
-                controller.saveAccount();
-                break;
-            case "6": //logout
-                controller.logoutAccount();
-                view.back();
-                break;
-            case "7": //Help
-                view.showHelpForMainMenu();
-                break;
-            default:
-                view.printError(ErrorType.INVALID_COMMAND);
-        }
-    }
 
-    @Override
-    public void showMenu() {
-        view.show("----------<Main Menu>---------");
-        view.show("1: Collection\n2: Shop\n3: Battle\n4: Exit\n5: Save\n6: Logout\n7: Help");
-    }
 }

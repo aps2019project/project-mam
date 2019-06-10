@@ -13,6 +13,9 @@ public class ShopMenuPage extends Page {
         super(stage);
     }
 
+    public ShopMenuPage() {
+    }
+
     @Override
     public void help() {
         view.showHelpForShopMenu();
