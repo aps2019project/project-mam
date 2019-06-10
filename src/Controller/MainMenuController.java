@@ -2,27 +2,31 @@ package Controller;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import view.pages.MainMenuPage;
 
 import java.io.FileInputStream;
 
 public class MainMenuController {
-    public ImageView battle ;
-    public ImageView shop = new ImageView();
-    public ImageView collection = new ImageView();
-    public ImageView custom = new ImageView();
-    public ImageView logout = new ImageView();
-    public ImageView exit = new ImageView();
+    public ImageView battle;
+    public ImageView shop;
+    public ImageView collection;
+    public ImageView custom;
+    public ImageView logout;
+    public ImageView exit;
 
     public MainMenuController() {
-        init();
+        //init();
     }
 
     private void init(){
         try {
-           battle.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));
+           /* battle.setOnMouseClicked(event -> {
+                System.out.println("clicked");
+            });*/
+           /*battle.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));
 
-            MainMenuPage.getRoot().getChildren().addAll(battle);
+            MainMenuPage.getRoot().getChildren().addAll(battle);*/
 
 
         }catch (Exception e){

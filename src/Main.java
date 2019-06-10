@@ -12,6 +12,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Duelyst");
+
         Page.setStage(primaryStage);
 //        Page.getPages().push(new SignIn());
         Page.getPages().push(new MainMenuPage());

@@ -2,13 +2,17 @@ package view.pages;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.omg.CORBA.MARSHAL;
 import view.BattleMenu.BattleMenuPage;
-import Controller.Controller;
+import Controller.*;
 import Model.enums.ErrorType;
 import view.View;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 
@@ -16,13 +20,12 @@ public class MainMenuPage extends Page {
     Controller controller = Controller.getInstance();
     private View view = View.getInstance();
 
-    private static Pane root = new Pane();
 
     public MainMenuPage(Stage stage) {
         super(stage);
     }
 
-    public MainMenuPage(){
+    public MainMenuPage() {
         start();
     }
 
@@ -32,23 +35,38 @@ public class MainMenuPage extends Page {
     }
 
 
-    public void start(){
+    public void start() {
         try {
-            root = FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
-            FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
+            /*root = FXMLLoader.load(getClass().getResource("../layout/MainMenu.fxml"));
+            FXMLLoader.load(getClass().getResource("../layout/MainMenu.fxml"));*/
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/MainMenu2.fxml"));
+
+            Pane root = fxmlLoader.load();
+            MainMenu2Controller mainMenuController = fxmlLoader.getController();
+
+
+            //mainMenuController.battle.setImage(new Image(new FileInputStream("resources/ui/button_primary_right_glow@2x.png")));
+            /*mainMenuController.shop.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));
+            mainMenuController.collection.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));
+            mainMenuController.custom.setImage(new Image(new FileInputStream("resources/ui/button_primary_right.png")));*/
+            mainMenuController.logout.setImage(new Image(new FileInputStream("resources/ui/button_close.png")));
+            mainMenuController.exit.setImage(new Image(new FileInputStream("resources/ui/utility_menu/settings.png")));
+
+
             setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
+            stage.setFullScreenExitHint("Welcome");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static Pane getRoot() {
-        return root;
-    }
 
     public void handleCommand(String command) {
         switch (command) {

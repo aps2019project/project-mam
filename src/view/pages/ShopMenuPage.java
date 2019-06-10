@@ -2,12 +2,37 @@ package view.pages;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.View;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ShopMenuPage extends Page {
     Controller controller = Controller.getInstance();
     View view = View.getInstance();
+
+
+    @Override
+    public void start() {
+        try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/MainMenu2.fxml"));
+        Pane root = fxmlLoader.load();
+
+
+        setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        /*stage.setFullScreen(true);
+        stage.setFullScreenExitHint("Welcome");*/
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public ShopMenuPage(Stage stage) {
         super(stage);

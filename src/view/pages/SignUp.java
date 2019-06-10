@@ -18,7 +18,7 @@ public class SignUp extends Page{
 
     public void start(){
         try {
-            Pane root = FXMLLoader.load(getClass().getResource("FXML/SignUp.fxml"));
+            Pane root = FXMLLoader.load(getClass().getResource("../layout/SignUp.fxml"));
             setBackGround(root,"resources/codex/chapter17_background@2x.jpg", 500, 250);
             Scene scene = new Scene(root);
             stage.setScene(scene);

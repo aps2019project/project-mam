@@ -4,6 +4,7 @@ public enum ErrorType {
     DUPLICATE_USERNAME("username is'nt new"),
     DUPLICATE_DECK("deck name is'nt new"),
     INVALID_USERNAME("userName is inValid"),
+    INVALID_PASSWORD("password is inValid"),
     INCORRECT_PASSWORD("password is incorrect"),
     INVALID_COMMAND("command is invalid"),
     VALID_DECK("selected deck is valid"),
