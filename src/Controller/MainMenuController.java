@@ -2,7 +2,7 @@ package Controller;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import view.mainPages.MainMenuPage;
+import view.pages.MainMenuPage;
 
 import java.io.FileInputStream;
 

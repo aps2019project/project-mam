@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import view.Page;
+import view.pages.Page;
 
 public class SignUpController {
     public TextField userName;

@@ -4,7 +4,7 @@ import Controller.Controller;
 import Model.AI;
 import Model.enums.ErrorType;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class MissionsMenuPage extends Page {
 

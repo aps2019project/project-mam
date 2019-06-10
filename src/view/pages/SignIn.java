@@ -1,4 +1,4 @@
-package view;
+package view.pages;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import view.View;
+import view.pages.Page;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

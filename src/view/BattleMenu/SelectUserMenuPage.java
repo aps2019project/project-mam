@@ -3,7 +3,7 @@ package view.BattleMenu;
 import Controller.Controller;
 import Model.enums.ErrorType;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class SelectUserMenuPage extends Page {
 

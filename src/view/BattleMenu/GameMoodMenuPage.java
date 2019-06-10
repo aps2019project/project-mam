@@ -4,7 +4,7 @@ import Controller.Controller;
 import Model.enums.ErrorType;
 import javafx.stage.Stage;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class GameMoodMenuPage extends Page {
 
