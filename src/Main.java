@@ -1,9 +1,10 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.MainMenuPage;
-import view.Page;
+
 import view.SignIn;
 import view.View;
+import view.mainPages.MainMenuPage;
+import view.mainPages.Page;
 
 public class Main extends Application {
     public static void main(String argc[]) {
