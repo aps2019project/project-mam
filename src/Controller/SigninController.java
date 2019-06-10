@@ -23,7 +23,7 @@ public class SigninController {
 
     @FXML
     public void onSignInBtnClicked(){
-
+        loginAccount(userName.getText(), password.getText());
     }
 
     @FXML

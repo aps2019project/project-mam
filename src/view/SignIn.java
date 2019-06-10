@@ -18,7 +18,6 @@ import java.io.IOException;
 
 public class SignIn extends Page {
     private View view = View.getInstance();
-    public ImageView imageView=new ImageView();
 
     public SignIn(Stage stage) {
         super(stage);

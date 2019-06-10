@@ -41,7 +41,20 @@ public abstract class Page {
             e.printStackTrace();
         }
     }
+
+    protected void setBackGround(Pane root, String address){
+        try {
+            Image image = new Image(new FileInputStream(address));
+            BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            root.setBackground(new Background(myBI));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void start(){}
+
     public void help(){}
      public void handleCommand(String command){}
      public void showMenu(){}

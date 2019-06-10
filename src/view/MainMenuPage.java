@@ -1,24 +1,52 @@
 package view;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
 import Model.enums.ErrorType;
+
+import java.io.IOException;
 
 
 public class MainMenuPage extends Page {
     Controller controller = Controller.getInstance();
     private View view = View.getInstance();
 
+    private static Pane root = new Pane();
+
     public MainMenuPage(Stage stage) {
         super(stage);
     }
 
-    public MainMenuPage(){}
+    public MainMenuPage(){
+        start();
+    }
 
     @Override
     public void help() {
         view.showHelpForMainMenu();
+    }
+
+
+    public void start(){
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
+            FXMLLoader.load(getClass().getResource("FXML/MainMenu.fxml"));
+            setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static Pane getRoot() {
+        return root;
     }
 
     public void handleCommand(String command) {
