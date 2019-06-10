@@ -1,9 +1,10 @@
-package view;
+package view.mainPages;
 
-import javafx.stage.Stage;
-import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
 import Model.enums.ErrorType;
+import javafx.stage.Stage;
+import view.BattleMenu.BattleMenuPage;
+import view.View;
 
 
 public class MainMenuPage extends Page {

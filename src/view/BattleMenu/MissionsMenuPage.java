@@ -3,8 +3,8 @@ package view.BattleMenu;
 import Controller.Controller;
 import Model.AI;
 import Model.enums.ErrorType;
-import view.Page;
 import view.View;
+import view.mainPages.Page;
 
 public class MissionsMenuPage extends Page {
 

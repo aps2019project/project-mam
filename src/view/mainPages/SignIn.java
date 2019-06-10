@@ -1,22 +1,17 @@
-package view;
+package view.mainPages;
 
-import Controller.Controller;
+import Controller.FXML.SignInController;
 import Model.enums.ErrorType;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import view.View;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SignIn extends Page {
     private View view = View.getInstance();
-    public ImageView imageView;
 
     public SignIn(Stage stage) {
         super(stage);
@@ -26,9 +21,8 @@ public class SignIn extends Page {
 
     public void start() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("FXML/SignIn.fxml"));
-            /*Image image = new Image(new FileInputStream("resources/main/codex/chapter17_background@2x.jpg"));
-            imageView.setImage(image);*/
+            Parent root = FXMLLoader.load(getClass().getResource("view/layout/SignIn.fxml"));
+            new SignInController().init();
             Scene scene = new Scene(root);
             stage.setScene(scene);
         } catch (IOException e) {
