@@ -1,6 +1,6 @@
 package view.pages;
 
-import Controller.Controller;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -11,12 +11,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public abstract class Page {
-     protected Controller controller;
      protected static Stage stage;
      protected static Deque<Page> pages = new LinkedList<>();
 
     public Page(Stage stage) {
-        this.controller = Controller.getInstance();
         this.stage = stage;
     }
 
@@ -29,6 +27,10 @@ public abstract class Page {
 
     public static Deque<Page> getPages() {
         return pages;
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 
     protected void setBackGround(Pane root, String address, int width, int height){
@@ -48,6 +50,17 @@ public abstract class Page {
             BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                     BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
             root.setBackground(new Background(myBI));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void setBackGround(Label label, String address){
+        try {
+            Image image = new Image(new FileInputStream(address));
+            BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            label.setBackground(new Background(myBI));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

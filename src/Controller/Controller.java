@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.*;
+import Model.AI;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -10,9 +10,8 @@ import Model.enums.SPActivationTime;
 import Model.game.Game;
 import Model.shop.Shop;
 import Model.user.User;
-import view.*;
+import view.View;
 
-import java.lang.String;
 import java.util.ArrayList;
 
 public class Controller {

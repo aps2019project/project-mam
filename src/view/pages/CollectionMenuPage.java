@@ -13,6 +13,9 @@ public class CollectionMenuPage extends Page {
         super(stage);
     }
 
+    public CollectionMenuPage() {
+    }
+
     @Override
     public void help() {
         view.showHelpForCollectionMenu();
