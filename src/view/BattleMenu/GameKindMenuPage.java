@@ -2,7 +2,7 @@ package view.BattleMenu;
 
 import Model.enums.ErrorType;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class GameKindMenuPage extends Page {
 

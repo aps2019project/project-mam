@@ -1,14 +1,13 @@
-package view;
+package view.pages;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import view.mainPages.Page;
 
 import java.io.IOException;
 
-public class SignUp extends Page {
+public class SignUp extends Page{
     public SignUp(Stage stage) {
         super(stage);
     }

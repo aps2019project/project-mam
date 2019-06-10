@@ -1,4 +1,4 @@
-package view.mainPages;
+package view.pages;
 
 import Controller.Controller;
 import Model.enums.ErrorType;

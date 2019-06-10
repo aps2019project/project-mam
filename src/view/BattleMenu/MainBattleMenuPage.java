@@ -4,7 +4,7 @@ import Controller.Controller;
 import Model.enums.ErrorType;
 import Model.game.Game;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class MainBattleMenuPage extends Page {
 

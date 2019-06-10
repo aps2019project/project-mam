@@ -2,7 +2,7 @@ package view.BattleMenu;
 
 import Controller.Controller;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class GraveyardMenu extends Page {
 

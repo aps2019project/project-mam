@@ -5,7 +5,7 @@ import Model.enums.ErrorType;
 import Model.user.User;
 import javafx.stage.Stage;
 import view.View;
-import view.mainPages.Page;
+import view.pages.Page;
 
 public class BattleMenuPage extends Page {
     private Controller controller = Controller.getInstance();
