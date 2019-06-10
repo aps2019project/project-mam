@@ -7,12 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import view.MainMenuPage;
-import view.Page;
 import view.SignUp;
-import view.View;
+import view.mainPages.MainMenuPage;
+import view.mainPages.Page;
 
 public class SigninController {
     public Button signIn;
