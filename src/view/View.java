@@ -3,6 +3,7 @@ package view;
 import Controller.Controller;
 import Model.enums.ErrorType;
 import view.BattleMenu.BattleMenuPage;
+import view.mainPages.Page;
 
 import java.util.Deque;
 import java.util.LinkedList;

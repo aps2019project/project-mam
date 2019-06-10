@@ -3,8 +3,8 @@ package view.BattleMenu;
 import Controller.Controller;
 import Model.enums.ErrorType;
 import Model.game.Game;
-import view.Page;
 import view.View;
+import view.mainPages.Page;
 
 public class MainBattleMenuPage extends Page {
 

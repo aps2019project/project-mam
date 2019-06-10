@@ -1,8 +1,9 @@
-package view;
+package view.mainPages;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
 import javafx.stage.Stage;
+import view.View;
 
 public class CollectionMenuPage extends Page {
     Controller controller = Controller.getInstance();

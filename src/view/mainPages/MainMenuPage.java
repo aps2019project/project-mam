@@ -1,4 +1,4 @@
-package view;
+package view.mainPages;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import view.BattleMenu.BattleMenuPage;
 import Controller.Controller;
 import Model.enums.ErrorType;
+import javafx.stage.Stage;
+import view.BattleMenu.BattleMenuPage;
+import view.View;
 
 import java.io.IOException;
 

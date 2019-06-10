@@ -2,8 +2,8 @@ package view.BattleMenu;
 
 import Controller.Controller;
 import Model.enums.ErrorType;
-import view.Page;
 import view.View;
+import view.mainPages.Page;
 
 public class SelectUserMenuPage extends Page {
 
