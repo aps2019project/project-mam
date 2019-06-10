@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+         <children>
+            <ImageView fx:id="battle" fitHeight="34.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_primary_right.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="shop" fitHeight="36.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_primary_right.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="collection" fitHeight="35.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_primary_right.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="custom" fitHeight="42.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_primary_right.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="400.0" layoutY="294.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <ImageView fx:id="logout" fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_close.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exit" fitHeight="43.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/utility_menu/settings.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
