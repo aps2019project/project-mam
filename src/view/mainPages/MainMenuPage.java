@@ -15,6 +15,8 @@ public class MainMenuPage extends Page {
         super(stage);
     }
 
+    public MainMenuPage(){}
+
     @Override
     public void help() {
         view.showHelpForMainMenu();

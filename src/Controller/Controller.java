@@ -72,27 +72,9 @@ public class Controller {
     public void saveAccount() {
     }
 
-    public void createAccount(String command) {
-        view = View.getInstance();
-        String userName = command.substring(15);
-        view.show("password :");
-        String password = view.getPassword();
-        if (User.isUserNameNew(userName))
-            User.addUser(new User(userName, password));
-        else view.printError(ErrorType.DUPLICATE_USERNAME);
-    }
 
-    public void loginAccount(String command) {              //????? problem
-        String userName = command.split(" ")[1];
-        view.show("password :");
-        String password = view.getPassword();
-        if (!User.isUserNameNew(userName)) {
-            if (User.isPassCorrect(userName, password)) {
-                user = User.login(userName, password);
-                //view.getPages().push(new MainMenuPage());
-            } else view.printError(ErrorType.INCORRECT_PASSWORD);
-        } else view.printError(ErrorType.INVALID_USERNAME);
-    }
+
+
 
     public void logoutAccount() {
         user = null;
