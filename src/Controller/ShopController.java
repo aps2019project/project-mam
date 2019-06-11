@@ -6,6 +6,7 @@ import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import view.pages.Page;
@@ -23,6 +24,9 @@ public class ShopController {
     public Button sell_btn;
     public Button buy_btn;
     public ImageView back = new ImageView();
+    public ScrollPane scrollPane;
+    public Label showAllLbl;
+    public Button showAllBtn;
 
 
 
@@ -53,6 +57,17 @@ public class ShopController {
     @FXML
     public void onSSearchClicked(){
         searchInShop(searchInStore_tf.getText());
+    }
+
+    @FXML
+    public void onShowAllBtnClicked(){
+        scrollPane.setVisible(true);
+        showAllLbl.setText(shop.show());
+    }
+
+    @FXML
+    public void onScrollPaneClicked(){
+        scrollPane.setVisible(false);
     }
 
 
