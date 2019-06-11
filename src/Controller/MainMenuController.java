@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -16,6 +17,8 @@ public class MainMenuController {
     public Label customLbl;
     public ImageView exit;
     public ImageView logout;
+
+    private User user;
 
     public MainMenuController() {
 
