@@ -11,19 +11,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="1318.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="1318.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
   <columnConstraints>
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="898.0" minWidth="10.0" prefWidth="644.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="737.0" minWidth="10.0" prefWidth="674.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="89.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="89.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="271.0" minHeight="0.0" prefHeight="173.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="378.0" minHeight="10.0" prefHeight="338.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="378.0" minHeight="10.0" prefHeight="338.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="173.0" minHeight="10.0" prefHeight="151.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="134.0" minHeight="0.0" prefHeight="0.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="271.0" minHeight="0.0" prefHeight="57.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="378.0" minHeight="5.0" prefHeight="220.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="378.0" minHeight="10.0" prefHeight="50.0" valignment="BOTTOM" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label fx:id="collection_lb" alignment="CENTER" prefHeight="71.0" prefWidth="231.0" text="Collection" GridPane.rowIndex="1">
@@ -55,10 +56,20 @@
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding></Label>
-            <Button fx:id="buy_btn" mnemonicParsing="false" onMouseClicked="#onBuyClicked" text="Buy">
-               <font>
-                  <Font size="36.0" />
-               </font></Button>
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="161.0" spacing="20.0">
+               <children>
+                  <Button fx:id="buy_btn" mnemonicParsing="false" onMouseClicked="#onBuyClicked" text="Buy">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="showAllBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onShowAllBtnClicked" prefHeight="42.0" prefWidth="131.0" text="Show All">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
@@ -70,7 +81,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
+      <HBox alignment="CENTER" prefHeight="161.0" prefWidth="845.0" spacing="20.0" GridPane.rowIndex="2">
          <children>
             <TextField fx:id="searchInCollection_tf" maxWidth="250.0" promptText="Search in Colection">
                <font>
@@ -98,12 +109,7 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="showAllBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onShowAllBtnClicked" prefHeight="32.0" prefWidth="93.0" text="show All" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets bottom="100.0" left="300.0" />
-         </GridPane.margin>
-      </Button>
-      <ScrollPane fx:id="scrollPane" onMouseClicked="#onScrollPaneClicked" opacity="0.81" prefHeight="176.0" prefWidth="918.0" visible="false" GridPane.columnSpan="2" GridPane.rowSpan="5">
+      <ScrollPane fx:id="scrollPane" onMouseClicked="#onScrollPaneClicked" opacity="0.81" prefHeight="378.0" prefWidth="1500.0" visible="false" GridPane.columnSpan="2" GridPane.rowSpan="5">
          <opaqueInsets>
             <Insets top="100.0" />
          </opaqueInsets>
