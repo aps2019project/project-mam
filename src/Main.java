@@ -16,7 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Duelyst");
         Page.setStage(primaryStage);
-
         GsonReader.readUser();
         GsonReader.initShop();
         Page.getPages().push(new SignIn());

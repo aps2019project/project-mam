@@ -21,7 +21,10 @@ import static Model.enums.SPActivationTime.*;
 public class Shop {
     private static final Shop SHOP = new Shop();
     private static ArrayList<Deck> decks=new ArrayList<>();
+    private static ArrayList<Card> spells = new ArrayList<>();
     private static ArrayList<Card> cards = new ArrayList<>();
+    private static ArrayList<Card> heros = new ArrayList<>();
+    private static ArrayList<Card> minions = new ArrayList<>();
     private static ArrayList<UsableItem> usableItems = new ArrayList<>();
     private static ArrayList<CollectableItem> collectibles = new ArrayList<>();
 
@@ -32,16 +35,32 @@ public class Shop {
         return decks;
     }
 
-    public static ArrayList<CollectableItem> getCollectibles() {
-        return collectibles;
+    public static Shop getSHOP() {
+        return SHOP;
+    }
+
+    public static ArrayList<Card> getSpells() {
+        return spells;
     }
 
     public static ArrayList<Card> getCards() {
         return cards;
     }
 
+    public static ArrayList<Card> getHeros() {
+        return heros;
+    }
+
+    public static ArrayList<Card> getMinions() {
+        return minions;
+    }
+
     public static ArrayList<UsableItem> getUsableItems() {
         return usableItems;
+    }
+
+    public static ArrayList<CollectableItem> getCollectibles() {
+        return collectibles;
     }
 
     public String getCardInfo() {
@@ -234,7 +253,7 @@ public class Shop {
         return SHOP;
     }
 
-/*    public static void importCards() {
+    public static void importCards() {
         Card card = new Spell("TotalDisarm", 1000, 0);
         card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
         spells.add(card);
@@ -668,19 +687,17 @@ public class Shop {
         collectibles.add(collectableItem);
 
         //-----------------------------mission deck--------------------------------------
-         Deck deck1=new Deck();
-         deck1.setName("mission_1");
-         deck1.setHero(heros.get(0));
-         deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
-                 .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
-                 .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
-                 .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
-                 .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
-                 .addCard(minions.get(39)).addItem(usableItems.get(0));
+        Deck deck1=new Deck();
+        deck1.setHero(heros.get(0));
+        deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
+                .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
+                .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
+                .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
+                .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
+                .addCard(minions.get(39)).addItem(usableItems.get(0));
         decks.add(deck1);
 
         Deck deck2=new Deck();
-        deck2.setName("mission_2");
         deck2.setHero(heros.get(4));
         deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
                 .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
@@ -691,7 +708,6 @@ public class Shop {
         decks.add(deck2);
 
         Deck deck3=new Deck();
-        deck3.setName("mission_3");
         deck3.setHero(heros.get(6));
         deck3.addCard(spells.get(5)).addCard(spells.get(9)).addCard(spells.get(11)).addCard(spells.get(13))
                 .addCard(spells.get(14)).addCard(spells.get(15)).addCard(spells.get(16))
@@ -701,6 +717,6 @@ public class Shop {
                 .addCard(minions.get(23)).addItem(usableItems.get(4));
         decks.add(deck3);
 
-    }*/
+    }
 
 }

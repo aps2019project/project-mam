@@ -23,9 +23,9 @@ public class GsonWriter {
     }
 
     public static void writeCards() throws IOException {
-        Shop.importCards();
-        for (Card card : Shop.getCards()) {
-            FileWriter out = new FileWriter("gson/Cards/" + card.getName() + ".json");
+        //Shop.importCards();
+        for (Card card : Shop.getSpells()) {
+            FileWriter out = new FileWriter("gson/Cards/Spell/"+ card.getName() + ".json");
             Gson gson = new GsonBuilder().create();
             out.write(gson.toJson(card));
             out.flush();
@@ -34,7 +34,7 @@ public class GsonWriter {
     }
 
     public static void writeItems() throws IOException {
-        Shop.importCards();
+       // Shop.importCards();
         for (UsableItem item : Shop.getUsableItems()) {
             FileWriter writer = new FileWriter("gson/items/usable/" + item.getName() + ".json");
             Gson gson = new GsonBuilder().create();

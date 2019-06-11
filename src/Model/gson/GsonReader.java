@@ -1,6 +1,9 @@
 package Model.gson;
 
 import Model.card.Card;
+import Model.card.Hero;
+import Model.card.Minion;
+import Model.card.Spell;
 import Model.deck.Deck;
 import Model.item.CollectableItem;
 import Model.item.UsableItem;
@@ -32,10 +35,20 @@ public class GsonReader {
     public static void initShop() throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader;
-        File dir = new File("gson/Cards");
+        File dir = new File("gson/Cards/Hero");
         for (File file : dir.listFiles()) {
             reader = new JsonReader(new FileReader(file));
-            Shop.getCards().add(gson.fromJson(reader, Card.class));
+            Shop.getCards().add(gson.fromJson(reader, Hero.class));
+        }
+        dir = new File("gson/Cards/Minion");
+        for (File file : dir.listFiles()) {
+            reader = new JsonReader(new FileReader(file));
+            Shop.getCards().add(gson.fromJson(reader, Minion.class));
+        }
+        dir = new File("gson/Cards/Spell");
+        for (File file : dir.listFiles()) {
+            reader = new JsonReader(new FileReader(file));
+            Shop.getCards().add(gson.fromJson(reader, Spell.class));
         }
         readItems();
         readDeck("mission_1");

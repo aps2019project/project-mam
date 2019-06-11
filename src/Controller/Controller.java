@@ -19,7 +19,7 @@ public class Controller {
     private static final Controller CONTROLLER = new Controller();
 
     private Controller() {
-        Shop.importCards();
+       // Shop.importCards();
     }
 
     public static Controller getInstance() {
