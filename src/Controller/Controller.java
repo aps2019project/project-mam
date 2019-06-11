@@ -121,15 +121,7 @@ public class Controller {
         view.show(user.getCollection().showCollection());
     }
 
-    public void searchInCollection(String name) {
-        if (user.getCollection().searchCardInCollection(name)) {
-            view.printError(ErrorType.FOUND_CARD);
-            view.show("Card ID: " + user.getCollection().getCardId(name));
-        } else if (user.getCollection().searchItemInCollection(name)) {
-            view.printError(ErrorType.FOUND_ITEM);
-            view.show("Item ID: " + user.getCollection().getItemId(name));
-        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
-    }
+
 
     public void saveCollection() {
     }
@@ -199,40 +191,7 @@ public class Controller {
     }
 
     //------------------------------------------Shop-----------------------
-    public void searchInShop(String name) {
-        if (shop.searchCard(name)) {
-            view.printError(ErrorType.FOUND_CARD);
-            view.show(shop.getCardInfo(name));
-        } else if (shop.searchItem(name)) {
-            view.printError(ErrorType.FOUND_ITEM);
-            view.show(shop.getItemInfo(name));
-        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
-    }
 
-    public void buy(String name) {
-        if (shop.cardNameIsAvailable(name)) {
-            if (shop.priceIsEnough(shop.getCardPrice(name), user)) {
-                shop.buyCard(name, user);
-                view.printError(ErrorType.SUCCESSFUL_BUY);
-            } else view.printError(ErrorType.MONEY_IS_NOT_ENOUGH);
-        } else if (shop.itemNameIsAvailable(name)) {
-            if (shop.isPossibleToAddItem(user)) {
-                if (shop.priceIsEnough(shop.getItemPrice(name), user)) {
-                    shop.buyItem(name, user);
-                    view.printError(ErrorType.SUCCESSFUL_BUY);
-                } else view.printError(ErrorType.MONEY_IS_NOT_ENOUGH);
-            } else view.printError(ErrorType.THREE_ITEM);
-        } else view.printError(ErrorType.UNAVAILABLE_CARD_OR_ITEM);
-    }
-
-    public void sell(String id) {
-        int ID = Integer.parseInt(id);
-        if (shop.sellCard(ID, user)) {
-            view.printError(ErrorType.SUCCESSFUL_SELL);
-        } else if (shop.sellItem(ID, user)) {
-            view.printError(ErrorType.SUCCESSFUL_SELL);
-        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
-    }
 
     public void showShop() {
         view.show(shop.show());

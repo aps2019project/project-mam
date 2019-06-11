@@ -33,7 +33,7 @@ public class SigninController {
     public void loginAccount(String userName, String password) {              //????? problem
         if (!User.isUserNameNew(userName)) {
             if (User.isPassCorrect(userName, password)) {
-                User user = User.login(userName, password);
+                User.user = User.login(userName, password);
                 Page.getPages().push(new MainMenuPage());
             } else msgLb.setText(ErrorType.INCORRECT_PASSWORD.getMessage());
         } else msgLb.setText(ErrorType.INVALID_USERNAME.getMessage());

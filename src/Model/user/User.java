@@ -3,11 +3,13 @@ package Model.user;
 import Model.collection.Collection;
 import Model.deck.Deck;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class User {
+    public static User user = new User();
     private static ArrayList<User> users = new ArrayList<>();
     private String name;
     private String password;

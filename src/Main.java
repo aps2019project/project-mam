@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import view.View;
 import view.pages.MainMenuPage;
 import view.pages.Page;
+import view.pages.ShopMenuPage;
 import view.pages.SignIn;
 
 public class Main extends Application {
@@ -18,8 +19,9 @@ public class Main extends Application {
         primaryStage.setTitle("Duelyst");
 
         Page.setStage(primaryStage);
-//        Page.getPages().push(new SignIn());
-        Page.getPages().push(new MainMenuPage());
+        //Page.getPages().push(new SignIn());
+        //Page.getPages().push(new MainMenuPage());
+        Page.getPages().push(new ShopMenuPage());
         primaryStage.show();
     }
 }

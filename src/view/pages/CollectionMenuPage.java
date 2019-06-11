@@ -22,7 +22,7 @@ public class CollectionMenuPage extends Page {
     }
 
 
-    @Override
+    /*@Override
     public void handleCommand(String command) {
         if (command.matches("show"))
             controller.showCollection();
@@ -49,7 +49,7 @@ public class CollectionMenuPage extends Page {
         else if (command.matches("exit"))
             view.back();
         else view.printError(ErrorType.INVALID_COMMAND);
-    }
+    }*/
 
     @Override
     public void showMenu() {

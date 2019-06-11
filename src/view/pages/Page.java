@@ -59,7 +59,7 @@ public abstract class Page {
         try {
             Image image = new Image(new FileInputStream(address));
             BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+                    BackgroundPosition.DEFAULT, new BackgroundSize(label.getWidth(), label.getHeight(), true, true, true, true));
             label.setBackground(new Background(myBI));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
