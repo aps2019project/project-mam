@@ -24,7 +24,7 @@
    <children>
       <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="400.0" prefWidth="222.0" spacing="30.0" GridPane.rowSpan="2">
          <children>
-            <Label fx:id="battleLbl" alignment="CENTER" onMouseClicked="#onBattleClicked" prefHeight="80.0" prefWidth="250.0" text="Battle">
+            <Label fx:id="battleLbl" alignment="CENTER" onMouseClicked="#onBattleClicked" prefHeight="80.0" prefWidth="250.0" text="Battle" textFill="#b50000">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font></Label>

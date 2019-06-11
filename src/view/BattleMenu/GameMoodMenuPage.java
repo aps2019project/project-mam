@@ -16,6 +16,10 @@ public class GameMoodMenuPage extends Page {
         super(stage);
     }
 
+    public GameMoodMenuPage(){
+        start();
+    }
+
     @Override
     public void help() {
         view.showHelpForGameMoodMenu();
