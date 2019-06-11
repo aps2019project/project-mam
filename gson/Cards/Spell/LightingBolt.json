@@ -1,0 +1,1 @@
+{"MP":2,"id":0,"price":1250,"name":"LightingBolt","specialPower":[{"type":"ATTACK_TO_ENEMY","remainTime":1,"buffPower":8,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"ENEMY_HERO"}],"selected":false}

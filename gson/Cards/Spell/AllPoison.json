@@ -1,0 +1,1 @@
+{"MP":8,"id":0,"price":1500,"name":"AllPoison","specialPower":[{"type":"POISON","remainTime":4,"buffPower":0,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"ALL_ENEMY_FORCES"}],"selected":false}
