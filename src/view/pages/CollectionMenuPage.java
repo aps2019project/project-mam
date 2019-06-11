@@ -50,6 +50,7 @@ public class CollectionMenuPage extends Page {
 
     private void initializeImage() throws FileNotFoundException {
         setBackGround(root, "resources/codex/chapter7_background@2x.jpg");
+        setBackGround(controller.search_lb, "resources/ui/button_primary_middle_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
 
 

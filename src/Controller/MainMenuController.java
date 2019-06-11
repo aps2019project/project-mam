@@ -52,7 +52,8 @@ public class MainMenuController {
 
     @FXML
     public void onLogoutClicked(){
-
+        Page.getPages().pop();
+        Page.getPages().peek().start();
     }
 
     @FXML
