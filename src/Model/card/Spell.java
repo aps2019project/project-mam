@@ -36,6 +36,14 @@ public class Spell extends Card {
     }
 
     @Override
+    public String getInfoInShop() {
+        StringBuilder info = new StringBuilder();
+        info.append("Type : Spell\nName : ").append(getName()).append("\nMP : ").append(getMP());
+        info.append("\nDescription : ").append(getDesc()).append("\nSell Cost : ").append(getPrice());
+        return info.toString();
+    }
+
+    @Override
     public Card copyCard() {
         Card newCard = new Spell(this.getName(), this.getPrice(), this.getMP(), this.getSpecialPower());
         return newCard;

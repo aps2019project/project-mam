@@ -103,6 +103,10 @@ public class Card {
         return toString();
     }
 
+    public String getInfoInShop(){
+        return toString();
+    }
+
     public int getRow(){
         return -1;
     }

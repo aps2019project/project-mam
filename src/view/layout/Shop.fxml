@@ -40,7 +40,10 @@
             <Label fx:id="CResult_lb" alignment="TOP_LEFT" prefHeight="300.0" prefWidth="300.0">
                <font>
                   <Font size="18.0" />
-               </font></Label>
+               </font>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding></Label>
             <Button fx:id="sell_btn" mnemonicParsing="false" onMouseClicked="#onSellClicked" text="Sell">
                <font>
                   <Font size="36.0" />

@@ -95,6 +95,15 @@ public class Minion extends Card {
     }
 
     @Override
+    public String getInfoInShop() {
+        StringBuilder info = new StringBuilder();
+        info.append("Type : Minion\nName : ").append(getName()).append("\nClass : ").append(getCardClass());
+        info.append("\nAP : ").append(getAP()).append("     HP : ").append(getHP()).append("     MP : ").append(getMP());
+        info.append("\nSpecial power : ").append(getDesc()).append("\nSell Cost : ").append(getPrice());
+        return info.toString();
+    }
+
+    @Override
     public int getMP() {
         return super.getMP();
     }
