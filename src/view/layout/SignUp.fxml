@@ -10,6 +10,6 @@
       <TextField fx:id="userName" alignment="CENTER" promptText="user name" />
       <PasswordField fx:id="password" alignment="CENTER" promptText="password" />
       <Button fx:id="btn" mnemonicParsing="false" onAction="#onBtnClicked" text="sign up" textAlignment="CENTER" />
-      <Label fx:id="lb" />
+      <Label fx:id="lb" textFill="WHITE" />
    </children>
 </VBox>

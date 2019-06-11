@@ -15,17 +15,20 @@ public class SignUpController {
     public Button btn;
     public Label lb;
 
-    public void onBtnClicked(){
+    public void onBtnClicked() {
         createAccount(userName.getText(), password.getText());
     }
 
     public void createAccount(String userName, String password) {
-        if (User.isUserNameNew(userName)) {
-            User.addUser(new User(userName, password));
-            Page.getPages().pop();
-            Page.getPages().peek().start();
-        }
-        else lb.setText(ErrorType.DUPLICATE_USERNAME.getMessage());
+        if (!userName.trim().equalsIgnoreCase("")) {
+            if (User.isUserNameNew(userName)) {
+                if (!password.trim().equalsIgnoreCase("")) {
+                    User.addUser(new User(userName, password));
+                    Page.getPages().pop();
+                    Page.getPages().peek().start();
+                } else lb.setText(ErrorType.INVALID_PASSWORD.getMessage());
+            } else lb.setText(ErrorType.DUPLICATE_USERNAME.getMessage());
+        } else lb.setText(ErrorType.INVALID_USERNAME.getMessage());
     }
 
 }

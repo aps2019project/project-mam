@@ -29,6 +29,8 @@ public class MainMenuPage extends Page {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
+            stage.setFullScreenExitHint("Welcome");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,9 +59,6 @@ public class MainMenuPage extends Page {
         return instance;
     }
 
-    public static Pane getRoot() {
-        return root;
-    }
 
 
 }

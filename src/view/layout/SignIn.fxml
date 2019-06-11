@@ -8,8 +8,8 @@
               <TextField fx:id="userName" alignment="CENTER" promptText="user name" />
               <PasswordField fx:id="password" alignment="CENTER" onAction="#onSignInBtnClicked" promptText="password" />
               <Button fx:id="signIn" mnemonicParsing="false" onAction="#onSignInBtnClicked" text="sign in" textAlignment="CENTER" />
-      <Label fx:id="signUp" onMouseClicked="#onSignUpClicked" text="sign up" textFill="#30322e" />
-              <Label fx:id="msgLb" prefHeight="17.0" prefWidth="77.0" text="Label" textAlignment="CENTER" visible="false" />
+      <Label fx:id="signUp" onMouseClicked="#onSignUpClicked" text="sign up" textFill="WHITE" />
+              <Label fx:id="msgLb" prefHeight="17.0" prefWidth="77.0" text="Label" textAlignment="CENTER" textFill="#fcf7f7" visible="false" />
     </children>
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

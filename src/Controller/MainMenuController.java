@@ -8,6 +8,10 @@ import view.BattleMenu.BattleMenuPage;
 import view.pages.CollectionMenuPage;
 import view.pages.Page;
 import view.pages.ShopMenuPage;
+import javafx.scene.layout.AnchorPane;
+import view.pages.MainMenuPage;
+
+import java.io.FileInputStream;
 
 public class MainMenuController {
     public Label battleLbl;
@@ -51,7 +55,8 @@ public class MainMenuController {
 
     @FXML
     public void onLogoutClicked(){
-
+        Page.getPages().pop();
+        Page.getPages().peek().start();
     }
 
     @FXML

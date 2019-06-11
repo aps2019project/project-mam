@@ -1,4 +1,4 @@
-#pane{
-    -fx-background-image: url("../../../resources/codex/chapter17_background@2x.jpg");
-    -fx-background-repeat: stretch;
+.el:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
 }
