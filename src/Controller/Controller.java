@@ -84,16 +84,7 @@ public class Controller {
         view.show(User.showUsers());
     }
 
-    public void showUsers() {
-        StringBuilder info = new StringBuilder();
-        info.append("Accounts:\n");
-        for (User users : User.getUsers()) {
-            if (!users.getName().equalsIgnoreCase(user.getName())) {
-                info.append("\t").append(users.getName()).append("\n");
-            }
-        }
-        view.show(info.toString());
-    }
+
 
     //------------------------------------AI------------------------------------
 

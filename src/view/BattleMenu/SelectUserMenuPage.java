@@ -51,6 +51,7 @@ public class SelectUserMenuPage extends Page {
         setBackGround(root, "resources/codex/chapter1_background@2x.jpg");
         setBackGround(controller.select, "resources/ui/button_secondary_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
+        controller.showUsers();
 
 
     }

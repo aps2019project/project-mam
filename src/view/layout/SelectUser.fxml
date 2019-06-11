@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -18,8 +19,8 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="295.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="755.0" minHeight="10.0" prefHeight="517.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="230.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="755.0" minHeight="10.0" prefHeight="586.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="230.0" minHeight="10.0" prefHeight="171.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <HBox prefHeight="213.0" prefWidth="1500.0">
@@ -37,10 +38,13 @@
                <children>
                   <ScrollPane maxHeight="229.0" maxWidth="439.0" opacity="0.8" prefHeight="229.0" prefWidth="439.0">
                      <content>
-                        <Label fx:id="users" prefHeight="3000.0" prefWidth="300.0" text="Label">
+                        <Label fx:id="users" alignment="TOP_LEFT" prefHeight="3001.0" prefWidth="420.0">
                            <font>
                               <Font size="24.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
                         </Label>
                      </content>
                   </ScrollPane>
@@ -54,6 +58,7 @@
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
+                  <Label fx:id="label" textFill="#f5f3f3" />
                </children>
             </VBox>
          </children>
