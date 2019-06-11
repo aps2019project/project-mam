@@ -21,8 +21,10 @@ public class SelectUserController {
 
     public void setSelect() {
         if (!User.isUserNameNew(user.getText())) {
-            BattleMenuPage.getInstance().setSecondUser(User.getUser(user.getText()));
-            Page.getPages().push(new GameMoodMenuPage());
+            if (isMainDeckValid(user.getText())) {
+                BattleMenuPage.getInstance().setSecondUser(User.getUser(user.getText()));
+                Page.getPages().push(new GameMoodMenuPage());
+            }else label.setText(ErrorType.INVALID_DECK_2.getMessage());
         } label.setText(ErrorType.INVALID_USERNAME.getMessage());
     }
 
@@ -40,5 +42,9 @@ public class SelectUserController {
             }
         }
         users.setText(info.toString());
+    }
+
+    public boolean isMainDeckValid(String userName) {
+        return User.getUser(userName).getCollection().isValidMainDeck();
     }
 }

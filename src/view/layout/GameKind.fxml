@@ -17,8 +17,8 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="295.0" minHeight="0.0" prefHeight="164.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="682.0" minHeight="10.0" prefHeight="533.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="203.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="682.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <HBox alignment="CENTER" prefHeight="635.0" prefWidth="1500.0" GridPane.rowIndex="1">
@@ -37,13 +37,14 @@
                               <Font name="Arial Bold" size="36.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="31.0" prefWidth="133.0" promptText="deck name">
+                        <TextField fx:id="deckName" prefHeight="31.0" prefWidth="133.0" promptText="deck name">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
+                  <Label fx:id="label" textFill="#f5f2f2" />
                </children>
             </VBox>
          </children>
