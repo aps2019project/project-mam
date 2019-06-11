@@ -63,6 +63,13 @@ public class GsonReader {
         Shop.getDecks().add(gson.fromJson(reader, Deck.class));
     }
 
+    public static Deck getDeck(String name) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader;
+        reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
+        return gson.fromJson(reader, Deck.class);
+    }
+
     public static void readItems() throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader;

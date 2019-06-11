@@ -1,6 +1,9 @@
 package Controller;
 
+import Model.deck.Deck;
 import Model.enums.ErrorType;
+import Model.gson.GsonReader;
+import Model.gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import view.pages.Page;
+
+import javax.jws.soap.SOAPBinding;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class CollectionController {
@@ -19,6 +26,7 @@ public class CollectionController {
     public Label delete_lb;
     public Label select_lb;
     public Label show_lb;
+    public Label port_lb;
 
     public Label showAll_lb = new Label();
 
@@ -30,6 +38,7 @@ public class CollectionController {
     public TextField nameToDelete;
     public TextField nameToSelect;
     public TextField nameToShow;
+    public TextField nameToPort;
 
     public Button search;
     public Button add;
@@ -39,7 +48,8 @@ public class CollectionController {
     public Button select;
     public Button showAll;
     public Button show;
-    public Button save;
+    public Button export_btn;
+    public Button import_btn;
 
     public ImageView back;
 
@@ -57,7 +67,7 @@ public class CollectionController {
 
     @FXML
     public void setAdd(){
-        addCardToDeck(cardId.getId(), nameToAdd.getText());
+        addCardToDeck(cardId.getText(), nameToAdd.getText());
     }
 
     @FXML
@@ -92,11 +102,39 @@ public class CollectionController {
     }
 
     @FXML
-    public void setSave(){
-        saveCollection();
+    public void setExport_btn(){
+        if (User.user.getCollection().isDeckExist(nameToPort.getText())) {
+            exportDeck(User.user.getCollection().getDeck(nameToPort.getText()));
+            port_lb.setText("deck name: \"" + nameToPort.getText() + "\" exported");
+        }
+        else port_lb.setText("deck not found!");
+    }
+
+    @FXML
+    public void setImport_btn(){
+        importDeck(nameToPort.getText());
     }
 
 
+    public void exportDeck(Deck deck){
+        try {
+            GsonWriter.writeDeck(deck);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void importDeck(String deckName){
+        try {
+            Deck deck = GsonReader.getDeck(deckName);
+            if (User.user.getCollection().isCardsInDeckExist(deck)) {
+                User.user.getCollection().getDecks().add(deck);
+                port_lb.setText("deck name: \"" + deckName + "\" imported");
+            } else port_lb.setText("you haven't this deck's cards!");
+        } catch (FileNotFoundException e) {
+            port_lb.setText("deck not found!");
+        }
+    }
 
 
     public static void searchInCollection(String name, Label label) {
@@ -105,9 +143,6 @@ public class CollectionController {
         } else if (User.user.getCollection().searchItemInCollection(name)) {
             label.setText("Item ID: " + User.user.getCollection().getItemId(name));
         } else label.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
-    }
-
-    public void saveCollection() {
     }
 
     public void createDeck(String deckName) {
@@ -173,4 +208,5 @@ public class CollectionController {
     public void showAllDecks(Label label) {
         label.setText(User.user.getCollection().showAllDecks());
     }
+
 }

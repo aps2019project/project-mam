@@ -17,6 +17,8 @@ public class UsableItem extends Item {
         this.price = price;
     }
 
+    public UsableItem(){}
+
     @Override
     public int getPrice() {
         return price;

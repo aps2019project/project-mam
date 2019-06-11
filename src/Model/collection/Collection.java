@@ -149,11 +149,31 @@ public class Collection {
 
     public Deck getDeck(String deckName) {
         for (Deck deck : decks) {
-            if (deck.getName().equalsIgnoreCase(deckName)) {
+            if (deck.getName().equals(deckName)) {
                 return deck;
             }
         }
         return null;
+    }
+
+    public boolean isDeckExist(String deckName){
+        for (Deck deck : decks) {
+            if (deck.getName().equals(deckName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCardsInDeckExist(Deck deck){
+        if (deck.getCards().size() == 0)
+            return true;
+        for (Card card : deck.getCards()) {
+            if (!searchCardInCollection(card.getName())){
+                return false;
+            }
+        }
+        return searchItemInCollection(deck.getItem().getName());
     }
 
     public boolean searchItemInCollection(String itemName) {

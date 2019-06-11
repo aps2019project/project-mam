@@ -11,6 +11,8 @@ public class Item {
     private int id;
     private ArrayList<Buff> buffs = new ArrayList<>();
 
+    public Item(){}
+
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;

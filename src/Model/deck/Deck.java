@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Deck {
     private ArrayList<Card> cards = new ArrayList<>();
-    private UsableItem item;
+    private UsableItem item =  new UsableItem();
     private Card hero;
     private String name;
 

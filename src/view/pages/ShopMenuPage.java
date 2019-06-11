@@ -27,8 +27,6 @@ public class ShopMenuPage extends Page {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Shop.fxml"));
         root = fxmlLoader.load();
         controller = fxmlLoader.getController();
-
-
         initializeImage();
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -27,6 +27,7 @@ public class Minion extends Card {
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
+        setType("minion");
     }
 
     public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
@@ -37,6 +38,7 @@ public class Minion extends Card {
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
+        setType("minion");
     }
 
     @Override
