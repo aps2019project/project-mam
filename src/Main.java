@@ -18,9 +18,9 @@ public class Main extends Application {
         Page.setStage(primaryStage);
         GsonReader.readUser();
         GsonReader.initShop();
-        //Page.getPages().push(new SignIn());
+        Page.getPages().push(new SignIn());
         //Page.getPages().push(new MainMenuPage());
-        Page.getPages().push(new ShopMenuPage());
+        //Page.getPages().push(new ShopMenuPage());
         //Page.getPages().push(new CollectionMenuPage());
         primaryStage.show();
     }

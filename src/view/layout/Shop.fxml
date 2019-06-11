@@ -117,7 +117,7 @@
             <Insets bottom="50.0" left="200.0" right="200.0" top="50.0" />
          </GridPane.margin>
          <content>
-            <Label fx:id="showAllLbl" prefHeight="2500.0" prefWidth="1500.0" text="Label">
+            <Label fx:id="showAllLbl" alignment="TOP_LEFT" prefHeight="2500.0" prefWidth="1500.0" text="Label">
                <padding>
                   <Insets top="100.0" />
                </padding>

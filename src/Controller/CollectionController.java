@@ -8,6 +8,7 @@ import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import view.pages.Page;
@@ -53,6 +54,9 @@ public class CollectionController {
 
     public ImageView back;
 
+    public ScrollPane scrollPane;
+    public Label scrollPane_lb;
+
 
     @FXML
     public void setBack(){
@@ -92,8 +96,10 @@ public class CollectionController {
 
     @FXML
     public void setShowAll(){
-        showAll_lb.resizeRelocate(100, 100, 700, 500);
-        showAllDecks(showAll_lb);
+        /*showAll_lb.resizeRelocate(100, 100, 700, 500);
+        showAllDecks(showAll_lb);*/
+        scrollPane.setVisible(true);
+        scrollPane_lb.setText(User.user.getCollection().showAllDecks());
     }
 
     @FXML
@@ -113,6 +119,11 @@ public class CollectionController {
     @FXML
     public void setImport_btn(){
         importDeck(nameToPort.getText());
+    }
+
+    @FXML
+    public void setScrollPane(){
+        scrollPane.setVisible(false);
     }
 
 
