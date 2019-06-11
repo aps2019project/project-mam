@@ -33,7 +33,7 @@ public class ShopMenuPage extends Page {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setFullScreen(true);
-        //stage.setFullScreenExitHint("Welcome");
+        stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();
         }

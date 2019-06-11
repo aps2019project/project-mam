@@ -47,7 +47,7 @@ public class ShopController {
 
     @FXML
     public void onCSearchClicked(){
-        searchInCollection(searchInCollection_tf.getText());
+        CollectionController.searchInCollection(searchInCollection_tf.getText(), CResult_lb);
     }
 
     @FXML
@@ -55,13 +55,7 @@ public class ShopController {
         searchInShop(searchInStore_tf.getText());
     }
 
-    public void searchInCollection(String name) {
-        if (User.user.getCollection().searchCardInCollection(name)) {
-            CResult_lb.setText("Card ID: " + User.user.getCollection().getCardId(name));
-        } else if (User.user.getCollection().searchItemInCollection(name)) {
-            CResult_lb.setText("Item ID: " + User.user.getCollection().getItemId(name));
-        } else CResult_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
-    }
+
 
     public void searchInShop(String name) {
         if (shop.searchCard(name)) {

@@ -4,10 +4,7 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.View;
-import view.pages.MainMenuPage;
-import view.pages.Page;
-import view.pages.ShopMenuPage;
-import view.pages.SignIn;
+import view.pages.*;
 
 public class Main extends Application {
     public static void main(String argc[]) {
@@ -21,7 +18,8 @@ public class Main extends Application {
         Page.setStage(primaryStage);
         //Page.getPages().push(new SignIn());
         //Page.getPages().push(new MainMenuPage());
-        Page.getPages().push(new ShopMenuPage());
+        //Page.getPages().push(new ShopMenuPage());
+        Page.getPages().push(new CollectionMenuPage());
         primaryStage.show();
     }
 }

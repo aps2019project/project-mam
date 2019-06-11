@@ -33,7 +33,7 @@
          </font></Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
-            <Label fx:id="CResult_lb" prefHeight="300.0" prefWidth="300.0">
+            <Label fx:id="CResult_lb" alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
@@ -45,7 +45,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Label fx:id="SResult_lb" prefHeight="300.0" prefWidth="300.0">
+            <Label fx:id="SResult_lb" alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
@@ -66,7 +66,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
          <children>
-            <TextField fx:id="searchInCollection_tf" maxWidth="200.0" promptText="Search in Colection">
+            <TextField fx:id="searchInCollection_tf" maxWidth="250.0" promptText="Search in Colection">
                <font>
                   <Font size="24.0" />
                </font>
@@ -80,7 +80,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <TextField fx:id="searchInStore_tf" maxWidth="200.0" promptText="Search in Store">
+            <TextField fx:id="searchInStore_tf" maxWidth="250.0" promptText="Search in Store">
                <font>
                   <Font size="24.0" />
                </font>
