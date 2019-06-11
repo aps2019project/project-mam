@@ -21,11 +21,8 @@ import static Model.enums.SPActivationTime.*;
 public class Shop {
     private static final Shop SHOP = new Shop();
     private static ArrayList<Deck> decks=new ArrayList<>();
-    private static ArrayList<Card> spells = new ArrayList<>();
     private static ArrayList<Card> cards = new ArrayList<>();
-    private static ArrayList<Card> heros = new ArrayList<>();
-    private static ArrayList<Card> minions = new ArrayList<>();
-    private static ArrayList<UsableItem> items = new ArrayList<>();
+    private static ArrayList<UsableItem> usableItems = new ArrayList<>();
     private static ArrayList<CollectableItem> collectibles = new ArrayList<>();
 
     private Shop() {
@@ -43,8 +40,8 @@ public class Shop {
         return cards;
     }
 
-    public static ArrayList<UsableItem> getItems() {
-        return items;
+    public static ArrayList<UsableItem> getUsableItems() {
+        return usableItems;
     }
 
     public String getCardInfo() {
@@ -87,7 +84,7 @@ public class Shop {
     public String getItemInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             info.append("\t\t").append(counter).append(" : ");
             info.append(item.getInfo()).append("\n");
             counter++;
@@ -97,7 +94,7 @@ public class Shop {
 
     public String getItemInfo(String itemName) {
         StringBuilder info = new StringBuilder();
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 info.append(item.getInfo()).append("\n");
                 return info.toString();
@@ -124,7 +121,7 @@ public class Shop {
     }
 
     public boolean searchItem(String itemName) {
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -133,7 +130,7 @@ public class Shop {
     }
 
     public boolean checkIsItem(String name) {
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equals(name)) {
                 return true;
             }
@@ -154,7 +151,7 @@ public class Shop {
     }
 
     public void buyItem(String itemName, User user) {
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
@@ -173,7 +170,7 @@ public class Shop {
     }
 
     public int getItemPrice(String name) {
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(name))
                 return item.getPrice();
         }
@@ -197,7 +194,7 @@ public class Shop {
     }
 
     public boolean itemNameIsAvailable(String itemName) {
-        for (UsableItem item : items) {
+        for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
@@ -237,7 +234,7 @@ public class Shop {
         return SHOP;
     }
 
-    public static void importCards() {
+/*    public static void importCards() {
         Card card = new Spell("TotalDisarm", 1000, 0);
         card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
         spells.add(card);
@@ -589,47 +586,47 @@ public class Shop {
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
         item.addBuff(new Buff(INCREASE_MANA, 3, 1, TargetCommunity.NONE));
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("namosSpar", 4000, "12");
         item.addBuff(new Buff(HOLY, -1, 12, INSIDER_HERO));
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("kamanDamol", 30000, " ");
         item.addBuff(new Buff(DISARM, 1, 0, INSIDER_HERO));//???????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("parSimorgh", 3500, "12");
         item.addBuff(new Buff(ATTACK_POWER, -1, -2, ENEMY_HERO));//???????????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("terrorHood", 5000, "12");
         item.addBuff(new Buff(ATTACK_WEAKNESS, 1, 2, ONE_ENEMY_FORCE_RANDOM));
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("kingWisdom", 9000, "12");
         item.addBuff(new Buff(INCREASE_MANA, -1, 1, TargetCommunity.NONE));
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("assassinationDagger", 15000, "12");
         item.addBuff(new Buff(ATTACK_INSERT, -1, 1, ENEMY_HERO));//???????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("poisonousDagger", 7000, "12");
         //item.addBuff(new Buff());  ??????????????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("shockHammer", 15000, "12");
         //???????????????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("soulEater", 4000, "12");
         //?????????????????????
-        items.add(item);
+        usableItems.add(item);
 
         item = new UsableItem("ghoslTamid", 20000, "12");
         //???????????????
-        items.add(item);
+        usableItems.add(item);
 
         //-----------------------------collectible--------------------------------------
 
@@ -672,35 +669,38 @@ public class Shop {
 
         //-----------------------------mission deck--------------------------------------
          Deck deck1=new Deck();
+         deck1.setName("mission_1");
          deck1.setHero(heros.get(0));
          deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
                  .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
                  .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
                  .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
                  .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
-                 .addCard(minions.get(39)).addItem(items.get(0));
+                 .addCard(minions.get(39)).addItem(usableItems.get(0));
         decks.add(deck1);
 
         Deck deck2=new Deck();
+        deck2.setName("mission_2");
         deck2.setHero(heros.get(4));
         deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
                 .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
                 .addCard(minions.get(1)).addCard(minions.get(2)).addCard(minions.get(4)).addCard(minions.get(7))
                 .addCard(minions.get(11)).addCard(minions.get(14)).addCard(minions.get(14)).addCard(minions.get(18))
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(29)).addCard(minions.get(32))
-                .addCard(minions.get(38)).addItem(items.get(9));
+                .addCard(minions.get(38)).addItem(usableItems.get(9));
         decks.add(deck2);
 
         Deck deck3=new Deck();
+        deck3.setName("mission_3");
         deck3.setHero(heros.get(6));
         deck3.addCard(spells.get(5)).addCard(spells.get(9)).addCard(spells.get(11)).addCard(spells.get(13))
                 .addCard(spells.get(14)).addCard(spells.get(15)).addCard(spells.get(16))
                 .addCard(minions.get(24)).addCard(minions.get(27)).addCard(minions.get(28)).addCard(minions.get(30))
                 .addCard(minions.get(33)).addCard(minions.get(5)).addCard(minions.get(6)).addCard(minions.get(9))
                 .addCard(minions.get(13)).addCard(minions.get(15)).addCard(minions.get(15)).addCard(minions.get(19))
-                .addCard(minions.get(23)).addItem(items.get(4));
+                .addCard(minions.get(23)).addItem(usableItems.get(4));
         decks.add(deck3);
 
-    }
+    }*/
 
 }

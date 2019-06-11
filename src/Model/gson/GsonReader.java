@@ -1,7 +1,8 @@
 package Model.gson;
 
 import Model.card.Card;
-import Model.item.Item;
+import Model.deck.Deck;
+import Model.item.CollectableItem;
 import Model.item.UsableItem;
 import Model.shop.Shop;
 import Model.user.User;
@@ -11,7 +12,6 @@ import com.google.gson.stream.JsonReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class GsonReader {
 
@@ -38,19 +38,30 @@ public class GsonReader {
             Shop.getCards().add(gson.fromJson(reader, Card.class));
         }
         readItems();
+        readDeck("mission_1");
+        readDeck("mission_2");
+        readDeck("mission_3");
     }
 
-    public static void readDeck(){
-
+    public static void readDeck(String name) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader;
+        reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
+        Shop.getDecks().add(gson.fromJson(reader, Deck.class));
     }
 
     public static void readItems() throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader;
-        File dir = new File("gson/items");
+        File dir = new File("gson/items/usable");
         for (File file : dir.listFiles()) {
             reader = new JsonReader(new FileReader(file));
-            Shop.getItems().add(gson.fromJson(reader, UsableItem.class));
+            Shop.getUsableItems().add(gson.fromJson(reader, UsableItem.class));
+        }
+        dir = new File("gson/items/collectible");
+        for (File file : dir.listFiles()) {
+            reader = new JsonReader(new FileReader(file));
+            Shop.getCollectibles().add(gson.fromJson(reader, CollectableItem.class));
         }
     }
 

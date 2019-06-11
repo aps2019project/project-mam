@@ -1,5 +1,7 @@
+import Model.deck.Deck;
 import Model.gson.GsonReader;
 import Model.gson.GsonWriter;
+import Model.shop.Shop;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,7 +19,6 @@ public class Main extends Application {
 
         GsonReader.readUser();
         GsonReader.initShop();
-
         Page.getPages().push(new SignIn());
         //Page.getPages().push(new MainMenuPage());
         //Page.getPages().push(new ShopMenuPage());
