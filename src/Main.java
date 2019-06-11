@@ -1,3 +1,4 @@
+import Model.gson.GsonReader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Duelyst");
 
         Page.setStage(primaryStage);
+        GsonReader.readUser();
         Page.getPages().push(new SignIn());
         //Page.getPages().push(new MainMenuPage());
         //Page.getPages().push(new ShopMenuPage());

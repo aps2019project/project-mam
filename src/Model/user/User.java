@@ -191,6 +191,12 @@ public class User {
         return info.toString();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
 
 

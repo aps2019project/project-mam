@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import view.pages.MainMenuPage;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class MainMenuController {
     public Label battleLbl;
@@ -45,7 +47,11 @@ public class MainMenuController {
 
     @FXML
     public void onSaveClicked(){
-
+        try {
+            GsonWriter.writeUser(User.user);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
