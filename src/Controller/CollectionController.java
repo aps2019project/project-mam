@@ -212,7 +212,9 @@ public class CollectionController {
 
     public void showDeck(String deckName) {
         if (User.user.getCollection().checkIsExistDeck(deckName)) {
-            show_lb.setText(User.user.getCollection().showDeck(deckName));
+            scrollPane.setVisible(true);
+            scrollPane_lb.setText(User.user.getCollection().showDeck(deckName));
+            //show_lb.setText(User.user.getCollection().showDeck(deckName));
         } else show_lb.setText(ErrorType.NOT_FOUND_DECK.getMessage());
     }
 
