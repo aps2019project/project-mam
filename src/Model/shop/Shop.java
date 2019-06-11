@@ -39,6 +39,14 @@ public class Shop {
         return collectibles;
     }
 
+    public static ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public static ArrayList<UsableItem> getItems() {
+        return items;
+    }
+
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;

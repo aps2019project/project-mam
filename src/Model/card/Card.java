@@ -6,7 +6,7 @@ import Model.enums.SPActivationTime;
 
 import java.util.ArrayList;
 
-public abstract class Card {
+public class Card {
     private int MP;
     private int id;
     private int price;
@@ -94,7 +94,9 @@ public abstract class Card {
     public String getCardType() {
         return null;
     }
-    public abstract String getInfo();
+    public  String getInfo(){
+        return toString();
+    }
 
     public int getRow(){
         return -1;
@@ -191,5 +193,18 @@ public abstract class Card {
     }
 
     public void decrementOfCoolDown(int number){
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "MP=" + MP +
+                ", id=" + id +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", specialPower=" + specialPower +
+                ", selected=" + selected +
+                '}';
     }
 }
