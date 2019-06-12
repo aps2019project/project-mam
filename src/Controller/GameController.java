@@ -99,6 +99,8 @@ public class GameController {
     public Circle handCard4;
     public Circle handCard5;
 
+    public ArrayList<Circle> handCards = new ArrayList<>();
+    public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init(){
         cells.add(cell00);
@@ -111,6 +113,19 @@ public class GameController {
         cells.add(cell60);
         cells.add(cell70);
         cells.add(cell80);
+
+        handCards.add(handCard1);
+        handCards.add(handCard2);
+        handCards.add(handCard3);
+        handCards.add(handCard4);
+        handCards.add(handCard5);
+
+        handCardsMana.add(handCard1mana);
+        handCardsMana.add(handCard2mana);
+        handCardsMana.add(handCard3mana);
+        handCardsMana.add(handCard4mana);
+        handCardsMana.add(handCard5mana);
+
     }
 
     public void setGraveyard() {

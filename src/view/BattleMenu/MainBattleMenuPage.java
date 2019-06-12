@@ -48,11 +48,12 @@ public class MainBattleMenuPage extends Page {
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
 
+            controller.init();
 
             initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            //stage.setFullScreen(true);
+            stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,18 +77,25 @@ public class MainBattleMenuPage extends Page {
         controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
         controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
 
-        controller.handCard2.setId(String.valueOf(game.getFirstPlayerHand().get(1).getId()));
+        int counter = 0;
+        for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
+            controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
+            controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
+            counter++;
+        }
+
+        /*controller.handCard2.setId(String.valueOf(game.getFirstPlayerHand().get(1).getId()));
         controller.handCard3.setId(String.valueOf(game.getFirstPlayerHand().get(2).getId()));
         controller.handCard4.setId(String.valueOf(game.getFirstPlayerHand().get(3).getId()));
-        controller.handCard5.setId(String.valueOf(game.getFirstPlayerHand().get(4).getId()));
+        controller.handCard5.setId(String.valueOf(game.getFirstPlayerHand().get(4).getId()));*/
 
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
 
-        controller.handCard1mana.setText(String.valueOf(game.getFirstPlayerHand().get(0).getMP()));
+        /*controller.handCard1mana.setText(String.valueOf(game.getFirstPlayerHand().get(0).getMP()));
         controller.handCard2mana.setText(String.valueOf(game.getFirstPlayerHand().get(1).getMP()));
         controller.handCard3mana.setText(String.valueOf(game.getFirstPlayerHand().get(2).getMP()));
         controller.handCard4mana.setText(String.valueOf(game.getFirstPlayerHand().get(3).getMP()));
-        controller.handCard5mana.setText(String.valueOf(game.getFirstPlayerHand().get(4).getMP()));
+        controller.handCard5mana.setText(String.valueOf(game.getFirstPlayerHand().get(4).getMP()));*/
 
         controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
         controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
