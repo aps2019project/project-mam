@@ -65,9 +65,6 @@ public class Game {
     private String winnerName;
     private int price = 1000;
 
-    public Game() {
-    }
-
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         this.firstUser = firstUser;
         this.secondUser = secondUser;
@@ -89,7 +86,6 @@ public class Game {
         setNextSecondPlayerCard();
         startGame();
     }
-
 
     public int getPrice() {
         return price;
