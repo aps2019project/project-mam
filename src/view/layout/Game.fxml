@@ -151,5 +151,10 @@
             <ImageView fx:id="cell84" fitHeight="82.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+      <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

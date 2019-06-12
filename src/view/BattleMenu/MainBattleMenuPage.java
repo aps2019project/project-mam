@@ -19,7 +19,15 @@ public class MainBattleMenuPage extends Page {
     //private Controller controller = Controller.getInstance();
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
-    private Game game;
+    private static Game game;
+    public static Game getGame(){
+        return game;
+    }
+
+    public static void setGame(Game game) {
+        MainBattleMenuPage.game = game;
+    }
+
     private static boolean isStarted = false;
 
     public MainBattleMenuPage() {
@@ -53,6 +61,7 @@ public class MainBattleMenuPage extends Page {
 
     private void initializeImage() throws FileNotFoundException {
         setBackGround(root, "resources/maps/gameBackgaround.jpg");
+        setBackGround(controller.label, "resources/ui/button_primary_middle_glow@2x.png");
         //setBackGround(root, "resources/maps/battlemap5_middleground.png");
         /*setBackGround(controller.story, "resources/ui/button_secondary_glow@2x.png");
         setBackGround(controller.custom, "resources/ui/button_secondary_glow@2x.png");
