@@ -98,6 +98,42 @@ public class Game {
         return game;
     }
 
+    public User getFirstUser() {
+        return firstUser;
+    }
+
+    public User getSecondUser() {
+        return secondUser;
+    }
+
+    public ArrayList<Card> getFirstPlayerGraveYard() {
+        return firstPlayerGraveYard;
+    }
+
+    public Card getNextFirstPlayerCard() {
+        return nextFirstPlayerCard;
+    }
+
+    public Card getNextSecondPlayerCard() {
+        return nextSecondPlayerCard;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public int getHavingFlagCount() {
+        return havingFlagCount;
+    }
+
+    public ArrayList<CollectableItem> getPlayer1Collectable() {
+        return player1Collectable;
+    }
+
+    public ArrayList<CollectableItem> getPlayer2Collectable() {
+        return player2Collectable;
+    }
+
     public void setFirstUser(User firstUser) {
         this.firstUser = firstUser;
     }
@@ -136,6 +172,14 @@ public class Game {
 
     public int getMana() {
         return mana[getTurn() % 2];
+    }
+
+    public int getFirstPlayerMana(){
+        return mana[1];
+    }
+
+    public int getSecondPlayerMana(){
+        return mana[0];
     }
 
     public Deck getFirstPlayerDeck() {
