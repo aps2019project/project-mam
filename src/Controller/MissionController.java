@@ -1,7 +1,11 @@
 package Controller;
 
+import Model.shop.Shop;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import view.BattleMenu.BattleMenuPage;
+import view.BattleMenu.GameMoodMenuPage;
+import view.BattleMenu.MainBattleMenuPage;
 import view.pages.Page;
 
 public class MissionController {
@@ -13,12 +17,21 @@ public class MissionController {
     public ImageView back;
 
     public void setMission1() {
+        BattleMenuPage.setMission("1");
+        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(0));
+        Page.getPages().push(new GameMoodMenuPage());
     }
 
     public void setMission2() {
+        BattleMenuPage.setMission("2");
+        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(1));
+        Page.getPages().push(new GameMoodMenuPage());
     }
 
     public void setMission3() {
+        BattleMenuPage.setMission("3");
+        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(2));
+        Page.getPages().push(new GameMoodMenuPage());
     }
 
     public void setBack() {

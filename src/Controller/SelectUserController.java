@@ -2,6 +2,7 @@ package Controller;
 
 import Model.enums.ErrorType;
 import Model.user.User;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -19,15 +20,18 @@ public class SelectUserController {
 
     public ImageView back;
 
+    @FXML
     public void setSelect() {
         if (!User.isUserNameNew(user.getText())) {
             if (isMainDeckValid(user.getText())) {
                 BattleMenuPage.getInstance().setSecondUser(User.getUser(user.getText()));
                 Page.getPages().push(new GameMoodMenuPage());
-            }else label.setText(ErrorType.INVALID_DECK_2.getMessage());
-        } label.setText(ErrorType.INVALID_USERNAME.getMessage());
+            } else label.setText(ErrorType.INVALID_DECK_2.getMessage());
+        }
+        label.setText(ErrorType.INVALID_USERNAME.getMessage());
     }
 
+    @FXML
     public void setBack() {
         Page.getPages().pop();
         Page.getPages().peek().start();
@@ -45,6 +49,10 @@ public class SelectUserController {
     }
 
     public boolean isMainDeckValid(String userName) {
-        return User.getUser(userName).getCollection().isValidMainDeck();
+        try {
+            return User.getUser(userName).getCollection().isValidMainDeck();
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 }

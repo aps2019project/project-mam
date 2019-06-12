@@ -1,9 +1,10 @@
-package Model;
+package Model.user;
 
 import Controller.Controller;
 import Model.card.Card;
 import Model.game.Cell;
 import Model.game.Game;
+import Model.item.UsableItem;
 import Model.user.User;
 
 import java.util.Map;
@@ -11,7 +12,6 @@ import java.util.Map;
 import static java.lang.Math.abs;
 
 public class AI {
-
 
     private Controller controller = Controller.getInstance();
     private Game game = Controller.getGame(); //= controller.getGame();

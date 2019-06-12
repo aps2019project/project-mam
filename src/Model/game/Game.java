@@ -21,6 +21,7 @@ import static java.lang.Math.abs;
 
 
 public class Game {
+    private static Game game;
     private static final String SINGLE_PLAYER = "single player";
     private static final String MULTI_PLAYER = "multi player";
     private static final String FIRST_MODE = "1";
@@ -85,6 +86,34 @@ public class Game {
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
+        game = this;
+    }
+
+    public Game() {
+    }
+
+    public static Game getInstance(){
+        return game;
+    }
+
+    public void setFirstUser(User firstUser) {
+        this.firstUser = firstUser;
+    }
+
+    public void setSecondUser(User secondUser) {
+        this.secondUser = secondUser;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public void setFlagCount(int flagCount) {
+        this.flagCount = flagCount;
     }
 
     public int getPrice() {

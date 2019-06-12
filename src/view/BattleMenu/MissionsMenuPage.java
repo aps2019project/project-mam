@@ -1,8 +1,6 @@
 package view.BattleMenu;
 
 import Controller.*;
-import Model.AI;
-import Model.enums.ErrorType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

@@ -2,6 +2,7 @@ package view.BattleMenu;
 
 import Controller.*;
 import Model.enums.ErrorType;
+import Model.game.Game;
 import Model.user.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,9 +25,12 @@ public class BattleMenuPage extends Page {
     private static String gameKind = null;
     private static String gameMood = null;
     private static String mission = null;
-    private User secondUser = new User("notAi");
+    private static User secondUser = new User("notAi");
     //private User firstUser = controller.getFirstUser();
-    private static int flags;
+    private static int flags = 0;
+
+    private static Pane root = new Pane();
+    private BattleMenuController controller;
 
     public BattleMenuPage(Stage stage) {
         super(stage);
@@ -39,77 +43,6 @@ public class BattleMenuPage extends Page {
     public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;
     }
-
-
-    private static Pane root = new Pane();
-    private BattleMenuController controller;
-
-
-    @Override
-    public void start() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/BattleMenu.fxml"));
-            root = fxmlLoader.load();
-            controller = fxmlLoader.getController();
-
-
-            initializeImage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitHint("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initializeImage() throws FileNotFoundException {
-        setBackGround(root, "resources/codex/chapter1_background@2x.jpg");
-        setBackGround(controller.single, "resources/ui/button_secondary_glow@2x.png");
-        setBackGround(controller.multi, "resources/ui/button_secondary_glow@2x.png");
-        controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
-
-
-    }
-
-    @Override
-    public void help() {
-        view.showHelpForBattleMenu();
-    }
-
-    @Override
-    public void showMenu() {
-        view.show("----------<Battle Menu>---------");
-        view.show("1: single player\n2: multi player\n");
-    }
-
-    /*@Override
-    public void handleCommand(String command) {
-        if (!controller.isMainDeckValid()) {
-            view.back();
-            return;
-        }
-        switch (command) {
-            case "1":
-                setNumOfPlayers("single player");
-                numOfPlayers = "single player";
-                //secondUser = AI.getAI();
-                view.getPages().push(new GameKindMenuPage());
-                break;
-            case "2":
-                setNumOfPlayers("multi player");
-                numOfPlayers = "multi player";
-                view.getPages().push(new SelectUserMenuPage());
-                break;
-            case "exit":
-                view.back();
-                break;
-            case "help":
-                help();
-            default:
-                view.printError(ErrorType.INVALID_COMMAND);
-        }
-    }*/
 
     public static String getNumOfPlayers() {
         return numOfPlayers;
@@ -131,7 +64,7 @@ public class BattleMenuPage extends Page {
         return controller.getFirstUser();
     }*/
 
-    public User getSecondUser() {
+    public static User getSecondUser() {
         return secondUser;
     }
 
@@ -161,5 +94,37 @@ public class BattleMenuPage extends Page {
 
     public static void setFlags(int flags) {
         BattleMenuPage.flags = flags;
+    }
+
+    @Override
+    public void start() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/BattleMenu.fxml"));
+            root = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+
+
+            initializeImage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeImage() throws FileNotFoundException {
+        setBackGround(root, "resources/codex/chapter1_background@2x.jpg");
+        setBackGround(controller.single, "resources/ui/button_secondary_glow@2x.png");
+        setBackGround(controller.multi, "resources/ui/button_secondary_glow@2x.png");
+        controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
+
+
+    }
+
+    public static void createGame(){
+        new Game(User.user, secondUser, gameMood, gameKind, flags);
+        Page.getPages().push(new MainBattleMenuPage());
     }
 }

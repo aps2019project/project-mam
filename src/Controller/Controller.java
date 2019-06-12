@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.AI;
+import Model.user.AI;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -30,7 +30,7 @@ public class Controller {
     private Shop shop = Shop.getInstance();
     private User user = new User();
     private AI ai = new AI();
-    private static Game game = new Game();
+    private static Game game = Game.getInstance();
     private View view = View.getInstance();
     private Deck secondDeck = new Deck();
 
