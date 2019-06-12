@@ -1,6 +1,6 @@
 package view.BattleMenu;
 
-import Controller.MatchController;
+import Controller.*;
 import Model.enums.ErrorType;
 import Model.game.Game;
 import javafx.fxml.FXMLLoader;
@@ -20,30 +20,56 @@ public class Match extends Page {
 
     public Match() {
         start();
+    public MainBattleMenuPage() {
+        start();
+        init();
     }
+
+
+    private static Pane root = new Pane();
+    private GameController controller;
+
+
 
     @Override
     public void start() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Match.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Game.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
+
+
             initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
-            stage.setFullScreenExitHint(" ");
+            stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void initializeImage() {
-        setBackGround(root, "resources/codex/chapter6_background@2x.jpg");
-        //setBackGround(controller.map, "resources/maps/me.png");
+    private void initializeImage() throws FileNotFoundException {
+        setBackGround(root, "resources/maps/gameBackgaround.jpg");
+        //setBackGround(root, "resources/maps/battlemap5_middleground.png");
+        /*setBackGround(controller.story, "resources/ui/button_secondary_glow@2x.png");
+        setBackGround(controller.custom, "resources/ui/button_secondary_glow@2x.png");
+        controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
+*/
+
     }
 
-    /*    @Override
+
+
+
+    private void init(){
+        /*if (controller.getSecondDeck().getCards().size() != 0)
+            battleMenuPage.getSecondUser().setMainDeck(controller.getSecondDeck());*/
+        /*game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
+                BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);*/
+    }
+
+    @Override
     public void help() {
         view.show("Game info\nshow my minions \nshow opponent minions \nShow card info [card id] \nSelect [card id]\n" +
                 "Use special power (x, y)\nShow hand\nInsert [card name] in (x, y)\nInsert [card name] in x y\nEnd turn\n" +
@@ -51,7 +77,7 @@ public class Match extends Page {
 
     }
 
-    @Override
+    /*@Override
     public void handleCommand(String command) {
         if (controller.isEnded()) {
             controller.showEnd();
@@ -95,11 +121,11 @@ public class Match extends Page {
             view.back();
             view.back();
         } else view.printError(ErrorType.INVALID_COMMAND);
-    }
+    }*/
 
     @Override
     public void showMenu() {
-        controller.setGame(game);
+        //controller.setGame(game);
         if (!isStarted) {
             isStarted = true;
             view.show("----------< BATTLE >---------");

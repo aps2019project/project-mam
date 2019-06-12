@@ -58,7 +58,7 @@ public class GameKindMenuPage extends Page {
         view.showHelpForGameKindMenu();
     }
 
-    @Override
+    /*@Override
     public void handleCommand(String command) {
         switch (command){
             case "1":
@@ -78,7 +78,7 @@ public class GameKindMenuPage extends Page {
             default:
                 view.printError(ErrorType.INVALID_COMMAND);
         }
-    }
+    }*/
 
     @Override
     public void showMenu() {
