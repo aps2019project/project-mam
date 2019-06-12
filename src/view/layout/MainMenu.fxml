@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -22,27 +22,35 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <VBox alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="222.0" spacing="10.0" GridPane.rowSpan="2">
+      <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="400.0" prefWidth="222.0" spacing="30.0" GridPane.rowSpan="2">
          <children>
-            <Label fx:id="battleLbl" alignment="CENTER" onMouseClicked="#onBattleClicked" prefHeight="40.0" prefWidth="100.0" text="Battle">
+            <Label fx:id="label">
                <font>
                   <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="battleLbl" alignment="CENTER" onMouseClicked="#onBattleClicked" prefHeight="80.0" prefWidth="250.0" text="Battle" textFill="#b50000">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
                </font></Label>
-            <Label fx:id="shopLbl" alignment="CENTER" onMouseClicked="#onShopClicked" prefHeight="31.0" prefWidth="100.0" text="Shop">
+            <Label fx:id="shopLbl" alignment="CENTER" onMouseClicked="#onShopClicked" prefHeight="80.0" prefWidth="250.0" text="Shop">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font></Label>
-            <Label fx:id="collectionLbl" alignment="CENTER" onMouseClicked="#onCollectionClicked" prefHeight="35.0" prefWidth="105.0" text="Collection">
+            <Label fx:id="collectionLbl" alignment="CENTER" onMouseClicked="#onCollectionClicked" prefHeight="80.0" prefWidth="250.0" text="Collection">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font></Label>
-            <Label fx:id="saveLbl" alignment="CENTER" onMouseClicked="#onSaveClicked" prefHeight="29.0" prefWidth="100.0" text="Save">
+            <Label fx:id="saveLbl" alignment="CENTER" onMouseClicked="#onSaveClicked" prefHeight="80.0" prefWidth="250.0" text="Save" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font></Label>
-            <Label fx:id="customLbl" alignment="CENTER" onMouseClicked="#onCustomClicked" prefHeight="35.0" prefWidth="129.0" text="Custom" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+            <Label fx:id="customLbl" alignment="CENTER" onMouseClicked="#onCustomClicked" prefHeight="80.0" prefWidth="250.0" text="Custom" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font></Label>
          </children>
          <padding>
@@ -52,22 +60,23 @@
             <Insets />
          </GridPane.margin>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="133.0" prefWidth="270.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <HBox alignment="CENTER_RIGHT" prefHeight="133.0" prefWidth="270.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <ImageView fx:id="logout" fitHeight="51.0" fitWidth="48.0" onMouseClicked="#onLogoutClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logout" fitHeight="77.0" fitWidth="114.0" onMouseClicked="#onLogoutClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/button_close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exit" fitHeight="43.0" fitWidth="39.0" onMouseClicked="#onExitClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exit" fitHeight="80.0" fitWidth="119.0" onMouseClicked="#onExitClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/utility_menu/settings.png" />
                </image>
             </ImageView>
          </children>
          <padding>
-            <Insets bottom="20.0" left="200.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="50.0" right="100.0" top="50.0" />
          </padding>
       </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
    </children>
 </GridPane>

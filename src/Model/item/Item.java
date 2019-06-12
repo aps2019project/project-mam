@@ -55,6 +55,10 @@ public class Item {
         info.append("name : ").append(name).append(" id : ").append(id).append(" desc : ").append(desc);
         return info.toString();
     }
+
+    public String getInfoInShop(){
+        return toString();
+    }
 }
 
 

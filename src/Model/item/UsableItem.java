@@ -34,4 +34,12 @@ public class UsableItem extends Item {
         info.append(" - Sell Cost : ").append(getPrice());
         return info.toString();
     }
+
+    @Override
+    public String getInfoInShop() {
+        StringBuilder info = new StringBuilder();
+        info.append("Name : ").append(getName()).append("\nDescription : ").append(getDesc());
+        info.append("\nSell Cost : ").append(getPrice());
+        return info.toString();
+    }
 }

@@ -80,7 +80,7 @@ public class Shop {
         StringBuilder info = new StringBuilder();
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
-                info.append(card.getInfo()).append("\n");
+                info.append(card.getInfoInShop()).append("\n");
                 return info.toString();
             }
         }
@@ -115,7 +115,7 @@ public class Shop {
         StringBuilder info = new StringBuilder();
         for (UsableItem item : usableItems) {
             if (item.getName().equalsIgnoreCase(itemName)) {
-                info.append(item.getInfo()).append("\n");
+                info.append(item.getInfoInShop()).append("\n");
                 return info.toString();
             }
         }

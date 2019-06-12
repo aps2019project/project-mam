@@ -84,16 +84,7 @@ public class Controller {
         view.show(User.showUsers());
     }
 
-    public void showUsers() {
-        StringBuilder info = new StringBuilder();
-        info.append("Accounts:\n");
-        for (User users : User.getUsers()) {
-            if (!users.getName().equalsIgnoreCase(user.getName())) {
-                info.append("\t").append(users.getName()).append("\n");
-            }
-        }
-        view.show(info.toString());
-    }
+
 
     //------------------------------------AI------------------------------------
 
@@ -140,29 +131,7 @@ public class Controller {
 
     //----------------------------------battle-------------------------------------
 
-    public boolean isMainDeckValid() {
-        if (user.getMainDeck() != null) {
-            if (user.getCollection().isValidMainDeck()) {
-                return true;
-            } else {
-                view.printError(ErrorType.INVALID_DECK);
-                return false;
-            }
-        }
-        view.printError(ErrorType.NOT_SELECT_MAIN_DECK);
-        return false;
-    }
 
-    public boolean isMainDeckValid(String userName) {
-        return User.getUser(userName).getCollection().isValidMainDeck();
-    }
-
-    public boolean isDeckValid(String deckName) {
-        if (user.getCollection().isValidDeck(deckName)) {
-            return true;
-        }
-        return false;
-    }
 
     public void showGameInfo() {
         view.show(game.getGameInfo());

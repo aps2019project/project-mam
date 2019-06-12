@@ -148,11 +148,21 @@ public class Hero extends Card {
         return canCounterAttack;
     }
 
+    @Override
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Name : ").append(getName()).append(" - AP : ").append(getAP());
         info.append(" - HP : ").append(getHP()).append(" - Class : ").append(getCardClass());
         info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
+        return info.toString();
+    }
+
+    @Override
+    public String getInfoInShop() {
+        StringBuilder info = new StringBuilder();
+        info.append("Name : ").append(getName()).append("\nAP : ").append(getAP());
+        info.append("\nHP : ").append(getHP()).append("\nClass : ").append(getCardClass());
+        info.append("\nSpecial power : ").append(getDesc()).append("\nSell Cost : ").append(getPrice());
         return info.toString();
     }
 

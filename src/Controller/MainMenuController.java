@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.enums.ErrorType;
 import Model.gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ public class MainMenuController {
     public Label collectionLbl;
     public Label saveLbl;
     public Label customLbl;
+    public Label label;
     public ImageView exit;
     public ImageView logout;
 
@@ -32,7 +34,9 @@ public class MainMenuController {
 
     @FXML
     public void onBattleClicked(){
-        Page.getPages().push(new BattleMenuPage());
+        if (isMainDeckValid()) {
+            Page.getPages().push(new BattleMenuPage());
+        }
     }
 
     @FXML
@@ -70,4 +74,16 @@ public class MainMenuController {
         Page.getStage().close();
     }
 
+    public boolean isMainDeckValid() {
+        if (User.user.getMainDeck() != null) {
+            if (User.user.getCollection().isValidMainDeck()) {
+                return true;
+            } else {
+                label.setText(ErrorType.INVALID_DECK.getMessage());
+                return false;
+            }
+        }
+        label.setText(ErrorType.NOT_SELECT_MAIN_DECK.getMessage());
+        return false;
+    }
 }

@@ -19,6 +19,7 @@ public abstract class Page {
     }
 
     public Page() {
+        //start();
     }
 
     public static void setStage(Stage stage) {
