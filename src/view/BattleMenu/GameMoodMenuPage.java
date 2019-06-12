@@ -79,17 +79,17 @@ public class GameMoodMenuPage extends Page {
                     case "1":
                        // controller.selectMainDeck();
                         BattleMenuPage.setGameMood("1");
-                        view.getPages().push(new MainBattleMenuPage());
+                        view.getPages().push(new Match());
                         break;
                     case "2":
                         BattleMenuPage.setGameMood("2");
                         BattleMenuPage.setFlags(1);
-                        view.getPages().push(new MainBattleMenuPage());
+                        view.getPages().push(new Match());
                         break;
                     case "3":
                         BattleMenuPage.setGameMood("3");
                         BattleMenuPage.setFlags(Integer.parseInt(command.split(" ")[4]));
-                        view.getPages().push(new MainBattleMenuPage());
+                        view.getPages().push(new Match());
                         break;
                     default:
                         view.printError(ErrorType.INVALID_MOOD_NUM);

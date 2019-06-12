@@ -1,31 +1,49 @@
 package view.BattleMenu;
 
-import Controller.Controller;
+import Controller.MatchController;
 import Model.enums.ErrorType;
 import Model.game.Game;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import view.View;
 import view.pages.Page;
 
-public class MainBattleMenuPage extends Page {
+import java.io.FileInputStream;
+import java.io.IOException;
 
-    private Controller controller = Controller.getInstance();
-    private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
-    private View view = View.getInstance();
+public class Match extends Page {
+    private MatchController controller;
     private Game game;
-    private static boolean isStarted = false;
+    private Pane root;
 
-    public MainBattleMenuPage() {
-        init();
-    }
-
-    private void init(){
-        if (controller.getSecondDeck().getCards().size() != 0)
-            battleMenuPage.getSecondUser().setMainDeck(controller.getSecondDeck());
-        /*game = new Game(battleMenuPage.getFirstUser(), battleMenuPage.getSecondUser(),
-                BattleMenuPage.getGameMood(), BattleMenuPage.getGameKind(), 0);*/
+    public Match() {
+        start();
     }
 
     @Override
+    public void start() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Match.fxml"));
+            root = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+            initializeImage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeImage() {
+        setBackGround(root, "resources/codex/chapter6_background@2x.jpg");
+        //setBackGround(controller.map, "resources/maps/me.png");
+    }
+
+    /*    @Override
     public void help() {
         view.show("Game info\nshow my minions \nshow opponent minions \nShow card info [card id] \nSelect [card id]\n" +
                 "Use special power (x, y)\nShow hand\nInsert [card name] in (x, y)\nInsert [card name] in x y\nEnd turn\n" +
@@ -90,5 +108,5 @@ public class MainBattleMenuPage extends Page {
             view.show("game mood : " + BattleMenuPage.getGameMood());
             view.show("mission : " + BattleMenuPage.getMission());
         }
-    }
+    }*/
 }

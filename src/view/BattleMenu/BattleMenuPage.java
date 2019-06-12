@@ -1,7 +1,6 @@
 package view.BattleMenu;
 
 import Controller.*;
-import Model.enums.ErrorType;
 import Model.game.Game;
 import Model.user.User;
 import javafx.fxml.FXMLLoader;
@@ -125,6 +124,6 @@ public class BattleMenuPage extends Page {
 
     public static void createGame(){
         new Game(User.user, secondUser, gameMood, gameKind, flags);
-        Page.getPages().push(new MainBattleMenuPage());
+        Page.getPages().push(new Match());
     }
 }

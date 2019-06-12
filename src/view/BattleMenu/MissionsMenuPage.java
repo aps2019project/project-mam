@@ -66,19 +66,19 @@ public class MissionsMenuPage extends Page {
                 BattleMenuPage.setMission("1");
                 controller.setAiMainDeck(1);
                 battleMenuPage.setSecondUser(AI.getAI());
-                view.getPages().push(new MainBattleMenuPage());
+                view.getPages().push(new Match());
                 break;
             case "2":
                 BattleMenuPage.setMission("2");
                 controller.setAiMainDeck(2);
                 battleMenuPage.setSecondUser(AI.getAI());
-                view.getPages().push(new MainBattleMenuPage());
+                view.getPages().push(new Match());
                 break;
             case "3":
                 BattleMenuPage.setMission("3");
                 controller.setAiMainDeck(3);
                 battleMenuPage.setSecondUser(AI.getAI());
-                view.getPages().push(new MainBattleMenuPage());
+                view.getPages().push(new Match());
                 break;
             case "back":
                 view.back();
