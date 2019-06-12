@@ -26,7 +26,6 @@ public class MainMenuController {
     public ImageView exit;
     public ImageView logout;
 
-    private User user;
 
     public MainMenuController() {
 

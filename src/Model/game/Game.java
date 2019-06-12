@@ -82,6 +82,8 @@ public class Game {
         mana[1] = basicMana;
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
+        setId(firstPlayerDeck);
+        setId(secondPlayerDeck);
         setPlayersHand();
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
@@ -92,7 +94,7 @@ public class Game {
     public Game() {
     }
 
-    public static Game getInstance(){
+    public static Game getInstance() {
         return game;
     }
 
@@ -202,6 +204,14 @@ public class Game {
 
     public void changeTurn() {
         turn++;
+    }
+
+    private void setId(Deck deck) {
+        int counter = 0;
+        if (deck.getCards().get(0).getId() == deck.getCards().get(1).getId())
+            for (Card card : deck.getCards()) {
+                card.setId(counter++);
+            }
     }
 
     public void startGame() {
