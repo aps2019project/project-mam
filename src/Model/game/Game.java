@@ -1,5 +1,6 @@
 package Model.game;
 
+import Controller.GameController.ImageController;
 import Model.Buffs.Buff;
 import Model.deck.Deck;
 import Model.shop.Shop;
@@ -67,6 +68,7 @@ public class Game {
     private int price = 1000;
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
+        game = this;
         this.firstUser = firstUser;
         this.secondUser = secondUser;
         this.mode = mode;
@@ -74,6 +76,7 @@ public class Game {
         this.kind = kind;
         this.firstPlayerDeck = firstUser.getMainDeck();
         this.secondPlayerDeck = secondUser.getMainDeck();
+        ImageController.getInstance().initCardImage();
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
@@ -88,7 +91,7 @@ public class Game {
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
-        game = this;
+
     }
 
     public Game() {

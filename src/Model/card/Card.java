@@ -14,6 +14,7 @@ public class Card {
     private String desc;
     private ArrayList<Buff> specialPower = new ArrayList<>();
     private String type;
+    private String imageAddress;
 
     private boolean selected = false;
 
@@ -25,6 +26,14 @@ public class Card {
         this.price = price;
         this.name = name;
         this.desc = desc;
+    }
+
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress;
+    }
+
+    public String getImageAddress() {
+        return imageAddress;
     }
 
     public void setSpecialPower(ArrayList<Buff> specialPower) {

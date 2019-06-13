@@ -5,6 +5,7 @@ import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
+import Model.game.Game;
 import Model.user.User;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 
 public class GameController {
     private MapController mapCtrl = MapController.getInstance();
+    private Game game = Game.getInstance();
+    private ImageController imageCtrl = ImageController.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -108,6 +111,8 @@ public class GameController {
 
     public void initalizeGame(){
         mapCtrl.initalize(cells, pane);
+        imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
+        imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());
     }
 
     public Rectangle[][] getCells() {
