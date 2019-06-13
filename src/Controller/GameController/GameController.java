@@ -1,22 +1,15 @@
 package Controller.GameController;
 
-import Controller.Controller;
 import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
-import Model.user.User;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import view.BattleMenu.MainBattleMenuPage;
 import view.pages.Page;
 
 import java.util.ArrayList;
@@ -111,8 +104,8 @@ public class GameController {
     public Pane pane;
     public Rectangle[][] cells = new Rectangle[5][9];
 
-    public void initalizeGame(){
-        mapCtrl.initalize(cells, pane);
+    public void initializeGame(){
+        mapCtrl.initialize(cells, pane, label);
     }
 
     public Rectangle[][] getCells() {
@@ -131,7 +124,7 @@ public class GameController {
         cells.add(cell50);
         cells.add(cell60);
         cells.add(cell70);
-        cells.add(cell80);
+        cells.add(cell80);*/
 
         handCards.add(handCard1);
         handCards.add(handCard2);
@@ -143,7 +136,7 @@ public class GameController {
         handCardsMana.add(handCard2mana);
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
-        handCardsMana.add(handCard5mana);*/
+        handCardsMana.add(handCard5mana);
 
     }
 
@@ -216,24 +209,9 @@ public class GameController {
         view.show(MainBattleMenuPage.getGame().showHand());
     }*/
 
-    public void selectCard(String cardId) {
-        if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(cardId))) {
-            Game.getInstance().selectCard(Integer.parseInt(cardId));
-        } else label.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
-    }
 
-    public void moveCard(String x, String y) {
-        if (Game.getInstance().getCurrentCard().isCanMove()) {
-            if (Game.getInstance().cardCanMove(Integer.parseInt(x), Integer.parseInt(y))) {
-                Game.getInstance().moveCurrentCardTo(Integer.parseInt(x), Integer.parseInt(y));
-                StringBuilder message = new StringBuilder();
-                message.append(Game.getInstance().getCurrentCard().getId()).append(" moved to ");
-                message.append(x).append(" ").append(y);
-                ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
-                label.setText(ErrorType.SUCCESSFUL_MOVING_CARD.getMessage());
-            } else label.setText(ErrorType.INVALID_TARGET.getMessage());
-        } else label.setText(ErrorType.CARD_CAN_NOT_MOVE.getMessage());
-    }
+
+
 
     public void insertCard(String cardName, String x, String y) {
         if (Game.getInstance().isCardInPlayerHand(cardName)) {
