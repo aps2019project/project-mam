@@ -1,15 +1,22 @@
 package view.BattleMenu;
 
 import Controller.GameController.GameController;
+import Controller.*;
+import Model.card.Card;
+import Model.enums.ErrorType;
+import Model.game.Cell;
 import Model.game.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import view.View;
 import view.pages.Page;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 public class MainBattleMenuPage extends Page {
 
@@ -21,15 +28,14 @@ public class MainBattleMenuPage extends Page {
         return game;
     }
 
-    public static void setGame(Game game) {
-        MainBattleMenuPage.game = game;
-    }
 
     private static boolean isStarted = false;
 
     public MainBattleMenuPage() {
+        game = Game.getInstance();
         start();
         init();
+        updatePage();
     }
 
 
@@ -47,6 +53,7 @@ public class MainBattleMenuPage extends Page {
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
 
+            controller.init();
 
             initializeImage();
             controller.initalizeGame();
@@ -67,10 +74,47 @@ public class MainBattleMenuPage extends Page {
         setBackGround(controller.custom, "resources/ui/button_secondary_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
 */
-
     }
 
+    public void updatePage(){
+        /*controller.firstPlayerName.setText(game.getFirstUser().getName());
+        controller.secondPlayerName.setText(game.getSecondUser().getName());
 
+        controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
+        controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
+
+        int counter = 0;
+        for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
+            controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
+            controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
+            counter++;
+        }
+
+        *//*controller.handCard2.setId(String.valueOf(game.getFirstPlayerHand().get(1).getId()));
+        controller.handCard3.setId(String.valueOf(game.getFirstPlayerHand().get(2).getId()));
+        controller.handCard4.setId(String.valueOf(game.getFirstPlayerHand().get(3).getId()));
+        controller.handCard5.setId(String.valueOf(game.getFirstPlayerHand().get(4).getId()));*//*
+
+        controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
+
+        *//*controller.handCard1mana.setText(String.valueOf(game.getFirstPlayerHand().get(0).getMP()));
+        controller.handCard2mana.setText(String.valueOf(game.getFirstPlayerHand().get(1).getMP()));
+        controller.handCard3mana.setText(String.valueOf(game.getFirstPlayerHand().get(2).getMP()));
+        controller.handCard4mana.setText(String.valueOf(game.getFirstPlayerHand().get(3).getMP()));
+        controller.handCard5mana.setText(String.valueOf(game.getFirstPlayerHand().get(4).getMP()));*//*
+
+        controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
+        controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
+
+        for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
+            StringBuilder index = new StringBuilder();
+            index.append(entry.getValue().getColumn()).append(entry.getValue().getRow());
+            for (ImageView cell : controller.cells) {
+                if (cell.getAccessibleText().equals(index.toString()))
+                    cell.setId(String.valueOf(entry.getKey()));
+            }
+        }*/
+    }
 
 
     private void init(){

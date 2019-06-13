@@ -28,55 +28,55 @@
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="secondPlayerMana" alignment="CENTER" layoutX="1728.0" layoutY="227.0" prefHeight="51.0" text="Label">
+      <Label fx:id="secondPlayerMana" alignment="CENTER" layoutX="1749.0" layoutY="227.0" prefHeight="51.0" text="0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="firstPlayerMana" alignment="CENTER" layoutX="137.0" layoutY="227.0" prefHeight="51.0" text="Label">
+      <Label fx:id="firstPlayerMana" alignment="CENTER" layoutX="158.0" layoutY="227.0" prefHeight="51.0" text="0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="item1mana" alignment="CENTER" layoutX="228.0" layoutY="436.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="item1mana" alignment="CENTER" layoutX="243.0" layoutY="436.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="item2mana" alignment="CENTER" layoutX="1658.0" layoutY="436.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="item2mana" alignment="CENTER" layoutX="1672.0" layoutY="436.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <ImageView fx:id="graveyard" fitHeight="341.0" fitWidth="95.0" layoutX="3.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" />
-      <Label fx:id="handCard5mana" alignment="CENTER" layoutX="1252.0" layoutY="1029.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="handCard5mana" alignment="CENTER" layoutX="1263.0" layoutY="1027.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="handCard4mana" alignment="CENTER" layoutX="1047.0" layoutY="1029.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="handCard4mana" alignment="CENTER" layoutX="1062.0" layoutY="1028.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="handCard3mana" alignment="CENTER" layoutX="860.0" layoutY="1029.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="handCard3mana" alignment="CENTER" layoutX="874.0" layoutY="1027.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="handCard2mana" alignment="CENTER" layoutX="662.0" layoutY="1029.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="handCard2mana" alignment="CENTER" layoutX="674.0" layoutY="1028.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="handCard1mana" alignment="CENTER" layoutX="466.0" layoutY="1029.0" prefHeight="34.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="handCard1mana" alignment="CENTER" layoutX="481.0" layoutY="1027.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <ImageView fx:id="endTurn" fitHeight="79.0" fitWidth="283.0" layoutX="1511.0" layoutY="870.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
       <Circle fx:id="item2" fill="#1f93ff00" layoutX="1677.0" layoutY="363.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="item1" fill="#1f93ff00" layoutX="247.0" layoutY="363.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="nextCard" fill="#1f93ff00" layoutX="238.0" layoutY="910.0" radius="117.0" stroke="TRANSPARENT" strokeType="INSIDE" />
