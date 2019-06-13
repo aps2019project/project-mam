@@ -18,7 +18,7 @@ public class SelectCardMenu extends Page {
                 "exit");
     }
 
-    @Override
+    /*@Override
     public void handleCommand(String command) {
         if (command.matches("move to \\d \\d")){
             controller.moveCard(command.split(" ")[2], command.split(" ")[3]);
@@ -50,7 +50,7 @@ public class SelectCardMenu extends Page {
             view.back();
         }
     }
-
+*/
     @Override
     public void showMenu() {
         StringBuilder menu = new StringBuilder();

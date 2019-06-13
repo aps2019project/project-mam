@@ -123,7 +123,9 @@ public class BattleMenuPage extends Page {
     }
 
     public static void createGame(){
-        new Game(User.user, secondUser, gameMood, gameKind, flags);
-        Page.getPages().push(new MainBattleMenuPage());
+        MainBattleMenuPage mainBattleMenuPage = new MainBattleMenuPage();
+        MainBattleMenuPage.setGame(new Game(User.user, secondUser, gameMood, gameKind, flags));
+        Page.getPages().push(mainBattleMenuPage);
+
     }
 }
