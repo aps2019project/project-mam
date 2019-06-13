@@ -1,14 +1,21 @@
-package Controller;
+package Controller.GameController;
 
+import Controller.Controller;
 import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
 import Model.user.User;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import view.BattleMenu.MainBattleMenuPage;
 import view.pages.Page;
 
@@ -16,6 +23,7 @@ import java.util.ArrayList;
 
 
 public class GameController {
+    private MapController mapCtrl = MapController.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -81,7 +89,7 @@ public class GameController {
     public ImageView cell74;
     public ImageView cell84;
 
-    public ArrayList<ImageView> cells = new ArrayList<>();
+    //public ArrayList<ImageView> cells = new ArrayList<>();
 
 
 
@@ -99,11 +107,22 @@ public class GameController {
     public Circle handCard4;
     public Circle handCard5;
 
+    //------------------me-----------
+    public Pane pane;
+    public Rectangle[][] cells = new Rectangle[5][9];
+
+    public void initalizeGame(){
+        mapCtrl.initalize(cells, pane);
+    }
+
+    public Rectangle[][] getCells() {
+        return cells;
+    }
     public ArrayList<Circle> handCards = new ArrayList<>();
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init(){
-        cells.add(cell00);
+        /*cells.add(cell00);
         cell00.setAccessibleText("00");
         cells.add(cell10);
         cells.add(cell20);
@@ -124,7 +143,7 @@ public class GameController {
         handCardsMana.add(handCard2mana);
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
-        handCardsMana.add(handCard5mana);
+        handCardsMana.add(handCard5mana);*/
 
     }
 

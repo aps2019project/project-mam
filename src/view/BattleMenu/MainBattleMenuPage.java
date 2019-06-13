@@ -1,5 +1,6 @@
 package view.BattleMenu;
 
+import Controller.GameController.GameController;
 import Controller.*;
 import Model.card.Card;
 import Model.enums.ErrorType;
@@ -13,7 +14,6 @@ import javafx.scene.layout.Pane;
 import view.View;
 import view.pages.Page;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
@@ -39,7 +39,9 @@ public class MainBattleMenuPage extends Page {
     private static Pane root = new Pane();
     private GameController controller;
 
-
+    public static Pane getRoot() {
+        return root;
+    }
 
     @Override
     public void start() {
@@ -51,9 +53,10 @@ public class MainBattleMenuPage extends Page {
             controller.init();
 
             initializeImage();
+            controller.initalizeGame();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreen(true);
+           // stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();

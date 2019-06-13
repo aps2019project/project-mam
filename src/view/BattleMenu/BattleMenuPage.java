@@ -1,7 +1,6 @@
 package view.BattleMenu;
 
 import Controller.*;
-import Model.enums.ErrorType;
 import Model.game.Game;
 import Model.user.User;
 import javafx.fxml.FXMLLoader;

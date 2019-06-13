@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
 import view.BattleMenu.GameMoodMenuPage;
-import view.BattleMenu.MainBattleMenuPage;
 import view.pages.Page;
 
 public class MissionController {
