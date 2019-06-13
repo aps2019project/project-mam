@@ -11,15 +11,17 @@ import view.View;
 import view.pages.Page;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Match extends Page {
-    private MatchController controller;
-    private Game game;
-    private Pane root;
+public class MainBattleMenuPage extends Page {
 
-    public Match() {
-        start();
+    //private Controller controller = Controller.getInstance();
+    private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
+    private View view = View.getInstance();
+    private Game game;
+    private static boolean isStarted = false;
+
     public MainBattleMenuPage() {
         start();
         init();
@@ -134,5 +136,5 @@ public class Match extends Page {
             view.show("game mood : " + BattleMenuPage.getGameMood());
             view.show("mission : " + BattleMenuPage.getMission());
         }
-    }*/
+    }
 }
