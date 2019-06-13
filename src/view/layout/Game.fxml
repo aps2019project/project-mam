@@ -6,11 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController.GameController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="212.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -84,7 +85,7 @@
       <Circle fx:id="handCard4" fill="#1f93ff00" layoutX="1066.0" layoutY="948.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="handCard3" fill="#1f93ff00" layoutX="879.0" layoutY="949.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="handCard2" fill="#1f93ff00" layoutX="681.0" layoutY="948.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-      <GridPane layoutX="637.0" layoutY="321.0" prefHeight="410.0" prefWidth="808.0">
+      <GridPane fx:id="map" layoutX="637.0" layoutY="321.0" prefHeight="410.0" prefWidth="808.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -151,6 +152,7 @@
             <ImageView fx:id="cell84" fitHeight="82.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+      <Pane fx:id="pane" prefHeight="500.0" prefWidth="1000.0" />
       <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="Label" textAlignment="CENTER">
          <font>
             <Font size="18.0" />

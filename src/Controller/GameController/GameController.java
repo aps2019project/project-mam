@@ -1,19 +1,27 @@
-package Controller;
+package Controller.GameController;
 
+import Controller.Controller;
 import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.user.User;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import view.BattleMenu.MainBattleMenuPage;
 
 import java.util.ArrayList;
 
 
 public class GameController {
+    private MapController mapCtrl = MapController.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -94,6 +102,17 @@ public class GameController {
     public Circle handCard4;
     public Circle handCard5;
 
+    //------------------me-----------
+    public Pane pane;
+    public Rectangle[][] cells = new Rectangle[5][9];
+
+    public void initalizeGame(){
+        mapCtrl.initalize(cells, pane);
+    }
+
+    public Rectangle[][] getCells() {
+        return cells;
+    }
 
     public void setGraveyard() {
         this.graveyard = graveyard;
