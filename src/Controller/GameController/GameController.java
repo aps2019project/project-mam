@@ -109,8 +109,8 @@ public class GameController {
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label);
-        imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
-        imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());
+        /*imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
+        imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());*/
     }
 
 

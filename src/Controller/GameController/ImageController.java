@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ImageController {
     public static final ImageController instance = new ImageController();
@@ -21,8 +22,12 @@ public class ImageController {
         return instance;
     }
 
-    private ArrayList<ImageView> views = new ArrayList<>();
+   // private ArrayList<ImageView> views = new ArrayList<>();
+    private HashMap<Integer, ImageView> views = new HashMap<>();
 
+    public HashMap<Integer, ImageView> getViews() {
+        return views;
+    }
 
     public void initCardImage() {
         File dir = new File("resources/unit_gifs");
@@ -47,6 +52,7 @@ public class ImageController {
             view.setY(MapController.getInstance().getCells()[row][column].getY()-35);
             view.setX(MapController.getInstance().getCells()[row][column].getX()-15);
             MapController.getInstance().getPane().getChildren().add(view);
+            views.put(card.getId(), view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

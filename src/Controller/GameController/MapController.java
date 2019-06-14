@@ -30,6 +30,7 @@ public class MapController {
 
     private GameController controller;
     private Game game = Game.getInstance();
+    private ImageController imageController = ImageController.getInstance();
 
     private Rectangle[][] cells;
     private Pane pane;
@@ -119,6 +120,8 @@ public class MapController {
                         if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
                             rectangle.setId(null);
                             rectangle.setFill(Color.WHITE);
+                            pane.getChildren().remove(imageController.getViews().get(Integer.parseInt(id)));
+                            imageController.getViews().remove(Integer.parseInt(id));
                         } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
                             rectangle.setId(null);
                             rectangle.setFill(Color.WHITE);
@@ -152,6 +155,7 @@ public class MapController {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
+            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard());
         }
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
