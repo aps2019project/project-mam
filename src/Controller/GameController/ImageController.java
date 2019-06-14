@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class ImageController {
     public static final ImageController instance = new ImageController();
@@ -46,11 +47,41 @@ public class ImageController {
         Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress(path.get(counter));
     }
 
+    public void initItemImage(){
+        try {
+            File dir = new File("resources/items");
+            ArrayList<String> path = new ArrayList<>();
+            for (String s : dir.list()) {
+                path.add("resources/items/" + s);
+            }
+            Random random = new Random();
+            addItem(path, random, 185);
+
+            addItem(path, random, 1615);
+
+            //Game.getInstance().getFirstPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
+            //Game.getInstance().getSecondPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void addItem(ArrayList<String> path, Random random, int x) throws FileNotFoundException {
+        ImageView view = new ImageView(new Image(new FileInputStream(path.get(random.nextInt(path.size() - 1)))));
+        view.setY(305);
+        view.setX(x);
+        view.setFitWidth(120);
+        view.setFitHeight(120);
+        MapController.getInstance().getPane().getChildren().add(view);
+    }
+
     public void addCard(int row, int column, Card card) {
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
             view.setY(MapController.getInstance().getCells()[row][column].getY()-35);
             view.setX(MapController.getInstance().getCells()[row][column].getX()-15);
+            view.setFitWidth(120);
+            view.setFitHeight(120);
             MapController.getInstance().getPane().getChildren().add(view);
             views.put(card.getId(), view);
         } catch (FileNotFoundException e) {
@@ -72,5 +103,4 @@ public class ImageController {
             e.printStackTrace();
         }
     }
-
 }

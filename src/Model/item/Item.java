@@ -10,12 +10,21 @@ public class Item {
     private String desc;
     private int id;
     private ArrayList<Buff> buffs = new ArrayList<>();
+    private String imageAddress;
 
     public Item(){}
 
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
+    }
+
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress;
     }
 
     public int getPrice(){

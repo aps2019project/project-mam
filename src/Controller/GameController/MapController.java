@@ -47,6 +47,7 @@ public class MapController {
         this.cells = cells;
         this.pane = pane;
         initCells();
+        imageController.initItemImage();
         updatePage();
     }
 
@@ -147,6 +148,7 @@ public class MapController {
         }
 
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
+        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200);
 
 
         controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));

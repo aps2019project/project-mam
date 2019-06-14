@@ -153,7 +153,7 @@
          </children>
       </GridPane>
       <Pane fx:id="pane" prefHeight="500.0" prefWidth="1000.0" />
-      <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="&quot;Game Started&quot;" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

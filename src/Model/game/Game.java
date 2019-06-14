@@ -91,7 +91,7 @@ public class Game {
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
-
+        //ImageController.getInstance().initItemImage();
     }
 
     public Game() {
