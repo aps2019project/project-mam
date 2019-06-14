@@ -102,10 +102,14 @@ public class MapController {
         for (Rectangle[] rectangles : cells) {
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.getId() != null) {
-                    if (rectangle.getId().equals(id)) {
-                        rectangle.setId(null);
-                        rectangle.setFill(Color.WHITE);
-                    }
+                    if (game.getTurn() % 2 == 1)
+                        if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
+                            rectangle.setId(null);
+                            rectangle.setFill(Color.WHITE);
+                        } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
+                            rectangle.setId(null);
+                            rectangle.setFill(Color.WHITE);
+                        }
                 }
             }
         }

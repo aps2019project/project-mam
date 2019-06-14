@@ -413,8 +413,8 @@ public class Game {
 
     public void moveCurrentCardTo(int x, int y) {
         currentCard.setCanMove(false);
-        currentCard.setRow(x);
-        currentCard.setColumn(y);
+        /*currentCard.setRow(x);
+        currentCard.setColumn(y);*/
         if (turn % 2 == 1) {
             if (map.getCells()[x][y].haveCollectableItem()) {
                 player1Collectable.add(map.getCells()[x][y].getCollectableItem());
@@ -424,8 +424,9 @@ public class Game {
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getFirstPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getFirstPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
-            map.getFirstPlayerCellCard().get(currentCard.getId()).setRow(x);
-            map.getFirstPlayerCellCard().get(currentCard.getId()).setColumn(y);
+            /*map.getFirstPlayerCellCard().get(currentCard.getId()).setRow(x);
+            map.getFirstPlayerCellCard().get(currentCard.getId()).setColumn(y);*/
+            map.getFirstPlayerCellCard().replace(currentCard.getId(), map.getCells()[x][y]);
         } else {
             if (map.getCells()[x][y].haveCollectableItem()) {
                 player2Collectable.add(map.getCells()[x][y].getCollectableItem());
@@ -438,6 +439,9 @@ public class Game {
             map.getSecondPlayerCellCard().get(currentCard.getId()).setRow(x);
             map.getSecondPlayerCellCard().get(currentCard.getId()).setColumn(y);
         }
+
+        currentCard.setRow(x);
+        currentCard.setColumn(y);
     }
 
     public boolean cardCanMove(int x, int y) {
