@@ -106,10 +106,8 @@ public class GameController {
     public Pane pane;
     public Rectangle[][] cells = new Rectangle[5][9];
 
-    public void initializeGame(){
+    public void initializeGame() {
         mapCtrl.initialize(cells, pane, label);
-    public void initalizeGame(){
-        mapCtrl.initalize(cells, pane);
         imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
         imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());
     }
