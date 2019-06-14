@@ -58,4 +58,19 @@ public class ImageController {
         }
     }
 
+    public void addCard(double x, double y, Card card, int size) {
+        try {
+            ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
+            view.setY(y);
+            view.setX(x);
+            //view.resize(size, size);
+            view.setFitWidth(size);
+            view.setFitHeight(size);
+            MapController.getInstance().getPane().getChildren().add(view);
+            views.put(card.getId(), view);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

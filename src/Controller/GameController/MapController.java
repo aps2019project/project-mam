@@ -142,6 +142,7 @@ public class MapController {
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
             controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
+            imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150);
             counter++;
         }
 
@@ -161,6 +162,7 @@ public class MapController {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
+            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard());
         }
 
     }
