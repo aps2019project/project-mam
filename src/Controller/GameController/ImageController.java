@@ -44,8 +44,9 @@ public class ImageController {
     public void addCard(int row, int column, Card card) {
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
-            view.setY(MapController.getInstance().getCells()[row][column].getY());
-            view.setX(MapController.getInstance().getCells()[row][column].getX());
+            view.setY(MapController.getInstance().getCells()[row][column].getY()-35);
+            view.setX(MapController.getInstance().getCells()[row][column].getX()-15);
+            MapController.getInstance().getPane().getChildren().add(view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -53,6 +53,10 @@ public class MapController {
         return cells;
     }
 
+    public Pane getPane() {
+        return pane;
+    }
+
     public void initCells() {
         final double SPACE = 5;
         final int ROW = 5;
