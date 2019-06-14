@@ -33,9 +33,8 @@ public class MainBattleMenuPage extends Page {
         game = Game.getInstance();
         start();
         init();
-        updatePage();
+        //updatePage();
     }
-
 
     private static Pane root = new Pane();
     private GameController controller;
@@ -74,7 +73,7 @@ public class MainBattleMenuPage extends Page {
 */
     }
 
-    public void updatePage(){
+    /*public void updatePage(){
         controller.firstPlayerName.setText(game.getFirstUser().getName());
         controller.secondPlayerName.setText(game.getSecondUser().getName());
 
@@ -106,15 +105,15 @@ public class MainBattleMenuPage extends Page {
         }
 
 
-        /*for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
+        *//*for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
             StringBuilder index = new StringBuilder();
             index.append(entry.getValue().getColumn()).append(entry.getValue().getRow());
             for (ImageView cell : controller.cells) {
                 if (cell.getAccessibleText().equals(index.toString()))
                     cell.setId(String.valueOf(entry.getKey()));
             }
-        }*/
-    }
+        }*//*
+    }*/
 
 
     private void init(){

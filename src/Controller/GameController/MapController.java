@@ -1,6 +1,8 @@
 package Controller.GameController;
 
+import Model.card.Card;
 import Model.enums.ErrorType;
+import Model.game.Cell;
 import Model.game.Game;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -11,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MapController {
     private static MapController ourInstance = new MapController();
@@ -22,18 +25,25 @@ public class MapController {
     private MapController() {
     }
 
+    private GameController controller;
+    private Game game = Game.getInstance();
+
     private Rectangle[][] cells;
     private Pane pane;
     private Label label;
 
     private boolean isSelected = false;
 
+    public void setController(GameController controller) {
+        this.controller = controller;
+    }
 
-    public void initialize(Rectangle[][] cells, Pane pane, Label label){
+    public void initialize(Rectangle[][] cells, Pane pane, Label label) {
         this.label = label;
         this.cells = cells;
         this.pane = pane;
         initCells();
+        updatePage();
     }
 
     public Rectangle[][] getCells() {
@@ -62,7 +72,7 @@ public class MapController {
                 Rectangle rectangle = new Rectangle(x, y, xStep, yStep);
                 rectangle.setFill(Color.WHITE);
                 rectangle.setOpacity(0.2);
-                setOnRecClicked(rectangle, j, i);
+                setOnRecClicked(rectangle, i, j);
                 pane.getChildren().add(rectangle);
                 cells[i][j] = rectangle;
             }
@@ -74,24 +84,65 @@ public class MapController {
                 rectangle.setFill(Color.BEIGE);
             else rectangle.setFill(Color.WHITE);*/
 
-            if (isSelected){
+            if (isSelected) {
                 moveCard(x, y);
+                updatePage();
                 isSelected = false;
-            }
-            else if (rectangle.getId() != null) {
+            } else if (rectangle.getId() != null) {
                 if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(rectangle.getId()))) {
                     selectCard(rectangle.getId());
                     isSelected = true;
-                }
+                } else label.setText("please select your card");
             }
         });
     }
 
+    public void updatePage() {
+        controller.firstPlayerName.setText(game.getFirstUser().getName());
+        controller.secondPlayerName.setText(game.getSecondUser().getName());
+
+        controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
+        controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
+
+        int counter = 0;
+        for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
+            controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
+            controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
+            counter++;
+        }
+
+        controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
+
+
+        controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
+        controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
+
+
+        for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
+            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
+            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
+        }
+
+        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
+            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
+            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
+        }
+
+
+        /*for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
+            StringBuilder index = new StringBuilder();
+            index.append(entry.getValue().getColumn()).append(entry.getValue().getRow());
+            for (ImageView cell : controller.cells) {
+                if (cell.getAccessibleText().equals(index.toString()))
+                    cell.setId(String.valueOf(entry.getKey()));
+            }
+        }*/
+    }
+
+
     public void selectCard(String cardId) {
-        if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(cardId))) {
-            Game.getInstance().selectCard(Integer.parseInt(cardId));
-            label.setText(cardId + " selected");
-        } else label.setText("please select your card");
+        Game.getInstance().selectCard(Integer.parseInt(cardId));
+        label.setText(cardId + " selected");
     }
 
     public void moveCard(int x, int y) {
@@ -106,4 +157,6 @@ public class MapController {
             } else label.setText(ErrorType.INVALID_TARGET.getMessage());
         } else label.setText(ErrorType.CARD_CAN_NOT_MOVE.getMessage());
     }
+
+
 }
