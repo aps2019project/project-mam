@@ -85,6 +85,7 @@ public class MapController {
             else rectangle.setFill(Color.WHITE);*/
 
             if (isSelected) {
+                removeThisId(String.valueOf(game.getCurrentCard().getId()));
                 moveCard(x, y);
                 updatePage();
                 isSelected = false;
@@ -95,6 +96,19 @@ public class MapController {
                 } else label.setText("please select your card");
             }
         });
+    }
+
+    private void removeThisId(String id) {
+        for (Rectangle[] rectangles : cells) {
+            for (Rectangle rectangle : rectangles) {
+                if (rectangle.getId() != null) {
+                    if (rectangle.getId().equals(id)) {
+                        rectangle.setId(null);
+                        rectangle.setFill(Color.WHITE);
+                    }
+                }
+            }
+        }
     }
 
     public void updatePage() {
@@ -124,19 +138,10 @@ public class MapController {
         }
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
+            controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
         }
 
-
-        /*for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            StringBuilder index = new StringBuilder();
-            index.append(entry.getValue().getColumn()).append(entry.getValue().getRow());
-            for (ImageView cell : controller.cells) {
-                if (cell.getAccessibleText().equals(index.toString()))
-                    cell.setId(String.valueOf(entry.getKey()));
-            }
-        }*/
     }
 
 
