@@ -23,11 +23,16 @@ public class ImageController {
         return instance;
     }
 
-   // private ArrayList<ImageView> views = new ArrayList<>();
-    private HashMap<Integer, ImageView> views = new HashMap<>();
+    // private ArrayList<ImageView> views = new ArrayList<>();
+    private HashMap<Integer, ImageView> views1 = new HashMap<>();
+    private HashMap<Integer, ImageView> views2 = new HashMap<>();
 
-    public HashMap<Integer, ImageView> getViews() {
-        return views;
+    public HashMap<Integer, ImageView> getViews1() {
+        return views1;
+    }
+
+    public HashMap<Integer, ImageView> getViews2() {
+        return views2;
     }
 
     public void initCardImage() {
@@ -47,7 +52,7 @@ public class ImageController {
         Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress(path.get(counter));
     }
 
-    public void initItemImage(){
+    public void initItemImage() {
         try {
             File dir = new File("resources/items");
             ArrayList<String> path = new ArrayList<>();
@@ -61,7 +66,7 @@ public class ImageController {
 
             //Game.getInstance().getFirstPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
             //Game.getInstance().getSecondPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -75,21 +80,23 @@ public class ImageController {
         MapController.getInstance().getPane().getChildren().add(view);
     }
 
-    public void addCard(int row, int column, Card card) {
+    public void addCard(int row, int column, Card card, int playerTurn) {
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
-            view.setY(MapController.getInstance().getCells()[row][column].getY()-35);
-            view.setX(MapController.getInstance().getCells()[row][column].getX()-15);
+            view.setY(MapController.getInstance().getCells()[row][column].getY() - 35);
+            view.setX(MapController.getInstance().getCells()[row][column].getX() - 15);
             view.setFitWidth(120);
             view.setFitHeight(120);
             MapController.getInstance().getPane().getChildren().add(view);
-            views.put(card.getId(), view);
+            if (playerTurn == 1)
+                views1.put(card.getId(), view);
+            else views2.put(card.getId(), view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void addCard(double x, double y, Card card, int size) {
+    public void addCard(double x, double y, Card card, int size, int playerTurn) {
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
             view.setY(y);
@@ -98,7 +105,9 @@ public class ImageController {
             view.setFitWidth(size);
             view.setFitHeight(size);
             MapController.getInstance().getPane().getChildren().add(view);
-            views.put(card.getId(), view);
+            if (playerTurn == 1)
+                views1.put(card.getId(), view);
+            else views2.put(card.getId(), view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

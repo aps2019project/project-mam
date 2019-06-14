@@ -47,7 +47,7 @@ public class MapController {
         this.cells = cells;
         this.pane = pane;
         initCells();
-       // imageController.initItemImage();
+        imageController.initItemImage();
         updatePage();
     }
 
@@ -64,22 +64,22 @@ public class MapController {
         final int ROW = 5;
         final int COLUMN = 9;
 //-----------------------jimi-------
-        final double startX = 450;
+        /*final double startX = 450;
         final double startY = 190;
         final double xStep = (500 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (300 - SPACE * ROW) / ROW;
+        final double yStep = (300 - SPACE * ROW) / ROW;*/
 //------------------feri------------
-        /*final double startX = 650;
+        final double startX = 650;
         final double startY = 320;
         final double xStep = (808 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (410 - SPACE * ROW) / ROW;*/
+        final double yStep = (410 - SPACE * ROW) / ROW;
 
         for (int i = 0; i < ROW; i++)
             for (int j = 0; j < COLUMN; j++) {
                 double x = (xStep + SPACE) * j + startX;
                 double y = (yStep + SPACE) * i + startY;
                 Rectangle rectangle = new Rectangle(x, y, xStep, yStep);
-                rectangle.setFill(Color.WHITE);
+                rectangle.setFill(Color.BLACK);
                 rectangle.setOpacity(0.2);
                 setOnRecClicked(rectangle, i, j);
                 pane.getChildren().add(rectangle);
@@ -94,8 +94,8 @@ public class MapController {
             else rectangle.setFill(Color.WHITE);*/
 
             if (isSelected) {
-                if ((game.getTurn()%2 == 1 && rectangle.getFill() == Color.BLUE)
-                        || (game.getTurn()%2 == 0 && rectangle.getFill() == Color.RED)){
+                if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
+                        || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
                     attack(rectangle.getId());
                     isSelected = false;
                 } else {
@@ -117,16 +117,17 @@ public class MapController {
         for (Rectangle[] rectangles : cells) {
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.getId() != null) {
-                    if (game.getTurn() % 2 == 1)
+                    if (game.getTurn() % 2 == 1) {
                         if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
                             rectangle.setId(null);
-                            rectangle.setFill(Color.WHITE);
-                            pane.getChildren().remove(imageController.getViews().get(Integer.parseInt(id)));
-                            imageController.getViews().remove(Integer.parseInt(id));
-                        } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
-                            rectangle.setId(null);
-                            rectangle.setFill(Color.WHITE);
+                            rectangle.setFill(Color.BLACK);
+                            pane.getChildren().remove(imageController.getViews1().get(Integer.parseInt(id)));
+                            imageController.getViews1().remove(Integer.parseInt(id));
                         }
+                    } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
+                        rectangle.setId(null);
+                        rectangle.setFill(Color.BLACK);
+                    }
                 }
             }
         }
@@ -143,12 +144,12 @@ public class MapController {
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
             controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
-            imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150);
+            imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150, 1);
             counter++;
         }
 
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
-        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200);
+        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 1);
 
 
         controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
@@ -158,13 +159,13 @@ public class MapController {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
-            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard());
+            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
-            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard());
+            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
         }
 
     }

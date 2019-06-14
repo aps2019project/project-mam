@@ -28,7 +28,7 @@ public class SelectUserController {
                 Page.getPages().push(new GameMoodMenuPage());
             } else label.setText(ErrorType.INVALID_DECK_2.getMessage());
         }
-        label.setText(ErrorType.INVALID_USERNAME.getMessage());
+        else label.setText(ErrorType.INVALID_USERNAME.getMessage());
     }
 
     @FXML

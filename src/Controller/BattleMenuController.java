@@ -29,6 +29,7 @@ public class BattleMenuController {
 
     public void setMulti() {
         BattleMenuPage.setNumOfPlayers("2");
+        BattleMenuPage.setGameKind("custom");
         Page.getPages().push(new SelectUserMenuPage());
     }
 
