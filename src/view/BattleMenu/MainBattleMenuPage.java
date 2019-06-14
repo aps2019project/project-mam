@@ -21,7 +21,10 @@ public class MainBattleMenuPage extends Page {
     //private Controller controller = Controller.getInstance();
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
     private View view = View.getInstance();
-    private Game game;
+    private static Game game = Game.getInstance();
+    public static Game getGame(){
+        return game;
+    }
 
 
     private static boolean isStarted = false;

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class GameController {
     private MapController mapCtrl = MapController.getInstance();
+    private Game game = Game.getInstance();
+    private ImageController imageCtrl = ImageController.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -106,6 +108,10 @@ public class GameController {
 
     public void initializeGame(){
         mapCtrl.initialize(cells, pane, label);
+    public void initalizeGame(){
+        mapCtrl.initalize(cells, pane);
+        imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
+        imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());
     }
 
     public Rectangle[][] getCells() {

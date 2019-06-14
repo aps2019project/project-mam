@@ -21,7 +21,7 @@ public class Main extends Application {
         //Page.getPages().push(new ShopMenuPage());
         //Page.getPages().push(new CollectionMenuPage());
         //Page.getPages().push(new BattleMenuPage());
-        //Page.getPages().push(new MainBattleMenuPage());
+//        Page.getPages().push(new MainBattleMenuPage());
         primaryStage.show();
     }
 }

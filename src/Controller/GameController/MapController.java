@@ -4,11 +4,13 @@ import Model.enums.ErrorType;
 import Model.game.Game;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
 
 public class MapController {
     private static MapController ourInstance = new MapController();
@@ -32,6 +34,10 @@ public class MapController {
         this.cells = cells;
         this.pane = pane;
         initCells();
+    }
+
+    public Rectangle[][] getCells() {
+        return cells;
     }
 
     public void initCells() {
