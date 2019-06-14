@@ -13,9 +13,7 @@ public class Minion extends Card {
     private int TargetCommunity;
     private ImpactType minionClass;
     private Model.enums.SPActivationTime SPActivationTime;
-    private boolean canMove = true;
-    private boolean canAttack = true;
-    private boolean canCounterAttack = true;
+
 
 
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
@@ -53,7 +51,7 @@ public class Minion extends Card {
         return column;
     }*/
 
-    public boolean isCanMove() {
+    /*public boolean isCanMove() {
         return canMove;
     }
 
@@ -63,7 +61,7 @@ public class Minion extends Card {
 
     public boolean canCounterAttack() {
         return canCounterAttack;
-    }
+    }*/
 
     /*public void setRow(int row) {
         this.row = row;
@@ -73,7 +71,7 @@ public class Minion extends Card {
         this.column = column;
     }*/
 
-    public void setCanMove(boolean canMove) {
+    /*public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
 
@@ -83,7 +81,7 @@ public class Minion extends Card {
 
     public void setCanCounterAttack(boolean canCounterAttack) {
         this.canCounterAttack = canCounterAttack;
-    }
+    }*/
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();

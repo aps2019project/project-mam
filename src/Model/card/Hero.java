@@ -14,9 +14,7 @@ public class Hero extends Card {
     private int cooldown;
     private final int BASE_COOL_DOWN;
     private ImpactType heroClass;
-    private boolean canMove = true;
-    private boolean canAttack = true;
-    private boolean canCounterAttack = true;
+
 
     public Hero(String name, int price, int HP, int AP, ImpactType heroClass, int targetCommunity,
                 int MP, int cooldown) {
@@ -90,13 +88,13 @@ public class Hero extends Card {
         return column;
     }*/
 
-    public boolean isCanMove() {
+    /*public boolean isCanMove() {
         return canMove;
     }
 
     public boolean isCanAttack() {
         return canAttack;
-    }
+    }*/
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
@@ -106,13 +104,13 @@ public class Hero extends Card {
         cooldown -= number;
     }
 
-    public void setCanMove(boolean canMove) {
+    /*public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
 
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
-    }
+    }*/
 
    /* public void setRow(int row) {
         this.row = row;
@@ -122,9 +120,9 @@ public class Hero extends Card {
         this.column = column;
     }*/
 
-    public void setCanCounterAttack(boolean canCounterAttack) {
+    /*public void setCanCounterAttack(boolean canCounterAttack) {
         this.canCounterAttack = canCounterAttack;
-    }
+    }*/
 
     public void incrementOfHp(int number){
         this.HP += number;
@@ -143,9 +141,9 @@ public class Hero extends Card {
         AP -= number;
     }
 
-    public boolean canCounterAttack(){
+    /*public boolean canCounterAttack(){
         return canCounterAttack;
-    }
+    }*/
 
     @Override
     public String getInfo() {

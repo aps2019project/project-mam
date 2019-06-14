@@ -18,6 +18,10 @@ public class Card {
     private String type;
     private String imageAddress;
 
+    private boolean canMove = true;
+    private boolean canAttack = true;
+    private boolean canCounterAttack = true;
+
     private boolean selected = false;
 
     Card() {
@@ -132,17 +136,19 @@ public class Card {
     }
 
     public boolean isCanMove() {
-        return true;
+        return canMove;
     }
 
     public boolean isCanAttack() {
-        return true;
+        return canAttack;
     }
 
     public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
     }
 
     public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
     }
 
     public int getTargetCommunity() {
@@ -179,11 +185,11 @@ public class Card {
     }
 
     public boolean canCounterAttack(){
-        return true;
+        return canCounterAttack;
     }
 
     public void setCanCounterAttack(boolean canCounterAttack){
-
+        this.canCounterAttack = canCounterAttack;
     }
 
     public void addBuff(Buff buff){
