@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":4,"HP":6,"TargetCommunity":7,"minionClass":"RANGED","SPActivationTime":"NULL","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":2,"id":0,"price":300,"name":"kamandarFars","specialPower":[],"selected":false}
+{"AP":4,"HP":6,"TargetCommunity":7,"minionClass":"RANGED","SPActivationTime":"NULL","row":0,"column":0,"MP":2,"id":0,"price":300,"name":"kamandarFars","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

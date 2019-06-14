@@ -14,7 +14,8 @@ import static java.lang.Math.abs;
 public class AI {
 
     private Controller controller = Controller.getInstance();
-    private Game game = Controller.getGame(); //= controller.getGame();
+    //private Game game = Controller.getGame(); //= controller.getGame();
+    private Game game = Game.getInstance();
     private Cell cell;
     private static final User ai = new User("AI", "0");
     private int counter;
@@ -35,6 +36,12 @@ public class AI {
     private Card attackTarget = null;
     private Card insertCard = null;
     private Cell insertTarget = null;
+
+
+
+    public void action(){
+
+    }
 
     public String getCommand() {
         game = Controller.getGame();

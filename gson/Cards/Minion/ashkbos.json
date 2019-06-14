@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":8,"HP":14,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEFEND","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":7,"id":0,"price":400,"name":"ashkbos","specialPower":[],"selected":false}
+{"AP":8,"HP":14,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEFEND","row":0,"column":0,"MP":7,"id":0,"price":400,"name":"ashkbos","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

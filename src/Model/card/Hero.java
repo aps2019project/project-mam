@@ -42,6 +42,7 @@ public class Hero extends Card {
         BASE_COOL_DOWN = cooldown;
         this.heroClass = heroClass;
         this.setDesc(desc);
+        setType("hero");
     }
 
     @Override

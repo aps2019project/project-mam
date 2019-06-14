@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":8,"HP":1,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":2,"id":0,"price":600,"name":"shirDarande","specialPower":[],"selected":false}
+{"AP":8,"HP":1,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","row":0,"column":0,"MP":2,"id":0,"price":600,"name":"shirDarande","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

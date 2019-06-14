@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":6,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":3,"id":0,"price":600,"name":"arzhangDiv","specialPower":[],"selected":false}
+{"AP":6,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","row":0,"column":0,"MP":3,"id":0,"price":600,"name":"arzhangDiv","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

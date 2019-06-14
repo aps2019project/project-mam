@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":6,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"NULL","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":4,"id":0,"price":200,"name":"asbSavarFars","specialPower":[],"selected":false}
+{"AP":6,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"NULL","row":0,"column":0,"MP":4,"id":0,"price":200,"name":"asbSavarFars","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

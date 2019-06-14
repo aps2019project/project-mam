@@ -15,7 +15,7 @@ public class Card {
     private String name;
     private String desc;
     private ArrayList<Buff> specialPower = new ArrayList<>();
-    private String type;
+    private String type = "";
     private String imageAddress;
 
     private boolean canMove = true;

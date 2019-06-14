@@ -97,6 +97,7 @@ public class MapController {
                 if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
                         || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
                     attack(rectangle.getId());
+                    updatePage();
                     isSelected = false;
                 } else {
                     removeThisId(String.valueOf(game.getCurrentCard().getId()));
@@ -127,6 +128,8 @@ public class MapController {
                     } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
                         rectangle.setId(null);
                         rectangle.setFill(Color.BLACK);
+                        pane.getChildren().remove(imageController.getViews2().get(Integer.parseInt(id)));
+                        imageController.getViews2().remove(Integer.parseInt(id));
                     }
                 }
             }

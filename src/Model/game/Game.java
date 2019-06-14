@@ -177,11 +177,11 @@ public class Game {
         return mana[getTurn() % 2];
     }
 
-    public int getFirstPlayerMana(){
+    public int getFirstPlayerMana() {
         return mana[1];
     }
 
-    public int getSecondPlayerMana(){
+    public int getSecondPlayerMana() {
         return mana[0];
     }
 
@@ -436,8 +436,9 @@ public class Game {
             map.getCells()[x][y].setCard(currentCard);
             map.getCells()[x][y].incrementOfFlag(map.getSecondPlayerCellCard().get(currentCard.getId()).getFlagCount());
             map.getSecondPlayerCellCard().get(currentCard.getId()).setFlagCount(0);
-            map.getSecondPlayerCellCard().get(currentCard.getId()).setRow(x);
-            map.getSecondPlayerCellCard().get(currentCard.getId()).setColumn(y);
+            /*map.getSecondPlayerCellCard().get(currentCard.getId()).setRow(x);
+            map.getSecondPlayerCellCard().get(currentCard.getId()).setColumn(y);*/
+            map.getSecondPlayerCellCard().replace(currentCard.getId(), map.getCells()[x][y]);
         }
 
         currentCard.setRow(x);
@@ -1054,8 +1055,11 @@ public class Game {
 
     public Card getHero(HashMap<Integer, Cell> cell) {
         for (java.util.Map.Entry<Integer, Cell> entry : cell.entrySet()) {
-            if (entry.getValue().getCard() instanceof Hero)
-                return entry.getValue().getCard();
+            /*if (entry.getValue().getCard() instanceof Hero)
+                return entry.getValue().getCard();*/
+            if (entry.getValue().getCard() != null)
+                if (entry.getValue().getCard().getCardType().equalsIgnoreCase("hero"))
+                    return entry.getValue().getCard();
         }
         return null;
     }

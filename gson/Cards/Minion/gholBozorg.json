@@ -1,1 +1,1 @@
-{"row":0,"column":0,"AP":8,"HP":30,"TargetCommunity":2,"minionClass":"HYBRID","SPActivationTime":"NULL","canMove":true,"canAttack":true,"canCounterAttack":true,"MP":9,"id":0,"price":600,"name":"gholBozorg","specialPower":[],"selected":false}
+{"AP":8,"HP":30,"TargetCommunity":2,"minionClass":"HYBRID","SPActivationTime":"NULL","row":0,"column":0,"MP":9,"id":0,"price":600,"name":"gholBozorg","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
