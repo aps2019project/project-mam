@@ -7,11 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
-import view.pages.CollectionMenuPage;
-import view.pages.Page;
-import view.pages.ShopMenuPage;
+import view.pages.*;
 import javafx.scene.layout.AnchorPane;
-import view.pages.MainMenuPage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -59,7 +56,7 @@ public class MainMenuController {
 
     @FXML
     public void onCustomClicked(){
-
+        Page.getPages().push(new CustomMenuPage());
     }
 
     @FXML

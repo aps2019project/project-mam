@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controller.CustomController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" prefWidth="589.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1343.0" minWidth="10.0" prefWidth="1331.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="712.0" maxWidth="490.0" prefHeight="712.0" prefWidth="490.0">
+               <children>
+                  <TextField maxWidth="100.0" prefHeight="31.0" prefWidth="404.0" promptText="card name" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Label" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="RadioButton" />
+                              <RadioButton mnemonicParsing="false" text="RadioButton" />
+                              <RadioButton mnemonicParsing="false" text="RadioButton" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <TextField layoutX="205.0" layoutY="301.0" maxWidth="100.0" prefHeight="31.0" prefWidth="404.0" promptText="cost" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="1080.0" prefWidth="1051.0" GridPane.columnIndex="1">
+         <children>
+            <VBox alignment="CENTER" maxHeight="601.0" prefHeight="601.0" prefWidth="313.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Label" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="RadioButton" />
+                              <RadioButton mnemonicParsing="false" text="RadioButton" />
+                              <RadioButton layoutX="10.0" layoutY="39.0" mnemonicParsing="false" text="RadioButton" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <Label text="Label" />
+                  <TextField />
+               </children>
+            </VBox>
+            <VBox layoutX="334.0" layoutY="250.0" maxHeight="601.0" prefHeight="601.0" prefWidth="313.0" />
+         </children>
+      </HBox>
+   </children>
+</GridPane>
