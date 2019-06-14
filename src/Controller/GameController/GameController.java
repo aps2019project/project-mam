@@ -240,41 +240,7 @@ public class GameController {
         Game.getInstance().endTurn();
     }
 
-    public void attack(String oppCardId) {
-        if (Game.getInstance().getCurrentCard().isCanAttack()) {
-            if (Game.getInstance().isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
-                if (Game.getInstance().isOppAvailableForAttack(Integer.parseInt(oppCardId), Game.getInstance().getCurrentCard().getId())) {
-                    Game.getInstance().attack(Integer.parseInt(oppCardId));
-                    label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
-                } else label.setText(ErrorType.UNAVAILABLE_OPP_ATTACK.getMessage());
-            } else label.setText(ErrorType.INVALID_CARD_ID.getMessage());
-        } else {
-            StringBuilder message = new StringBuilder();
-            message.append("card with ").append(Game.getInstance().getCurrentCard().getId()).append(" can't attack");
-            ErrorType.CARD_CAN_NOT_ATTACK.setMessage(message.toString());
-            label.setText(ErrorType.CARD_CAN_NOT_ATTACK.getMessage());
-        }
-    }
 
-    public void comboAttack(String oppCardId, ArrayList<String> myCardsId) {
-        int[] attackersId = new int[myCardsId.size()];
-        int counter = 0;
-        for (String cardId : myCardsId) {
-            attackersId[counter] = Integer.parseInt(cardId);
-            counter++;
-        }
-        if (Game.getInstance().isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
-            Game.getInstance().comboAttack(Integer.parseInt(oppCardId), attackersId);
-        } else label.setText(ErrorType.INVALID_CARD_ID.getMessage());
-    }
-
-    public void useSP(String x, String y) {
-        if (Game.getInstance().getCurrentCard() instanceof Minion && Game.getInstance().getCurrentCard().getSPActivationTime() == SPActivationTime.ON_SPAWN) {
-            if (Game.getInstance().getCurrentCard() instanceof Hero && Game.getInstance().getCurrentCard().getCooldown() == 0) {
-                Game.getInstance().useSP(Integer.parseInt(x), Integer.parseInt(y));
-            } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_USE_SP.getMessage());
-        } else label.setText(ErrorType.CARD_HAVE_NOT_SP.getMessage());
-    }
 
 
 }
