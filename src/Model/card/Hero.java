@@ -7,8 +7,7 @@ import Model.enums.SPActivationTime;
 import java.util.ArrayList;
 
 public class Hero extends Card {
-    private int row;
-    private int column;
+
     private int AP;
     private int HP;
     private int TargetCommunity;
@@ -83,13 +82,13 @@ public class Hero extends Card {
         return super.getSPActivationTime();
     }
 
-    public int getRow(){
+    /*public int getRow(){
         return row;
-    }
+    }*/
 
-    public int getColumn() {
+    /*public int getColumn() {
         return column;
-    }
+    }*/
 
     public boolean isCanMove() {
         return canMove;
@@ -115,13 +114,13 @@ public class Hero extends Card {
         this.canAttack = canAttack;
     }
 
-    public void setRow(int row) {
+   /* public void setRow(int row) {
         this.row = row;
     }
 
     public void setColumn(int column) {
         this.column = column;
-    }
+    }*/
 
     public void setCanCounterAttack(boolean canCounterAttack) {
         this.canCounterAttack = canCounterAttack;

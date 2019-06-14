@@ -7,6 +7,8 @@ import Model.enums.SPActivationTime;
 import java.util.ArrayList;
 
 public class Card {
+    private int row;
+    private int column;
     private int MP;
     private int id;
     private int price;
@@ -117,11 +119,11 @@ public class Card {
     }
 
     public int getRow(){
-        return -1;
+        return row;
     }
 
     public int getColumn() {
-        return -1;
+        return column;
     }
 
 
@@ -156,9 +158,11 @@ public class Card {
     }
 
     public void setRow(int row) {
+        this.row = row;
     }
 
     public void setColumn(int column) {
+        this.column = column;
     }
 
     public void incrementOfHp(int number){

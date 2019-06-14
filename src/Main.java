@@ -1,4 +1,5 @@
 import Model.gson.GsonReader;
+import Model.gson.GsonWriter;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,6 +15,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Duelyst");
         Page.setStage(primaryStage);
+
+        /*GsonWriter.writeCards();
+        GsonWriter.writeItems();*/
+
         GsonReader.readUser();
         GsonReader.initShop();
         Page.getPages().push(new SignIn());

@@ -62,7 +62,7 @@ public class MapController {
                 Rectangle rectangle = new Rectangle(x, y, xStep, yStep);
                 rectangle.setFill(Color.WHITE);
                 rectangle.setOpacity(0.2);
-                setOnRecClicked(rectangle, i, j);
+                setOnRecClicked(rectangle, j, i);
                 pane.getChildren().add(rectangle);
                 cells[i][j] = rectangle;
             }
@@ -75,11 +75,14 @@ public class MapController {
             else rectangle.setFill(Color.WHITE);*/
 
             if (isSelected){
-                moveCard(String.valueOf(x), String.valueOf(y));
+                moveCard(x, y);
+                isSelected = false;
             }
             else if (rectangle.getId() != null) {
-                selectCard(rectangle.getId());
-                isSelected = true;
+                if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(rectangle.getId()))) {
+                    selectCard(rectangle.getId());
+                    isSelected = true;
+                }
             }
         });
     }
@@ -91,10 +94,10 @@ public class MapController {
         } else label.setText("please select your card");
     }
 
-    public void moveCard(String x, String y) {
+    public void moveCard(int x, int y) {
         if (Game.getInstance().getCurrentCard().isCanMove()) {
-            if (Game.getInstance().cardCanMove(Integer.parseInt(x), Integer.parseInt(y))) {
-                Game.getInstance().moveCurrentCardTo(Integer.parseInt(x), Integer.parseInt(y));
+            if (Game.getInstance().cardCanMove(x, y)) {
+                Game.getInstance().moveCurrentCardTo(x, y);
                 StringBuilder message = new StringBuilder();
                 message.append(Game.getInstance().getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);

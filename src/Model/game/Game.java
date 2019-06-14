@@ -389,7 +389,7 @@ public class Game {
     }
 
     public void selectCard(int cardId) {
-        if (getTurn() % 2 == FIRST_PLAYER_TURN)
+        if (getTurn() % 2 == 1)
             currentCard = map.getFirstPlayerCellCard().get(cardId).getCard();
         else
             currentCard = map.getSecondPlayerCellCard().get(cardId).getCard();

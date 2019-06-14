@@ -1,1 +1,1 @@
-{"MP":5,"id":0,"price":900,"name":"poisonLake","specialPower":[{"type":"CELL_EFFECT_POISON","remainTime":1,"buffPower":0,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"THREE_IN_THREE"}],"selected":false}
+{"row":0,"column":0,"MP":5,"id":0,"price":900,"name":"poisonLake","specialPower":[{"type":"CELL_EFFECT_POISON","remainTime":1,"buffPower":0,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"THREE_IN_THREE"}],"type":"spell","selected":false}

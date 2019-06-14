@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class Minion extends Card {
 
-    private int row;
-    private int column;
+
     private int AP;
     private int HP;
     private int TargetCommunity;
@@ -46,13 +45,13 @@ public class Minion extends Card {
         return "minion";
     }
 
-    public int getRow() {
+    /*public int getRow() {
         return row;
     }
 
     public int getColumn() {
         return column;
-    }
+    }*/
 
     public boolean isCanMove() {
         return canMove;
@@ -66,13 +65,13 @@ public class Minion extends Card {
         return canCounterAttack;
     }
 
-    public void setRow(int row) {
+    /*public void setRow(int row) {
         this.row = row;
     }
 
     public void setColumn(int column) {
         this.column = column;
-    }
+    }*/
 
     public void setCanMove(boolean canMove) {
         this.canMove = canMove;
