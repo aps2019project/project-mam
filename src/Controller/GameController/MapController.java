@@ -47,7 +47,7 @@ public class MapController {
         this.cells = cells;
         this.pane = pane;
         initCells();
-        imageController.initItemImage();
+       // imageController.initItemImage();
         updatePage();
     }
 
@@ -64,15 +64,15 @@ public class MapController {
         final int ROW = 5;
         final int COLUMN = 9;
 //-----------------------jimi-------
-        final double startX = 650;
+        final double startX = 450;
+        final double startY = 190;
+        final double xStep = (500 - SPACE * COLUMN) / COLUMN;
+        final double yStep = (300 - SPACE * ROW) / ROW;
+//------------------feri------------
+        /*final double startX = 650;
         final double startY = 320;
         final double xStep = (808 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (410 - SPACE * ROW) / ROW;
-//------------------feri------------
-        /*final double startX = pane.getLayoutX();
-        final double startY = pane.getLayoutY();
-        final double xStep = (pane.getPrefWidth() - space * column) / column;
-        final double yStep = (pane.getPrefHeight() - space * row) / row;*/
+        final double yStep = (410 - SPACE * ROW) / ROW;*/
 
         for (int i = 0; i < ROW; i++)
             for (int j = 0; j < COLUMN; j++) {
