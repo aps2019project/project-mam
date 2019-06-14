@@ -87,8 +87,8 @@ public class BattleMenuPage extends Page {
         BattleMenuPage.mission = mission;
     }
 
-    public void setSecondUser(User secondUser) {
-        this.secondUser = secondUser;
+    public static void setSecondUser(User secondUser) {
+        BattleMenuPage.secondUser = secondUser;
     }
 
     public static void setFlags(int flags) {

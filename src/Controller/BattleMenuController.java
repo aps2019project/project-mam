@@ -23,6 +23,7 @@ public class BattleMenuController {
 
     public void setSingle() {
         BattleMenuPage.setNumOfPlayers("1");
+        BattleMenuPage.setSecondUser(AI.getAI());
         Page.getPages().push(new GameKindMenuPage());
     }
 

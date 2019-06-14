@@ -24,7 +24,7 @@ public class SelectUserController {
     public void setSelect() {
         if (!User.isUserNameNew(user.getText())) {
             if (isMainDeckValid(user.getText())) {
-                BattleMenuPage.getInstance().setSecondUser(User.getUser(user.getText()));
+                BattleMenuPage.setSecondUser(User.getUser(user.getText()));
                 Page.getPages().push(new GameMoodMenuPage());
             } else label.setText(ErrorType.INVALID_DECK_2.getMessage());
         }
