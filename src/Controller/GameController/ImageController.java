@@ -34,11 +34,11 @@ public class ImageController {
         for (Card card : Game.getInstance().getFirstPlayerDeck().getCards()) {
             card.setImageAddress(path.get(counter++));
         }
-        Game.getInstance().getFirstPlayerDeck().getHero().setImageAddress("resources/unit_gifs/" + path.get(counter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setImageAddress(path.get(counter++));
         for (Card card : Game.getInstance().getSecondPlayerDeck().getCards()) {
             card.setImageAddress(path.get(counter++));
         }
-        Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress("resources/unit_gifs/" + path.get(counter));
+        Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress(path.get(counter));
     }
 
     public void addCard(int row, int column, Card card) {
