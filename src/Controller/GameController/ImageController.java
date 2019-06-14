@@ -94,7 +94,7 @@ public class ImageController {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
             view.setY(y);
             view.setX(x);
-            //view.resize(size, size);
+            view.resize(size, size);
             view.setFitWidth(size);
             view.setFitHeight(size);
             MapController.getInstance().getPane().getChildren().add(view);

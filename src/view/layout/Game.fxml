@@ -74,9 +74,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fx:id="endTurn" fitHeight="79.0" fitWidth="283.0" layoutX="1511.0" layoutY="870.0" onMouseClicked="#setEndTurn" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
       <Circle fx:id="item2" fill="#1f93ff00" layoutX="1677.0" layoutY="363.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="item1" fill="#1f93ff00" layoutX="247.0" layoutY="363.0" radius="78.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Circle fx:id="nextCard" fill="#1f93ff00" layoutX="238.0" layoutY="910.0" radius="117.0" stroke="TRANSPARENT" strokeType="INSIDE" />
@@ -158,5 +155,8 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="endTurn" fitHeight="79.0" fitWidth="283.0" layoutX="1511.0" layoutY="870.0" onMouseClicked="#setEndTurn" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
