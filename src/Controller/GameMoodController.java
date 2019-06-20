@@ -26,12 +26,14 @@ public class GameMoodController {
     @FXML
     public void setMood2() {
         BattleMenuPage.setGameMood("2");
+        BattleMenuPage.setFlags(1);
         BattleMenuPage.createGame();
     }
 
     @FXML
     public void setMood3() {
         BattleMenuPage.setGameMood("3");
+        BattleMenuPage.setFlags(Integer.parseInt(numOfFlags.getText()));
         BattleMenuPage.createGame();
     }
 

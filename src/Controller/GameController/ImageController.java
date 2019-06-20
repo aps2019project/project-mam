@@ -26,6 +26,7 @@ public class ImageController {
     // private ArrayList<ImageView> views = new ArrayList<>();
     private HashMap<Integer, ImageView> views1 = new HashMap<>();
     private HashMap<Integer, ImageView> views2 = new HashMap<>();
+    private HashMap<Integer, ImageView> viewsHand = new HashMap<>();
 
     public HashMap<Integer, ImageView> getViews1() {
         return views1;
@@ -33,6 +34,10 @@ public class ImageController {
 
     public HashMap<Integer, ImageView> getViews2() {
         return views2;
+    }
+
+    public HashMap<Integer, ImageView> getViewsHand() {
+        return viewsHand;
     }
 
     public void initCardImage() {
@@ -105,7 +110,9 @@ public class ImageController {
             view.setFitWidth(size);
             view.setFitHeight(size);
             MapController.getInstance().getPane().getChildren().add(view);
-            views1.put(card.getId(), view);
+            if (playerTurn == 1)
+                viewsHand.put(card.getId(), view);
+            else views1.put(card.getId(), view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

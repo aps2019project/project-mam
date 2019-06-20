@@ -7,12 +7,11 @@ import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Cell;
 import Model.game.Game;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class MapController {
     private Rectangle[][] cells;
     private Pane pane;
     private Label label;
+    private ArrayList<Circle> handCards;
 
     private boolean isSelected = false;
 
@@ -42,10 +42,11 @@ public class MapController {
         this.controller = controller;
     }
 
-    public void initialize(Rectangle[][] cells, Pane pane, Label label) {
+    public void initialize(Rectangle[][] cells, Pane pane, Label label, ArrayList<Circle> handCards) {
         this.label = label;
         this.cells = cells;
         this.pane = pane;
+        this.handCards = handCards;
         initCells();
         imageController.initItemImage();
         updatePlayerName();
@@ -53,6 +54,7 @@ public class MapController {
         updateHand();
         updateItems();
         updateMap();
+        updateNextCard();
     }
 
     public Rectangle[][] getCells() {
@@ -62,6 +64,9 @@ public class MapController {
     public Pane getPane() {
         return pane;
     }
+
+    private String handCardId = "-1";
+    private boolean handCardSelected = false;
 
     public void initCells() {
         final double SPACE = 5;
@@ -97,33 +102,54 @@ public class MapController {
                 rectangle.setFill(Color.BEIGE);
             else rectangle.setFill(Color.WHITE);*/
 
-            if (isSelected) {
+            if (handCardSelected) {
+                insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), String.valueOf(x), String.valueOf(y));
+                updateMap();
+                updateHand();
+                //setOnHandClick();
+                handCardSelected = false;
+            } else if (isSelected) {
                 if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
                         || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
                     attack(rectangle.getId());
                     updateMap();
                     isSelected = false;
                 } else {
-                    //removeThisId(String.valueOf(game.getCurrentCard().getId()));
+                    //removeIdFromMap(String.valueOf(game.getCurrentCard().getId()));
                     moveCard(x, y);
                     updateMap();
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
-                if (game.getTurn() % 2 == 1 && rectangle.getFill() == Color.RED){
+                if (game.getTurn() % 2 == 1 && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
                     isSelected = true;
-                }
-                else if (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.BLUE){
+                } else if (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
                     isSelected = true;
-                }
-                else label.setText("please select your card");
+                } else label.setText("please select your card");
             }
         });
     }
 
-    private void removeThisId(String id, int turn) {
+    public void setOnHandClick() {
+        for (Map.Entry<Integer, ImageView> entry : imageController.getViewsHand().entrySet()) {
+            entry.getValue().setOnMouseClicked(event -> {
+                handCardId = String.valueOf(entry.getKey());
+                handCardSelected = true;
+                label.setText(handCardId + " from hand selected");
+            });
+        }
+    }
+
+    private void removeIdFromHand(int id){
+        //imageController.getViewsHand().get(id);
+        pane.getChildren().remove(imageController.getViewsHand().get(id));
+        imageController.getViewsHand().remove(id);
+        controller.handCardsMana.get(4).setText("-");
+    }
+
+    private void removeIdFromMap(String id, int turn) {
         for (Rectangle[] rectangles : cells) {
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.getId() != null) {
@@ -131,7 +157,6 @@ public class MapController {
                         if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
                             rectangle.setId(null);
                             rectangle.setFill(Color.BLACK);
-                            imageController.getViews1().get(Integer.parseInt(id)).setImage(null);
                             pane.getChildren().remove(imageController.getViews1().get(Integer.parseInt(id)));
                             imageController.getViews1().remove(Integer.parseInt(id));
                         }
@@ -146,45 +171,49 @@ public class MapController {
         }
     }
 
-    public void updatePlayerName(){
+    public void updatePlayerName() {
         controller.firstPlayerName.setText(game.getFirstUser().getName());
         controller.secondPlayerName.setText(game.getSecondUser().getName());
     }
 
-    public void updatePlayersMana(){
+    public void updatePlayersMana() {
         controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
         controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
     }
 
-    public void updateItems(){
+    public void updateItems() {
         controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
         controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
     }
 
-    public void updateHand(){
+    public void updateHand() {
         int counter = 0;
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
+            removeIdFromHand(entry.getValue().getId());
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
             controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
             imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150, 1);
             counter++;
         }
+        setOnHandClick();
+    }
 
+    public void updateNextCard(){
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
-        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 1);
+        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
     }
 
     public void updateMap() {
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            removeThisId(String.valueOf(entry.getValue().getCard().getId()), 1);
+            removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 1);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            removeThisId(String.valueOf(entry.getValue().getCard().getId()), 2);
+            removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 2);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
@@ -246,5 +275,21 @@ public class MapController {
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_USE_SP.getMessage());
         } else label.setText(ErrorType.CARD_HAVE_NOT_SP.getMessage());
     }
+
+    public void insertCard(String cardName, String x, String y) {
+        if (Game.getInstance().isCardInPlayerHand(cardName)) {
+            if (Game.getInstance().haveEnoughMana(cardName)) {
+                if (Game.getInstance().isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
+                    Game.getInstance().insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
+                    StringBuilder message = new StringBuilder();
+                    message.append(cardName).append(" with ").append(Game.getInstance().getCurrentCard().getId());
+                    message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
+                    ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
+                    label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
+                } else label.setText(ErrorType.INVALID_TARGET.getMessage());
+            } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
+        } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
+    }
+
 
 }

@@ -108,7 +108,7 @@ public class GameController {
 
     public void initializeGame() {
         mapCtrl.setController(this);
-        mapCtrl.initialize(cells, pane, label);
+        mapCtrl.initialize(cells, pane, label, handCards);
         /*imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
         imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());*/
     }
@@ -220,20 +220,7 @@ public class GameController {
 
 
 
-    public void insertCard(String cardName, String x, String y) {
-        if (Game.getInstance().isCardInPlayerHand(cardName)) {
-            if (Game.getInstance().haveEnoughMana(cardName)) {
-                if (Game.getInstance().isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
-                    Game.getInstance().insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
-                    StringBuilder message = new StringBuilder();
-                    message.append(cardName).append(" with ").append(Game.getInstance().getCurrentCard().getId());
-                    message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
-                    ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
-                    label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
-                } else label.setText(ErrorType.INVALID_TARGET.getMessage());
-            } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
-        } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
-    }
+
 
     public void endTurn() {
         label.setText("---<End turn>---");
