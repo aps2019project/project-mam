@@ -106,10 +106,19 @@ public class MapController {
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
-                if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(rectangle.getId()))) {
+                if (game.getTurn() % 2 == 1 && rectangle.getFill() == Color.RED){
                     selectCard(rectangle.getId());
                     isSelected = true;
-                } else label.setText("please select your card");
+                }
+                else if (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.BLUE){
+                    selectCard(rectangle.getId());
+                    isSelected = true;
+                }
+                /*if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(rectangle.getId()))) {
+                    selectCard(rectangle.getId());
+                    isSelected = true;
+                } */
+                else label.setText("please select your card");
             }
         });
     }
