@@ -105,9 +105,7 @@ public class ImageController {
             view.setFitWidth(size);
             view.setFitHeight(size);
             MapController.getInstance().getPane().getChildren().add(view);
-            if (playerTurn == 1)
-                views1.put(card.getId(), view);
-            else views2.put(card.getId(), view);
+            views1.put(card.getId(), view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

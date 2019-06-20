@@ -237,6 +237,7 @@ public class GameController {
 
     public void endTurn() {
         label.setText("---<End turn>---");
+        mapCtrl.updatePlayersMana();
         Game.getInstance().endTurn();
     }
 

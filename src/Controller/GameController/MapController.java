@@ -48,7 +48,11 @@ public class MapController {
         this.pane = pane;
         initCells();
         imageController.initItemImage();
-        updatePage();
+        updatePlayerName();
+        updatePlayersMana();
+        updateHand();
+        updateItems();
+        updateMap();
     }
 
     public Rectangle[][] getCells() {
@@ -97,12 +101,12 @@ public class MapController {
                 if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
                         || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
                     attack(rectangle.getId());
-                    updatePage();
+                    updateMap();
                     isSelected = false;
                 } else {
-                    removeThisId(String.valueOf(game.getCurrentCard().getId()));
+                    //removeThisId(String.valueOf(game.getCurrentCard().getId()));
                     moveCard(x, y);
-                    updatePage();
+                    updateMap();
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
@@ -114,23 +118,20 @@ public class MapController {
                     selectCard(rectangle.getId());
                     isSelected = true;
                 }
-                /*if (Game.getInstance().isCardInPlayerCellCard(Integer.parseInt(rectangle.getId()))) {
-                    selectCard(rectangle.getId());
-                    isSelected = true;
-                } */
                 else label.setText("please select your card");
             }
         });
     }
 
-    private void removeThisId(String id) {
+    private void removeThisId(String id, int turn) {
         for (Rectangle[] rectangles : cells) {
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.getId() != null) {
-                    if (game.getTurn() % 2 == 1) {
+                    if (turn == 1) {
                         if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
                             rectangle.setId(null);
                             rectangle.setFill(Color.BLACK);
+                            imageController.getViews1().get(Integer.parseInt(id)).setImage(null);
                             pane.getChildren().remove(imageController.getViews1().get(Integer.parseInt(id)));
                             imageController.getViews1().remove(Integer.parseInt(id));
                         }
@@ -145,13 +146,22 @@ public class MapController {
         }
     }
 
-    public void updatePage() {
+    public void updatePlayerName(){
         controller.firstPlayerName.setText(game.getFirstUser().getName());
         controller.secondPlayerName.setText(game.getSecondUser().getName());
+    }
 
+    public void updatePlayersMana(){
         controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
         controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
+    }
 
+    public void updateItems(){
+        controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
+        controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
+    }
+
+    public void updateHand(){
         int counter = 0;
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
@@ -162,19 +172,19 @@ public class MapController {
 
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
         imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 1);
+    }
 
-
-        controller.item1.setId(String.valueOf(game.getFirstPlayerDeck().getItem().getId()));
-        controller.item2.setId(String.valueOf(game.getSecondPlayerDeck().getItem().getId()));
-
+    public void updateMap() {
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
+            removeThisId(String.valueOf(entry.getValue().getCard().getId()), 1);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
+            removeThisId(String.valueOf(entry.getValue().getCard().getId()), 2);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
