@@ -223,12 +223,13 @@ public class GameController {
 
 
     public void endTurn() {
+        mapCtrl.removeNextCard();
+        Game.getInstance().endTurn();
         label.setText("---<End turn>---");
+        mapCtrl.updateHand();
         mapCtrl.updatePlayersMana();
         mapCtrl.updateNextCard();
-        mapCtrl.updateHand();
         mapCtrl.updateMap();
-        Game.getInstance().endTurn();
     }
 
 

@@ -144,7 +144,6 @@ public class MapController {
     }
 
     private void removeIdFromHand(int id){
-        //imageController.getViewsHand().get(id);
         pane.getChildren().remove(imageController.getViewsHand().get(id));
         imageController.getViewsHand().remove(id);
         controller.handCardsMana.get(4).setText("-");
@@ -170,6 +169,11 @@ public class MapController {
                 }
             }
         }
+    }
+
+    public void removeNextCard(){
+        pane.getChildren().remove(imageController.getViews1().get(game.getNextFirstPlayerCard().getId()));
+        imageController.getViews1().remove(game.getNextFirstPlayerCard().getId());
     }
 
     public void updatePlayerName() {
