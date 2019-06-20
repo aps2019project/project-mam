@@ -104,6 +104,7 @@ public class MapController {
 
             if (handCardSelected) {
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), String.valueOf(x), String.valueOf(y));
+                removeIdFromHand(Integer.parseInt(handCardId));
                 updateMap();
                 updateHand();
                 //setOnHandClick();
