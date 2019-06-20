@@ -814,8 +814,8 @@ public class Game {
                 }
         }
         Buff.refreshBuffs();
-        checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
-        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);
+        /*checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
+        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);*/
         if (canCounterAttack(currentCard.getId(), cardId))
             counterAttack(cardId, currentCard.getId());
         checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
@@ -842,6 +842,8 @@ public class Game {
             if (attacker.getCardClass() == ImpactType.RANGED && distance <= attacker.getTargetCommunity())
                 return true;
             if (attacker.getCardClass() == ImpactType.HYBRID)
+                return true;
+            if (attacker.getCardClass() == ImpactType._NULL)
                 return true;
         } catch (NullPointerException e) {
             return false;
@@ -958,7 +960,7 @@ public class Game {
                     havingFlagCount = 0;
                 graveYard.add(entry.getValue().getCard());
                 map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
-                cells.remove(entry);
+                cells.remove(entry.getKey());
             }
         }
     }
