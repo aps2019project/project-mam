@@ -158,6 +158,21 @@ public class MapController {
                 handCardId = String.valueOf(entry.getKey());
                 handCardSelected = true;
                 label.setText(handCardId + " from hand selected");
+                text = label.getText();
+            });
+        }
+    }
+
+    private void setOnHandEnteredAndExited() {
+        for (Map.Entry<Integer, ImageView> entry : imageController.getViewsHand().entrySet()) {
+            entry.getValue().setOnMouseEntered(event -> {
+                text = label.getText();
+                Card card = game.getFirstPlayerHand().get(entry.getKey());
+                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+            });
+
+            entry.getValue().setOnMouseExited(event -> {
+                label.setText(text);
             });
         }
     }
@@ -220,6 +235,7 @@ public class MapController {
             counter++;
         }
         setOnHandClick();
+        setOnHandEnteredAndExited();
     }
 
     public void updateNextCard() {
