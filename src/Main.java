@@ -1,6 +1,7 @@
 import Model.gson.GsonReader;
 import Model.gson.GsonWriter;
 import Model.shop.Shop;
+import Model.user.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

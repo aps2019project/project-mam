@@ -1,6 +1,8 @@
 package view.pages;
 
 import Controller.MainMenuController;
+import Model.gson.GsonReader;
+import Model.user.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,6 +19,11 @@ public class MainMenuPage extends Page {
     private static Pane root = new Pane();
 
     public MainMenuPage(){
+        try {
+            User.user.setMainDeck(GsonReader.getDeck("custom"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         start();
     }
 

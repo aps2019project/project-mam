@@ -262,7 +262,7 @@ public class Shop {
                 .addCard(minions.get(11)).addCard(minions.get(20)).addCard(minions.get(14)).addCard(minions.get(1))
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(9)).addCard(minions.get(2))
                 .addCard(minions.get(17)).addItem(usableItems.get(5));
-        deck.setName("custom_1");
+        deck.setName("custom");
         return  deck;
     }
 
