@@ -1,5 +1,6 @@
 import Model.gson.GsonReader;
 import Model.gson.GsonWriter;
+import Model.shop.Shop;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,7 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Duelyst");
         Page.setStage(primaryStage);
-
         /*GsonWriter.writeCards();
         GsonWriter.writeItems();*/
 

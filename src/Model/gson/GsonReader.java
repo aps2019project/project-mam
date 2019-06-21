@@ -52,9 +52,9 @@ public class GsonReader {
             Shop.getCards().add(gson.fromJson(reader, Spell.class));
         }
         readItems();
-        /*readDeck("mission_1");
+        readDeck("mission_1");
         readDeck("mission_2");
-        readDeck("mission_3");*/
+        readDeck("mission_3");
     }
 
     public static void readDeck(String name) throws FileNotFoundException {

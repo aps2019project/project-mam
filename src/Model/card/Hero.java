@@ -25,7 +25,7 @@ public class Hero extends Card {
         TargetCommunity = targetCommunity;
         this.cooldown = cooldown;
         this.heroClass = heroClass;
-        setType("hero");
+        type = "hero";
     }
 
     public int getBASE_COOL_DOWN() {

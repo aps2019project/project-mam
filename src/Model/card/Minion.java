@@ -24,7 +24,7 @@ public class Minion extends Card {
         TargetCommunity = targetCommunity;
         this.minionClass = minionClass;
         this.SPActivationTime = SPActivationTime;
-        setType("minion");
+        type = "minion";
     }
 
     public Minion(String name, int price, int MP, int HP, int AP, int targetCommunity, ImpactType minionClass,
