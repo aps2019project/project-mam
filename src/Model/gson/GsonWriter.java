@@ -53,7 +53,7 @@ public class GsonWriter {
 
     public static void writeDeck(Deck deck) throws IOException {
         FileWriter writer = new FileWriter("gson/decks/" + deck.getName() + ".json");
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
         writer.write(gson.toJson(deck));
         writer.flush();
         writer.close();

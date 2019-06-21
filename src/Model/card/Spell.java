@@ -8,18 +8,19 @@ public class Spell extends Card {
 
     public Spell(String name, int price, int MP, String desc) {
         super(name, price, MP, desc);
+        type = "spell";
     }
 
     public Spell(){}
 
     public Spell(String name, int price, int MP, ArrayList<Buff> buffs) {
         super(name, MP, price);
-        setType("spell");
+        type = "spell";
     }
 
     public Spell(String name, int price,int MP) {
         super(name, MP, price);
-        setType("spell");
+        type = "spell";
     }
 
     @Override
