@@ -116,11 +116,12 @@ public class MapController {
 
     private void setOnCard1EnteredAndExited() {
         for (Map.Entry<Integer, ImageView> entry : imageController.getViews1().entrySet()) {
-            entry.getValue().setOnMouseEntered(event -> {
-                text = label.getText();
-                Card card = game.getMap().getFirstPlayerCellCard().get(entry.getKey()).getCard();
-                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
-            });
+            if (game.getMap().getFirstPlayerCellCard().containsKey(entry.getKey()))
+                entry.getValue().setOnMouseEntered(event -> {
+                    text = label.getText();
+                    Card card = game.getMap().getFirstPlayerCellCard().get(entry.getKey()).getCard();
+                    label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+                });
 
             entry.getValue().setOnMouseExited(event -> {
                 label.setText(text);
@@ -130,10 +131,6 @@ public class MapController {
 
     private void setOnRecClicked(Rectangle rectangle, int x, int y) {
         rectangle.setOnMouseClicked(event -> {
-            /*if (rectangle.getFill() == Color.WHITE)
-                rectangle.setFill(Color.BEIGE);
-            else rectangle.setFill(Color.WHITE);*/
-
             if (handCardSelected) {
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), String.valueOf(x), String.valueOf(y));
                 removeIdFromHand(Integer.parseInt(handCardId));
@@ -165,7 +162,7 @@ public class MapController {
         });
     }
 
-    public void setOnHandClick() {
+    private void setOnHandClick() {
         for (Map.Entry<Integer, ImageView> entry : imageController.getViewsHand().entrySet()) {
             entry.getValue().setOnMouseClicked(event -> {
                 handCardId = String.valueOf(entry.getKey());
@@ -190,7 +187,7 @@ public class MapController {
         }
     }
 
-    private void setOnNextEnteredAndExited(){
+    private void setOnNextEnteredAndExited() {
         Card card = game.getNextFirstPlayerCard();
         imageController.getViews1().get(card.getId()).setOnMouseEntered(event -> {
             text = label.getText();
