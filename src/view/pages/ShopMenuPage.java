@@ -27,6 +27,9 @@ public class ShopMenuPage extends Page {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Shop.fxml"));
         root = fxmlLoader.load();
         controller = fxmlLoader.getController();
+        controller.CSearch_btn.setStyle("-jfx-button-type: FLAT;" +
+                "-fx-background-color: #484848;" +
+                "-fx-text-fill: white;");
         initializeImage();
         Scene scene = new Scene(root);
         stage.setScene(scene);

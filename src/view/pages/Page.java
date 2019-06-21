@@ -1,8 +1,10 @@
 package view.pages;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -54,6 +56,10 @@ public abstract class Page {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void setBackGround(Pane root, Color color){
+        root.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     protected void setBackGround(Label label, String address){
