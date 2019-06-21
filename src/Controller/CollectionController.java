@@ -197,6 +197,10 @@ public class CollectionController {
         } else add_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM_IN_COLLECTION.getMessage());
     }
 
+    public void removeFromDeck(String cardId, String deckName){
+
+    }
+
     public void selectMainDeck(String deckName) {
         if (User.user.getCollection().checkIsExistDeck(deckName)) {
             User.user.getCollection().setMainDeck(deckName);

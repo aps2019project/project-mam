@@ -23,7 +23,6 @@ public class ImageController {
         return instance;
     }
 
-    // private ArrayList<ImageView> views = new ArrayList<>();
     private HashMap<Integer, ImageView> views1 = new HashMap<>();
     private HashMap<Integer, ImageView> views2 = new HashMap<>();
     private HashMap<Integer, ImageView> viewsHand = new HashMap<>();
@@ -69,8 +68,6 @@ public class ImageController {
 
             addItem(path, random, 1615);
 
-            //Game.getInstance().getFirstPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
-            //Game.getInstance().getSecondPlayerDeck().getItem().setImageAddress(path.get(random.nextInt(path.size() - 1)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

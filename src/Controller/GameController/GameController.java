@@ -122,17 +122,6 @@ public class GameController {
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init(){
-        /*cells.add(cell00);
-        cell00.setAccessibleText("00");
-        cells.add(cell10);
-        cells.add(cell20);
-        cells.add(cell30);
-        cells.add(cell40);
-        cells.add(cell50);
-        cells.add(cell60);
-        cells.add(cell70);
-        cells.add(cell80);*/
-
         handCards.add(handCard1);
         handCards.add(handCard2);
         handCards.add(handCard3);
@@ -144,7 +133,6 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
-
     }
 
 
