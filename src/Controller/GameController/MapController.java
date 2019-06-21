@@ -94,25 +94,38 @@ public class MapController {
                 rectangle.setFill(Color.BLACK);
                 rectangle.setOpacity(0.2);
                 setOnRecClicked(rectangle, i, j);
-                setOnRecEnteredAndExited(rectangle);
                 pane.getChildren().add(rectangle);
                 cells[i][j] = rectangle;
             }
     }
 
-    private void setOnRecEnteredAndExited(Rectangle rectangle) {
-        rectangle.setOnMouseEntered(event -> {
-            if (rectangle.getId() != null) {
+    private void setOnCard2EnteredAndExited() {
+        for (Map.Entry<Integer, ImageView> entry : imageController.getViews2().entrySet()) {
+            entry.getValue().setOnMouseEntered(event -> {
                 text = label.getText();
-                Card card = game.getMap().getFirstPlayerCellCard().get(Integer.parseInt(rectangle.getId())).getCard();
+                Card card = game.getMap().getSecondPlayerCellCard().get(entry.getKey()).getCard();
                 label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
-            }
-        });
+            });
 
-        rectangle.setOnMouseExited(event -> {
-            if (rectangle.getId() != null)
+            entry.getValue().setOnMouseExited(event -> {
                 label.setText(text);
-        });
+            });
+        }
+    }
+
+
+    private void setOnCard1EnteredAndExited() {
+        for (Map.Entry<Integer, ImageView> entry : imageController.getViews1().entrySet()) {
+            entry.getValue().setOnMouseEntered(event -> {
+                text = label.getText();
+                Card card = game.getMap().getFirstPlayerCellCard().get(entry.getKey()).getCard();
+                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+            });
+
+            entry.getValue().setOnMouseExited(event -> {
+                label.setText(text);
+            });
+        }
     }
 
     private void setOnRecClicked(Rectangle rectangle, int x, int y) {
@@ -175,6 +188,18 @@ public class MapController {
                 label.setText(text);
             });
         }
+    }
+
+    private void setOnNextEnteredAndExited(){
+        Card card = game.getNextFirstPlayerCard();
+        imageController.getViews1().get(card.getId()).setOnMouseEntered(event -> {
+            text = label.getText();
+            label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+        });
+
+        imageController.getViews1().get(card.getId()).setOnMouseExited(event -> {
+            label.setText(text);
+        });
     }
 
     private void removeIdFromHand(int id) {
@@ -241,6 +266,7 @@ public class MapController {
     public void updateNextCard() {
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
         imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
+        setOnNextEnteredAndExited();
     }
 
     public void updateMap() {
@@ -251,6 +277,7 @@ public class MapController {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
+        setOnCard1EnteredAndExited();
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
             removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 2);
@@ -258,6 +285,8 @@ public class MapController {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
         }
+
+        setOnCard2EnteredAndExited();
 
     }
 
