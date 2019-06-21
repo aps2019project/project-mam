@@ -702,6 +702,8 @@ public class Game {
                 mana[getTurn() % 2] -= entry.getValue().getMP();
                 if (!(entry.getValue() instanceof Spell)) {
                     insertMinionsOrHero(entry.getValue(), x, y);
+                    entry.getValue().setCanMove(false);
+                    entry.getValue().setCanAttack(false);
                 }
                 if (entry.getValue().getSPActivationTime() == SPActivationTime.ON_INSERT) {
                     for (Buff buff : entry.getValue().getSpecialPower()) {                //spell

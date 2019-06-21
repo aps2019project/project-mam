@@ -36,6 +36,7 @@ public class MapController {
     private Label label;
     private ArrayList<Circle> handCards;
 
+
     private boolean isSelected = false;
 
     public void setController(GameController controller) {
@@ -56,6 +57,8 @@ public class MapController {
         updateMap();
         updateNextCard();
     }
+
+    private String text;//= "\"Game Started\"";
 
     public Rectangle[][] getCells() {
         return cells;
@@ -91,9 +94,25 @@ public class MapController {
                 rectangle.setFill(Color.BLACK);
                 rectangle.setOpacity(0.2);
                 setOnRecClicked(rectangle, i, j);
+                setOnRecEnteredAndExited(rectangle);
                 pane.getChildren().add(rectangle);
                 cells[i][j] = rectangle;
             }
+    }
+
+    private void setOnRecEnteredAndExited(Rectangle rectangle) {
+        rectangle.setOnMouseEntered(event -> {
+            if (rectangle.getId() != null) {
+                text = label.getText();
+                Card card = game.getMap().getFirstPlayerCellCard().get(Integer.parseInt(rectangle.getId())).getCard();
+                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+            }
+        });
+
+        rectangle.setOnMouseExited(event -> {
+            if (rectangle.getId() != null)
+                label.setText(text);
+        });
     }
 
     private void setOnRecClicked(Rectangle rectangle, int x, int y) {
@@ -116,7 +135,6 @@ public class MapController {
                     updateMap();
                     isSelected = false;
                 } else {
-                    //removeIdFromMap(String.valueOf(game.getCurrentCard().getId()));
                     moveCard(x, y);
                     updateMap();
                     isSelected = false;
@@ -130,6 +148,7 @@ public class MapController {
                     isSelected = true;
                 } else label.setText("please select your card");
             }
+            text = label.getText();
         });
     }
 
@@ -143,7 +162,7 @@ public class MapController {
         }
     }
 
-    private void removeIdFromHand(int id){
+    private void removeIdFromHand(int id) {
         pane.getChildren().remove(imageController.getViewsHand().get(id));
         imageController.getViewsHand().remove(id);
         controller.handCardsMana.get(4).setText("-");
@@ -171,7 +190,7 @@ public class MapController {
         }
     }
 
-    public void removeNextCard(){
+    public void removeNextCard() {
         pane.getChildren().remove(imageController.getViews1().get(game.getNextFirstPlayerCard().getId()));
         imageController.getViews1().remove(game.getNextFirstPlayerCard().getId());
     }
@@ -203,7 +222,7 @@ public class MapController {
         setOnHandClick();
     }
 
-    public void updateNextCard(){
+    public void updateNextCard() {
         controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
         imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
     }

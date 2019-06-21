@@ -147,6 +147,7 @@ public class GameController {
 
     }
 
+
     public void setGraveyard() {
         this.graveyard = graveyard;
     }
@@ -170,26 +171,6 @@ public class GameController {
 
     public void setItem2() {
         this.item2 = item2;
-    }
-
-    public void setHandCard1() {
-
-    }
-
-    public void setHandCard2() {
-        this.handCard2 = handCard2;
-    }
-
-    public void setHandCard3() {
-        this.handCard3 = handCard3;
-    }
-
-    public void setHandCard4() {
-        this.handCard4 = handCard4;
-    }
-
-    public void setHandCard5() {
-        this.handCard5 = handCard5;
     }
 
 
@@ -216,12 +197,6 @@ public class GameController {
         view.show(MainBattleMenuPage.getGame().showHand());
     }*/
 
-
-
-
-
-
-
     public void endTurn() {
         mapCtrl.removeNextCard();
         Game.getInstance().endTurn();
@@ -231,8 +206,5 @@ public class GameController {
         mapCtrl.updateNextCard();
         mapCtrl.updateMap();
     }
-
-
-
 
 }
