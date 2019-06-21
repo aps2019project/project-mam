@@ -10,6 +10,7 @@ import Model.item.UsableItem;
 import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.File;
@@ -51,13 +52,13 @@ public class GsonReader {
             Shop.getCards().add(gson.fromJson(reader, Spell.class));
         }
         readItems();
-        readDeck("mission_1");
+        /*readDeck("mission_1");
         readDeck("mission_2");
-        readDeck("mission_3");
+        readDeck("mission_3");*/
     }
 
     public static void readDeck(String name) throws FileNotFoundException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
         JsonReader reader;
         reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
         Shop.getDecks().add(gson.fromJson(reader, Deck.class));
@@ -70,7 +71,7 @@ public class GsonReader {
     }
 
     public static Deck getDeck(String name) throws FileNotFoundException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
         JsonReader reader;
         reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
         return gson.fromJson(reader, Deck.class);
