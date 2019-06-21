@@ -54,8 +54,13 @@
                </font></TextField>
             <Button fx:id="add" mnemonicParsing="false" onMouseClicked="#setAdd" text="Add">
                <font>
-                  <Font size="24.0" />
+                  <Font size="18.0" />
                </font></Button>
+            <Button fx:id="remove" mnemonicParsing="false" onMouseClicked="#setRemove" text="Remove">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="3">

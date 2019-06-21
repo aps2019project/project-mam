@@ -227,14 +227,7 @@ public class Collection {
         }
     }
 
-    public void removeCardFromDeck(Card card, String deckName) {
-        for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
-                deck.removeCard(card);
-                return;
-            }
-        }
-    }
+
 
     public void addItemToDeck(UsableItem item, String deckName) {
         for (Deck deck : decks) {
@@ -245,11 +238,32 @@ public class Collection {
         }
     }
 
-    public void removeItemFromDeck(UsableItem item, String deckName) {
+    public void removeCardFromDeck(Card card, String deckName) {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
-                deck.removeItem(item);
+                deck.removeCard(card);
                 return;
+            }
+        }
+    }
+
+    public void removeFromDeck(int id, String deckName){
+        for (Deck deck : decks) {
+            if (deck.getName().equals(deckName)){
+                for (Card card : deck.getCards()) {
+                    if (card.getId() == id){
+                        deck.removeCard(card);
+                        return;
+                    }
+                }
+                if (deck.getHero().getId() == id){
+                    deck.removeHero();
+                    return;
+                }
+                if (deck.getItem().getId() == id){
+                    deck.removeItem();
+                    return;
+                }
             }
         }
     }
@@ -263,14 +277,7 @@ public class Collection {
         }
     }
 
-    public void removeHeroFromDeck(Hero hero, String deckName) {
-        for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
-                deck.removeHero(hero);
-                return;
-            }
-        }
-    }
+
 
     public boolean cardIsExistInCollection(int cardId, User user) {
         for (Card card : user.getCollection().getCards()) {

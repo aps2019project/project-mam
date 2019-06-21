@@ -43,6 +43,7 @@ public class CollectionController {
 
     public Button search;
     public Button add;
+    public Button remove;
     public Button create;
     public Button validate;
     public Button delete;
@@ -59,43 +60,48 @@ public class CollectionController {
 
 
     @FXML
-    public void setBack(){
+    public void setBack() {
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
 
     @FXML
-    public void setSearch(){
+    public void setSearch() {
         searchInCollection(cSearch.getText(), search_lb);
     }
 
     @FXML
-    public void setAdd(){
+    public void setAdd() {
         addCardToDeck(cardId.getText(), nameToAdd.getText());
     }
 
     @FXML
-    public void setCreate(){
+    public void setRemove() {
+        removeFromDeck(cardId.getText(), nameToAdd.getText());
+    }
+
+    @FXML
+    public void setCreate() {
         createDeck(nameToCreate.getText());
     }
 
     @FXML
-    public void setValidate(){
+    public void setValidate() {
         validateDeck(nameToValidate.getText());
     }
 
     @FXML
-    public void setDelete(){
+    public void setDelete() {
         deleteDeck(nameToDelete.getText());
     }
 
     @FXML
-    public void setSelect(){
+    public void setSelect() {
         selectMainDeck(nameToSelect.getText());
     }
 
     @FXML
-    public void setShowAll(){
+    public void setShowAll() {
         /*showAll_lb.resizeRelocate(100, 100, 700, 500);
         showAllDecks(showAll_lb);*/
         scrollPane.setVisible(true);
@@ -103,31 +109,30 @@ public class CollectionController {
     }
 
     @FXML
-    public void setShow(){
+    public void setShow() {
         showDeck(nameToShow.getText());
     }
 
     @FXML
-    public void setExport_btn(){
+    public void setExport_btn() {
         if (User.user.getCollection().isDeckExist(nameToPort.getText())) {
             exportDeck(User.user.getCollection().getDeck(nameToPort.getText()));
             port_lb.setText("deck name: \"" + nameToPort.getText() + "\" exported");
-        }
-        else port_lb.setText("deck not found!");
+        } else port_lb.setText("deck not found!");
     }
 
     @FXML
-    public void setImport_btn(){
+    public void setImport_btn() {
         importDeck(nameToPort.getText());
     }
 
     @FXML
-    public void setScrollPane(){
+    public void setScrollPane() {
         scrollPane.setVisible(false);
     }
 
 
-    public void exportDeck(Deck deck){
+    public void exportDeck(Deck deck) {
         try {
             GsonWriter.writeDeck(deck);
         } catch (IOException e) {
@@ -135,7 +140,7 @@ public class CollectionController {
         }
     }
 
-    public void importDeck(String deckName){
+    public void importDeck(String deckName) {
         try {
             Deck deck = GsonReader.getDeck(deckName);
             if (User.user.getCollection().isCardsInDeckExist(deck)) {
@@ -197,8 +202,39 @@ public class CollectionController {
         } else add_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM_IN_COLLECTION.getMessage());
     }
 
-    public void removeFromDeck(String cardId, String deckName){
+    public void removeFromDeck(String cardId, String deckName) {
+        if (!User.user.getCollection().checkIsExistDeck(deckName)) {
+            add_lb.setText(ErrorType.NOT_FOUND_DECK.getMessage());
+            return;
+        }
+        int cardID = Integer.parseInt(cardId);
+        if (User.user.getCollection().isDeckExist(deckName)) {
+            if (User.user.getCollection().getDeck(deckName).cardIsExist(cardID)) {
+                User.user.getCollection().removeFromDeck(cardID, deckName);
+                add_lb.setText(ErrorType.SUCCESSFUL_REMOVING.getMessage());
+            } else add_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
+        }
 
+        /*if (User.user.getCollection().getCard(cardID) != null) {
+            if (!User.user.getCollection().getCard(cardID).getCardType().equalsIgnoreCase("hero")) {
+                if (User.user.getCollection().getDeck(deckName).getCards().size() < 20) {
+                    if (!User.user.getCollection().getDeck(deckName).cardIsExist(cardID)) {
+                        User.user.getCollection().addCardToDeck(User.user.getCollection().getCard(cardID), deckName);
+                        add_lb.setText(ErrorType.SUCCESSFUL_ADDING_CARD.getMessage());
+                    } else add_lb.setText(ErrorType.REPETITIVE_CARD.getMessage());
+                } else add_lb.setText(ErrorType.TWENTY_CARD.getMessage());
+            } else if (User.user.getCollection().getCard(cardID).getCardType().equalsIgnoreCase("hero")) {
+                if (User.user.getCollection().getDeck(deckName).getHero() == null) {
+                    User.user.getCollection().addHeroToDeck(User.user.getCollection().getCard(cardID), deckName);
+                    add_lb.setText(ErrorType.SUCCESSFUL_ADDING_HERO.getMessage());
+                } else add_lb.setText(ErrorType.EXTRA_HERO.getMessage());
+            }
+        } else if (User.user.getCollection().getItem(cardID) != null) {
+            if (User.user.getCollection().getDeck(deckName).getItem() == null) {
+                User.user.getCollection().addItemToDeck(User.user.getCollection().getItem(cardID), deckName);
+                add_lb.setText(ErrorType.SUCCESSFUL_ADDING_ITEM.getMessage());
+            } else add_lb.setText(ErrorType.EXTRA_USABLEITEM.getMessage());
+        } else add_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM_IN_COLLECTION.getMessage());*/
     }
 
     public void selectMainDeck(String deckName) {
