@@ -1,5 +1,6 @@
 package Controller.GameController;
 
+import Model.card.Card;
 import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,9 +43,36 @@ public class AnimationController {
         ptr.play();
     }
 
-    public void Attack(){}
+    public void attack(ImageView image, Card attacker) {
+        //TODO : init path
+        new Thread(() -> {
+            try {
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attacking.gif")));
+                Thread.sleep(1000);
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 
-    public void SpecialPower(){}
+    public void conterAttack(ImageView image, int attackerId) {
+        //TODO : init path
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attacking.gif")));
+                Thread.sleep(1000);
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 
-    public void Spell(){}
+    public void SpecialPower() {
+    }
+
+    public void Spell() {
+    }
 }

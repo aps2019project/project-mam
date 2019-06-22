@@ -17,6 +17,8 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static java.lang.Math.abs;
+
 public class MapController {
     private static MapController ourInstance = new MapController();
 
@@ -36,7 +38,6 @@ public class MapController {
     private Pane pane;
     private Label label;
     private ArrayList<Circle> handCards;
-
 
     private boolean isSelected = false;
 
@@ -108,13 +109,11 @@ public class MapController {
                 Card card = game.getMap().getSecondPlayerCellCard().get(entry.getKey()).getCard();
                 label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
             });
-
             entry.getValue().setOnMouseExited(event -> {
                 label.setText(text);
             });
         }
     }
-
 
     private void setOnCard1EnteredAndExited() {
         for (Map.Entry<Integer, ImageView> entry : imageController.getViews1().entrySet()) {
@@ -143,7 +142,7 @@ public class MapController {
             } else if (isSelected) {
                 if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
                         || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
-                    attack(rectangle.getId());
+                    attack(Integer.parseInt(rectangle.getId()));
                     updateMap();
                     isSelected = false;
                 } else {
@@ -207,28 +206,6 @@ public class MapController {
         controller.handCardsMana.get(4).setText("-");
     }
 
- /*   private void removeIdFromMap(String id, int turn) {
-        for (Rectangle[] rectangles : cells) {
-            for (Rectangle rectangle : rectangles) {
-                if (rectangle.getId() != null) {
-                    if (turn == 1) {
-                        if (rectangle.getId().equals(id) && rectangle.getFill() == Color.RED) {
-                            rectangle.setId(null);
-                            rectangle.setFill(Color.BLACK);
-                            pane.getChildren().remove(imageController.getViews1().get(Integer.parseInt(id)));
-                            imageController.getViews1().remove(Integer.parseInt(id));
-                        }
-                    } else if (rectangle.getId().equals(id) && rectangle.getFill() == Color.BLUE) {
-                        rectangle.setId(null);
-                        rectangle.setFill(Color.BLACK);
-                        pane.getChildren().remove(imageController.getViews2().get(Integer.parseInt(id)));
-                        imageController.getViews2().remove(Integer.parseInt(id));
-                    }
-                }
-            }
-        }
-    }*/
-
     public void removeNextCard() {
         pane.getChildren().remove(imageController.getViews1().get(game.getNextFirstPlayerCard().getId()));
         imageController.getViews1().remove(game.getNextFirstPlayerCard().getId());
@@ -273,18 +250,14 @@ public class MapController {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
-            //imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
         setOnCard1EnteredAndExited();
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
-            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
         }
-
         setOnCard2EnteredAndExited();
-
     }
 
 
@@ -298,11 +271,11 @@ public class MapController {
             if (game.cardCanMove(x, y)) {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
-                animationCtrl.moveTo(imageController.getView(game.getTurn(), game.getCurrentCard().getId()),
+                animationCtrl.moveTo(imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()),
                         cells[x][y].getX(), cells[x][y].getY());
 
                 StringBuilder message = new StringBuilder();
-                message.append(Game.getInstance().getCurrentCard().getId()).append(" moved to ");
+                message.append(game.getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);
                 ErrorType.SUCCESSFUL_MOVING_CARD.setMessage(message.toString());
                 label.setText(ErrorType.SUCCESSFUL_MOVING_CARD.getMessage());
@@ -310,17 +283,20 @@ public class MapController {
         } else label.setText(ErrorType.CARD_CAN_NOT_MOVE.getMessage());
     }
 
-    public void attack(String oppCardId) {
-        if (Game.getInstance().getCurrentCard().isCanAttack()) {
-            if (Game.getInstance().isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
-                if (Game.getInstance().isOppAvailableForAttack(Integer.parseInt(oppCardId), Game.getInstance().getCurrentCard().getId())) {
-                    Game.getInstance().attack(Integer.parseInt(oppCardId));
+    public void attack(int oppId) {
+        if (game.getCurrentCard().isCanAttack()) {
+            if (game.isCardInOppPlayerCellCard(oppId)) {
+                if (game.isOppAvailableForAttack(oppId, game.getCurrentCard().getId())) {
+                    animationCtrl.attack(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()), game.getCurrentCard());
+                    int changedTurn = abs(game.getTurn() % 2 - 1);
+                    animationCtrl.conterAttack(imageController.getView(changedTurn, oppId), oppId);
+                    game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                 } else label.setText(ErrorType.UNAVAILABLE_OPP_ATTACK.getMessage());
             } else label.setText(ErrorType.INVALID_CARD_ID.getMessage());
         } else {
             StringBuilder message = new StringBuilder();
-            message.append("card with ").append(Game.getInstance().getCurrentCard().getId()).append(" can't attack");
+            message.append("card with ").append(game.getCurrentCard().getId()).append(" can't attack");
             ErrorType.CARD_CAN_NOT_ATTACK.setMessage(message.toString());
             label.setText(ErrorType.CARD_CAN_NOT_ATTACK.getMessage());
         }
@@ -333,26 +309,26 @@ public class MapController {
             attackersId[counter] = Integer.parseInt(cardId);
             counter++;
         }
-        if (Game.getInstance().isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
-            Game.getInstance().comboAttack(Integer.parseInt(oppCardId), attackersId);
+        if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
+            game.comboAttack(Integer.parseInt(oppCardId), attackersId);
         } else label.setText(ErrorType.INVALID_CARD_ID.getMessage());
     }
 
     public void useSP(String x, String y) {
-        if (Game.getInstance().getCurrentCard() instanceof Minion && Game.getInstance().getCurrentCard().getSPActivationTime() == SPActivationTime.ON_SPAWN) {
-            if (Game.getInstance().getCurrentCard() instanceof Hero && Game.getInstance().getCurrentCard().getCooldown() == 0) {
-                Game.getInstance().useSP(Integer.parseInt(x), Integer.parseInt(y));
+        if (game.getCurrentCard() instanceof Minion && game.getCurrentCard().getSPActivationTime() == SPActivationTime.ON_SPAWN) {
+            if (game.getCurrentCard() instanceof Hero && game.getCurrentCard().getCooldown() == 0) {
+                game.useSP(Integer.parseInt(x), Integer.parseInt(y));
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_USE_SP.getMessage());
         } else label.setText(ErrorType.CARD_HAVE_NOT_SP.getMessage());
     }
 
     public void insertCard(String cardName, String x, String y) {
-        if (Game.getInstance().isCardInPlayerHand(cardName)) {
-            if (Game.getInstance().haveEnoughMana(cardName)) {
-                if (Game.getInstance().isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
-                    Game.getInstance().insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
+        if (game.isCardInPlayerHand(cardName)) {
+            if (game.haveEnoughMana(cardName)) {
+                if (game.isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
+                    game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
                     StringBuilder message = new StringBuilder();
-                    message.append(cardName).append(" with ").append(Game.getInstance().getCurrentCard().getId());
+                    message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
                     message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
                     ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
                     label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
