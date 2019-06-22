@@ -31,6 +31,7 @@ public enum ErrorType {
     SUCCESSFUL_ADDING_ITEM("add item successful"),
     SUCCESSFUL_ADDING_HERO("add hero successful"),
     SUCCESSFUL_MOVING_CARD(""),
+    SUCCESSFUL_REMOVING("remove card successful"),
     SUCCESSFUL_INSERTING_CARD(""),
     SUCCESSFUL_ATTACK("attack to opp card successful"),
     SELECT_MAIN_DECK("main deck selected"),

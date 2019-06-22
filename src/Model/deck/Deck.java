@@ -107,15 +107,15 @@ public class Deck {
         this.item = item;
     }
 
-    public void removeItem(UsableItem item) {
-        this.item = item;
+    public void removeItem() {
+        this.item = null;
     }
 
     public void setHero(Card hero) {
         this.hero = hero;
     }
 
-    public void removeHero(Hero hero) {
+    public void removeHero() {
         this.hero = null;
     }
 
@@ -142,5 +142,14 @@ public class Deck {
             }
         }
         return false;
+    }
+
+    public Card getCard(int cardId){
+        for (Card card : cards) {
+            if (card.getId() == cardId){
+                return card;
+            }
+        }
+        return null;
     }
 }

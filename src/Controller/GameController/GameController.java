@@ -131,7 +131,6 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
-
     }
 
 
