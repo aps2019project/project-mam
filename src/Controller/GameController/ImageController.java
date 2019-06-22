@@ -1,6 +1,7 @@
 package Controller.GameController;
 
 import Model.card.Card;
+import Model.game.Cell;
 import Model.game.Game;
 import Model.game.Map;
 import javafx.scene.image.Image;
@@ -56,6 +57,11 @@ public class ImageController {
         Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress(path.get(counter));
     }
 
+    public void initHeroImage(){
+        addCard(Game.getInstance().getMap().getCells()[2][0], 1);
+        addCard(Game.getInstance().getMap().getCells()[2][8], 2);
+    }
+
     public void initItemImage() {
         try {
             File dir = new File("resources/items");
@@ -96,6 +102,10 @@ public class ImageController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addCard(Cell cell, int turn){
+        addCard(cell.getRow(), cell.getColumn(), cell.getCard(), turn);
     }
 
     public void addCard(double x, double y, Card card, int size, int playerTurn) {

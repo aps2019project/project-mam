@@ -56,6 +56,7 @@ public class MapController {
         updateHand();
         updateItems();
         updateMap();
+        imageController.initHeroImage();
         updateNextCard();
     }
 
@@ -77,15 +78,15 @@ public class MapController {
         final int ROW = 5;
         final int COLUMN = 9;
 //-----------------------jimi-------
-        /*final double startX = 450;
+        final double startX = 450;
         final double startY = 190;
         final double xStep = (500 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (300 - SPACE * ROW) / ROW;*/
+        final double yStep = (300 - SPACE * ROW) / ROW;
 //------------------feri------------
-        final double startX = 650;
+        /*final double startX = 650;
         final double startY = 320;
         final double xStep = (808 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (410 - SPACE * ROW) / ROW;
+        final double yStep = (410 - SPACE * ROW) / ROW;*/
 
         for (int i = 0; i < ROW; i++)
             for (int j = 0; j < COLUMN; j++) {
@@ -270,15 +271,13 @@ public class MapController {
     public void updateMap() {
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            //removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 1);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
-            imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
+            //imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
         }
         setOnCard1EnteredAndExited();
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-           // removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 2);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
@@ -290,14 +289,15 @@ public class MapController {
 
 
     public void selectCard(String cardId) {
-        Game.getInstance().selectCard(Integer.parseInt(cardId));
+        game.selectCard(Integer.parseInt(cardId));
         label.setText(cardId + " selected");
     }
 
     public void moveCard(int x, int y) {
-        if (Game.getInstance().getCurrentCard().isCanMove()) {
-            if (Game.getInstance().cardCanMove(x, y)) {
-                Game.getInstance().moveCurrentCardTo(x, y);
+        if (game.getCurrentCard().isCanMove()) {
+            if (game.cardCanMove(x, y)) {
+                cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
+                game.moveCurrentCardTo(x, y);
                 animationCtrl.moveTo(imageController.getView(game.getTurn(), game.getCurrentCard().getId()),
                         cells[x][y].getX(), cells[x][y].getY());
 

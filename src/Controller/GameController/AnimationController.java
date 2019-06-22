@@ -25,16 +25,16 @@ public class AnimationController {
         //TODO : init path
         Path path = new Path(new MoveTo(image.getX() + image.getFitWidth() / 2, image.getY() + image.getFitHeight() / 2), new LineTo(x, y));
         //path.getElements().add(new CubicCurveTo(180, 60, 250, 340, image.getX() + 200, image.getY()));
-        PathTransition ptr = new PathTransition(Duration.seconds(4), path);
+        PathTransition ptr = new PathTransition(Duration.seconds(1), path);
         ptr.setNode(image);
         try {
-            image.setImage(new Image(new FileInputStream("Fx/resource/Katara_run.gif")));
+            image.setImage(new Image(new FileInputStream("resources/gif/Katara_run.gif")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         ptr.setOnFinished(event -> {
             try {
-                image.setImage(new Image(new FileInputStream("Fx/resource/Katara_breathing.gif")));
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
