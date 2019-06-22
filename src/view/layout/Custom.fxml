@@ -61,7 +61,7 @@
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Button fx:id="create" mnemonicParsing="false" text="Create">
+                  <Button fx:id="create" mnemonicParsing="false" onMouseClicked="#setCreate" text="Create">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -325,7 +325,7 @@
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <ImageView fx:id="back" fitHeight="150.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="back" fitHeight="150.0" fitWidth="171.0" onMouseClicked="#setBack" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/button_back_corner@2x.png" />
                </image>

@@ -6,9 +6,11 @@ import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import view.pages.Page;
 
 import static Model.enums.BuffType.*;
 import static Model.enums.ImpactType.*;
@@ -74,14 +76,20 @@ public class CustomController {
     public TextField range;
     public TextField coolDown;
 
+    public Button create;
+
     public Label label;
     public ImageView back;
 
     public CustomController(){
-
     }
 
     public void init(){
+        create.setStyle("-jfx-button-type: FLAT;" +
+                "-fx-background-color: rgba(45,45,45,0.7);" +
+                "-fx-text-fill: #fff5fd;");
+
+
         minion.setToggleGroup(cardType);
         minion.setSelected(true);
         minion.setUserData("minion");
@@ -195,5 +203,14 @@ public class CustomController {
         label.setText(toggleGroup.getSelectedToggle().getUserData().toString());
     }
 
+    @FXML
+    public void setBack() {
+        Page.getPages().pop();
+        Page.getPages().peek().start();
+    }
 
+    @FXML
+    public void setCreate() {
+        label.setText("created");
+    }
 }

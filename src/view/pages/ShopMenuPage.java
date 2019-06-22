@@ -27,9 +27,6 @@ public class ShopMenuPage extends Page {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Shop.fxml"));
         root = fxmlLoader.load();
         controller = fxmlLoader.getController();
-        controller.CSearch_btn.setStyle("-jfx-button-type: FLAT;" +
-                "-fx-background-color: #484848;" +
-                "-fx-text-fill: white;");
         initializeImage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -48,7 +45,9 @@ public class ShopMenuPage extends Page {
         setBackGround(controller.store_lb, "resources/ui/button_secondary_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
 
-
+        controller.CSearch_btn.setStyle("-jfx-button-type: FLAT;" +
+                "-fx-background-color: #484848;" +
+                "-fx-text-fill: white;");
     }
 
     public ShopMenuPage(Stage stage) {
