@@ -109,8 +109,6 @@ public class GameController {
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
-        /*imageCtrl.addCard(2, 0, game.getMap().getCells()[2][0].getCard());
-        imageCtrl.addCard(2, 8, game.getMap().getCells()[2][8].getCard());*/
     }
 
 
@@ -122,17 +120,6 @@ public class GameController {
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init(){
-        /*cells.add(cell00);
-        cell00.setAccessibleText("00");
-        cells.add(cell10);
-        cells.add(cell20);
-        cells.add(cell30);
-        cells.add(cell40);
-        cells.add(cell50);
-        cells.add(cell60);
-        cells.add(cell70);
-        cells.add(cell80);*/
-
         handCards.add(handCard1);
         handCards.add(handCard2);
         handCards.add(handCard3);

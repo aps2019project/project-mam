@@ -7,7 +7,7 @@ import Model.item.CollectableItem;
 public class Cell {
     private int row;
     private int column;
-    private int flagCount = 0;
+    private int flagCount;
     private CellEffect cellEffect;
     private CollectableItem collectableItem;
     private Card card;

@@ -58,7 +58,7 @@ public class MapController {
         updateNextCard();
     }
 
-    private String text;//= "\"Game Started\"";
+    private String text;
 
     public Rectangle[][] getCells() {
         return cells;
