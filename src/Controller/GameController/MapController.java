@@ -30,6 +30,7 @@ public class MapController {
     private GameController controller;
     private Game game = Game.getInstance();
     private ImageController imageController = ImageController.getInstance();
+    private AnimationController animationCtrl = AnimationController.getInstance();
 
     private Rectangle[][] cells;
     private Pane pane;
@@ -205,7 +206,7 @@ public class MapController {
         controller.handCardsMana.get(4).setText("-");
     }
 
-    private void removeIdFromMap(String id, int turn) {
+ /*   private void removeIdFromMap(String id, int turn) {
         for (Rectangle[] rectangles : cells) {
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.getId() != null) {
@@ -225,7 +226,7 @@ public class MapController {
                 }
             }
         }
-    }
+    }*/
 
     public void removeNextCard() {
         pane.getChildren().remove(imageController.getViews1().get(game.getNextFirstPlayerCard().getId()));
@@ -269,7 +270,7 @@ public class MapController {
     public void updateMap() {
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 1);
+            //removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 1);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.RED);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 1);
@@ -277,7 +278,7 @@ public class MapController {
         setOnCard1EnteredAndExited();
 
         for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 2);
+           // removeIdFromMap(String.valueOf(entry.getValue().getCard().getId()), 2);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setFill(Color.BLUE);
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
             imageController.addCard(entry.getValue().getRow(), entry.getValue().getColumn(), entry.getValue().getCard(), 2);
@@ -297,6 +298,9 @@ public class MapController {
         if (Game.getInstance().getCurrentCard().isCanMove()) {
             if (Game.getInstance().cardCanMove(x, y)) {
                 Game.getInstance().moveCurrentCardTo(x, y);
+                animationCtrl.moveTo(imageController.getView(game.getTurn(), game.getCurrentCard().getId()),
+                        cells[x][y].getX(), cells[x][y].getY());
+
                 StringBuilder message = new StringBuilder();
                 message.append(Game.getInstance().getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);

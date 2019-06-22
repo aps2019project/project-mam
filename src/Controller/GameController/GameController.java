@@ -111,8 +111,6 @@ public class GameController {
         mapCtrl.initialize(cells, pane, label, handCards);
     }
 
-
-
     public Rectangle[][] getCells() {
         return cells;
     }
@@ -132,7 +130,6 @@ public class GameController {
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
     }
-
 
     public void setGraveyard() {
         this.graveyard = graveyard;
@@ -158,30 +155,6 @@ public class GameController {
     public void setItem2() {
         this.item2 = item2;
     }
-
-
-
-    /*public void showGameInfo() {
-        view.show(game.getGameInfo());
-    }
-
-    public void showMyMinions() {
-        view.show(game.showMyMinions());
-    }
-
-    public void showOpMinions() {
-        view.show(game.showOpMinions());
-    }*/
-
-    /*public void showCardInfo(String cardId) {
-        if (User.user.getMainDeck().cardIsExist(Integer.parseInt(cardId))) {
-            view.show(MainBattleMenuPage.getGame().showCardInfo(Integer.parseInt(cardId)));
-        } else view.printError(ErrorType.NOT_FOUND_CARD_OR_ITEM);
-    }
-
-    public void showHand() {
-        view.show(MainBattleMenuPage.getGame().showHand());
-    }*/
 
     public void endTurn() {
         mapCtrl.removeNextCard();

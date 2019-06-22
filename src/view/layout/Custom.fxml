@@ -27,13 +27,13 @@
    <children>
       <HBox alignment="CENTER" prefHeight="1080.0" prefWidth="500.0" GridPane.columnIndex="1">
          <children>
-            <VBox fx:id="cardVB" alignment="CENTER" maxHeight="614.0" maxWidth="348.0" prefHeight="614.0" prefWidth="348.0" spacing="50.0">
+            <VBox fx:id="cardVB" alignment="CENTER" spacing="50.0">
                <children>
                   <TextField fx:id="cardName" alignment="CENTER" maxWidth="161.0" prefHeight="51.0" prefWidth="161.0" promptText="card name">
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <HBox alignment="CENTER" prefHeight="141.0" prefWidth="348.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Type:" textFill="WHITE">
                            <font>
@@ -61,26 +61,32 @@
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Button fx:id="create" mnemonicParsing="false" onMouseClicked="#setCreate" text="Create">
+                  <Button fx:id="create" mnemonicParsing="false" onAction="#onCreateClick" onMouseClicked="#onCreateClick" text="Create">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Button>
                   <Label fx:id="label" text="Label" textFill="WHITE" />
                </children>
+               <HBox.margin>
+                  <Insets bottom="200.0" top="200.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="100.0" right="100.0" />
+               </padding>
             </VBox>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="1080.0" prefWidth="1051.0" spacing="200.0" GridPane.columnIndex="2">
          <children>
-            <VBox fx:id="spellVB" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="995.0" prefWidth="433.0" spacing="20.0">
+            <VBox fx:id="spellVB" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0">
                <children>
                   <Label text="SPELL" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Target:" textFill="WHITE">
                            <font>
@@ -143,7 +149,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></TextField>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Buff Type:" textFill="WHITE">
                            <font>
@@ -200,7 +206,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <TextField fx:id="effectValue" alignment="CENTER" prefHeight="39.0" prefWidth="120.0" promptText="Effect Value">
                            <font>
@@ -225,17 +231,17 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="20.0" left="100.0" right="100.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox fx:id="minionVB" alignment="CENTER" layoutX="334.0" layoutY="250.0" maxHeight="600.0" prefHeight="577.0" prefWidth="441.0" spacing="30.0">
+            <VBox fx:id="minionVB" alignment="CENTER" layoutX="334.0" layoutY="250.0" spacing="30.0">
                <children>
                   <Label text="MINION  &amp;  HERO" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Atack Type:" textFill="WHITE">
                            <font>
@@ -263,7 +269,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                  <HBox alignment="CENTER" spacing="30.0">
                      <children>
                         <TextField fx:id="ap" alignment="CENTER" prefHeight="31.0" prefWidth="50.0" promptText="AP">
                            <font>
@@ -287,7 +293,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Activation Time:" textFill="WHITE">
                            <font>
@@ -320,7 +326,13 @@
                         </VBox>
                      </children>
                   </HBox>
-               </children></VBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="200.0" top="200.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="100.0" right="100.0" />
+               </padding></VBox>
          </children>
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0">

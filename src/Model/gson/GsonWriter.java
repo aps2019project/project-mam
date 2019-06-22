@@ -8,6 +8,7 @@ import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import sun.awt.geom.AreaOp;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,6 +32,25 @@ public class GsonWriter {
             out.flush();
             out.close();
         }
+    }
+
+    public static void writeCustomCard(Card card) throws IOException {
+        StringBuilder path = new StringBuilder("gson/Cards/");
+        switch (card.getCardType()){
+            case "hero":
+                path.append("Hero");
+                break;
+            case "minion":
+                path.append("Minion");
+                break;
+            case "spell":
+                path.append("spell");
+        }
+        path.append(card.getName()).append(".json");
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        FileWriter writer = new FileWriter(path.toString());
+        writer.write(gson.toJson(card));
+        writer.flush();
     }
 
     public static void writeItems() throws IOException {

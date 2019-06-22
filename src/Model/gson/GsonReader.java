@@ -34,7 +34,7 @@ public class GsonReader {
     }
 
     public static void initShop() throws FileNotFoundException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
         JsonReader reader;
         File dir = new File("gson/Cards/Hero");
         for (File file : dir.listFiles()) {

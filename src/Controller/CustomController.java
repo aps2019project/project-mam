@@ -97,11 +97,9 @@ public class CustomController {
         hero.setUserData("hero");
         spell.setToggleGroup(cardType);
         spell.setUserData("spell");
-        cardType.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-                if (cardType.getSelectedToggle() != null) {
-                    restate(cardType);
-                }
+        cardType.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (cardType.getSelectedToggle() != null) {
+                restate(cardType);
             }
         });
 
@@ -210,7 +208,19 @@ public class CustomController {
     }
 
     @FXML
-    public void setCreate() {
-        label.setText("created");
+    public void onCreateClick(){
+        System.out.println("hello");
+        if (!isInfoComplete())
+            return;
+        if (cardType.selectedToggleProperty().toString().equals("minion"))
+            return;
+    }
+
+    private boolean isInfoComplete(){{
+        System.out.println(cardName.getText().equals(""));
+    }
+        if (cardName.getText().equals(""))
+            label.setText("please");
+        return false;
     }
 }

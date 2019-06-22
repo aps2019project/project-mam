@@ -114,4 +114,10 @@ public class ImageController {
             e.printStackTrace();
         }
     }
+
+    public ImageView getView(int turn, int id){
+        if (turn == 1)
+            return views1.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
+        return views2.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
+    }
 }
