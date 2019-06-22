@@ -263,28 +263,19 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <TextField fx:id="ap" alignment="CENTER" prefHeight="31.0" prefWidth="100.0" promptText="AP">
+                        <TextField fx:id="ap" alignment="CENTER" prefHeight="31.0" prefWidth="50.0" promptText="AP">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="hp" alignment="CENTER" prefHeight="31.0" prefWidth="100.0" promptText="HP">
+                        <TextField fx:id="hp" alignment="CENTER" prefHeight="31.0" prefWidth="50.0" promptText="HP">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="range" alignment="CENTER" prefHeight="31.0" prefWidth="100.0" promptText="range">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                     <children>
-                        <TextField fx:id="activation" alignment="CENTER" prefHeight="31.0" prefWidth="120.0" promptText="activation">
+                        <TextField fx:id="range" alignment="CENTER" prefHeight="31.0" prefWidth="70.0" promptText="range">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -294,6 +285,39 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Activation Time:" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="183.0" spacing="20.0">
+                           <children>
+                              <RadioButton fx:id="passive" mnemonicParsing="false" text="passive" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="onDeath" mnemonicParsing="false" text="on death" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="onAttack" mnemonicParsing="false" text="on attack" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="onInsert" mnemonicParsing="false" text="on insert" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </children></VBox>

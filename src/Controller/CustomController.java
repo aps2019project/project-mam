@@ -2,6 +2,7 @@ package Controller;
 
 import Model.enums.BuffType;
 import Model.enums.ImpactType;
+import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 import static Model.enums.BuffType.*;
 import static Model.enums.ImpactType.*;
+import static Model.enums.SPActivationTime.*;
 import static Model.enums.TargetCommunity.*;
 
 public class CustomController {
@@ -20,6 +22,7 @@ public class CustomController {
     ToggleGroup buffType = new ToggleGroup();
     ToggleGroup enemyOrFriend = new ToggleGroup();
     ToggleGroup attackType = new ToggleGroup();
+    ToggleGroup activation = new ToggleGroup();
 
     public VBox cardVB;
     public VBox spellVB;
@@ -53,6 +56,11 @@ public class CustomController {
     public RadioButton ranged;
     public RadioButton hybrid;
 
+    public RadioButton passive;
+    public RadioButton onDeath;
+    public RadioButton onAttack;
+    public RadioButton onInsert;
+
     public TextField cardName;
     public TextField cost;
 
@@ -64,7 +72,6 @@ public class CustomController {
     public TextField ap;
     public TextField hp;
     public TextField range;
-    public TextField activation;
     public TextField coolDown;
 
     public Label label;
@@ -162,6 +169,23 @@ public class CustomController {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (attackType.getSelectedToggle() != null) {
                     restate(attackType);
+                }
+            }
+        });
+
+        passive.setToggleGroup(activation);
+        passive.setSelected(true);
+        passive.setUserData(PASSIVE);
+        onDeath.setToggleGroup(activation);
+        onDeath.setUserData(ON_DEATH);
+        onAttack.setToggleGroup(activation);
+        onAttack.setUserData(ON_ATTACK);
+        onInsert.setToggleGroup(activation);
+        onInsert.setUserData(ON_INSERT);
+        activation.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                if (activation.getSelectedToggle() != null) {
+                    restate(activation);
                 }
             }
         });
