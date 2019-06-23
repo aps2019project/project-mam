@@ -18,11 +18,6 @@
             <Image url="@../../../resources/maps/gameBackgaround.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="firstPlayerName" alignment="CENTER" layoutX="378.0" layoutY="121.0" prefHeight="51.0" prefWidth="213.0" text="Label">
-         <font>
-            <Font name="Arial Bold" size="30.0" />
-         </font>
-      </Label>
       <Label fx:id="secondPlayerName" alignment="CENTER" layoutX="1324.0" layoutY="121.0" prefHeight="51.0" prefWidth="213.0" text="Label">
          <font>
             <Font name="Arial Bold" size="30.0" />
@@ -150,6 +145,11 @@
          </children>
       </GridPane>
       <Pane fx:id="pane" prefHeight="500.0" prefWidth="1000.0" />
+      <Label fx:id="firstPlayerName" alignment="CENTER" layoutX="378.0" layoutY="121.0" onMouseClicked="#setEndTurn" prefHeight="51.0" prefWidth="213.0" text="Label">
+         <font>
+            <Font name="Arial Bold" size="30.0" />
+         </font>
+      </Label>
       <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="&quot;Game Started&quot;" textAlignment="CENTER">
          <font>
             <Font size="18.0" />

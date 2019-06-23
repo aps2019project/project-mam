@@ -6,6 +6,7 @@ import Model.game.Game;
 import Model.game.Map;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +28,7 @@ public class ImageController {
     private HashMap<Integer, ImageView> views1 = new HashMap<>();
     private HashMap<Integer, ImageView> views2 = new HashMap<>();
     private HashMap<Integer, ImageView> viewsHand = new HashMap<>();
+    private HashMap<Cell, ImageView> viewsFlag = new HashMap<>();
 
     public HashMap<Integer, ImageView> getViews1() {
         return views1;
@@ -116,6 +118,26 @@ public class ImageController {
 
             addItem(path, random, 1615);
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addFlags(Pane pane){
+        try {
+            for (Cell[] cells : Game.getInstance().getMap().getCells()) {
+                for (Cell cell : cells) {
+                    if (cell.getFlagCount() > 0 && cell.getCard() == null) {
+                        ImageView view = new ImageView(new Image(new FileInputStream("resources/loot_crates/mystery/t3/loot_crate_key.png")));
+                        view.setFitWidth(24);
+                        view.setFitHeight(60);
+                        view.setX(MapController.getInstance().getCells()[cell.getRow()][cell.getColumn()].getX() + 30);
+                        view.setY(MapController.getInstance().getCells()[cell.getRow()][cell.getColumn()].getY() + 10);
+                        viewsFlag.put(cell, view);
+                        pane.getChildren().add(view);
+                    }
+                }
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -258,6 +258,8 @@ public class MapController {
             controller.cells[entry.getValue().getRow()][entry.getValue().getColumn()].setId(String.valueOf(entry.getValue().getCard().getId()));
         }
         setOnCard2EnteredAndExited();
+
+        imageController.addFlags(getPane());
     }
 
 
