@@ -1162,6 +1162,12 @@ public class Game {
         }
     }
 
+    public Card getCard(int turn, int id) {
+        if (turn % 2 == 1){
+            return getMap().getFirstPlayerCellCard().get(id).getCard();
+        } else return getMap().getSecondPlayerCellCard().get(id).getCard();
+    }
+
 
 }
 

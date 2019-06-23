@@ -48,23 +48,23 @@ public class AnimationController {
         //TODO : init path
         new Thread(() -> {
             try {
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attack.gif")));
-                Thread.sleep(1000);
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
+                image.setImage(new Image(new FileInputStream(attacker.getAttackImage())));
+                Thread.sleep(2500);
+                image.setImage(new Image(new FileInputStream(attacker.getBreathingImage())));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
     }
 
-    public void conterAttack(ImageView image, int attackerId) {
+    public void conterAttack(ImageView image, Card attacker) {
         //TODO : init path
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attack.gif")));
-                Thread.sleep(1000);
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
+                Thread.sleep(2500);
+                image.setImage(new Image(new FileInputStream(attacker.getAttackImage())));
+                Thread.sleep(2500);
+                image.setImage(new Image(new FileInputStream(attacker.getBreathingImage())));
             } catch (Exception e) {
                 e.printStackTrace();
             }
