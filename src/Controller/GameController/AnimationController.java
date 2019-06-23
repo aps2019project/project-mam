@@ -24,7 +24,8 @@ public class AnimationController {
 
     public void moveTo(ImageView image, double x, double y) {
         //TODO : init path
-        Path path = new Path(new MoveTo(image.getX() + image.getFitWidth() / 2, image.getY() + image.getFitHeight() / 2), new LineTo(x, y));
+        Path path = new Path(new MoveTo(image.getX() + image.getFitWidth() / 2, image.getY() + image.getFitHeight() / 2),
+                new LineTo(x, y));
         //path.getElements().add(new CubicCurveTo(180, 60, 250, 340, image.getX() + 200, image.getY()));
         PathTransition ptr = new PathTransition(Duration.seconds(1), path);
         ptr.setNode(image);
@@ -47,7 +48,7 @@ public class AnimationController {
         //TODO : init path
         new Thread(() -> {
             try {
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attacking.gif")));
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attack.gif")));
                 Thread.sleep(1000);
                 image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
             } catch (Exception e) {
@@ -61,7 +62,7 @@ public class AnimationController {
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attacking.gif")));
+                image.setImage(new Image(new FileInputStream("resources/gif/Katara_attack.gif")));
                 Thread.sleep(1000);
                 image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
             } catch (Exception e) {

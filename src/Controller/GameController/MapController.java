@@ -74,20 +74,22 @@ public class MapController {
     private String handCardId = "-1";
     private boolean handCardSelected = false;
 
-    public void initCells() {
-        final double SPACE = 5;
-        final int ROW = 5;
-        final int COLUMN = 9;
-//-----------------------jimi-------
-        final double startX = 450;
+    final double SPACE = 5;
+    final int ROW = 5;
+    final int COLUMN = 9;
+    //-----------------------jimi-------
+        /*final double startX = 450;
         final double startY = 190;
         final double xStep = (500 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (300 - SPACE * ROW) / ROW;
+        final double yStep = (300 - SPACE * ROW) / ROW;*/
 //------------------feri------------
-        /*final double startX = 650;
-        final double startY = 320;
-        final double xStep = (808 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (410 - SPACE * ROW) / ROW;*/
+    final double startX = 650;
+    final double startY = 320;
+    final double xStep = (808 - SPACE * COLUMN) / COLUMN;
+    final double yStep = (410 - SPACE * ROW) / ROW;
+
+    public void initCells() {
+
 
         for (int i = 0; i < ROW; i++)
             for (int j = 0; j < COLUMN; j++) {
@@ -272,7 +274,7 @@ public class MapController {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
                 animationCtrl.moveTo(imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()),
-                        cells[x][y].getX(), cells[x][y].getY());
+                        cells[x][y].getX() + xStep/2, cells[x][y].getY() + yStep/2);
 
                 StringBuilder message = new StringBuilder();
                 message.append(game.getCurrentCard().getId()).append(" moved to ");
