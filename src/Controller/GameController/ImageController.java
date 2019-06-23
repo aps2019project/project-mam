@@ -41,36 +41,65 @@ public class ImageController {
     }
 
     public void initCardImage() {
-        File dir = new File("resources/gif");
-        ArrayList<String> path = new ArrayList<>();
-        for (String s : dir.list()) {
-            path.add("resources/gif/" + s);
+        File minions = new File("resources/gif-minion");
+        File spells = new File("resources/gif-spell");
+        File heros = new File("resources/gif-hero");
+        ArrayList<String> minionPath = new ArrayList<>();
+        ArrayList<String> spellPath = new ArrayList<>();
+        ArrayList<String> heroPath = new ArrayList<>();
+        for (String s : minions.list()) {
+            minionPath.add("resources/gif-minion/" + s);
         }
-        int counter = 0;
+        for (String s : spells.list()) {
+            spellPath.add("resources/gif-spell/" + s);
+        }
+        for (String s : heros.list()) {
+            heroPath.add("resources/gif-hero/" + s);
+        }
+        int mCounter = 0;
+        int sCounter = 0;
         for (Card card : Game.getInstance().getFirstPlayerDeck().getCards()) {
-            card.setAttackImage(path.get(counter++));
-            card.setBreathingImage(path.get(counter++));
-            card.setDeathImage(path.get(counter++));
-            card.setRunImage(path.get(counter++));
+            if (card.getCardType().equals("minion")) {
+                card.setAttackImage(minionPath.get(mCounter++));
+                card.setBreathingImage(minionPath.get(mCounter++));
+                card.setDeathImage(minionPath.get(mCounter++));
+                card.setRunImage(minionPath.get(mCounter++));
+            } else {
+                card.setBreathingImage(spellPath.get(sCounter++));
+                card.setAttackImage(spellPath.get(sCounter++));
+            }
         }
-        Game.getInstance().getFirstPlayerDeck().getHero().setAttackImage(path.get(counter++));
-        Game.getInstance().getFirstPlayerDeck().getHero().setBreathingImage(path.get(counter++));
-        Game.getInstance().getFirstPlayerDeck().getHero().setDeathImage(path.get(counter++));
-        Game.getInstance().getFirstPlayerDeck().getHero().setRunImage(path.get(counter++));
         for (Card card : Game.getInstance().getSecondPlayerDeck().getCards()) {
-            card.setAttackImage(path.get(counter++));
-            card.setBreathingImage(path.get(counter++));
-            card.setDeathImage(path.get(counter++));
-            card.setRunImage(path.get(counter++));
+            if (card.getCardType().equals("minion")) {
+                card.setAttackImage(minionPath.get(mCounter++));
+                card.setBreathingImage(minionPath.get(mCounter++));
+                card.setDeathImage(minionPath.get(mCounter++));
+                card.setRunImage(minionPath.get(mCounter++));
+            } else {
+                card.setBreathingImage(spellPath.get(sCounter++));
+                card.setAttackImage(spellPath.get(sCounter++));
+            }
         }
-        Game.getInstance().getSecondPlayerDeck().getHero().setAttackImage(path.get(counter++));
-        Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(path.get(counter++));
-        Game.getInstance().getSecondPlayerDeck().getHero().setDeathImage(path.get(counter++));
-        Game.getInstance().getSecondPlayerDeck().getHero().setRunImage(path.get(counter));
+        Random random = new Random();
+        int h = random.nextInt(7);
+        int hCounter = h*4;
+
+        Game.getInstance().getFirstPlayerDeck().getHero().setAttackImage(heroPath.get(hCounter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setDeathImage(heroPath.get(hCounter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setRunImage(heroPath.get(hCounter++));
+
+        hCounter = random.nextInt(7)*4;
+        if (h*4 == hCounter)
+            hCounter = (h-1) * 4;
+        Game.getInstance().getSecondPlayerDeck().getHero().setAttackImage(heroPath.get(hCounter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setDeathImage(heroPath.get(hCounter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setRunImage(heroPath.get(hCounter));
 
     }
 
-    public void initHeroImage(){
+    public void initHeroImage() {
         addCard(Game.getInstance().getMap().getCells()[2][0], 1);
         addCard(Game.getInstance().getMap().getCells()[2][8], 2);
     }
@@ -117,18 +146,27 @@ public class ImageController {
         }
     }
 
-    public void addCard(Cell cell, int turn){
+    public void addCard(Cell cell, int turn) {
         addCard(cell.getRow(), cell.getColumn(), cell.getCard(), turn);
     }
 
     public void addCard(double x, double y, Card card, int size, int playerTurn) {
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getBreathingImage())));
-            view.setY(y);
-            view.setX(x);
-            view.resize(size, size);
-            view.setFitWidth(size);
-            view.setFitHeight(size);
+
+            if (card.getCardType().equals("minion")) {
+                view.setY(y);
+                view.setX(x);
+                view.resize(size, size);
+                view.setFitWidth(size);
+                view.setFitHeight(size);
+            } else {
+                view.setY(y + size/4 + 15);
+                view.setX(x + size/4);
+                view.resize(size/2, size/2);
+                view.setFitWidth(size/2);
+                view.setFitHeight(size/2);
+            }
             MapController.getInstance().getPane().getChildren().add(view);
             if (playerTurn == 1)
                 viewsHand.put(card.getId(), view);
@@ -138,7 +176,7 @@ public class ImageController {
         }
     }
 
-    public ImageView getView(int turn, int id){
+    public ImageView getView(int turn, int id) {
         if (turn % 2 == 1)
             return views1.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
         return views2.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
