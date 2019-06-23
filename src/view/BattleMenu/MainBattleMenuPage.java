@@ -1,20 +1,14 @@
 package view.BattleMenu;
 
 import Controller.GameController.GameController;
-import Model.card.Card;
-import Model.game.Cell;
 import Model.game.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import view.View;
 import view.pages.Page;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
 
 public class MainBattleMenuPage extends Page {
 

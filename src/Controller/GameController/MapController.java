@@ -134,7 +134,7 @@ public class MapController {
     private void setOnRecClicked(Rectangle rectangle, int x, int y) {
         rectangle.setOnMouseClicked(event -> {
             if (handCardSelected) {
-                insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), String.valueOf(x), String.valueOf(y));
+                insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
                 removeIdFromHand(Integer.parseInt(handCardId));
                 updateMap();
                 updateHand();
@@ -328,16 +328,16 @@ public class MapController {
         } else label.setText(ErrorType.CARD_HAVE_NOT_SP.getMessage());
     }
 
-    public void insertCard(String cardName, String x, String y) {
+    public void insertCard(String cardName, int x, int y) {
         if (game.isCardInPlayerHand(cardName)) {
             if (game.haveEnoughMana(cardName)) {
-                if (game.isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
-                    game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
+                if (game.isCellValidForInsert(x, y)) {
+                    game.insertPlayerCard(cardName, x, y);
 
                     if (game.getCurrentCard().getCardType().equals("minion"))
-                        imageController.addCard(Integer.parseInt(x), Integer.parseInt(y), game.getCurrentCard(), game.getTurn());
+                        imageController.addCard(x, y, game.getCurrentCard(), game.getTurn());
                     else {
-                        animationCtrl.insertSpell(cells[Integer.parseInt(x)][Integer.parseInt(y)], game.getCurrentCard(), getPane());
+                        animationCtrl.insertSpell(cells[x][y], game.getCurrentCard(), getPane());
                     }
                     StringBuilder message = new StringBuilder();
                     message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
@@ -348,5 +348,6 @@ public class MapController {
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
         } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
     }
+
 
 }

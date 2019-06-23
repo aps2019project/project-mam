@@ -1,10 +1,6 @@
 package view.BattleMenu;
 
-import Controller.Controller;
-import view.View;
 import view.pages.Page;
-
-import java.util.ArrayList;
 
 public class SelectCardMenu extends Page {
 

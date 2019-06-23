@@ -1,12 +1,10 @@
 package view.BattleMenu;
 
 import Controller.*;
-import Model.enums.ErrorType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import view.View;
 import view.pages.Page;
 
 import java.io.FileInputStream;

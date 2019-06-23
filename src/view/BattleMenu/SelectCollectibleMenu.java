@@ -1,7 +1,5 @@
 package view.BattleMenu;
 
-import Controller.Controller;
-import view.View;
 import view.pages.Page;
 
 public class SelectCollectibleMenu extends Page {

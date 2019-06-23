@@ -1,13 +1,11 @@
 package view.pages;
 
 import Controller.*;
-import Model.enums.ErrorType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.View;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
