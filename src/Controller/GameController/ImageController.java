@@ -109,7 +109,7 @@ public class ImageController {
             view.setFitWidth(120);
             view.setFitHeight(120);
             MapController.getInstance().getPane().getChildren().add(view);
-            if (playerTurn == 1)
+            if (playerTurn % 2 == 1)
                 views1.put(card.getId(), view);
             else views2.put(card.getId(), view);
         } catch (FileNotFoundException e) {
@@ -139,7 +139,7 @@ public class ImageController {
     }
 
     public ImageView getView(int turn, int id){
-        if (turn == 1)
+        if (turn % 2 == 1)
             return views1.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
         return views2.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
     }

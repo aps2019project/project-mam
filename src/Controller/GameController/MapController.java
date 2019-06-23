@@ -89,8 +89,6 @@ public class MapController {
     final double yStep = (410 - SPACE * ROW) / ROW;
 
     public void initCells() {
-
-
         for (int i = 0; i < ROW; i++)
             for (int j = 0; j < COLUMN; j++) {
                 double x = (xStep + SPACE) * j + startX;
@@ -331,6 +329,9 @@ public class MapController {
             if (game.haveEnoughMana(cardName)) {
                 if (game.isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
                     game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
+
+                    imageController.addCard(Integer.parseInt(x), Integer.parseInt(y), game.getCurrentCard(), game.getTurn());
+
                     StringBuilder message = new StringBuilder();
                     message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
                     message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
@@ -340,6 +341,5 @@ public class MapController {
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
         } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
     }
-
 
 }
