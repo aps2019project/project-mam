@@ -28,7 +28,7 @@ public class MainBattleMenuPage extends Page {
     }
 
     private static Pane root = new Pane();
-    private GameController controller;
+    private static GameController controller;
 
     public static Pane getRoot() {
         return root;
@@ -62,6 +62,10 @@ public class MainBattleMenuPage extends Page {
         setBackGround(controller.custom, "resources/ui/button_secondary_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
 */
+    }
+
+    public static GameController getController() {
+        return controller;
     }
 
     /*public void updatePage(){

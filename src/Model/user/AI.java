@@ -1,9 +1,12 @@
 package Model.user;
 
+import Controller.GameController.GameController;
 import Controller.GameController.MapController;
 import Model.card.Card;
 import Model.game.Cell;
 import Model.game.Game;
+import javafx.application.Platform;
+import view.BattleMenu.MainBattleMenuPage;
 
 import java.util.Map;
 
@@ -39,6 +42,7 @@ public class AI {
     
 
     public void getCommand() {
+        game = Game.getInstance();
         new Thread(() -> {
             if (cardsCanInsert() && insertTarget() && !inserted)
                 commandInsert();
@@ -87,6 +91,7 @@ public class AI {
         reselected = false;
         moved = false;
         attacked = false;
+        Platform.runLater(() -> MainBattleMenuPage.getController().endTurn());
     }
 
     private boolean cardsCanInsert() {
@@ -113,7 +118,7 @@ public class AI {
 
     private void commandInsert() {
         inserted = true;
-        mapCtrl.insertCard(insertCard.getName(),insertTarget.getRow(), insertCard.getColumn());
+        Platform.runLater(() -> mapCtrl.insertCard(insertCard.getName(),insertTarget.getRow(), insertCard.getColumn()));
         sleep(1000);
     }
 
@@ -130,7 +135,7 @@ public class AI {
     }
 
     private void commandSelect() {
-        mapCtrl.selectCard(String.valueOf(selectedCard.getId()));
+        Platform.runLater(() -> mapCtrl.selectCard(String.valueOf(selectedCard.getId())));
         sleep(50);
     }
 
@@ -152,8 +157,8 @@ public class AI {
 
     private void commandMove() {
         moved = true;
-        mapCtrl.moveCard(moveTarget.getRow(), moveTarget.getColumn());
-        sleep(1000);
+        Platform.runLater(() -> mapCtrl.moveCard(moveTarget.getRow(), moveTarget.getColumn()));
+        sleep(400);
     }
 
     private boolean cardCanAttack() {
@@ -171,7 +176,7 @@ public class AI {
     }
 
     private void commandAttack() {
-        mapCtrl.attack(attackTarget.getId());
+        Platform.runLater(() -> mapCtrl.attack(attackTarget.getId()));
         sleep(2000);
     }
 }
