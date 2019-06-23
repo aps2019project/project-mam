@@ -92,11 +92,11 @@ public class ImageController {
         hCounter = random.nextInt(7)*4;
         if (h*4 == hCounter)
             hCounter = (h-1) * 4;
+
         Game.getInstance().getSecondPlayerDeck().getHero().setAttackImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setDeathImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setRunImage(heroPath.get(hCounter));
-
     }
 
     public void initHeroImage() {
@@ -168,7 +168,7 @@ public class ImageController {
                 view.setFitHeight(size/2);
             }
             MapController.getInstance().getPane().getChildren().add(view);
-            if (playerTurn == 1)
+            if (playerTurn % 2 == 1)
                 viewsHand.put(card.getId(), view);
             else views1.put(card.getId(), view);
         } catch (FileNotFoundException e) {

@@ -2,11 +2,14 @@ package Controller.GameController;
 
 import Model.card.Card;
 import javafx.animation.PathTransition;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -71,9 +74,26 @@ public class AnimationController {
         }).start();
     }
 
+    public void insertSpell(Rectangle cell, Card card, Pane pane) {
+        //TODO : init path
+        new Thread(() -> {
+            try {
+                ImageView image = new ImageView(new Image(new FileInputStream(card.getAttackImage())));
+                image.setY(cell.getY() + 12);
+                image.setX(cell.getX() + 12);
+                image.setFitWidth(60);
+                image.setFitHeight(60);
+                Platform.runLater(() -> pane.getChildren().add(image));
+                Thread.sleep(2000);
+                image.setImage(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
     public void SpecialPower() {
     }
 
-    public void Spell() {
-    }
+
 }

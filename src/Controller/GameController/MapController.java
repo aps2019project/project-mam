@@ -271,11 +271,11 @@ public class MapController {
             if (game.cardCanMove(x, y)) {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
-                animationCtrl.moveTo(imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()),
+                animationCtrl.moveTo(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()),
                         game.getCurrentCard(),
-                        cells[x][y].getX() + (xStep - 15)/2, cells[x][y].getY() + (yStep - 35)/2);
-                imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
-                imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
+                        cells[x][y].getX() + (xStep - 15) / 2, cells[x][y].getY() + (yStep - 35) / 2);
+                imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
+                imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
                 StringBuilder message = new StringBuilder();
                 message.append(game.getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);
@@ -330,8 +330,11 @@ public class MapController {
                 if (game.isCellValidForInsert(Integer.parseInt(x), Integer.parseInt(y))) {
                     game.insertPlayerCard(cardName, Integer.parseInt(x), Integer.parseInt(y));
 
-                    imageController.addCard(Integer.parseInt(x), Integer.parseInt(y), game.getCurrentCard(), game.getTurn());
-
+                    if (game.getCurrentCard().getCardType().equals("minion"))
+                        imageController.addCard(Integer.parseInt(x), Integer.parseInt(y), game.getCurrentCard(), game.getTurn());
+                    else {
+                        animationCtrl.insertSpell(cells[Integer.parseInt(x)][Integer.parseInt(y)], game.getCurrentCard(), getPane());
+                    }
                     StringBuilder message = new StringBuilder();
                     message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
                     message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
