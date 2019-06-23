@@ -295,7 +295,7 @@ public class MapController {
                 if (game.isOppAvailableForAttack(oppId, game.getCurrentCard().getId())) {
                     animationCtrl.attack(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()), game.getCurrentCard());
                     int changedTurn = abs(game.getTurn() % 2 - 1);
-                    animationCtrl.conterAttack(imageController.getView(changedTurn, oppId), game.getCard(changedTurn, oppId));
+                    animationCtrl.counterAttack(imageController.getView(changedTurn, oppId), game.getCard(changedTurn, oppId));
                     game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                 } else label.setText(ErrorType.UNAVAILABLE_OPP_ATTACK.getMessage());

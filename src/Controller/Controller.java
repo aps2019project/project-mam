@@ -29,7 +29,7 @@ public class Controller {
 
     private Shop shop = Shop.getInstance();
     private User user = new User();
-    private AI ai = new AI();
+    private AI ai = AI.getInstance();
     private static Game game = Game.getInstance();
     private View view = View.getInstance();
     private Deck secondDeck = new Deck();
@@ -97,9 +97,9 @@ public class Controller {
     }
 
     public void setAiMainDeck(int mission){
-        AI.getAI().setMainDeck(Shop.getDecks().get(mission - 1));
+        AI.getInstance().getAI().setMainDeck(Shop.getDecks().get(mission - 1));
         int counter = 1;
-        for (Card card : AI.getAI().getMainDeck().getCards()) {
+        for (Card card : AI.getInstance().getAI().getMainDeck().getCards()) {
             card.setId(counter);
             counter++;
         }

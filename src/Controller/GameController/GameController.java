@@ -5,6 +5,7 @@ import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
+import Model.user.AI;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,6 +20,7 @@ public class GameController {
     private MapController mapCtrl = MapController.getInstance();
     private Game game = Game.getInstance();
     private ImageController imageCtrl = ImageController.getInstance();
+    private AI ai = AI.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -158,12 +160,15 @@ public class GameController {
 
     public void endTurn() {
         mapCtrl.removeNextCard();
-        Game.getInstance().endTurn();
+        game.endTurn();
         label.setText("---<End turn>---");
         mapCtrl.updateHand();
         mapCtrl.updatePlayersMana();
         mapCtrl.updateNextCard();
         mapCtrl.updateMap();
+        if(game.getTurn() % 2 == 0 && game.getSecondUser().getName().equals("AI")){
+            ai.getCommand();
+        }
     }
 
 }

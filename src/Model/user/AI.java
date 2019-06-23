@@ -12,15 +12,21 @@ import java.util.Map;
 import static java.lang.Math.abs;
 
 public class AI {
+    private static AI instanse = new AI();
 
-    private Controller controller = Controller.getInstance();
-    //private Game game = Controller.getGame(); //= controller.getGame();
+    private AI() {
+    }
+
+    public static AI getInstance() {
+        return instanse;
+    }
+
     private Game game = Game.getInstance();
     private Cell cell;
-    private static final User ai = new User("AI", "0");
+    private User ai = new User("AI", "0");
     private int counter;
 
-    public static User getAI() {
+    public User getAI() {
         return ai;
     }
 
@@ -38,17 +44,15 @@ public class AI {
     private Cell insertTarget = null;
 
 
-
-    public void action(){
+    public void action() {
 
     }
 
-    public String getCommand() {
+    public void getCommand() {
         game = Controller.getGame();
         if (cardsCanInsert() && insertTarget() && !inserted) {
             commandInsert();
             inserted = true;
-            return command;
         }
         if (!selected) {
             if (cardsCanSelect()) {
@@ -56,31 +60,25 @@ public class AI {
                 commandSelect();
                 moved = false;
                 attacked = false;
-                return command;
             }
         }
         if (cardCanMove() && moveTarget() && !moved && selected) {
             moved = true;
             commandMove();
-            return command;
         }
         if (cardCanAttack() && attackTarget() && !attacked && selected && !reselected) {
             reselected = true;
             commandSelect();
-            return command;
         }
         if (cardCanAttack() && attackTarget() && !attacked && selected) {
             attacked = true;
             selected = false;
             commandAttack();
-            return command;
         }
         if (allSelected) {
             endTurn();
-            return command;
-        }else {
+        } else {
             selected = false;
-            return "";
         }
     }
 
@@ -185,161 +183,4 @@ public class AI {
         newCommand.append("attack ").append(attackTarget.getId());
         command = newCommand.toString();
     }
-
-    /*
-    public boolean firstCheckCardsCanSelect(){
-
-    }
-
-    public boolean cardCanSelect() {
-        for (Cell[] cells : game.getMap().getCells()) {
-            for (Cell cell : cells) {
-                if (cell.getCard() == null) {
-                    selectTarget = cell;
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void select() {
-        StringBuilder newCommand = new StringBuilder();
-        newCommand.append("selected ").append(selectTarget.getColumn());
-        command = newCommand.toString();
-
-    }
-
-    public void commandMoveCard(int x, int y) {
-        StringBuilder newCommand = new StringBuilder();
-        newCommand.append("move to ").append(x).append(" ").append(y);
-        command = newCommand.toString();
-        counter += 1;
-    }
-
-    public boolean cardCanMove(Card card) {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (entry.getValue().getCard().getName().equalsIgnoreCase(card.getName())) {
-                for (Cell[] cells : game.getMap().getCells()) {
-                    for (Cell cell : cells) {
-                        if (game.getMap().getManhatanDistance(cell, entry.getValue()) < entry.getValue().getCard().getTargetCommunity()) {
-                            moveTarget = cell;
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean firstCheckCardsCanMove() {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (entry.getValue().getCard().isCanMove()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void move() {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (cardCanMove(entry.getValue().getCard())) {
-                commandMoveCard(moveTarget.getColumn(), moveTarget.getRow());
-                break;
-            }
-        }
-    }
-
-    public boolean cardsCanInsert() {
-        for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
-            if (entry.getValue().getCardType().equalsIgnoreCase("minion")) {
-                insertCard = entry.getValue();
-                if (checkCellInsert(insertCard))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-
-    public boolean checkCellInsert(Card card2) {
-        for (Cell[] cells : game.getMap().getCells()) {
-            for (Cell cell : cells) {
-                for (Map.Entry<Integer, Cell> entry2 : game.getMap().getFirstPlayerCellCard().entrySet()) {
-                    if (game.getMap().getManhatanDistance(cell, entry2.getValue()) < card2.getTargetCommunity()) {
-                        insertTarget = cell;
-                        return true;
-                    } else {
-                        insertTarget = cell;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean firstCheckCardsCanInsert(){
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (entry.getValue().getCard().getMP() <= game.getSecondPlayerMana()){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void commandInsertCard() {
-        if (cardsCanInsert()) {
-            StringBuilder newCommand = new StringBuilder();
-            newCommand.append("insert to ").append(insertCard).append("in").append(insertTarget.getColumn())
-                    .append(" ").append(insertCard.getRow());
-            command = newCommand.toString();
-            counter += 1;
-        }
-    }
-
-    public boolean cardsCanAttack(Card card) {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (entry.getValue().getCard().getName().equalsIgnoreCase(card.getName())) {
-                for (Cell[] cells : game.getMap().getCells()) {
-                    for (Cell cell : cells) {
-                        for (Map.Entry<Integer, Cell> entry2 : game.getMap().getFirstPlayerCellCard().entrySet()) {
-                            if (game.getMap().getManhatanDistance(cell, entry2.getValue()) < entry.getValue().getCard().getTargetCommunity()) {
-                                attackTarget = cell;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean firstCheckCardsCanAttack() {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (entry.getValue().getCard().isCanAttack()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void attack() {
-        for (Map.Entry<Integer, Cell> entry : game.getMap().getSecondPlayerCellCard().entrySet()) {
-            if (cardsCanAttack(entry.getValue().getCard())) {
-                commandAttackCard(attackTarget.getColumn(), attackTarget.getRow());
-                break;
-            }
-        }
-    }
-
-    public void commandAttackCard(int x, int y) {
-        StringBuilder newCommand = new StringBuilder();
-        newCommand.append("attack to ").append(x).append(" ").append(y);
-        command = newCommand.toString();
-        counter += 1;
-    }*/
-
 }

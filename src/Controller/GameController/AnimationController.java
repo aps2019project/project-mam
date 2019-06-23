@@ -60,7 +60,7 @@ public class AnimationController {
         }).start();
     }
 
-    public void conterAttack(ImageView image, Card attacker) {
+    public void counterAttack(ImageView image, Card attacker) {
         //TODO : init path
         new Thread(() -> {
             try {
