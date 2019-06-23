@@ -22,7 +22,7 @@ public class AnimationController {
         return instance;
     }
 
-    public void moveTo(ImageView image, double x, double y) {
+    public void moveTo(ImageView image, Card card, double x, double y) {
         //TODO : init path
         Path path = new Path(new MoveTo(image.getX() + image.getFitWidth() / 2, image.getY() + image.getFitHeight() / 2),
                 new LineTo(x, y));
@@ -30,13 +30,13 @@ public class AnimationController {
         PathTransition ptr = new PathTransition(Duration.seconds(1), path);
         ptr.setNode(image);
         try {
-            image.setImage(new Image(new FileInputStream("resources/gif/Katara_run.gif")));
+            image.setImage(new Image(new FileInputStream(card.getRunImage())));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         ptr.setOnFinished(event -> {
             try {
-                image.setImage(new Image(new FileInputStream("resources/gif/Katara_breathing.gif")));
+                image.setImage(new Image(new FileInputStream(card.getBreathingImage())));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

@@ -41,20 +41,33 @@ public class ImageController {
     }
 
     public void initCardImage() {
-        File dir = new File("resources/unit_gifs");
+        File dir = new File("resources/gif");
         ArrayList<String> path = new ArrayList<>();
         for (String s : dir.list()) {
-            path.add("resources/unit_gifs/" + s);
+            path.add("resources/gif/" + s);
         }
         int counter = 0;
         for (Card card : Game.getInstance().getFirstPlayerDeck().getCards()) {
-            card.setImageAddress(path.get(counter++));
+            card.setAttackImage(path.get(counter++));
+            card.setBreathingImage(path.get(counter++));
+            card.setDeathImage(path.get(counter++));
+            card.setRunImage(path.get(counter++));
         }
-        Game.getInstance().getFirstPlayerDeck().getHero().setImageAddress(path.get(counter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setAttackImage(path.get(counter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setBreathingImage(path.get(counter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setDeathImage(path.get(counter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setRunImage(path.get(counter++));
         for (Card card : Game.getInstance().getSecondPlayerDeck().getCards()) {
-            card.setImageAddress(path.get(counter++));
+            card.setAttackImage(path.get(counter++));
+            card.setBreathingImage(path.get(counter++));
+            card.setDeathImage(path.get(counter++));
+            card.setRunImage(path.get(counter++));
         }
-        Game.getInstance().getSecondPlayerDeck().getHero().setImageAddress(path.get(counter));
+        Game.getInstance().getSecondPlayerDeck().getHero().setAttackImage(path.get(counter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(path.get(counter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setDeathImage(path.get(counter++));
+        Game.getInstance().getSecondPlayerDeck().getHero().setRunImage(path.get(counter));
+
     }
 
     public void initHeroImage(){
@@ -90,7 +103,7 @@ public class ImageController {
 
     public void addCard(int row, int column, Card card, int playerTurn) {
         try {
-            ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
+            ImageView view = new ImageView(new Image(new FileInputStream(card.getBreathingImage())));
             view.setY(MapController.getInstance().getCells()[row][column].getY() - 35);
             view.setX(MapController.getInstance().getCells()[row][column].getX() - 15);
             view.setFitWidth(120);
@@ -110,7 +123,7 @@ public class ImageController {
 
     public void addCard(double x, double y, Card card, int size, int playerTurn) {
         try {
-            ImageView view = new ImageView(new Image(new FileInputStream(card.getImageAddress())));
+            ImageView view = new ImageView(new Image(new FileInputStream(card.getBreathingImage())));
             view.setY(y);
             view.setX(x);
             view.resize(size, size);

@@ -274,7 +274,8 @@ public class MapController {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
                 animationCtrl.moveTo(imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()),
-                        cells[x][y].getX() + xStep/2, cells[x][y].getY() + yStep/2);
+                        game.getCurrentCard(),
+                        cells[x][y].getX() + (xStep - 15)/2, cells[x][y].getY() + (yStep - 35)/2);
                 imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
                 imageController.getView(game.getTurn() % 2,game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
                 StringBuilder message = new StringBuilder();

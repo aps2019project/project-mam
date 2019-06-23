@@ -16,7 +16,10 @@ public class Card {
     private String desc;
     private ArrayList<Buff> specialPower = new ArrayList<>();
     protected String type = "";
-    private String imageAddress;
+    private String breathingImage;
+    private String attackImage;
+    private String runImage;
+    private String deathImage;
 
     private boolean canMove = true;
     private boolean canAttack = true;
@@ -34,12 +37,36 @@ public class Card {
         this.desc = desc;
     }
 
-    public void setImageAddress(String imageAddress) {
-        this.imageAddress = imageAddress;
+    public String getBreathingImage() {
+        return breathingImage;
     }
 
-    public String getImageAddress() {
-        return imageAddress;
+    public void setBreathingImage(String breathingImage) {
+        this.breathingImage = breathingImage;
+    }
+
+    public String getAttackImage() {
+        return attackImage;
+    }
+
+    public void setAttackImage(String attackImage) {
+        this.attackImage = attackImage;
+    }
+
+    public String getRunImage() {
+        return runImage;
+    }
+
+    public void setRunImage(String runImage) {
+        this.runImage = runImage;
+    }
+
+    public String getDeathImage() {
+        return deathImage;
+    }
+
+    public void setDeathImage(String deathImage) {
+        this.deathImage = deathImage;
     }
 
     public void setSpecialPower(ArrayList<Buff> specialPower) {
