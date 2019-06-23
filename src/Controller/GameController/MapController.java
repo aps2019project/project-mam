@@ -59,6 +59,7 @@ public class MapController {
         updateMap();
         imageController.initHeroImage();
         updateNextCard();
+        imageController.addFlags(getPane());
     }
 
     private String text;
@@ -259,7 +260,7 @@ public class MapController {
         }
         setOnCard2EnteredAndExited();
 
-        imageController.addFlags(getPane());
+        //imageController.addFlags(getPane());
     }
 
 
@@ -278,6 +279,7 @@ public class MapController {
                         cells[x][y].getX() + (xStep - 15) / 2, cells[x][y].getY() + (yStep - 35) / 2);
                 imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
                 imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
+                imageController.updateFlags(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
                 StringBuilder message = new StringBuilder();
                 message.append(game.getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);

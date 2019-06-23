@@ -4,6 +4,7 @@ import Model.card.Card;
 import Model.game.Cell;
 import Model.game.Game;
 import Model.game.Map;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -89,11 +90,13 @@ public class ImageController {
         Game.getInstance().getFirstPlayerDeck().getHero().setAttackImage(heroPath.get(hCounter++));
         Game.getInstance().getFirstPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
         Game.getInstance().getFirstPlayerDeck().getHero().setDeathImage(heroPath.get(hCounter++));
-        Game.getInstance().getFirstPlayerDeck().getHero().setRunImage(heroPath.get(hCounter++));
+        Game.getInstance().getFirstPlayerDeck().getHero().setRunImage(heroPath.get(hCounter));
 
         hCounter = random.nextInt(7)*4;
-        if (h*4 == hCounter)
+        if (h*4 == hCounter && h > 0)
             hCounter = (h-1) * 4;
+        else if (h*4 == hCounter)
+            hCounter = (h+1) * 4;
 
         Game.getInstance().getSecondPlayerDeck().getHero().setAttackImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
@@ -121,6 +124,11 @@ public class ImageController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateFlags(Pane pane, Cell cell){
+        pane.getChildren().remove(viewsFlag.get(cell));
+        viewsFlag.remove(cell);
     }
 
     public void addFlags(Pane pane){
