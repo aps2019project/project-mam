@@ -65,11 +65,12 @@ public class AI {
                 selected = false;
                 commandAttack();
             }
-            if (allSelected) {
+            endTurn();
+            /*if (allSelected) {
                 endTurn();
             } else {
                 selected = false;
-            }
+            }*/
         }).start();
     }
 

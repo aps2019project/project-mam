@@ -137,26 +137,6 @@ public class Game {
         return player2Collectable;
     }
 
-    public void setFirstUser(User firstUser) {
-        this.firstUser = firstUser;
-    }
-
-    public void setSecondUser(User secondUser) {
-        this.secondUser = secondUser;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public void setFlagCount(int flagCount) {
-        this.flagCount = flagCount;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -205,36 +185,8 @@ public class Game {
         return secondPlayerHand;
     }
 
-    public int getBasicMana() {
-        return basicMana;
-    }
-
-    public ArrayList<Card> getGraveYard() {
-        return firstPlayerGraveYard;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
     public int getTurn() {
         return turn;
-    }
-
-    public int getFlagCount() {
-        return flagCount;
-    }
-
-    public boolean isGameEnd() {
-        return isGameEnd;
-    }
-
-    public void setCurrentCard(Card currentCard) {
-        this.currentCard = currentCard;
-    }
-
-    public int getExtraPlayer1Mana() {
-        return extraPlayer1Mana;
     }
 
     public void setExtraPlayer1Mana(int extraPlayer1Mana) {
@@ -315,6 +267,10 @@ public class Game {
 
     public int getWinner() {
         return winner;
+    }
+
+    public boolean isGameEnd() {
+        return isGameEnd;
     }
 
     public String getWinnerName() {

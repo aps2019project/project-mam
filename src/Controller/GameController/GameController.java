@@ -61,10 +61,11 @@ public class GameController {
     public Rectangle[][] getCells() {
         return cells;
     }
+
     public ArrayList<Circle> handCards = new ArrayList<>();
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
-    public void init(){
+    public void init() {
         handCards.add(handCard1);
         handCards.add(handCard2);
         handCards.add(handCard3);
@@ -107,13 +108,16 @@ public class GameController {
         mapCtrl.removeNextCard();
         game.endTurn();
         label.setText("---<End turn>---");
-        mapCtrl.updateHand();
-        mapCtrl.updatePlayersMana();
-        mapCtrl.updateNextCard();
-        mapCtrl.updateMap();
-        if(game.getTurn() % 2 == 0 && game.getSecondUser().getName().equals("AI")){
-            ai.getCommand();
+        if (game.isGameEnd())
+            label.setText("-----<game ended>------\n" + game.getWinnerName() + "win");
+        else {
+            mapCtrl.updateHand();
+            mapCtrl.updatePlayersMana();
+            mapCtrl.updateNextCard();
+            mapCtrl.updateMap();
+            if (game.getTurn() % 2 == 0 && game.getSecondUser().getName().equals("AI")) {
+                ai.getCommand();
+            }
         }
     }
-
 }
