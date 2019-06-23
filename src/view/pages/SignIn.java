@@ -8,13 +8,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignIn extends Page {
-    private View view = View.getInstance();
-
-    public SignIn(Stage stage) {
-        super(stage);
-        start();
-        stage.show();
-    }
 
     public SignIn(){
         start();

@@ -15,8 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class BattleMenuPage extends Page {
-    //private Controller controller = Controller.getInstance();
-    View view = View.getInstance();
 
     private static final BattleMenuPage BATTLE_MENU_PAGE = new BattleMenuPage();
     private static String numOfPlayers = null;
@@ -24,7 +22,6 @@ public class BattleMenuPage extends Page {
     private static String gameMood = null;
     private static String mission = null;
     private static User secondUser = new User("notAi");
-    //private User firstUser = controller.getFirstUser();
     private static int flags = 0;
 
     private static Pane root = new Pane();
@@ -100,8 +97,6 @@ public class BattleMenuPage extends Page {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/BattleMenu.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
-
-
             initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -117,8 +112,6 @@ public class BattleMenuPage extends Page {
         setBackGround(controller.single, "resources/ui/button_secondary_glow@2x.png");
         setBackGround(controller.multi, "resources/ui/button_secondary_glow@2x.png");
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
-
-
     }
 
     public static void createGame(){

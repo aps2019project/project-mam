@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ShopMenuPage extends Page {
-    View view = View.getInstance();
     private static Pane root = new Pane();
     private ShopController controller;
 
@@ -49,21 +48,4 @@ public class ShopMenuPage extends Page {
                 "-fx-text-fill: white;");
     }
 
-    public ShopMenuPage(Stage stage) {
-        super(stage);
-    }
-
-
-
-    @Override
-    public void help() {
-        view.showHelpForShopMenu();
-    }
-
-
-
-    @Override
-    public void showMenu() {
-        view.show("----------<Shop>---------");
-    }
 }
