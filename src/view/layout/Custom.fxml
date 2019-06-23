@@ -61,7 +61,7 @@
                      <font>
                         <Font size="24.0" />
                      </font></TextField>
-                  <Button fx:id="create" mnemonicParsing="false" onAction="#onCreateClick" onMouseClicked="#onCreateClick" text="Create">
+                  <Button fx:id="create" mnemonicParsing="false" onMouseClicked="#onCreateClick" text="Create">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -77,7 +77,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="1080.0" prefWidth="1051.0" spacing="200.0" GridPane.columnIndex="2">
+      <HBox alignment="CENTER" prefHeight="1080.0" prefWidth="1051.0" spacing="100.0" GridPane.columnIndex="2">
          <children>
             <VBox fx:id="spellVB" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0">
                <children>

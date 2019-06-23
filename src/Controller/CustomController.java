@@ -1,9 +1,15 @@
 package Controller;
 
+import Model.Buffs.Buff;
+import Model.card.Card;
+import Model.card.Hero;
+import Model.card.Minion;
+import Model.card.Spell;
 import Model.enums.BuffType;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
+import Model.shop.Shop;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -81,10 +87,10 @@ public class CustomController {
     public Label label;
     public ImageView back;
 
-    public CustomController(){
+    public CustomController() {
     }
 
-    public void init(){
+    public void init() {
         create.setStyle("-jfx-button-type: FLAT;" +
                 "-fx-background-color: rgba(45,45,45,0.7);" +
                 "-fx-text-fill: #fff5fd;");
@@ -122,7 +128,7 @@ public class CustomController {
         two.setUserData(TWO_IN_TWO);
         three.setToggleGroup(spellTarget);
         three.setUserData(THREE_IN_THREE);
-        spellTarget.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        spellTarget.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (spellTarget.getSelectedToggle() != null) {
                     restate(spellTarget);
@@ -143,7 +149,7 @@ public class CustomController {
         weakness.setUserData(ATTACK_WEAKNESS);
         disarm.setToggleGroup(buffType);
         disarm.setUserData(DISARM);
-        buffType.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        buffType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (buffType.getSelectedToggle() != null) {
                     restate(buffType);
@@ -153,10 +159,10 @@ public class CustomController {
 
         friend.setToggleGroup(enemyOrFriend);
         friend.setSelected(true);
-        friend.setUserData("friend");
+        friend.setUserData(ONE_INSIDER_FORCE);
         enemy.setToggleGroup(enemyOrFriend);
-        enemy.setUserData("enemy");
-        enemyOrFriend.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        enemy.setUserData(ONE_ENEMY_FORCE);
+        enemyOrFriend.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (enemyOrFriend.getSelectedToggle() != null) {
                     restate(enemyOrFriend);
@@ -171,7 +177,7 @@ public class CustomController {
         ranged.setUserData(RANGED);
         hybrid.setToggleGroup(attackType);
         hybrid.setUserData(HYBRID);
-        attackType.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        attackType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (attackType.getSelectedToggle() != null) {
                     restate(attackType);
@@ -188,7 +194,7 @@ public class CustomController {
         onAttack.setUserData(ON_ATTACK);
         onInsert.setToggleGroup(activation);
         onInsert.setUserData(ON_INSERT);
-        activation.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        activation.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
                 if (activation.getSelectedToggle() != null) {
                     restate(activation);
@@ -197,7 +203,11 @@ public class CustomController {
         });
     }
 
-    public void restate(ToggleGroup toggleGroup){
+
+    private Card card;
+
+
+    public void restate(ToggleGroup toggleGroup) {
         label.setText(toggleGroup.getSelectedToggle().getUserData().toString());
     }
 
@@ -208,19 +218,70 @@ public class CustomController {
     }
 
     @FXML
-    public void onCreateClick(){
-        System.out.println("hello");
+    public void onCreateClick() {
         if (!isInfoComplete())
             return;
-        if (cardType.selectedToggleProperty().toString().equals("minion"))
-            return;
+        initCard();
+        Shop.getCards().add(card);
+        label.setText("created");
+        System.out.println("created");
     }
 
-    private boolean isInfoComplete(){{
-        System.out.println(cardName.getText().equals(""));
+    private void initCard() {
+        switch (cardType.getSelectedToggle().getUserData().toString()) {
+            case "minion":
+                initMinion();
+                break;
+            case "hero":
+                initHero();
+                break;
+            case "spell":
+                initSpell();
+        }
     }
-        if (cardName.getText().equals(""))
-            label.setText("please");
-        return false;
+
+    private void initSpell() {
+        card = new Spell(cardName.getText(), Integer.parseInt(cost.getText()), 2);
+        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) spellTarget.getUserData()));
+    }
+
+    private void initHero() {
+        card = new Hero(cardName.getText(), Integer.parseInt(cost.getText()),
+                Integer.parseInt(hp.getText()), Integer.parseInt(ap.getText()),
+                (ImpactType) attackType.getUserData(), Integer.parseInt(range.getText()),
+                2, Integer.parseInt(coolDown.getText()));
+        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getUserData()));
+    }
+
+    private void initMinion() {
+        card = new Minion(cardName.getText(), Integer.parseInt(cost.getText()),
+                2, Integer.parseInt(hp.getText()), Integer.parseInt(ap.getText()), Integer.parseInt(range.getText()),
+                (ImpactType) attackType.getUserData(), (SPActivationTime) activation.getUserData());
+        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getUserData()));
+    }
+
+    private boolean isInfoComplete() {
+        if (cardName.getText().equals("") ||
+                cost.getText().equals("") ||
+                buffName.getText().equals("") ||
+                delay.getText().equals("") ||
+                last.getText().equals("")) {
+            label.setText("please fill fields!");
+            return false;
+        }
+        if (cardType.getSelectedToggle().getUserData().toString().equals("minion") &&
+                (ap.getText().equals("") || hp.getText().equals("") || range.getText().equals(""))){
+            label.setText("please fill fields!");
+            return false;
+        }
+        if (cardType.getSelectedToggle().getUserData().toString().equals("hero") && (range.getText().equals("") ||
+                ap.getText().equals("") || hp.getText().equals("") || coolDown.getText().equals(""))){
+            label.setText("please fill fields!");
+            return false;
+        }
+        return true;
     }
 }

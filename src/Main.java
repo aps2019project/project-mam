@@ -29,7 +29,7 @@ public class Main extends Application {
         //Page.getPages().push(new CollectionMenuPage());
         //Page.getPages().push(new BattleMenuPage());
 //        Page.getPages().push(new MainBattleMenuPage());
-//        Page.getPages().push(new CustomMenuPage());
+        //Page.getPages().push(new CustomMenuPage());
         primaryStage.show();
     }
 }
