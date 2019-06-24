@@ -313,7 +313,7 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("AllDisarm", 2000, 9);
-        card.addBuff(new Buff(DISARM, 1, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Disarm(DISARM, 1, 0, ALL_ENEMY_FORCES));
         spells.add(card);
         cards.add(card);
 

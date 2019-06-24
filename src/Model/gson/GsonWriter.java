@@ -1,5 +1,6 @@
 package Model.gson;
 
+import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.deck.Deck;
 import Model.item.CollectableItem;
@@ -25,9 +26,10 @@ public class GsonWriter {
 
     public static void writeCards() throws IOException {
         Shop.importCards();
-        for (Card card : Shop.getMinions()) {
-            FileWriter out = new FileWriter("gson/Cards/Minion/"+ card.getName() + ".json");
-            Gson gson = new GsonBuilder().create();
+        for (Card card : Shop.getSpells()) {
+            FileWriter out = new FileWriter("gson/Cards/Spell/"+ card.getName() + ".json");
+            Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                    .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             out.write(gson.toJson(card));
             out.flush();
             out.close();
@@ -47,7 +49,8 @@ public class GsonWriter {
                 path.append("Spell/");
         }
         path.append(card.getName()).append(".json");
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         FileWriter writer = new FileWriter(path.toString());
         writer.write(gson.toJson(card));
         writer.flush();
@@ -73,7 +76,8 @@ public class GsonWriter {
 
     public static void writeDeck(Deck deck) throws IOException {
         FileWriter writer = new FileWriter("gson/decks/" + deck.getName() + ".json");
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         writer.write(gson.toJson(deck));
         writer.flush();
         writer.close();

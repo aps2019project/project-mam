@@ -11,7 +11,6 @@ public class BuffAdaptor implements JsonSerializer<Buff>, JsonDeserializer<Buff>
 
     static
     {
-        map.put("Buff", Buff.class);
         map.put("CellEffect", CellEffect.class);
         map.put("DestroyNegatives", DestroyNegatives.class);
         map.put("DestroyPositives", DestroyPositives.class);
@@ -33,7 +32,7 @@ public class BuffAdaptor implements JsonSerializer<Buff>, JsonDeserializer<Buff>
     @Override
     public JsonElement serialize(Buff buff, Type type, JsonSerializationContext context) {
         JsonObject retVal = context.serialize(buff).getAsJsonObject();
-        retVal.add("type", new JsonPrimitive(buff.getKind()));
+        retVal.add("kind", new JsonPrimitive(buff.getKind()));
         return retVal;
     }
 }

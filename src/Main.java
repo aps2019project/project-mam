@@ -18,12 +18,11 @@ public class Main extends Application {
         primaryStage.setTitle("Duelyst");
         Page.setStage(primaryStage);
 
+        /*GsonWriter.writeCards();
+        GsonWriter.writeItems();*/
 
-        GsonWriter.writeCards();
-        GsonWriter.writeItems();
-
-        /*GsonReader.readUser();
-        GsonReader.initShop();*/
+        GsonReader.readUser();
+        GsonReader.initShop();
         Page.getPages().push(new SignIn());
         //Page.getPages().push(new MainMenuPage());
         //Page.getPages().push(new ShopMenuPage());
