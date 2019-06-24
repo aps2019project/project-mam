@@ -156,7 +156,7 @@
          </font>
       </Label>
       <ImageView fx:id="endTurn" fitHeight="79.0" fitWidth="283.0" layoutX="1511.0" layoutY="870.0" onMouseClicked="#setEndTurn" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" onMouseClicked="#setHelp" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
       <ScrollPane fx:id="graveyardSP" layoutX="118.0" layoutY="490.0" prefHeight="272.0" prefWidth="260.0" visible="false">
          <content>
