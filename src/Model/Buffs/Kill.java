@@ -6,6 +6,7 @@ import Model.enums.TargetCommunity;
 public class Kill extends Buff {
     public Kill(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("Kill");
     }
 
     public Kill(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

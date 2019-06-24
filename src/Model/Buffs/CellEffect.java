@@ -7,6 +7,7 @@ import Model.enums.TargetCommunity;
 public class CellEffect extends Buff {
     public CellEffect(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("CellEffect");
     }
 
     public CellEffect(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

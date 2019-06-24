@@ -25,7 +25,7 @@ public class BuffAdaptor implements JsonSerializer<Buff>, JsonDeserializer<Buff>
     }
     @Override
     public Buff deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
-        Class cls = map.get(jsonElement.getAsJsonObject().get("type").getAsString());
+        Class cls = map.get(jsonElement.getAsJsonObject().get("kind").getAsString());
         return context.deserialize(jsonElement, cls);
     }
 

@@ -7,6 +7,7 @@ import Model.enums.TargetCommunity;
 public class IncreaseMana extends Buff {
     public IncreaseMana(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("IncreaseMana");
     }
 
     private Game game;

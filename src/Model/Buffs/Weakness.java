@@ -6,6 +6,7 @@ import Model.enums.TargetCommunity;
 public class Weakness extends Buff {
     public Weakness(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("Weakness");
     }
 
     public Weakness(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,

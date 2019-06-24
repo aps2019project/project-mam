@@ -6,6 +6,7 @@ import Model.enums.TargetCommunity;
 public class Holy extends Buff {
     public Holy(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("Holy");
     }
 
     public Holy(BuffType type, int remainTime, int buffPower, int activationTime,

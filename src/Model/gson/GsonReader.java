@@ -1,5 +1,6 @@
 package Model.gson;
 
+import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -34,7 +35,8 @@ public class GsonReader {
     }
 
     public static void initShop() throws FileNotFoundException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         JsonReader reader;
         File dir = new File("gson/Cards/Hero");
         for (File file : dir.listFiles()) {

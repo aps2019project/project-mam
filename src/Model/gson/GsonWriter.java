@@ -18,7 +18,8 @@ public class GsonWriter {
 
     public static void writeUser(User user) throws IOException {
         FileWriter out = new FileWriter("gson/users/" + user.toString() + ".json");
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         out.write(gson.toJson(user));
         out.flush();
         out.close();
@@ -26,8 +27,8 @@ public class GsonWriter {
 
     public static void writeCards() throws IOException {
         Shop.importCards();
-        for (Card card : Shop.getSpells()) {
-            FileWriter out = new FileWriter("gson/Cards/Spell/"+ card.getName() + ".json");
+        for (Card card : Shop.getHeros()) {
+            FileWriter out = new FileWriter("gson/Cards/Hero/"+ card.getName() + ".json");
             Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
                     .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             out.write(gson.toJson(card));
@@ -60,14 +61,14 @@ public class GsonWriter {
         Shop.importCards();
         for (UsableItem item : Shop.getUsableItems()) {
             FileWriter writer = new FileWriter("gson/items/usable/" + item.getName() + ".json");
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             writer.write(gson.toJson(item));
             writer.flush();
             writer.close();
         }
         for (CollectableItem collectible : Shop.getCollectibles()) {
             FileWriter writer = new FileWriter("gson/items/collectible/" + collectible.getName() + ".json");
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             writer.write(gson.toJson(collectible));
             writer.flush();
             writer.close();

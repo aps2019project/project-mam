@@ -1,1 +1,1 @@
-{"name":"shamshirChini","desc":"12","id":0,"buffs":[{"type":"ATTACK_POWER","remainTime":-1,"buffPower":5,"kind":"","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"JUST_MELEE"}]}
+{"name":"shamshirChini","desc":"12","id":0,"buffs":[{"type":"ATTACK_POWER","remainTime":-1,"buffPower":5,"kind":"Power","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"JUST_MELEE"}]}

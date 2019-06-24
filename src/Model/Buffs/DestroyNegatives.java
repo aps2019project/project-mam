@@ -6,6 +6,7 @@ import Model.enums.TargetCommunity;
 public class DestroyNegatives extends Buff {
     public DestroyNegatives(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         super(type, time, buffPower, targetCommunity);
+        this.setKind("DestroyNegatives");
     }
 
     public DestroyNegatives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
