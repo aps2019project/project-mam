@@ -18,7 +18,7 @@ public class Buff {
     private BuffType type;
     private int remainTime;
     private int buffPower;
-    private String kind;
+    private String kind = "";
     private int activationTime;
     private boolean isStarted = false;
     private boolean isUsed = false;

@@ -18,7 +18,6 @@ public class Main extends Application {
         primaryStage.setTitle("Duelyst");
         Page.setStage(primaryStage);
 
-
         /*GsonWriter.writeCards();
         GsonWriter.writeItems();*/
 

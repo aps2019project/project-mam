@@ -1,1 +1,1 @@
-{"row":0,"column":0,"MP":4,"id":0,"price":1500,"name":"AllAttack","specialPower":[{"type":"ATTACK_TO_ENEMY","remainTime":1,"buffPower":6,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"ALL_ENEMY_FORCES_IN_COLUMN"}],"type":"spell","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"row":0,"column":0,"MP":4,"id":0,"price":1500,"name":"AllAttack","specialPower":[],"type":"spell","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

@@ -1,1 +1,1 @@
-{"price":9000,"name":"kingWisdom","desc":"12","id":0,"buffs":[{"type":"INCREASE_MANA","remainTime":-1,"buffPower":1,"activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"NONE"}]}
+{"price":9000,"name":"kingWisdom","desc":"12","id":0,"buffs":[{"type":"INCREASE_MANA","remainTime":-1,"buffPower":1,"kind":"","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"NONE"}]}
