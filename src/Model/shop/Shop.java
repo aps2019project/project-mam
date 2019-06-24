@@ -1,7 +1,6 @@
 package Model.shop;
 
-import Model.Buffs.Buff;
-import Model.Buffs.IncreaseMana;
+import Model.Buffs.*;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -269,49 +268,47 @@ public class Shop {
 
     public static void importCards() {
         Card card = new Spell("TotalDisarm", 1000, 0);
-        card.addBuff(new Buff(DISARM, -1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Disarm(DISARM, -1, 0, ONE_ENEMY_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("AreaDispel", 1500, 2);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, TWO_IN_TWO));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, TWO_IN_TWO));
+        card.addBuff(new DestroyNegatives(REMOVE_INSIDERS_BUFFS, 1, 0, TWO_IN_TWO));
+        card.addBuff(new DestroyPositives(REMOVE_ENEMIES_BUFFS, 1, 0, TWO_IN_TWO));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Empower", 250, 1);
-        card.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE));
+        card.addBuff(new Power(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("FireBall", 400, 1);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ONE_ENEMY_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("GodStrength", 450, 2);
-        card.addBuff(new Buff(ATTACK_POWER, -1, 4, INSIDER_HERO));
+        card.addBuff(new Power(ATTACK_POWER, -1, 4, INSIDER_HERO));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("HellFire", 600, 3);
-        card.addBuff(new Buff(CELL_EFFECT_FIERY, 2, 0, TWO_IN_TWO));
+        card.addBuff(new CellEffect(CELL_EFFECT_FIERY, 2, 0, TWO_IN_TWO));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("LightingBolt", 1250, 2);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 8, ENEMY_HERO));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("poisonLake", 900, 5);
-        card.addBuff(new Buff(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
+        card.addBuff(new CellEffect(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Madness", 650, 0);
-        card.addBuff(new Buff(ATTACK_POWER, 3, 4, ONE_INSIDER_FORCE));
-        card.addBuff(new Buff(DISARM, 3, 0, ONE_INSIDER_FORCE));
+        card.addBuff(new Power(ATTACK_POWER, 3, 4, ONE_INSIDER_FORCE));
+        card.addBuff(new Disarm(DISARM, 3, 0, ONE_INSIDER_FORCE));
         spells.add(card);
         cards.add(card);
 
@@ -321,55 +318,54 @@ public class Shop {
         cards.add(card);
 
         card = new Spell("AllPoison", 1500, 8);
-        card.addBuff(new Buff(POISON, 4, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Poison(POISON, 4, 0, ALL_ENEMY_FORCES));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Dispel", 2100, 0);
-        card.addBuff(new Buff(REMOVE_INSIDERS_BUFFS, 1, 0, ALL_INSIDER_FORCES));
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new DestroyNegatives(REMOVE_INSIDERS_BUFFS, 1, 0, ALL_INSIDER_FORCES));
+        card.addBuff(new DestroyPositives(REMOVE_ENEMIES_BUFFS, 1, 0, ALL_ENEMY_FORCES));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("HealthWithProfit", 2250, 0);
-        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
-        card.addBuff(new Buff(HOLY, 3, 2, ONE_INSIDER_FORCE));
+        card.addBuff(new Weakness(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
+        card.addBuff(new Holy(HOLY, 3, 2, ONE_INSIDER_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("PowerUp", 2500, 2);
-        card.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE));
+        card.addBuff(new Power(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("AllPower", 2000, 4);
-        card.addBuff(new Buff(ATTACK_POWER, -1, 2, ALL_INSIDER_FORCES));
+        card.addBuff(new Power(ATTACK_POWER, -1, 2, ALL_INSIDER_FORCES));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("AllAttack", 1500, 4);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ALL_ENEMY_FORCES_IN_COLUMN));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Weakening", 1000, 1);
-        card.addBuff(new Buff(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
+        card.addBuff(new Weakness(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Sacrifice", 1600, 2);
-        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
-        card.addBuff(new Buff(ATTACK_POWER, 1, 8, ONE_INSIDER_FORCE));
+        card.addBuff(new Weakness(HEALTH_WEAKNESS, 1, 6, ONE_INSIDER_FORCE));
+        card.addBuff(new Power(ATTACK_POWER, 1, 8, ONE_INSIDER_FORCE));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("KingsGuard", 1750, 9);
-        card.addBuff(new Buff(KILL, 1, 0, ONE_ENEMY_FORCE_RANDOM));
+        card.addBuff(new Kill(KILL, 1, 0, ONE_ENEMY_FORCE_RANDOM));
         spells.add(card);
         cards.add(card);
 
         card = new Spell("Shock", 1200, 1);
-        card.addBuff(new Buff(STUN, 2, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Stun(STUN, 2, 0, ONE_ENEMY_FORCE));
         spells.add(card);
         cards.add(card);
 
@@ -568,47 +564,45 @@ public class Shop {
         //-----------------------------heroes-----------------------------------------
 
         card = new Hero("divsfid", 8000, 50, 4, MELEE, 0, 1, 2);
-        card.addBuff(new Buff(ATTACK_POWER, -1, 4, OWN));
+        card.addBuff(new Power(ATTACK_POWER, -1, 4, OWN));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("simorgh", 9000, 50, 4, MELEE, 0, 5, 8);
-        card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES));
+        card.addBuff(new Stun(STUN, 1, 0, ALL_ENEMY_FORCES));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("ezhdehayeHaftsar", 8000, 50, 4, MELEE, 0, 0, 1);
-        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Disarm(DISARM, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("rakhsh", 8000, 50, 4, MELEE, 0, 1, 2);
-        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Stun(STUN, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("zahak", 10000, 50, 2, MELEE, 0, 0, 0);
-        card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));//?????????????????????
+        card.addBuff(new Poison(POISON, 3, 0, ONE_ENEMY_FORCE));//?????????????????????
         cards.add(card);
         heros.add(card);
 
         card = new Hero("kaveh", 8000, 50, 4, MELEE, 0, 1, 3);
-        card.addBuff(new Buff(CELL_EFFECT_HOLY, 3, 0, ONE_CELL));
+        card.addBuff(new CellEffect(CELL_EFFECT_HOLY, 3, 0, ONE_CELL));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("arash", 10000, 30, 2, RANGED, 6, 2, 2);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 4, ALL_ENEMY_FORCES_IN_ROW));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("afsane", 11000, 40, 3, RANGED, 3, 1, 2);
-        card.addBuff(new Buff(DISPEL, 1, 0, ONE_ENEMY_FORCE));
         cards.add(card);
         heros.add(card);
 
         card = new Hero("esfandyar", 12000, 35, 3, HYBRID, 3, 0, 0);
-        card.addBuff(new Buff(HOLY, -1, 3,true, OWN));
+        card.addBuff(new Holy(HOLY, -1, 3, OWN));
         cards.add(card);
         heros.add(card);
 
@@ -622,27 +616,26 @@ public class Shop {
         usableItems.add(item);
 
         item = new UsableItem("namosSpar", 4000, "12");
-        item.addBuff(new Buff(HOLY, -1, 12, INSIDER_HERO));
+        item.addBuff(new Holy(HOLY, -1, 12, INSIDER_HERO));
         usableItems.add(item);
 
         item = new UsableItem("kamanDamol", 30000, " ");
-        item.addBuff(new Buff(DISARM, 1, 0, INSIDER_HERO));//???????????????
+        item.addBuff(new Disarm(DISARM, 1, 0, INSIDER_HERO));//???????????????
         usableItems.add(item);
 
         item = new UsableItem("parSimorgh", 3500, "12");
-        item.addBuff(new Buff(ATTACK_POWER, -1, -2, ENEMY_HERO));//???????????????????
+        item.addBuff(new Power(ATTACK_POWER, -1, -2, ENEMY_HERO));//???????????????????
         usableItems.add(item);
 
         item = new UsableItem("terrorHood", 5000, "12");
-        item.addBuff(new Buff(ATTACK_WEAKNESS, 1, 2, ONE_ENEMY_FORCE_RANDOM));
+        item.addBuff(new Weakness(ATTACK_WEAKNESS, 1, 2, ONE_ENEMY_FORCE_RANDOM));
         usableItems.add(item);
 
         item = new UsableItem("kingWisdom", 9000, "12");
-        item.addBuff(new Buff(INCREASE_MANA, -1, 1, TargetCommunity.NONE));
+        item.addBuff(new IncreaseMana(INCREASE_MANA, -1, 1, TargetCommunity.NONE));
         usableItems.add(item);
 
         item = new UsableItem("assassinationDagger", 15000, "12");
-        item.addBuff(new Buff(ATTACK_INSERT, -1, 1, ENEMY_HERO));//???????????????
         usableItems.add(item);
 
         item = new UsableItem("poisonousDagger", 7000, "12");
@@ -664,40 +657,40 @@ public class Shop {
         //-----------------------------collectible--------------------------------------
 
         CollectableItem collectableItem = new CollectableItem("noshDaroo", "12");
-        collectableItem.addBuff(new Buff(HEALTH_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Power(HEALTH_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("tirDoshakh","12");
-        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 2, RANGED_HYBRID));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, RANGED_HYBRID));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("eksir","12");
-        collectableItem.addBuff(new Buff(HEALTH_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
-        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Power(HEALTH_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("majonMana","12");
-        collectableItem.addBuff(new Buff(INCREASE_MANA, 1, 3, TargetCommunity.NONE));
+        collectableItem.addBuff(new IncreaseMana(INCREASE_MANA, 1, 3, TargetCommunity.NONE));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("majonRoiintani","12");
-        collectableItem.addBuff(new Buff(HOLY, 2, 10, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Holy(HOLY, 2, 10, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("nefrinMarg","12");
-        collectableItem.addBuff(new Buff(POISON, -1, 8, ONE_ENEMY_FORCE_RANDOM));//?
+        collectableItem.addBuff(new Poison(POISON, -1, 8, ONE_ENEMY_FORCE_RANDOM));//?
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("randomDamage","12");
-        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("bladesOfAgility","12");
-        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("shamshirChini","12");
-        collectableItem.addBuff(new Buff(ATTACK_POWER, -1, 5, JUST_MELEE));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, JUST_MELEE));
         collectibles.add(collectableItem);
 
         //-----------------------------mission deck--------------------------------------
