@@ -7,6 +7,7 @@ public class Holy extends Buff {
     public Holy(BuffType type, int remainTime, int buffPower, int activationTime,
                 boolean isStarted, TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
+        this.setKind("Holy");
     }
 
     public Buff copy(){

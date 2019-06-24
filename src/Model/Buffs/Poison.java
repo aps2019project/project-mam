@@ -7,6 +7,7 @@ import Model.enums.TargetCommunity;
 public class Poison extends Buff {
     public Poison(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted, TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
+        this.setKind("Poison");
     }
 
     @Override

@@ -9,6 +9,7 @@ public class IncreaseMana extends Buff {
     public IncreaseMana(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                         TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
+        this.setKind("IncreaseMana");
     }
 
     public void setGame(Game game) {

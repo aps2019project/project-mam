@@ -7,6 +7,7 @@ public class DestroyNegatives extends Buff {
     public DestroyNegatives(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                             TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
+        this.setKind("DestroyNegatives");
     }
 
     @Override

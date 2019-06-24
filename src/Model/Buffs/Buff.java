@@ -18,6 +18,7 @@ public class Buff {
     private BuffType type;
     private int remainTime;
     private int buffPower;
+    private String kind;
     private int activationTime;
     private boolean isStarted = false;
     private boolean isUsed = false;
@@ -52,6 +53,15 @@ public class Buff {
         this.isStarted = isStarted;
         this.targetCommunity = targetCommunity;
         buffs = new ArrayList<>();
+    }
+
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public void setBuffPower(int buffPower) {
