@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController.GameController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController.GameController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="212.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -43,7 +44,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fx:id="graveyard" fitHeight="341.0" fitWidth="95.0" layoutX="3.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" />
+      <ImageView fx:id="graveyard" fitHeight="341.0" fitWidth="95.0" layoutX="3.0" layoutY="369.0" onMouseClicked="#setGraveyard" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" />
       <Label fx:id="handCard5mana" alignment="CENTER" layoutX="1263.0" layoutY="1027.0" prefHeight="34.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -144,7 +145,6 @@
             <ImageView fx:id="cell84" fitHeight="82.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Pane fx:id="pane" prefHeight="500.0" prefWidth="1000.0" />
       <Label fx:id="firstPlayerName" alignment="CENTER" layoutX="378.0" layoutY="121.0" onMouseClicked="#setEndTurn" prefHeight="51.0" prefWidth="213.0" text="Label">
          <font>
             <Font name="Arial Bold" size="30.0" />
@@ -158,5 +158,14 @@
       <ImageView fx:id="endTurn" fitHeight="79.0" fitWidth="283.0" layoutX="1511.0" layoutY="870.0" onMouseClicked="#setEndTurn" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="help" fitHeight="51.0" fitWidth="192.0" layoutX="1453.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
+      <ScrollPane fx:id="graveyardSP" layoutX="118.0" layoutY="490.0" prefHeight="272.0" prefWidth="260.0" visible="false">
+         <content>
+            <Label fx:id="graveyardL" alignment="TOP_LEFT" prefHeight="800.0" prefWidth="600.0" text="Label">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Label>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

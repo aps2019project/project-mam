@@ -1,5 +1,6 @@
 package Controller.GameController;
 
+import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
 import Model.enums.ErrorType;
@@ -7,6 +8,7 @@ import Model.enums.SPActivationTime;
 import Model.game.Game;
 import Model.user.AI;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -51,6 +53,9 @@ public class GameController {
 
     //------------------me-----------
     public Pane pane;
+    public ScrollPane graveyardSP;
+    public Label graveyardL;
+
     public Rectangle[][] cells = new Rectangle[5][9];
 
     public void initializeGame() {
@@ -80,7 +85,16 @@ public class GameController {
     }
 
     public void setGraveyard() {
-        this.graveyard = graveyard;
+        if (graveyardSP.isVisible())
+            graveyardSP.setVisible(false);
+        else {
+            graveyardSP.setVisible(true);
+            StringBuilder info = new StringBuilder();
+            for (Card card : game.getFirstPlayerGraveYard()) {
+                info.append(card.getInfo()).append("\n");
+            }
+            graveyardL.setText(info.toString());
+        }
     }
 
     public void setExit() {
