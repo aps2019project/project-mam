@@ -9,6 +9,7 @@ import Model.enums.BuffType;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
+import Model.gson.GsonWriter;
 import Model.shop.Shop;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import view.pages.Page;
+
+import java.io.IOException;
 
 import static Model.enums.BuffType.*;
 import static Model.enums.ImpactType.*;
@@ -223,6 +226,11 @@ public class CustomController {
             return;
         initCard();
         Shop.getCards().add(card);
+        try {
+            GsonWriter.writeCustomCard(card);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         label.setText("created");
         System.out.println("created");
     }

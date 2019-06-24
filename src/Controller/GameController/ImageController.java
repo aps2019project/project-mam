@@ -44,20 +44,20 @@ public class ImageController {
     }
 
     public void initCardImage() {
-        File minions = new File("resources/gif");
-        File spells = new File("resources/gif");
-        File heros = new File("resources/gif");
+        File minions = new File("resources/gif-minion");
+        File spells = new File("resources/gif-spell");
+        File heroes = new File("resources/gif-hero");
         ArrayList<String> minionPath = new ArrayList<>();
         ArrayList<String> spellPath = new ArrayList<>();
         ArrayList<String> heroPath = new ArrayList<>();
         for (String s : minions.list()) {
-            minionPath.add("resources/gif/" + s);
+            minionPath.add("resources/gif-minion/" + s);
         }
         for (String s : spells.list()) {
-            spellPath.add("resources/gif/" + s);
+            spellPath.add("resources/gif-spell/" + s);
         }
-        for (String s : heros.list()) {
-            heroPath.add("resources/gif/" + s);
+        for (String s : heroes.list()) {
+            heroPath.add("resources/gif-hero/" + s);
         }
         int mCounter = 0;
         int sCounter = 0;

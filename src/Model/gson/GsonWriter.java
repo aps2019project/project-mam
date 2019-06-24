@@ -38,13 +38,13 @@ public class GsonWriter {
         StringBuilder path = new StringBuilder("gson/Cards/");
         switch (card.getCardType()){
             case "hero":
-                path.append("Hero");
+                path.append("Hero/");
                 break;
             case "minion":
-                path.append("Minion");
+                path.append("Minion/");
                 break;
             case "spell":
-                path.append("spell");
+                path.append("Spell/");
         }
         path.append(card.getName()).append(".json");
         Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();

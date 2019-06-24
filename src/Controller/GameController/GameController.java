@@ -109,7 +109,7 @@ public class GameController {
         game.endTurn();
         label.setText("---<End turn>---");
         if (game.isGameEnd())
-            label.setText("-----<game ended>------\n" + game.getWinnerName() + "win");
+            label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
         else {
             mapCtrl.updateHand();
             mapCtrl.updatePlayersMana();
