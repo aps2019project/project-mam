@@ -1,7 +1,6 @@
 package Model.shop;
 
-import Model.Buffs.Buff;
-import Model.Buffs.IncreaseMana;
+import Model.Buffs.*;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -381,7 +380,7 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("shamshirzanFars", 400, 2, 6, 4, 0, MELEE, ON_ATTACK);
-        card.addBuff(new Buff(STUN, 1, 0, ONE_ENEMY_FORCE));//???????????????
+        card.addBuff(new Stun(STUN, 1, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
         minions.add(card);
 
@@ -394,7 +393,6 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("pahlavanFars", 600, 9, 24, 6, 0, MELEE, ON_ATTACK);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 5 + card.getAP(), ONE_ENEMY_FORCE));//????????????????
         cards.add(card);
         minions.add(card);
 
@@ -415,8 +413,8 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("jasosanTorani", 700, 4, 6, 6, 0, MELEE, NULL);
-        card.addBuff(new Buff(DISARM, 1, 0, ONE_ENEMY_FORCE));
-        card.addBuff(new Buff(POISON, 4, 0, ONE_ENEMY_FORCE));//???????????????
+        card.addBuff(new Disarm(DISARM, 1, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Poison(POISON, 4, 0, ONE_ENEMY_FORCE));//???????????????
         cards.add(card);
         minions.add(card);
 
@@ -437,7 +435,7 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("oghab", 200, 2, 0, 2, 3, RANGED, PASSIVE);
-        card.addBuff(new Buff(HEALTH_POWER, -1, 10, OWN));
+        card.addBuff(new Power(HEALTH_POWER, -1, 10, OWN));
         cards.add(card);
         minions.add(card);
 
@@ -446,12 +444,11 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("gholTakCheshm", 500, 7, 12, 11, 3, HYBRID, ON_DEATH);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 2, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("marSami", 300, 4, 5, 6, 4, RANGED, ON_ATTACK);
-        card.addBuff(new Buff(POISON, 3, 0, ONE_ENEMY_FORCE));
+        card.addBuff(new Poison(POISON, 3, 0, ONE_ENEMY_FORCE));
         cards.add(card);
         minions.add(card);
 
@@ -460,17 +457,15 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("shirDarande", 600, 2, 1, 8, 0, MELEE, ON_ATTACK);
-        //card.addBuff(new Buff());??????????????????
         cards.add(card);
         minions.add(card);
 
         card = new Minion("marGholPeykar", 500, 8, 14, 7, 5, RANGED, ON_SPAWN);
-        //??????????????????
         cards.add(card);
         minions.add(card);
 
         card = new Minion("gorgSefid", 400, 5, 8, 2, 0, MELEE, ON_ATTACK);
-        Buff buff = new Buff(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
+        Buff buff = new Power(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
         buff.setBuffPower(-8 + 4 / buff.getTime());
         buff.setUsed(true);
         buff.setStarted(true);
@@ -479,13 +474,13 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("palang", 400, 4, 6, 2, 0, MELEE, ON_ATTACK);
-        buff = new Buff(HEALTH_POWER, 1, -8, ONE_ENEMY_FORCE);
+        buff = new Power(HEALTH_POWER, 1, -8, ONE_ENEMY_FORCE);
         card.addBuff(buff);
         cards.add(card);
         minions.add(card);
 
         card = new Minion("gorg", 400, 3, 6, 1, 0, MELEE, ON_ATTACK);
-        buff = new Buff(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
+        buff = new Power(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
         buff.setStarted(true);
         buff.setUsed(true);
         card.addBuff(buff);
@@ -493,41 +488,41 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("jadogar", 550, 4, 5, 4, 3, RANGED, PASSIVE);
-        card.addBuff(new Buff(ATTACK_POWER, 1, 2, OWN_AND_INSIDER_FORCES_CLOSE));
-        card.addBuff(new Buff(HEALTH_WEAKNESS, 1, 1, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Power(ATTACK_POWER, 1, 2, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Weakness(HEALTH_WEAKNESS, 1, 1, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("jadogarAzam", 550, 6, 6, 6, 5, RANGED, PASSIVE);
-        card.addBuff(new Buff(ATTACK_POWER, 2, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
-        card.addBuff(new Buff(HOLY, 0, -1, true, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Power(ATTACK_POWER, 2, -1, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Holy(HOLY, 0, -1, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_INSERT);//?????????
-        card.addBuff(new Buff(ATTACK_POWER, 1, -1, true, ALL_INSIDER_FORCES));
+        card.addBuff(new Power(ATTACK_POWER, 1, -1, ALL_INSIDER_FORCES));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("gorazVahshi", 500, 6, 10, 14, 0, MELEE, ON_DEFEND);
-        cards.add(card);//????????????
+        cards.add(card);
         minions.add(card);
 
         card = new Minion("piran", 400, 8, 20, 12, 0, MELEE, ON_DEFEND);
-        cards.add(card);//???????????
+        cards.add(card);
         minions.add(card);
 
         card = new Minion("give", 450, 4, 5, 7, 5, RANGED, ON_DEFEND);
-        cards.add(card);//???????????
+        cards.add(card);
         minions.add(card);
 
         card = new Minion("bahman", 450, 8, 16, 9, 0, MELEE, ON_SPAWN);
-        card.addBuff(new Buff(HEALTH_POWER, -1, -16, ONE_ENEMY_FORCE_RANDOM));
+        card.addBuff(new Power(HEALTH_POWER, -1, -16, ONE_ENEMY_FORCE_RANDOM));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("ashkbos", 400, 7, 14, 8, 0, MELEE, ON_DEFEND);
-        cards.add(card);//???????????
+        cards.add(card);
         minions.add(card);
 
         card = new Minion("iraj", 500, 4, 6, 20, 3, RANGED, NULL);
@@ -539,22 +534,21 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("gholTwoSar", 550, 4, 10, 4, 0, MELEE, ON_ATTACK);
-        card.addBuff(new Buff(REMOVE_ENEMIES_BUFFS, 1, 0, ONE_ENEMY_FORCE));//?????????????????
+        card.addBuff(new DestroyPositives(REMOVE_ENEMIES_BUFFS, 1, 0, ONE_ENEMY_FORCE));//?????????????????
         cards.add(card);
         minions.add(card);
 
         card = new Minion("naneSarma", 500, 3, 3, 4, 5, RANGED, ON_SPAWN);
-        card.addBuff(new Buff(STUN, 1, 0, ALL_ENEMY_FORCES_CLOSE));
+        card.addBuff(new Stun(STUN, 1, 0, ALL_ENEMY_FORCES_CLOSE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("foladZereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
-        card.addBuff(new Buff(HOLY, 12, -1, true, OWN));
+        card.addBuff(new Holy(HOLY, 12, -1, OWN));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("siavosh", 350, 4, 8, 5, 0, MELEE, ON_DEATH);
-        card.addBuff(new Buff(ATTACK_TO_ENEMY, 1, 6, ENEMY_HERO));
         cards.add(card);
         minions.add(card);
 
