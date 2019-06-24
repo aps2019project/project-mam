@@ -60,27 +60,24 @@ public class GsonReader {
     }
 
     public static void readDeck(String name) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         JsonReader reader;
         reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
         Shop.getDecks().add(gson.fromJson(reader, Deck.class));
     }
 
-    public static void initDeckCards(Deck deck){
-        for (Card card : deck.getCards()) {
-
-        }
-    }
-
     public static Deck getDeck(String name) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         JsonReader reader;
         reader = new JsonReader(new FileReader("gson/decks/" + name + ".json"));
         return gson.fromJson(reader, Deck.class);
     }
 
     public static void readItems() throws FileNotFoundException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         JsonReader reader;
         File dir = new File("gson/items/usable");
         for (File file : dir.listFiles()) {
