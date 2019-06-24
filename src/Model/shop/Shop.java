@@ -20,7 +20,7 @@ import static Model.enums.SPActivationTime.*;
 
 public class Shop {
     private static final Shop SHOP = new Shop();
-    private static ArrayList<Deck> decks=new ArrayList<>();
+    private static ArrayList<Deck> decks = new ArrayList<>();
     private static ArrayList<Card> spells = new ArrayList<>();
     private static ArrayList<Card> cards = new ArrayList<>();
     private static ArrayList<Card> heros = new ArrayList<>();
@@ -253,8 +253,8 @@ public class Shop {
         return SHOP;
     }
 
-    public static Deck deckMaker(){
-        Deck deck=new Deck();
+    public static Deck deckMaker() {
+        Deck deck = new Deck();
         deck.setHero(heros.get(6));
         deck.addCard(spells.get(2)).addCard(spells.get(3)).addCard(spells.get(5)).addCard(spells.get(9))
                 .addCard(spells.get(1)).addCard(spells.get(11)).addCard(spells.get(19))
@@ -263,7 +263,7 @@ public class Shop {
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(9)).addCard(minions.get(2))
                 .addCard(minions.get(17)).addItem(usableItems.get(5));
         deck.setName("custom");
-        return  deck;
+        return deck;
     }
 
     public static void importCards() {
@@ -655,41 +655,41 @@ public class Shop {
         collectableItem.addBuff(new Power(HEALTH_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("tirDoshakh","12");
+        collectableItem = new CollectableItem("tirDoshakh", "12");
         collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, RANGED_HYBRID));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("eksir","12");
+        collectableItem = new CollectableItem("eksir", "12");
         collectableItem.addBuff(new Power(HEALTH_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
         collectableItem.addBuff(new Power(ATTACK_POWER, -1, 3, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("majonMana","12");
+        collectableItem = new CollectableItem("majonMana", "12");
         collectableItem.addBuff(new IncreaseMana(INCREASE_MANA, 1, 3, TargetCommunity.NONE));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("majonRoiintani","12");
+        collectableItem = new CollectableItem("majonRoiintani", "12");
         collectableItem.addBuff(new Holy(HOLY, 2, 10, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("nefrinMarg","12");
+        collectableItem = new CollectableItem("nefrinMarg", "12");
         collectableItem.addBuff(new Poison(POISON, -1, 8, ONE_ENEMY_FORCE_RANDOM));//?
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("randomDamage","12");
+        collectableItem = new CollectableItem("randomDamage", "12");
         collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("bladesOfAgility","12");
+        collectableItem = new CollectableItem("bladesOfAgility", "12");
         collectableItem.addBuff(new Power(ATTACK_POWER, -1, 6, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
-        collectableItem = new CollectableItem("shamshirChini","12");
+        collectableItem = new CollectableItem("shamshirChini", "12");
         collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, JUST_MELEE));
         collectibles.add(collectableItem);
 
         //-----------------------------mission deck--------------------------------------
-        Deck deck1=new Deck();
+        Deck deck1 = new Deck();
         deck1.setHero(heros.get(0));
         deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
                 .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
@@ -700,7 +700,7 @@ public class Shop {
         deck1.setName("mission_1");
         decks.add(deck1);
 
-        Deck deck2=new Deck();
+        Deck deck2 = new Deck();
         deck2.setHero(heros.get(4));
         deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
                 .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
@@ -711,7 +711,7 @@ public class Shop {
         deck2.setName("mission_2");
         decks.add(deck2);
 
-        Deck deck3=new Deck();
+        Deck deck3 = new Deck();
         deck3.setHero(heros.get(6));
         deck3.addCard(spells.get(5)).addCard(spells.get(9)).addCard(spells.get(11)).addCard(spells.get(13))
                 .addCard(spells.get(14)).addCard(spells.get(15)).addCard(spells.get(16))
