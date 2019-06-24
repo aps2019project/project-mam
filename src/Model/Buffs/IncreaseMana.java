@@ -5,6 +5,10 @@ import Model.game.Game;
 import Model.enums.TargetCommunity;
 
 public class IncreaseMana extends Buff {
+    public IncreaseMana(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
+        super(type, time, buffPower, targetCommunity);
+    }
+
     private Game game;
     public IncreaseMana(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                         TargetCommunity targetCommunity) {

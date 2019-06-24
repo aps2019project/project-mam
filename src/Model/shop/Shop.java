@@ -1,6 +1,7 @@
 package Model.shop;
 
 import Model.Buffs.Buff;
+import Model.Buffs.IncreaseMana;
 import Model.card.Card;
 import Model.card.Hero;
 import Model.card.Minion;
@@ -617,7 +618,7 @@ public class Shop {
 
         //-----------------------------Item------------------------------------------
         UsableItem item = new UsableItem("tajdanaii", 300, "3time");
-        item.addBuff(new Buff(INCREASE_MANA, 3, 1, TargetCommunity.NONE));
+        item.addBuff(new IncreaseMana(INCREASE_MANA, 3, 1, TargetCommunity.NONE));
         usableItems.add(item);
 
         item = new UsableItem("namosSpar", 4000, "12");

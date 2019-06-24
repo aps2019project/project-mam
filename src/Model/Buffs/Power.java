@@ -5,6 +5,10 @@ import Model.game.Cell;
 import Model.enums.TargetCommunity;
 
 public class Power extends Buff {
+    public Power(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
+        super(type, time, buffPower, targetCommunity);
+    }
+
     public Power(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                  TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);

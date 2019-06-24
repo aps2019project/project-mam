@@ -5,6 +5,10 @@ import Model.game.Cell;
 import Model.enums.TargetCommunity;
 
 public class CellEffect extends Buff {
+    public CellEffect(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
+        super(type, time, buffPower, targetCommunity);
+    }
+
     public CellEffect(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                       TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);

@@ -4,6 +4,10 @@ import Model.enums.BuffType;
 import Model.enums.TargetCommunity;
 
 public class Stun extends Buff {
+    public Stun(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
+        super(type, time, buffPower, targetCommunity);
+    }
+
     public Stun(BuffType type, int remainTime, int buffPower, int activationTime, boolean isStarted,
                 TargetCommunity targetCommunity) {
         super(type, remainTime, buffPower, activationTime, isStarted, targetCommunity);
