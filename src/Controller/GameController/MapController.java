@@ -205,7 +205,21 @@ public class MapController {
     private void removeIdFromHand(int id) {
         pane.getChildren().remove(imageController.getViewsHand().get(id));
         imageController.getViewsHand().remove(id);
-        controller.handCardsMana.get(4).setText("-");
+        if (!controller.handCardsMana.get(4).getText().equals("-"))
+            controller.handCardsMana.get(4).setText("-");
+        else if (!controller.handCardsMana.get(3).getText().equals("-"))
+            controller.handCardsMana.get(3).setText("-");
+        else if (!controller.handCardsMana.get(2).getText().equals("-"))
+            controller.handCardsMana.get(2).setText("-");
+        else if (!controller.handCardsMana.get(1).getText().equals("-"))
+            controller.handCardsMana.get(1).setText("-");
+        else if (!controller.handCardsMana.get(0).getText().equals("-"))
+            controller.handCardsMana.get(0).setText("-");
+    }
+
+    private void removeIdFromHand(int id, int index) {
+        pane.getChildren().remove(imageController.getViewsHand().get(id));
+        imageController.getViewsHand().remove(id);
     }
 
     public void removeNextCard() {
@@ -231,7 +245,7 @@ public class MapController {
     public void updateHand() {
         int counter = 0;
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
-            removeIdFromHand(entry.getValue().getId());
+            removeIdFromHand(entry.getValue().getId(), counter);
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
             controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
             imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150, 1);
@@ -242,9 +256,11 @@ public class MapController {
     }
 
     public void updateNextCard() {
-        controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
-        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
-        setOnNextEnteredAndExited();
+        if (game.getNextFirstPlayerCard() != null) {
+            controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
+            imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
+            setOnNextEnteredAndExited();
+        }
     }
 
     public void updateMap() {

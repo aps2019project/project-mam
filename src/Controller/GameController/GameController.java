@@ -103,23 +103,16 @@ public class GameController {
     }
 
     public void setHelp() {
-        this.help = help;
+        label.setText("heeeeelp!!!");
     }
 
     public void setEndTurn() {
         endTurn();
     }
 
-    public void setItem1() {
-
-    }
-
-    public void setItem2() {
-        this.item2 = item2;
-    }
-
     public void endTurn() {
-        mapCtrl.removeNextCard();
+        if (game.getNextFirstPlayerCard() != null)
+            mapCtrl.removeNextCard();
         game.endTurn();
         label.setText("---<End turn>---");
         if (game.isGameEnd())
