@@ -91,7 +91,6 @@ public class Game {
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
-        //ImageController.getInstance().initItemImage();
     }
 
     public Game() {
@@ -708,21 +707,21 @@ public class Game {
             basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
-            /*mana[1] = basicMana + extraPlayer1Mana;
+            mana[1] = basicMana + extraPlayer1Mana;
             updateFirstPlayerHand();
-            updateCellCard(map.getFirstPlayerCellCard());*/
+            updateCellCard(map.getFirstPlayerCellCard());
         } else {
-            /*mana[0] = basicMana + extraPlayer2Mana;
+            mana[0] = basicMana + extraPlayer2Mana;
             updateSecondPlayerHand();
-            updateCellCard(map.getSecondPlayerCellCard());*/
+            updateCellCard(map.getSecondPlayerCellCard());
         }
-        mana[1] = basicMana + extraPlayer1Mana;
+        /*mana[1] = basicMana + extraPlayer1Mana;
         updateFirstPlayerHand();
         updateCellCard(map.getFirstPlayerCellCard());
 
         mana[0] = basicMana + extraPlayer2Mana;
         updateSecondPlayerHand();
-        updateCellCard(map.getSecondPlayerCellCard());
+        updateCellCard(map.getSecondPlayerCellCard());*/
 
         updateHavingFlagCount();
         changeTurn();

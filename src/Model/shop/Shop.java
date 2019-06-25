@@ -263,6 +263,7 @@ public class Shop {
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(9)).addCard(minions.get(2))
                 .addCard(minions.get(17)).addItem(usableItems.get(5));
         deck.setName("custom");
+        initCardId(deck);
         return deck;
     }
 
@@ -698,6 +699,7 @@ public class Shop {
                 .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
                 .addCard(minions.get(39)).addItem(usableItems.get(0));
         deck1.setName("mission_1");
+        initCardId(deck1);
         decks.add(deck1);
 
         Deck deck2 = new Deck();
@@ -709,6 +711,7 @@ public class Shop {
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(29)).addCard(minions.get(32))
                 .addCard(minions.get(38)).addItem(usableItems.get(9));
         deck2.setName("mission_2");
+        initCardId(deck2);
         decks.add(deck2);
 
         Deck deck3 = new Deck();
@@ -720,8 +723,17 @@ public class Shop {
                 .addCard(minions.get(13)).addCard(minions.get(15)).addCard(minions.get(15)).addCard(minions.get(19))
                 .addCard(minions.get(23)).addItem(usableItems.get(4));
         deck3.setName("mission_3");
+        initCardId(deck3);
         decks.add(deck3);
 
+    }
+
+    public static void initCardId(Deck deck){
+        deck.getHero().setId(1);
+        int counter = 2;
+        for (Card cards : deck.getCards()) {
+            cards.setId(counter++);
+        }
     }
 
 }
