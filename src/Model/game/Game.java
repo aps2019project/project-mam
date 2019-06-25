@@ -772,8 +772,6 @@ public class Game {
                 }
         }
         Buff.refreshBuffs();
-        /*checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
-        checkHpState(map.getSecondPlayerCellCard(), secondPlayerGraveYard, 2);*/
         if (canCounterAttack(currentCard.getId(), cardId))
             counterAttack(cardId, currentCard.getId());
         checkHpState(map.getFirstPlayerCellCard(), firstPlayerGraveYard, 1);
@@ -821,14 +819,14 @@ public class Game {
         return isOppAvailableForAttack(targetId, CountererId);
     }
 
-    private void counterAttack(int attackerId, int defenderId) {
+    private void counterAttack(int countererId, int defenderId) {
         if (turn % 2 == 1) {
             map.getFirstPlayerCellCard().get(defenderId).getCard().
-                    decrementOfHp(map.getSecondPlayerCellCard().get(attackerId).getCard().getAP());
+                    decrementOfHp(map.getSecondPlayerCellCard().get(countererId).getCard().getAP());
 
         } else {
             map.getSecondPlayerCellCard().get(defenderId).getCard().
-                    decrementOfHp(map.getFirstPlayerCellCard().get(attackerId).getCard().getAP());
+                    decrementOfHp(map.getFirstPlayerCellCard().get(countererId).getCard().getAP());
         }
     }
 
@@ -902,13 +900,13 @@ public class Game {
                     if (kind != null && kind.equalsIgnoreCase("1"))
                         price = 500;
                     if (player == 1) {
-                        winnerName = firstUser.getName();
-                        firstUser.setMoney(price);
-                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
-                    } else {
                         winnerName = secondUser.getName();
                         secondUser.setMoney(price);
                         secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
+                    } else {
+                        winnerName = secondUser.getName();
+                        firstUser.setMoney(price);
+                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
                     }
                     winner = player;
                     isGameEnd = true;
