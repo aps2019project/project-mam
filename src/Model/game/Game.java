@@ -85,8 +85,8 @@ public class Game {
         mana[1] = basicMana;
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
-        setId(firstPlayerDeck);
-        setId(secondPlayerDeck);
+        //setId(firstPlayerDeck);
+        //setId(secondPlayerDeck);
         setPlayersHand();
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
@@ -204,13 +204,13 @@ public class Game {
         turn++;
     }
 
-    private void setId(Deck deck) {
+    /*private void setId(Deck deck) {
         int counter = 0;
         if (deck.getCards().get(0).getId() == deck.getCards().get(1).getId())
             for (Card card : deck.getCards()) {
                 card.setId(counter++);
             }
-    }
+    }*/
 
     public void startGame() {
         setMap();
@@ -281,41 +281,39 @@ public class Game {
             if (havingFlagCount == 6) {
                 for (java.util.Map.Entry<Integer, Cell> entry : map.getFirstPlayerCellCard().entrySet()) {
                     if (entry.getValue().getFlagCount() == 1) {
-                        if (kind != null && kind.equalsIgnoreCase("1"))
+                        if (kind != null && kind.equalsIgnoreCase("story"))
                             price = 1000;
                         winnerName = firstUser.getName();
-                        firstUser.setMoney(price);
-                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
-                        winner = 1;
+                        firstUser.incrementOfMoney(price);
                         firstUser.incrementOfNumberOfWin();
+                        winner = 1;
                         isGameEnd = true;
                     }
                 }
                 if (!isGameEnd) {
-                    if (kind != null && kind.equalsIgnoreCase("1"))
+                    if (kind != null && kind.equalsIgnoreCase("story"))
                         price = 1000;
                     winnerName = secondUser.getName();
-                    secondUser.setMoney(price);
-                    secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
-                    winner = 2;
+                    secondUser.incrementOfMoney(price);
                     secondUser.incrementOfNumberOfWin();
+                    winner = 2;
                     isGameEnd = true;
                 }
             }
 
         } else if (mode.equals(THIRD_MODE)) {
             if (getPlayer1FlagCount() > flagCount / 2) {
-                if (kind != null && kind.equalsIgnoreCase("1"))
+                if (kind != null && kind.equalsIgnoreCase("story"))
                     price = 1500;
-                firstUser.setMoney(price);
-                firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
+                firstUser.incrementOfMoney(price);
+                firstUser.incrementOfNumberOfWin();
                 isGameEnd = true;
                 winner = 1;
             } else if (getPlayer2FlagCount() > flagCount / 2) {
-                if (kind != null && kind.equalsIgnoreCase("1"))
+                if (kind != null && kind.equalsIgnoreCase("story"))
                     price = 1500;
-                secondUser.setMoney(price);
-                secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
+                secondUser.incrementOfMoney(price);
+                secondUser.incrementOfNumberOfWin();
                 isGameEnd = true;
                 winner = 2;
             }
@@ -707,11 +705,13 @@ public class Game {
             basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
-            mana[1] = basicMana + extraPlayer1Mana;
+            if (basicMana <= 9)
+                mana[1] = basicMana + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
         } else {
-            mana[0] = basicMana + extraPlayer2Mana;
+            if (basicMana <= 9)
+                mana[0] = basicMana + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
         }
@@ -1118,7 +1118,7 @@ public class Game {
     }
 
     public Card getCard(int turn, int id) {
-        if (turn % 2 == 1){
+        if (turn % 2 == 1) {
             return getMap().getFirstPlayerCellCard().get(id).getCard();
         } else return getMap().getSecondPlayerCellCard().get(id).getCard();
     }

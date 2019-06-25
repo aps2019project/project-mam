@@ -19,7 +19,34 @@
             <Image url="@../../../resources/maps/gameBackgaround.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="secondPlayerName" alignment="CENTER" layoutX="1324.0" layoutY="121.0" prefHeight="51.0" prefWidth="213.0" text="Label">
+      <ScrollPane fx:id="gameInfoSP" layoutX="837.0" layoutY="192.0" opacity="0.7" prefHeight="257.0" prefWidth="247.0" visible="false">
+         <content>
+            <Label fx:id="gameInfoL" text="Label">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Label>
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="userInfo1SP" layoutX="362.0" layoutY="196.0" opacity="0.7" prefHeight="257.0" prefWidth="247.0" visible="false">
+         <content>
+            <Label fx:id="userInfo1L" text="Label">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Label>
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="userInfo2SP" layoutX="1307.0" layoutY="196.0" opacity="0.7" prefHeight="257.0" prefWidth="247.0" visible="false">
+         <content>
+            <Label fx:id="userInfo2L" text="Label">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Label>
+         </content>
+      </ScrollPane>
+      <Label fx:id="secondPlayerName" alignment="CENTER" layoutX="1324.0" layoutY="121.0" onMouseClicked="#setUserInfo2" prefHeight="51.0" prefWidth="213.0" text="Label">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
@@ -145,12 +172,12 @@
             <ImageView fx:id="cell84" fitHeight="82.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="firstPlayerName" alignment="CENTER" layoutX="378.0" layoutY="121.0" onMouseClicked="#setEndTurn" prefHeight="51.0" prefWidth="213.0" text="Label">
+      <Label fx:id="firstPlayerName" alignment="CENTER" layoutX="378.0" layoutY="121.0" onMouseClicked="#setUserInfo1" prefHeight="51.0" prefWidth="213.0" text="Label">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" prefHeight="126.3" prefWidth="407.0" text="&quot;Game Started&quot;" textAlignment="CENTER">
+      <Label fx:id="label" alignment="CENTER" layoutX="757.0" layoutY="65.0" onMouseClicked="#setGameInfo" prefHeight="126.3" prefWidth="407.0" text="&quot;Game Started&quot;" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
@@ -160,7 +187,7 @@
       <ImageView fx:id="exit" fitHeight="51.0" fitWidth="192.0" layoutX="1653.0" layoutY="962.0" onMouseClicked="#setExit" pickOnBounds="true" preserveRatio="true" />
       <ScrollPane fx:id="graveyardSP" layoutX="118.0" layoutY="490.0" prefHeight="272.0" prefWidth="260.0" visible="false">
          <content>
-            <Label fx:id="graveyardL" alignment="TOP_LEFT" prefHeight="800.0" prefWidth="600.0" text="Label">
+            <Label fx:id="graveyardL" alignment="TOP_LEFT" text="Label">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>

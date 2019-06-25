@@ -117,7 +117,7 @@ public class User {
             stringBuilder.append("win/");
         else
             stringBuilder.append("loss/");
-        stringBuilder.append(Integer.toString(time));
+        stringBuilder.append(time);
         lastGames.add(stringBuilder);
     }
 

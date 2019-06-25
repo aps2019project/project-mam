@@ -51,10 +51,22 @@ public class GameController {
     public Circle handCard4;
     public Circle handCard5;
 
-    //------------------me-----------
     public Pane pane;
+
+    public ScrollPane gameInfoSP;
+    public Label gameInfoL;
+
     public ScrollPane graveyardSP;
     public Label graveyardL;
+
+    public ScrollPane userInfo1SP;
+    public Label userInfo1L;
+
+    public ScrollPane userInfo2SP;
+    public Label userInfo2L;
+
+    //------------------me-----------
+
 
     public Rectangle[][] cells = new Rectangle[5][9];
 
@@ -82,6 +94,33 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
+    }
+
+    public void setUserInfo1(){
+        if (userInfo1SP.isVisible())
+            userInfo1SP.setVisible(false);
+        else {
+            userInfo1SP.setVisible(true);
+            userInfo1L.setText(game.getFirstUser().getName());
+        }
+    }
+
+    public void setUserInfo2(){
+        if (userInfo2SP.isVisible())
+            userInfo2SP.setVisible(false);
+        else {
+            userInfo2SP.setVisible(true);
+            userInfo2L.setText(game.getSecondUser().getName());
+        }
+    }
+
+    public void setGameInfo(){
+        if (gameInfoSP.isVisible())
+            gameInfoSP.setVisible(false);
+        else {
+            gameInfoSP.setVisible(true);
+            gameInfoL.setText(game.getGameInfo());
+        }
     }
 
     public void setGraveyard() {
