@@ -220,7 +220,6 @@ public class MapController {
     private void removeIdFromHand(int id, int index) {
         pane.getChildren().remove(imageController.getViewsHand().get(id));
         imageController.getViewsHand().remove(id);
-        controller.handCardsMana.get(index).setText("-");
     }
 
     public void removeNextCard() {
@@ -257,9 +256,11 @@ public class MapController {
     }
 
     public void updateNextCard() {
-        controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
-        imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
-        setOnNextEnteredAndExited();
+        if (game.getNextFirstPlayerCard() != null) {
+            controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
+            imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
+            setOnNextEnteredAndExited();
+        }
     }
 
     public void updateMap() {

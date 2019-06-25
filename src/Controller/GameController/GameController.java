@@ -111,7 +111,8 @@ public class GameController {
     }
 
     public void endTurn() {
-        mapCtrl.removeNextCard();
+        if (game.getNextFirstPlayerCard() != null)
+            mapCtrl.removeNextCard();
         game.endTurn();
         label.setText("---<End turn>---");
         if (game.isGameEnd())

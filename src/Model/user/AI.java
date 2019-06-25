@@ -74,9 +74,9 @@ public class AI {
         }).start();
     }
 
-    private void sleep(int nanoSecond) {
+    private void sleep(int millis) {
         try {
-            Thread.sleep(nanoSecond);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class AI {
     private void commandInsert() {
         inserted = true;
         Platform.runLater(() -> mapCtrl.insertCard(insertCard.getName(),insertTarget.getRow(), insertCard.getColumn()));
-        sleep(1000);
+        sleep(2000);
     }
 
     private boolean cardsCanSelect() {
@@ -159,7 +159,7 @@ public class AI {
     private void commandMove() {
         moved = true;
         Platform.runLater(() -> mapCtrl.moveCard(moveTarget.getRow(), moveTarget.getColumn()));
-        sleep(400);
+        sleep(1000);
     }
 
     private boolean cardCanAttack() {
@@ -178,6 +178,6 @@ public class AI {
 
     private void commandAttack() {
         Platform.runLater(() -> mapCtrl.attack(attackTarget.getId()));
-        sleep(2000);
+        sleep(2500);
     }
 }
