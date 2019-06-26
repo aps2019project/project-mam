@@ -7,6 +7,7 @@ import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Cell;
 import Model.game.Game;
+import Model.size.Coordinate;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -52,6 +53,7 @@ public class MapController {
         this.handCards = handCards;
         game = Game.getInstance();
         initCells();
+        Coordinate.getInstance().setHdCoordinate();
         imageController.initItemImage();
         updatePlayerName();
         updatePlayersMana();
@@ -79,16 +81,11 @@ public class MapController {
     final double SPACE = 5;
     final int ROW = 5;
     final int COLUMN = 9;
-    //-----------------------jimi-------
-        final double startX = 450;
-        final double startY = 190;
-        final double xStep = (500 - SPACE * COLUMN) / COLUMN;
-        final double yStep = (300 - SPACE * ROW) / ROW;
-//------------------feri------------
-    /*final double startX = 650;
+
+    final double startX = 650;
     final double startY = 320;
     final double xStep = (808 - SPACE * COLUMN) / COLUMN;
-    final double yStep = (410 - SPACE * ROW) / ROW;*/
+    final double yStep = (410 - SPACE * ROW) / ROW;
 
     public void initCells() {
         for (int i = 0; i < ROW; i++)

@@ -45,12 +45,9 @@ public class MainBattleMenuPage extends Page {
             initializeImage();
             controller.initializeGame();
 
-            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            int width = gd.getDisplayMode().getWidth();
-            int height = gd.getDisplayMode().getHeight();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreen(true);
+//            stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();

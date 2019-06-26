@@ -63,21 +63,15 @@ public class GameController {
     public Label graveyardL;
 
     public Rectangle[][] cells = new Rectangle[5][9];
+    public ArrayList<Circle> handCards = new ArrayList<>();
+    public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
     }
 
-    public Rectangle[][] getCells() {
-        return cells;
-    }
-
-    public ArrayList<Circle> handCards = new ArrayList<>();
-    public ArrayList<Label> handCardsMana = new ArrayList<>();
-
     public void init() {
-//        setSize();
         handCards.add(handCard1);
         handCards.add(handCard2);
         handCards.add(handCard3);
@@ -89,20 +83,6 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
-    }
-
-    public void setSize() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
-        pane.setPrefWidth(width);
-        pane.setPrefHeight(height);
-        if (width == 1366)
-            coordinate.setResolution(Resolution.HD);
-        coordinate.setHandCoordinate(handCards);
-        backGround.setFitHeight(height);
-        backGround.setFitWidth(width);
-
     }
 
     public void setGraveyard() {
