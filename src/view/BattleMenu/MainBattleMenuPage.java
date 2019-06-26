@@ -43,7 +43,7 @@ public class MainBattleMenuPage extends Page {
             controller.initializeGame();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreen(true);
+            //stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
         } catch (IOException e) {
             e.printStackTrace();

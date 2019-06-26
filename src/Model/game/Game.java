@@ -780,11 +780,22 @@ public class Game {
         Buff.refreshBuffs();
     }
 
-    public boolean isOppAvailableForAttack(int targetId, int attackerId) {
+    private void counterAttack(int attackerId, int defenderId) {
+        if (turn % 2 == 1) {
+            map.getFirstPlayerCellCard().get(defenderId).getCard().
+                    decrementOfHp(map.getSecondPlayerCellCard().get(attackerId).getCard().getAP());
+
+        } else {
+            map.getSecondPlayerCellCard().get(defenderId).getCard().
+                    decrementOfHp(map.getFirstPlayerCellCard().get(attackerId).getCard().getAP());
+        }
+    }
+
+    public boolean isOppAvailableForAttack(int targetId, int attackerId, int turn) {
         int distance;
         Card attacker;
         try {
-            if (getTurn() % 2 == 1) {
+            if (turn % 2 == 1) {
                 attacker = map.getFirstPlayerCellCard().get(attackerId).getCard();
                 Cell target = map.getSecondPlayerCellCard().get(targetId);
                 distance = map.getManhatanDistance(attacker.getRow(), attacker.getColumn(), target.getRow(), target.getColumn());
@@ -801,7 +812,7 @@ public class Game {
             if (attacker.getCardClass() == ImpactType.HYBRID)
                 return true;
             if (attacker.getCardClass() == ImpactType._NULL)
-                return true;
+                return false;
         } catch (NullPointerException e) {
             return false;
         }
@@ -816,20 +827,11 @@ public class Game {
         return getTurn() % 2 != 0 || map.getFirstPlayerCellCard().get(cardId) != null;
     }
 
-    private boolean canCounterAttack(int targetId, int CountererId) {
-        return isOppAvailableForAttack(targetId, CountererId);
+    public boolean canCounterAttack(int targetId, int CountererId) {
+        return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1);
     }
 
-    private void counterAttack(int attackerId, int defenderId) {
-        if (turn % 2 == 1) {
-            map.getFirstPlayerCellCard().get(defenderId).getCard().
-                    decrementOfHp(map.getSecondPlayerCellCard().get(attackerId).getCard().getAP());
 
-        } else {
-            map.getSecondPlayerCellCard().get(defenderId).getCard().
-                    decrementOfHp(map.getFirstPlayerCellCard().get(attackerId).getCard().getAP());
-        }
-    }
 
     public boolean canComboAttack(Card defender, ArrayList<Card> attackers) {
         if (!isCardIdValidForAttack(defender.getId()))
@@ -837,7 +839,7 @@ public class Game {
         for (Card attacker : attackers) {
             if (!attacker.isCanAttack())
                 return false;
-            if (!isOppAvailableForAttack(defender.getId(), attacker.getId()))
+            if (!isOppAvailableForAttack(defender.getId(), attacker.getId(), getTurn()))
                 return false;
         }
         return true;
