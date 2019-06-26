@@ -21,6 +21,7 @@ public class MainMenuPage extends Page {
     public MainMenuPage(){
         try {
             User.user.setMainDeck(GsonReader.getDeck("custom"));
+            User.user.getCollection().getDecks().add(GsonReader.getDeck("custom"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

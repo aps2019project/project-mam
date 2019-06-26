@@ -838,7 +838,12 @@ public class Game {
     }
 
     public boolean canCounterAttack(int targetId, int CountererId) {
-        return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1);
+        boolean isDisarm;
+        if (getTurn() % 2 == 1)
+            isDisarm = map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+        else
+            isDisarm = map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+        return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1) && !isDisarm;
     }
 
 

@@ -6,15 +6,19 @@ import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
+import Model.size.Coordinate;
+import Model.size.Resolution;
 import Model.user.AI;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import view.pages.Page;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -23,6 +27,7 @@ public class GameController {
     private Game game = Game.getInstance();
     private ImageController imageCtrl = ImageController.getInstance();
     private AI ai = AI.getInstance();
+    private Coordinate coordinate = Coordinate.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -51,6 +56,8 @@ public class GameController {
     public Circle handCard4;
     public Circle handCard5;
 
+    //------------------me-----------
+    public ImageView backGround;
     public Pane pane;
 
     public ScrollPane gameInfoSP;
@@ -69,18 +76,13 @@ public class GameController {
 
 
     public Rectangle[][] cells = new Rectangle[5][9];
+    public ArrayList<Circle> handCards = new ArrayList<>();
+    public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
     }
-
-    public Rectangle[][] getCells() {
-        return cells;
-    }
-
-    public ArrayList<Circle> handCards = new ArrayList<>();
-    public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init() {
         handCards.add(handCard1);
