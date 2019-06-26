@@ -2,8 +2,11 @@ package view.BattleMenu;
 
 import Controller.GameController.GameController;
 import Model.game.Game;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import view.pages.Page;
 
@@ -39,12 +42,13 @@ public class MainBattleMenuPage extends Page {
 
             controller.init();
 
-            initializeImage();
+
             controller.initializeGame();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             //stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
+            initializeImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,6 +57,13 @@ public class MainBattleMenuPage extends Page {
     private void initializeImage() {
         setBackGround(root, "resources/maps/gameBackgaround.jpg");
         setBackGround(controller.label, "resources/ui/button_primary_middle_glow@2x.png");
+
+        EventHandler<KeyEvent> handler = event -> {
+            if (event.getCode()  == KeyCode.Z)
+                controller.endTurn();
+        };
+
+        root.getScene().addEventHandler(KeyEvent.KEY_PRESSED, handler);
     }
 
     public static GameController getController() {
