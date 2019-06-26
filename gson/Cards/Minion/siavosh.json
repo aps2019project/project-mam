@@ -1,1 +1,1 @@
-{"AP":5,"HP":8,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEATH","row":0,"column":0,"MP":4,"id":0,"price":350,"name":"siavosh","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":5,"HP":8,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEATH","row":0,"column":0,"MP":4,"id":20,"price":350,"name":"siavosh","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

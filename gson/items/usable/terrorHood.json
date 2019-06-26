@@ -1,1 +1,1 @@
-{"price":5000,"name":"terrorHood","desc":"12","id":0,"buffs":[{"type":"ATTACK_WEAKNESS","remainTime":1,"buffPower":2,"kind":"Weakness","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"ONE_ENEMY_FORCE_RANDOM"}]}
+{"price":5000,"name":"terrorHood","desc":"12","id":0,"buffs":[{"type":"ATTACK_WEAKNESS","remainTime":1,"buffPower":2,"kind":"Weakness","activationTime":0,"isStarted":true,"isUsed":false,"isContinous":false,"targetCommunity":"ONE_ENEMY_FORCE_RANDOM"}]}

@@ -178,7 +178,7 @@ public class MapController {
             entry.getValue().setOnMouseEntered(event -> {
                 text = label.getText();
                 Card card = game.getFirstPlayerHand().get(entry.getKey());
-                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+                label.setText("Name: " + card.getName() + " AP:" + card.getAP() + " HP:" + card.getHP() + " MP:" + card.getMP());
             });
 
             entry.getValue().setOnMouseExited(event -> {
@@ -306,10 +306,11 @@ public class MapController {
     public void attack(int oppId) {
         if (game.getCurrentCard().isCanAttack()) {
             if (game.isCardInOppPlayerCellCard(oppId)) {
-                if (game.isOppAvailableForAttack(oppId, game.getCurrentCard().getId())) {
+                if (game.isOppAvailableForAttack(oppId, game.getCurrentCard().getId(), game.getTurn())) {
                     animationCtrl.attack(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()), game.getCurrentCard());
-                    int changedTurn = abs(game.getTurn() % 2 - 1);
-                    animationCtrl.counterAttack(imageController.getView(changedTurn, oppId), game.getCard(changedTurn, oppId));
+                    int changedTurn = abs(game.getTurn() % 2 + 1);
+                    if (game.canCounterAttack(game.getCurrentCard().getId(), oppId))
+                        animationCtrl.counterAttack(imageController.getView(changedTurn, oppId), game.getCard(changedTurn, oppId));
                     game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                 } else label.setText(ErrorType.UNAVAILABLE_OPP_ATTACK.getMessage());

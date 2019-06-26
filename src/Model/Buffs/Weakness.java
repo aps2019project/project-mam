@@ -18,10 +18,10 @@ public class Weakness extends Buff {
     @Override
     public Buff copy() {
         if (getType() == BuffType.ATTACK_WEAKNESS)
-        return new Weakness(BuffType.ATTACK_WEAKNESS, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(),
-                this.isStarted(), this.getTargetCommunity());
+            return new Weakness(BuffType.ATTACK_WEAKNESS, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(),
+                    this.isStarted(), this.getTargetCommunity());
         else
-            return new Poison(BuffType.HEALTH_WEAKNESS, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(),
+            return new Weakness(BuffType.HEALTH_WEAKNESS, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(),
                     this.isStarted(), this.getTargetCommunity());
     }
 

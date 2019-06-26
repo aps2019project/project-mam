@@ -168,7 +168,7 @@ public class AI {
 
     private boolean attackTarget() {
         for (Map.Entry<Integer, Cell> entry : game.getMap().getFirstPlayerCellCard().entrySet()) {
-            if (game.isOppAvailableForAttack(entry.getValue().getCard().getId(), selectedCard.getId())) {
+            if (game.isOppAvailableForAttack(entry.getValue().getCard().getId(), selectedCard.getId(), game.getTurn())) {
                 attackTarget = entry.getValue().getCard();
                 return true;
             }

@@ -463,25 +463,24 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("gorgSefid", 400, 5, 8, 2, 0, MELEE, ON_ATTACK);
-        Buff buff = new Power(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
+        /*Buff buff = new Power(HEALTH_POWER, 2, -6, ONE_ENEMY_FORCE);
         buff.setBuffPower(-8 + 4 / buff.getTime());
         buff.setUsed(true);
         buff.setStarted(true);
-        card.addBuff(buff);
+        card.addBuff(buff);*/
         cards.add(card);
         minions.add(card);
 
         card = new Minion("palang", 400, 4, 6, 2, 0, MELEE, ON_ATTACK);
-        buff = new Power(HEALTH_POWER, 1, -8, ONE_ENEMY_FORCE);
-        card.addBuff(buff);
+        card.addBuff(new Weakness(HEALTH_WEAKNESS, 1, 8, ONE_ENEMY_FORCE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("gorg", 400, 3, 6, 1, 0, MELEE, ON_ATTACK);
-        buff = new Power(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
+        /*buff = new Power(HEALTH_POWER, 1, -6, ONE_ENEMY_FORCE);
         buff.setStarted(true);
         buff.setUsed(true);
-        card.addBuff(buff);
+        card.addBuff(buff);*/
         cards.add(card);
         minions.add(card);
 
@@ -492,13 +491,13 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("jadogarAzam", 550, 6, 6, 6, 5, RANGED, PASSIVE);
-        card.addBuff(new Power(ATTACK_POWER, 2, -1, OWN_AND_INSIDER_FORCES_CLOSE));
-        card.addBuff(new Holy(HOLY, 0, -1, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Power(ATTACK_POWER, -1, 2, OWN_AND_INSIDER_FORCES_CLOSE));
+        card.addBuff(new Holy(HOLY, -1, 0, OWN_AND_INSIDER_FORCES_CLOSE));
         cards.add(card);
         minions.add(card);
 
         card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_INSERT);//?????????
-        card.addBuff(new Power(ATTACK_POWER, 1, -1, ALL_INSIDER_FORCES));
+        card.addBuff(new Power(ATTACK_POWER, -1, 1, ALL_INSIDER_FORCES));
         cards.add(card);
         minions.add(card);
 
@@ -515,7 +514,7 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("bahman", 450, 8, 16, 9, 0, MELEE, ON_SPAWN);
-        card.addBuff(new Power(HEALTH_POWER, -1, -16, ONE_ENEMY_FORCE_RANDOM));
+        card.addBuff(new Weakness(HEALTH_WEAKNESS, -1, 16, ONE_ENEMY_FORCE_RANDOM));
         cards.add(card);
         minions.add(card);
 
@@ -542,7 +541,7 @@ public class Shop {
         minions.add(card);
 
         card = new Minion("foladZereh", 650, 3, 1, 1, 0, MELEE, PASSIVE);
-        card.addBuff(new Holy(HOLY, 12, -1, OWN));
+        card.addBuff(new Holy(HOLY, -1, 12, OWN));
         cards.add(card);
         minions.add(card);
 
@@ -620,7 +619,7 @@ public class Shop {
         usableItems.add(item);
 
         item = new UsableItem("parSimorgh", 3500, "12");
-        item.addBuff(new Power(ATTACK_POWER, -1, -2, ENEMY_HERO));//???????????????????
+        item.addBuff(new Weakness(ATTACK_WEAKNESS, -1, 2, ENEMY_HERO));//???????????????????
         usableItems.add(item);
 
         item = new UsableItem("terrorHood", 5000, "12");
