@@ -2,6 +2,7 @@ package Model.size;
 
 import Controller.GameController.GameController;
 import Controller.GameController.MapController;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -9,6 +10,8 @@ import sun.applet.Main;
 import view.BattleMenu.MainBattleMenuPage;
 
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Coordinate {
@@ -49,6 +52,7 @@ public class Coordinate {
         setPaneCoordinate();
         setCellCoordinate();
         setHandCoordinate();
+        setButtonCoordinate();
         /*backGround.setFitHeight(height);
         backGround.setFitWidth(width);
         pane.setPrefWidth(width);
@@ -73,7 +77,8 @@ public class Coordinate {
             for (int j = 0; j < COLUMN; j++) {
                 double x = (xStep + SPACE) * j + startX;
                 double y = (yStep + SPACE) * i + startY;
-                gameCtrl.cells[i][j].relocate(x,y);
+                gameCtrl.cells[i][j].setX(x);
+                gameCtrl.cells[i][j].setY(y);
                 gameCtrl.cells[i][j].setWidth(xStep);
                 gameCtrl.cells[i][j].setHeight(yStep);
             }
@@ -81,5 +86,15 @@ public class Coordinate {
 
     private void setPaneCoordinate() {
 
+    }
+
+    private void setButtonCoordinate(){
+        gameCtrl.endTurn.setX(0);
+        gameCtrl.endTurn.setY(0);
+        /*try {
+            gameCtrl.endTurn.setImage(new Image(new FileInputStream("resources/ui/button_primary_middle_glow@2x.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
     }
 }

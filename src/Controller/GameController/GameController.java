@@ -57,7 +57,6 @@ public class GameController {
     public Circle handCard5;
 
     //------------------me-----------
-    public AnchorPane pane;
     public ImageView backGround;
     public Pane pane;
 
