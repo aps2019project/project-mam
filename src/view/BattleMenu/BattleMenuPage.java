@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.pages.Page;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -114,7 +115,7 @@ public class BattleMenuPage extends Page {
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
     }
 
-    public static void createGame(){
+    public static void createGame() {
         new Game(User.user, secondUser, gameMood, gameKind, flags);
         Page.getPages().push(new MainBattleMenuPage());
 

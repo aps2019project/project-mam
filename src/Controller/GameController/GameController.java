@@ -6,15 +6,19 @@ import Model.card.Minion;
 import Model.enums.ErrorType;
 import Model.enums.SPActivationTime;
 import Model.game.Game;
+import Model.size.Coordinate;
+import Model.size.Resolution;
 import Model.user.AI;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import view.pages.Page;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -23,6 +27,7 @@ public class GameController {
     private Game game = Game.getInstance();
     private ImageController imageCtrl = ImageController.getInstance();
     private AI ai = AI.getInstance();
+    private Coordinate coordinate = Coordinate.getInstance();
 
     public Label firstPlayerName;
     public Label firstPlayerMana;
@@ -52,7 +57,8 @@ public class GameController {
     public Circle handCard5;
 
     //------------------me-----------
-    public Pane pane;
+    public AnchorPane pane;
+    public ImageView backGround;
     public ScrollPane graveyardSP;
     public Label graveyardL;
 
@@ -71,6 +77,7 @@ public class GameController {
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
     public void init() {
+//        setSize();
         handCards.add(handCard1);
         handCards.add(handCard2);
         handCards.add(handCard3);
@@ -82,6 +89,20 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
+    }
+
+    public void setSize() {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int width = gd.getDisplayMode().getWidth();
+        int height = gd.getDisplayMode().getHeight();
+        pane.setPrefWidth(width);
+        pane.setPrefHeight(height);
+        if (width == 1366)
+            coordinate.setResolution(Resolution.HD);
+        coordinate.setHandCoordinate(handCards);
+        backGround.setFitHeight(height);
+        backGround.setFitWidth(width);
+
     }
 
     public void setGraveyard() {

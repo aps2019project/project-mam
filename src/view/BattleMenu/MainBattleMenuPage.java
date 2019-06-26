@@ -4,9 +4,12 @@ import Controller.GameController.GameController;
 import Model.game.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import view.pages.Page;
 
+import java.awt.*;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -41,6 +44,10 @@ public class MainBattleMenuPage extends Page {
 
             initializeImage();
             controller.initializeGame();
+
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
@@ -51,6 +58,11 @@ public class MainBattleMenuPage extends Page {
     }
 
     private void initializeImage() {
+        /*try {
+            controller.backGround.setImage(new Image(new FileInputStream("resources/maps/gameBackgaround.jpg")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
         setBackGround(root, "resources/maps/gameBackgaround.jpg");
         setBackGround(controller.label, "resources/ui/button_primary_middle_glow@2x.png");
     }
