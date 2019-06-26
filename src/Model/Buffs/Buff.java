@@ -8,10 +8,7 @@ import Model.enums.TargetCommunity;
 import Model.game.Cell;
 import Model.game.Game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Buff {
     private static ArrayList<Buff> buffs = new ArrayList<>();
@@ -291,14 +288,16 @@ public class Buff {
     }
 
     public static void updateBuffs() {
-        if (buffs != null)
-            for (Buff buff : buffs) {
-                buff.setUsed(false);
-                buff.decrementOfTime();
-                if (buff.getTime() == 0) {
-                    buff.removeBuff();
-                }
+        if (buffs != null) {
+            Iterator<Buff> iterator = buffs.iterator();
+            while (iterator.hasNext()){
+                Buff next = iterator.next();
+                next.setUsed(false);
+                next.decrementOfTime();
+                if (next.getTime() == 0)
+                    iterator.remove();
             }
+        }
     }
 
     public static void refreshBuffs() {
