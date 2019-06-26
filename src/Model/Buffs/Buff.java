@@ -14,13 +14,13 @@ import java.util.Map;
 import java.util.Random;
 
 public class Buff {
-    private static ArrayList<Buff> buffs;
+    private static ArrayList<Buff> buffs = new ArrayList<>();
     private BuffType type;
     private int remainTime;
     private int buffPower;
     private String kind = "";
     private int activationTime;
-    private boolean isStarted = false;
+    private boolean isStarted = true;
     private boolean isUsed = false;
     private boolean isContinous = false;
     private TargetCommunity targetCommunity;
@@ -148,12 +148,76 @@ public class Buff {
             }
     }
 
+    public ArrayList<Card> getMinionsSPTarget(Card attacker, Card defender,
+                                       HashMap<Integer, Cell> attackerTeam,
+                                       HashMap<Integer, Cell> defenderTeam,
+                                       Model.game.Map map){
+
+        ArrayList<Card> cards = new ArrayList<>();
+
+        switch (targetCommunity) {
+            case OWN:
+                cards.add(attacker);
+                break;
+            case ONE_ENEMY_FORCE:
+                cards.add(defender);
+                break;
+            case ONE_INSIDER_FORCE:
+                cards.add(defender);
+                break;
+            case ALL_ENEMY_FORCES:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet())
+                    cards.add(entry.getValue().getCard());
+                break;
+            case ALL_INSIDER_FORCES:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet())
+                    cards.add(entry.getValue().getCard());
+                break;
+            case INSIDER_HERO:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet())
+                    if (entry.getValue().getCard().getCardType().equals("hero"))
+                        cards.add(entry.getValue().getCard());
+                break;
+            case ENEMY_HERO:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet())
+                    if (entry.getValue().getCard().getCardType().equals("hero"))
+                        cards.add(entry.getValue().getCard());
+                break;
+            case ALL_ENEMY_FORCES_CLOSE:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
+                    if (map.getManhatanDistance(entry.getValue(), attackerTeam.get(attacker.getId())) == 1 ||
+                            (map.getManhatanDistance(entry.getValue(), attackerTeam.get(attacker.getId())) == 2 &&
+                                    entry.getValue().getRow() != attacker.getRow() &&
+                                    entry.getValue().getColumn() != attacker.getColumn())) {
+                        cards.add(entry.getValue().getCard());
+                    }
+                }
+                break;
+            case OWN_AND_INSIDER_FORCES_CLOSE:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet()) {
+                    if (map.getManhatanDistance(entry.getValue(), attackerTeam.get(attacker.getId())) == 1 ||
+                            (map.getManhatanDistance(entry.getValue(), attackerTeam.get(attacker.getId())) == 2 &&
+                                    entry.getValue().getRow() != attacker.getRow() &&
+                                    entry.getValue().getColumn() != attacker.getColumn())) {
+                        cards.add(entry.getValue().getCard());
+                    }
+                }
+                cards.add(attacker);
+        }
+
+
+        return cards;
+    }
+
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
                                                       HashMap<Integer, Cell> attackerTeam,
                                                       HashMap<Integer, Cell> defenderTeam,
                                                       Model.game.Map map) {
         ArrayList<Cell> cells = new ArrayList<>();
         switch (targetCommunity) {
+            case OWN:
+                cells.add(attacker);
+                break;
             case ONE_ENEMY_FORCE:
                 cells.add(defender);
                 break;
@@ -240,7 +304,7 @@ public class Buff {
     public static void refreshBuffs() {
         if (buffs != null)
             for (Buff buff : buffs) {
-                if (!buff.isUsed && buff.isStarted) {
+                if (!buff.isUsed && buff.isStarted()) {
                     buff.doEffect();
                     buff.isUsed = true;
                 }
@@ -253,6 +317,7 @@ public class Buff {
                 for (Buff buff : entry.getValue().getCard().getSpecialPower()) {
                     Buff newBuff = buff.copy();
                     newBuff.setCard(entry.getValue().getCard());
+                    newBuff.setStarted(true);
                     Buff.addBuff(newBuff);
                 }
             }

@@ -181,7 +181,7 @@ public class MapController {
             entry.getValue().setOnMouseEntered(event -> {
                 text = label.getText();
                 Card card = game.getFirstPlayerHand().get(entry.getKey());
-                label.setText("Name: " + card.getName() + "  AP: " + card.getAP() + "  HP: " + card.getHP());
+                label.setText("Name: " + card.getName() + " AP:" + card.getAP() + " HP:" + card.getHP() + " MP:" + card.getMP());
             });
 
             entry.getValue().setOnMouseExited(event -> {
