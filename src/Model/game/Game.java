@@ -30,7 +30,7 @@ public class Game {
     private static final String THIRD_MODE = "3";
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
-    private int basicMana = 2;
+    private int basicMana = 3;
     private int extraPlayer1Mana = 0;
     private int extraPlayer2Mana = 0;
     private Map map = new Map();
@@ -82,7 +82,7 @@ public class Game {
         turn = FIRST_PLAYER_TURN;
         mana = new int[2];
         mana[0] = basicMana;
-        mana[1] = basicMana;
+        mana[1] = basicMana - 1;
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         //setId(firstPlayerDeck);
@@ -138,6 +138,14 @@ public class Game {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getBasicMana1() {
+        return basicMana - 1;
+    }
+
+    public int getBasicMana2() {
+        return basicMana;
     }
 
     public Item getCurrentItem() {
@@ -678,14 +686,18 @@ public class Game {
         card.setColumn(y);
         if (getTurn() % 2 == 1) {
             map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
-            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN ||
-                    firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.PASSIVE)
+            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN)
                 buffCreator(card, map.getCells()[x][y]);
+                /*for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getFirstPlayerCellCard().get(card), buff);
+                }*/
         } else if (getTurn() % 2 == 0) {
             map.getSecondPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
-            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN ||
-                    firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.PASSIVE)
+            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN)
                 buffCreator(card, map.getCells()[x][y]);
+                /*for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
+                    buffAlocator(map.getSecondPlayerCellCard().get(card), buff);
+                }*/
         }
         if (map.getCells()[x][y].getFlagCount() != 0) {
             //TODO
@@ -702,21 +714,23 @@ public class Game {
 
     public void endTurn() {
         if (turn % 2 == 0) {
-            basicMana++;
+            if (basicMana < 9)
+                basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
-            if (basicMana <= 9)
-                mana[1] = basicMana + extraPlayer1Mana;
-            else mana[1] = 9 + extraPlayer1Mana;
+            //if (basicMana <= 9)
+                mana[1] = basicMana + extraPlayer1Mana - 1;
+            //else mana[1] = 9 + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
             Buff.updateBuffs();
         } else {
-            if (basicMana <= 9)
+            //if (basicMana <= 9)
                 mana[0] = basicMana + extraPlayer2Mana;
-            else mana[0] = 9 + extraPlayer2Mana;
+            //else mana[0] = 9 + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
+            Buff.refreshIsUsed();
         }
         /*mana[1] = basicMana + extraPlayer1Mana;
         updateFirstPlayerHand();
@@ -836,9 +850,9 @@ public class Game {
     public boolean canCounterAttack(int targetId, int CountererId) {
         boolean isDisarm;
         if (getTurn() % 2 == 1)
-            isDisarm = map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+            isDisarm = !map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
         else
-            isDisarm = map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+            isDisarm = !map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
         return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1) && !isDisarm;
     }
 
@@ -1003,7 +1017,7 @@ public class Game {
         return false;
     }
 
-    public boolean isCellValidForInsert(int x, int y) {
+    public boolean isCellValidForInsertMinion(int x, int y) {
         if (map.isTargetInMap(x, y) && map.isCellEmpty(x, y) && isInsiderForceAbutment(x, y)) {
             return true;
         }
