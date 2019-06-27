@@ -141,6 +141,9 @@ public class ImageController {
             view.setFitHeight(50);
             view.setX(350+ counter*50);
             view.setY(55);
+            view.setOnMouseClicked(event -> {
+                Game.getInstance().useCollectible();
+            });
             viewsCollectList.add(view);
             pane.getChildren().add(view);
             counter++;

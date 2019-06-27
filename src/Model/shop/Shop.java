@@ -656,7 +656,7 @@ public class Shop {
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("tirDoshakh", "12");
-        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, RANGED_HYBRID));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("eksir", "12");
@@ -685,7 +685,7 @@ public class Shop {
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("shamshirChini", "12");
-        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, JUST_MELEE));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         //-----------------------------mission deck--------------------------------------
