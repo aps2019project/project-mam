@@ -1,6 +1,5 @@
 package Model.user;
 
-import Controller.GameController.GameController;
 import Controller.GameController.MapController;
 import Model.card.Card;
 import Model.game.Cell;
@@ -108,7 +107,7 @@ public class AI {
     private boolean insertTarget() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                if (game.isCellValidForInsert(i, j)) {
+                if (game.isCellValidForInsertMinion(i, j)) {
                     insertTarget = game.getMap().getCells()[i][j];
                     return true;
                 }

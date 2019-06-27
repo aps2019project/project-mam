@@ -30,7 +30,7 @@ public class Game {
     private static final String THIRD_MODE = "3";
     private static final int FIRST_PLAYER_TURN = 1;
     private static final int SECOND_PLAYER_TURN = 2;
-    private int basicMana = 2;
+    private int basicMana = 3;
     private int extraPlayer1Mana = 0;
     private int extraPlayer2Mana = 0;
     private Map map = new Map();
@@ -82,7 +82,7 @@ public class Game {
         turn = FIRST_PLAYER_TURN;
         mana = new int[2];
         mana[0] = basicMana;
-        mana[1] = basicMana;
+        mana[1] = basicMana - 1;
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         //setId(firstPlayerDeck);
@@ -138,6 +138,14 @@ public class Game {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getBasicMana1() {
+        return basicMana - 1;
+    }
+
+    public int getBasicMana2() {
+        return basicMana;
     }
 
     public Item getCurrentItem() {
@@ -706,19 +714,20 @@ public class Game {
 
     public void endTurn() {
         if (turn % 2 == 0) {
-            basicMana++;
+            if (basicMana < 9)
+                basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
-            if (basicMana <= 9)
-                mana[1] = basicMana + extraPlayer1Mana;
-            else mana[1] = 9 + extraPlayer1Mana;
+            //if (basicMana <= 9)
+                mana[1] = basicMana + extraPlayer1Mana - 1;
+            //else mana[1] = 9 + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
             Buff.updateBuffs();
         } else {
-            if (basicMana <= 9)
+            //if (basicMana <= 9)
                 mana[0] = basicMana + extraPlayer2Mana;
-            else mana[0] = 9 + extraPlayer2Mana;
+            //else mana[0] = 9 + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
             Buff.refreshIsUsed();
@@ -1008,7 +1017,7 @@ public class Game {
         return false;
     }
 
-    public boolean isCellValidForInsert(int x, int y) {
+    public boolean isCellValidForInsertMinion(int x, int y) {
         if (map.isTargetInMap(x, y) && map.isCellEmpty(x, y) && isInsiderForceAbutment(x, y)) {
             return true;
         }

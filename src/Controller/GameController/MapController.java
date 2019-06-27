@@ -230,8 +230,8 @@ public class MapController {
     }
 
     public void updatePlayersMana() {
-        controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()));
-        controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()));
+        controller.firstPlayerMana.setText(String.valueOf(game.getFirstPlayerMana()) + "/" + game.getBasicMana1());
+        controller.secondPlayerMana.setText(String.valueOf(game.getSecondPlayerMana()) + "/" + game.getBasicMana2());
     }
 
     public void updateItems() {
@@ -346,7 +346,7 @@ public class MapController {
     public void insertCard(String cardName, int x, int y) {
         if (game.isCardInPlayerHand(cardName)) {
             if (game.haveEnoughMana(cardName)) {
-                if (game.isCellValidForInsert(x, y)) {
+                if (game.isCellValidForInsertMinion(x, y)) {
                     game.insertPlayerCard(cardName, x, y);
 
                     if (game.getCurrentCard().getCardType().equals("minion"))
@@ -359,6 +359,7 @@ public class MapController {
                     message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");
                     ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
                     label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
+                    updatePlayersMana();
                 } else label.setText(ErrorType.INVALID_TARGET.getMessage());
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
         } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
