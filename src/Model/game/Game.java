@@ -678,18 +678,14 @@ public class Game {
         card.setColumn(y);
         if (getTurn() % 2 == 1) {
             map.getFirstPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
-            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN)
+            if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN ||
+                    firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.PASSIVE)
                 buffCreator(card, map.getCells()[x][y]);
-                /*for (Buff buff : firstPlayerDeck.getItem().getBuffs()) {
-                    buffAlocator(map.getFirstPlayerCellCard().get(card), buff);
-                }*/
         } else if (getTurn() % 2 == 0) {
             map.getSecondPlayerCellCard().put(card.getId(), map.getCells()[x][y]);
-            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN)
+            if (secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_SPAWN ||
+                    firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.PASSIVE)
                 buffCreator(card, map.getCells()[x][y]);
-                /*for (Buff buff : secondPlayerDeck.getItem().getBuffs()) {
-                    buffAlocator(map.getSecondPlayerCellCard().get(card), buff);
-                }*/
         }
         if (map.getCells()[x][y].getFlagCount() != 0) {
             //TODO
@@ -840,9 +836,9 @@ public class Game {
     public boolean canCounterAttack(int targetId, int CountererId) {
         boolean isDisarm;
         if (getTurn() % 2 == 1)
-            isDisarm = map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
-        else
             isDisarm = map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+        else
+            isDisarm = map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
         return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1) && !isDisarm;
     }
 
