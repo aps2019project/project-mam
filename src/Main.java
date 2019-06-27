@@ -22,6 +22,7 @@ public class Main extends Application {
         /*GsonWriter.writeCards();
         GsonWriter.writeItems();*/
 
+
         GsonReader.readUser();
         GsonReader.initShop();
         Page.getPages().push(new SignIn());

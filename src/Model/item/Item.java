@@ -11,12 +11,21 @@ public class Item {
     private int id;
     private ArrayList<Buff> buffs = new ArrayList<>();
     private String imageAddress;
+    private String actionAdress;
 
     public Item(){}
 
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
+    }
+
+    public String getActionAdress() {
+        return actionAdress;
+    }
+
+    public void setActionAdress(String actionAdress) {
+        this.actionAdress = actionAdress;
     }
 
     public String getImageAddress() {

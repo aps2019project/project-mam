@@ -1,1 +1,1 @@
-{"price":300,"name":"tajdanaii","desc":"3time","id":0,"buffs":[{"type":"INCREASE_MANA","remainTime":3,"buffPower":1,"kind":"IncreaseMana","activationTime":0,"isStarted":true,"isUsed":false,"isContinous":false,"targetCommunity":"NONE"}]}
+{"price":300,"name":"tajdanaii","desc":"3time","id":0,"buffs":[{"type":"INCREASE_MANA","remainTime":3,"buffPower":1,"kind":"IncreaseMana","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"NONE"}]}

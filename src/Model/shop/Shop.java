@@ -284,9 +284,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("FireBall", 400, 1);
+        /*card = new Spell("FireBall", 400, 1);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("GodStrength", 450, 2);
         card.addBuff(new Power(ATTACK_POWER, -1, 4, INSIDER_HERO));
@@ -298,9 +298,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("LightingBolt", 1250, 2);
+        /*card = new Spell("LightingBolt", 1250, 2);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("poisonLake", 900, 5);
         card.addBuff(new CellEffect(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
@@ -345,9 +345,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("AllAttack", 1500, 4);
+        /*card = new Spell("AllAttack", 1500, 4);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("Weakening", 1000, 1);
         card.addBuff(new Weakness(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));
@@ -656,7 +656,7 @@ public class Shop {
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("tirDoshakh", "12");
-        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, RANGED_HYBRID));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 2, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("eksir", "12");
@@ -685,14 +685,14 @@ public class Shop {
         collectibles.add(collectableItem);
 
         collectableItem = new CollectableItem("shamshirChini", "12");
-        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, JUST_MELEE));
+        collectableItem.addBuff(new Power(ATTACK_POWER, -1, 5, ONE_INSIDER_FORCE_RANDOM));
         collectibles.add(collectableItem);
 
         //-----------------------------mission deck--------------------------------------
         Deck deck1 = new Deck();
         deck1.setHero(heros.get(0));
         deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
-                .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
+                .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(13)).addCard(spells.get(14))
                 .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
                 .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
                 .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
@@ -704,7 +704,7 @@ public class Shop {
         Deck deck2 = new Deck();
         deck2.setHero(heros.get(4));
         deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
-                .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
+                .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(15))
                 .addCard(minions.get(1)).addCard(minions.get(2)).addCard(minions.get(4)).addCard(minions.get(7))
                 .addCard(minions.get(11)).addCard(minions.get(14)).addCard(minions.get(14)).addCard(minions.get(18))
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(29)).addCard(minions.get(32))

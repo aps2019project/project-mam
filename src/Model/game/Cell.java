@@ -80,5 +80,4 @@ public class Cell {
         flagCount += number;
     }
 
-
 }

@@ -1,6 +1,7 @@
 package Model.game;
 
 import Model.enums.CellEffect;
+import Model.item.CollectableItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class Map {
     private Cell[][] cells;
     private HashMap<Integer, Cell> firstPlayerCellCard = new HashMap<>();
     private HashMap<Integer, Cell> secondPlayerCellCard = new HashMap<>();
+    private ArrayList<CollectableItem> collectableItems = new ArrayList<>();
 
 
     public Map() {
@@ -20,6 +22,21 @@ public class Map {
         for (int i = 0; i < ROW_NUMBER; i++)
             for (int j = 0; j < COLUMN_NUMBER; j++)
                 cells[i][j] = new Cell(i, j, 0, CellEffect.NONE, null);
+    }
+
+    public ArrayList<CollectableItem> getCollectableItems() {
+        return collectableItems;
+    }
+
+    public void initCollectableItemsList(){
+        for (int i = 0; i < ROW_NUMBER; i++)
+            for (int j = 0; j < COLUMN_NUMBER; j++)
+                if (cells[i][j].haveCollectableItem())
+                    collectableItems.add(cells[i][j].getCollectableItem());
+    }
+
+    public void setCollectableItems(ArrayList<CollectableItem> collectableItems) {
+        this.collectableItems = collectableItems;
     }
 
     public Cell[][] getCells() {
