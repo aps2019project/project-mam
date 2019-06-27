@@ -63,6 +63,7 @@ public class MapController {
         imageController.initHeroImage();
         updateNextCard();
         imageController.addFlags(getPane());
+        imageController.addCollectibles(getPane());
     }
 
     private String text;
@@ -294,6 +295,7 @@ public class MapController {
                 imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
                 imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
                 imageController.updateFlags(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
+                imageController.updateCollect(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
                 StringBuilder message = new StringBuilder();
                 message.append(game.getCurrentCard().getId()).append(" moved to ");
                 message.append(x).append(" ").append(y);

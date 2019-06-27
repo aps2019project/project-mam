@@ -4,6 +4,7 @@ import Model.card.Card;
 import Model.game.Cell;
 import Model.game.Game;
 import Model.game.Map;
+import Model.item.CollectableItem;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +31,8 @@ public class ImageController {
     private HashMap<Integer, ImageView> views2 = new HashMap<>();
     private HashMap<Integer, ImageView> viewsHand = new HashMap<>();
     private HashMap<Cell, ImageView> viewsFlag = new HashMap<>();
+    private HashMap<Cell, ImageView> viewsCollect = new HashMap<>();
+    private ArrayList<ImageView> viewsCollectList = new ArrayList<>();
 
     public HashMap<Integer, ImageView> getViews1() {
         return views1;
@@ -43,13 +46,21 @@ public class ImageController {
         return viewsHand;
     }
 
+    public HashMap<Cell, ImageView> getViewsCollect() {
+        return viewsCollect;
+    }
+
+    ArrayList<String> collectiblePath = new ArrayList<>();
+
     public void initCardImage() {
         File minions = new File("resources/gif-minion");
         File spells = new File("resources/gif-spell");
         File heroes = new File("resources/gif-hero");
+        File collectibles = new File("resources/gif-collectible");
         ArrayList<String> minionPath = new ArrayList<>();
         ArrayList<String> spellPath = new ArrayList<>();
         ArrayList<String> heroPath = new ArrayList<>();
+        collectiblePath = new ArrayList<>();
         for (String s : minions.list()) {
             minionPath.add("resources/gif-minion/" + s);
         }
@@ -58,6 +69,9 @@ public class ImageController {
         }
         for (String s : heroes.list()) {
             heroPath.add("resources/gif-hero/" + s);
+        }
+        for (String s : collectibles.list()) {
+            collectiblePath.add("resources/gif-collectible/" + s);
         }
         int mCounter = 0;
         int sCounter = 0;
@@ -102,6 +116,62 @@ public class ImageController {
         Game.getInstance().getSecondPlayerDeck().getHero().setBreathingImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setDeathImage(heroPath.get(hCounter++));
         Game.getInstance().getSecondPlayerDeck().getHero().setRunImage(heroPath.get(hCounter));
+    }
+
+    public void initCollectibleImage(){
+        int counter = 0;
+        for (CollectableItem item : Game.getInstance().getMap().getCollectableItems()) {
+            item.setImageAddress(collectiblePath.get(counter));
+            counter++;
+            item.setActionAdress(collectiblePath.get(counter));
+            counter++;
+        }
+    }
+
+    public void addCollectibleList(Pane pane){
+        int counter = 0;
+        for (CollectableItem item : Game.getInstance().getPlayer1Collectable()) {
+            ImageView view = null;
+            try {
+                view = new ImageView(new Image(new FileInputStream(item.getActionAdress())));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            view.setFitWidth(50);
+            view.setFitHeight(50);
+            view.setX(350+ counter*50);
+            view.setY(55);
+            viewsCollectList.add(view);
+            pane.getChildren().add(view);
+            counter++;
+        }
+    }
+
+
+    public void updateCollect(Pane pane, Cell cell){
+        pane.getChildren().remove(viewsCollect.get(cell));
+        viewsCollect.remove(cell);
+        addCollectibleList(pane);
+    }
+
+    public void addCollectibles(Pane pane){
+        try {
+            for (Cell[] cells : Game.getInstance().getMap().getCells()) {
+                for (Cell cell : cells) {
+                    if (cell.getCollectableItem() != null && cell.getCard() == null) {
+                        ImageView view = new ImageView(new Image(new FileInputStream(cell.getCollectableItem().getImageAddress())));
+                        view.setFitWidth(50);
+                        view.setFitHeight(50);
+                        view.setX(MapController.getInstance().getCells()[cell.getRow()][cell.getColumn()].getX() + 20);
+                        view.setY(MapController.getInstance().getCells()[cell.getRow()][cell.getColumn()].getY() + 15);
+                        viewsCollect.put(cell, view);
+                        pane.getChildren().add(view);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initHeroImage() {

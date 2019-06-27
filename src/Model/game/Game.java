@@ -91,6 +91,7 @@ public class Game {
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
+        ImageController.getInstance().initCollectibleImage();
     }
 
     public Game() {
@@ -262,6 +263,7 @@ public class Game {
             map.getCells()[x][y].setCollectableItem(Shop.getCollectibles().get(i));
             map.getCells()[4 - x][8 - y].setCollectableItem(Shop.getCollectibles().get(i));
         }
+        map.initCollectableItemsList();
     }
 
     private void updateHavingFlagCount() {
