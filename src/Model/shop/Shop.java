@@ -692,7 +692,7 @@ public class Shop {
         Deck deck1 = new Deck();
         deck1.setHero(heros.get(0));
         deck1.addCard(spells.get(0)).addCard(spells.get(6)).addCard(spells.get(9)).addCard(spells.get(9))
-                .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(17)).addCard(spells.get(19))
+                .addCard(spells.get(10)).addCard(spells.get(11)).addCard(spells.get(13)).addCard(spells.get(14))
                 .addCard(minions.get(0)).addCard(minions.get(8)).addCard(minions.get(10)).addCard(minions.get(10))
                 .addCard(minions.get(12)).addCard(minions.get(16)).addCard(minions.get(17)).addCard(minions.get(20))
                 .addCard(minions.get(21)).addCard(minions.get(25)).addCard(minions.get(37)).addCard(minions.get(35))
@@ -704,7 +704,7 @@ public class Shop {
         Deck deck2 = new Deck();
         deck2.setHero(heros.get(4));
         deck2.addCard(spells.get(1)).addCard(spells.get(2)).addCard(spells.get(4)).addCard(spells.get(8))
-                .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(18))
+                .addCard(spells.get(7)).addCard(spells.get(12)).addCard(spells.get(15))
                 .addCard(minions.get(1)).addCard(minions.get(2)).addCard(minions.get(4)).addCard(minions.get(7))
                 .addCard(minions.get(11)).addCard(minions.get(14)).addCard(minions.get(14)).addCard(minions.get(18))
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(29)).addCard(minions.get(32))

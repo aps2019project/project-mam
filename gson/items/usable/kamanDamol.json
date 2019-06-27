@@ -1,1 +1,1 @@
-{"price":30000,"name":"kamanDamol","desc":" ","id":0,"buffs":[{"type":"DISARM","remainTime":1,"buffPower":0,"kind":"DestroyPositives","activationTime":0,"isStarted":true,"isUsed":false,"isContinous":false,"targetCommunity":"INSIDER_HERO"}]}
+{"price":30000,"name":"kamanDamol","desc":" ","id":0,"buffs":[{"type":"DISARM","remainTime":1,"buffPower":0,"kind":"Disarm","activationTime":0,"isStarted":false,"isUsed":false,"isContinous":false,"targetCommunity":"INSIDER_HERO"}]}
