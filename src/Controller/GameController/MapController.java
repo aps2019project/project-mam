@@ -346,7 +346,8 @@ public class MapController {
     public void insertCard(String cardName, int x, int y) {
         if (game.isCardInPlayerHand(cardName)) {
             if (game.haveEnoughMana(cardName)) {
-                if (game.isCellValidForInsertMinion(x, y)) {
+                if ((game.isCellValidForInsertMinion(x, y) && game.getCardInHand(cardName).getCardType().equalsIgnoreCase("minion")) ||
+                        (game.isCellValidForInsertSpell(game.getCardInHand(cardName), x, y) && game.getCardInHand(cardName).getCardType().equalsIgnoreCase("spell"))) {
                     game.insertPlayerCard(cardName, x, y);
 
                     if (game.getCurrentCard().getCardType().equals("minion"))

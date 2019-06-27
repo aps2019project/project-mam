@@ -284,9 +284,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("FireBall", 400, 1);
+        /*card = new Spell("FireBall", 400, 1);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("GodStrength", 450, 2);
         card.addBuff(new Power(ATTACK_POWER, -1, 4, INSIDER_HERO));
@@ -298,9 +298,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("LightingBolt", 1250, 2);
+        /*card = new Spell("LightingBolt", 1250, 2);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("poisonLake", 900, 5);
         card.addBuff(new CellEffect(CELL_EFFECT_POISON, 1, 0, THREE_IN_THREE));
@@ -345,9 +345,9 @@ public class Shop {
         spells.add(card);
         cards.add(card);
 
-        card = new Spell("AllAttack", 1500, 4);
+        /*card = new Spell("AllAttack", 1500, 4);
         spells.add(card);
-        cards.add(card);
+        cards.add(card);*/
 
         card = new Spell("Weakening", 1000, 1);
         card.addBuff(new Weakness(ATTACK_WEAKNESS, 1, 4, ONE_ENEMY_FORCE));

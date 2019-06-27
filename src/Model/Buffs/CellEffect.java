@@ -18,7 +18,7 @@ public class CellEffect extends Buff {
 
     @Override
     public void doEffect(Cell cell) {
-        super.doEffect(cell);
+        System.out.println("\n\n\nworked\n\n\n");
     }
 
     @Override

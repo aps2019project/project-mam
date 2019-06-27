@@ -22,6 +22,7 @@ public class Buff {
     private boolean isContinous = false;
     private TargetCommunity targetCommunity;
     private Card card;
+    private Cell cell;
 
     public Buff(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         this.type = type;
@@ -52,6 +53,13 @@ public class Buff {
         buffs = new ArrayList<>();
     }
 
+    public Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
 
     public String getKind() {
         return kind;
@@ -157,10 +165,12 @@ public class Buff {
                 cards.add(attacker);
                 break;
             case ONE_ENEMY_FORCE:
-                cards.add(defender);
+                if (defenderTeam.containsKey(defender.getId()))
+                    cards.add(defender);
                 break;
             case ONE_INSIDER_FORCE:
-                cards.add(defender);
+                if (attackerTeam.containsKey(defender.getId()))
+                    cards.add(defender);
                 break;
             case ALL_ENEMY_FORCES:
                 for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet())
@@ -204,6 +214,93 @@ public class Buff {
 
 
         return cards;
+    }
+
+    public ArrayList<Cell> getSpellTarget(Cell defender,
+                                          HashMap<Integer, Cell> attackerTeam,
+                                          HashMap<Integer, Cell> defenderTeam,
+                                          Model.game.Map map) {
+        ArrayList<Cell> cells = new ArrayList<>();
+        switch (targetCommunity) {
+            case ONE_ENEMY_FORCE:
+                /*if (defenderTeam.containsValue(defender))
+                    cells.add(defender);*/
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
+                    if (entry.getValue().getColumn() == defender.getColumn() &&
+                            entry.getValue().getRow() == defender.getRow()) {
+                        cells.add(defender);
+                        break;
+                    }
+                }
+                break;
+            case ONE_INSIDER_FORCE:
+                /*if (attackerTeam.containsValue(defender))
+                    cells.add(defender);*/
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet()) {
+                    if (entry.getValue().getColumn() == defender.getColumn() &&
+                            entry.getValue().getRow() == defender.getRow()) {
+                        cells.add(defender);
+                        break;
+                    }
+                }
+                break;
+            case ALL_ENEMY_FORCES:
+                for (Map.Entry<Integer, Cell> entry : defenderTeam.entrySet()) {
+                    cells.add(entry.getValue());
+                }
+                break;
+            case ALL_INSIDER_FORCES:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet()) {
+                    cells.add(entry.getValue());
+                }
+                break;
+            case INSIDER_HERO:
+                for (Map.Entry<Integer, Cell> entry : attackerTeam.entrySet())
+                    if (entry.getValue().getCard().getCardType().equals("hero"))
+                        cells.add(entry.getValue());
+                break;
+            case TWO_IN_TWO:
+                cells.add(map.getCells()[defender.getRow()][defender.getColumn()]);
+                if (defender.getColumn() + 1 < 9)
+                    cells.add(map.getCells()[defender.getRow()][defender.getColumn() + 1]);
+                if (defender.getRow() + 1 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 1][defender.getRow()]);
+                if (defender.getColumn() + 1 < 9 && defender.getRow() + 1 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 1][defender.getColumn() + 1]);
+                break;
+            case THREE_IN_THREE:
+                cells.add(map.getCells()[defender.getRow()][defender.getColumn()]);
+
+                if (defender.getColumn() + 1 < 9)
+                    cells.add(map.getCells()[defender.getRow()][defender.getColumn() + 1]);
+
+                if (defender.getRow() + 1 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 1][defender.getRow()]);
+
+                if (defender.getColumn() + 1 < 9 && defender.getRow() + 1 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 1][defender.getColumn() + 1]);
+
+                if (defender.getColumn() + 1 < 9 && defender.getRow() + 2 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 2][defender.getColumn() + 1]);
+
+                if (defender.getColumn() + 2 < 9 && defender.getRow() + 1 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 1][defender.getColumn() + 2]);
+
+                if (defender.getColumn() + 2 < 9 && defender.getRow() + 2 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 2][defender.getColumn() + 2]);
+
+                if (defender.getColumn() + 2 < 9 && defender.getRow() < 5)
+                    cells.add(map.getCells()[defender.getRow()][defender.getColumn() + 2]);
+
+                if (defender.getColumn() < 9 && defender.getRow() + 2 < 5)
+                    cells.add(map.getCells()[defender.getRow() + 2][defender.getColumn()]);
+                break;
+            case ONE_ENEMY_FORCE_RANDOM:
+                Random rand = new Random();
+                cells.add(defenderTeam.get(rand.nextInt(defenderTeam.size() - 1)));
+                break;
+        }
+        return cells;
     }
 
     public ArrayList<Cell> getSpecialPowerTargetCells(Cell attacker, Cell defender,
@@ -316,7 +413,9 @@ public class Buff {
         if (buffs != null)
             for (Buff buff : buffs) {
                 if (!buff.isUsed && buff.isStarted()) {
-                    buff.doEffect();
+                    if (buff.getCard() != null)
+                        buff.doEffect();
+                    else buff.doEffect(buff.getCell());
                     buff.isUsed = true;
                 }
             }

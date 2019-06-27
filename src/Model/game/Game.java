@@ -658,26 +658,31 @@ public class Game {
     }
 
     private void insertCard(String cardName, int x, int y, HashMap<Integer, Card> Hand) {
-        for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet())
+        for (java.util.Map.Entry<Integer, Card> entry : Hand.entrySet()) {
             if (entry.getValue().getName().equalsIgnoreCase(cardName)) {
                 mana[getTurn() % 2] -= entry.getValue().getMP();
                 if (!(entry.getValue() instanceof Spell)) {
                     insertMinionsOrHero(entry.getValue(), x, y);
                     entry.getValue().setCanMove(false);
                     entry.getValue().setCanAttack(false);
+                    addCollectible(map.getCells()[x][y]);
+
+                } else {
+                    spellBuffCreator(entry.getValue(), getMap().getCells()[x][y]);
                 }
                 if (entry.getValue().getSPActivationTime() == SPActivationTime.ON_SPAWN ||
                         entry.getValue().getSPActivationTime() == SPActivationTime.PASSIVE) {  ///spell
+
                     //buffCreator(entry.getValue(), map.getCells()[x][y]);
                     /*for (Buff buff : entry.getValue().getSpecialPower()) {
                         buffAlocator(map.getCells()[x][y], buff);
                     }*/
                 }
-                addCollectible(map.getCells()[x][y]);
                 currentCard = entry.getValue();
                 Hand.remove(entry.getValue().getId());
                 break;
             }
+        }
     }
 
     private void insertMinionsOrHero(Card card, int x, int y) {
@@ -719,14 +724,14 @@ public class Game {
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
             //if (basicMana <= 9)
-                mana[1] = basicMana + extraPlayer1Mana - 1;
+            mana[1] = basicMana + extraPlayer1Mana - 1;
             //else mana[1] = 9 + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
             Buff.updateBuffs();
         } else {
             //if (basicMana <= 9)
-                mana[0] = basicMana + extraPlayer2Mana;
+            mana[0] = basicMana + extraPlayer2Mana;
             //else mana[0] = 9 + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
@@ -950,6 +955,19 @@ public class Game {
         }
     }
 
+    private void spellBuffCreator(Card attacker, Cell defender) {
+        for (Buff buff : attacker.getSpecialPower()) {
+            for (Cell cell : buff.getSpellTarget(defender, getMyTeam(), getOppTeam(), getMap())) {
+                Buff newBuff = buff.copy();
+                if (cell.getCard() != null)
+                    newBuff.setCard(cell.getCard());
+                newBuff.setCell(cell);
+                newBuff.setStarted(true);
+                Buff.addBuff(newBuff);
+            }
+        }
+    }
+
     private void buffCreator(Card card, Cell cell) {
         for (Buff buff : card.getSpecialPower()) {
             for (Card cards : buff.getMinionsSPTarget(card, cell.getCard(), getMyTeam(), getOppTeam(), map)) {
@@ -1022,6 +1040,33 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    public boolean isCellValidForInsertSpell(Card card, int x, int y) {
+        for (Buff buff : card.getSpecialPower()) {
+            for (Cell cell : buff.getSpellTarget(map.getCells()[x][y], getMyTeam(), getOppTeam(), getMap())) {
+                if (cell.getRow() == x && cell.getColumn() == y)
+                    return true;
+            }
+            if (buff.getKind().equalsIgnoreCase("cellEffect"))
+                return true;
+        }
+        return false;
+    }
+
+    public Card getCardInHand(String cardName) {
+        if (getTurn() % 2 == 1) {
+            for (java.util.Map.Entry<Integer, Card> entry : getFirstPlayerHand().entrySet()) {
+                if (entry.getValue().getName().equalsIgnoreCase(cardName))
+                    return entry.getValue();
+            }
+        } else {
+            for (java.util.Map.Entry<Integer, Card> entry : getSecondPlayerHand().entrySet()) {
+                if (entry.getValue().getName().equalsIgnoreCase(cardName))
+                    return entry.getValue();
+            }
+        }
+        return null;
     }
 
     public boolean isInsiderForceAbutment(int x, int y) {
