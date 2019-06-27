@@ -17,7 +17,7 @@ public class Poison extends Buff {
 
     @Override
     public void doEffect() {
-        getCard().decrementOfHp(getBuffPower());
+        getCard().decrementOfHp(1);
     }
 
     @Override
@@ -28,5 +28,11 @@ public class Poison extends Buff {
 
     public Buff copy(){
         return new Poison(BuffType.POISON, this.getRemainTime(), this.getBuffPower(), this.getActivationTime(), this.isStarted(), this.getTargetCommunity());
+    }
+
+    @Override
+    public void removeBuff() {
+        getCard().incrementOfHp(1);
+        super.removeBuff();
     }
 }

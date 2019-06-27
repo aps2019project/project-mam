@@ -496,7 +496,7 @@ public class Shop {
         cards.add(card);
         minions.add(card);
 
-        card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_INSERT);//?????????
+        card = new Minion("jen", 500, 5, 10, 4, 4, RANGED, ON_SPAWN);//?????????
         card.addBuff(new Power(ATTACK_POWER, -1, 1, ALL_INSIDER_FORCES));
         cards.add(card);
         minions.add(card);

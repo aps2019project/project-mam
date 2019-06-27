@@ -721,6 +721,7 @@ public class Game {
             else mana[0] = 9 + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
+            Buff.refreshIsUsed();
         }
         /*mana[1] = basicMana + extraPlayer1Mana;
         updateFirstPlayerHand();
@@ -840,9 +841,9 @@ public class Game {
     public boolean canCounterAttack(int targetId, int CountererId) {
         boolean isDisarm;
         if (getTurn() % 2 == 1)
-            isDisarm = map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+            isDisarm = !map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
         else
-            isDisarm = map.getSecondPlayerCellCard().get(CountererId).getCard().canCounterAttack();
+            isDisarm = !map.getFirstPlayerCellCard().get(CountererId).getCard().canCounterAttack();
         return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1) && !isDisarm;
     }
 

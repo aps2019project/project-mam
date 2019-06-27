@@ -17,7 +17,7 @@ public class Buff {
     private int buffPower;
     private String kind = "";
     private int activationTime;
-    private boolean isStarted = true;
+    private boolean isStarted = false;
     private boolean isUsed = false;
     private boolean isContinous = false;
     private TargetCommunity targetCommunity;
@@ -146,9 +146,9 @@ public class Buff {
     }
 
     public ArrayList<Card> getMinionsSPTarget(Card attacker, Card defender,
-                                       HashMap<Integer, Cell> attackerTeam,
-                                       HashMap<Integer, Cell> defenderTeam,
-                                       Model.game.Map map){
+                                              HashMap<Integer, Cell> attackerTeam,
+                                              HashMap<Integer, Cell> defenderTeam,
+                                              Model.game.Map map) {
 
         ArrayList<Card> cards = new ArrayList<>();
 
@@ -290,14 +290,26 @@ public class Buff {
     public static void updateBuffs() {
         if (buffs != null) {
             Iterator<Buff> iterator = buffs.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Buff next = iterator.next();
                 next.setUsed(false);
+                if (next.getKind().equals("Poison"))
+                    next.setUsed(true);
                 next.decrementOfTime();
-                if (next.getTime() == 0)
+                if (next.getTime() == 0) {
+                    next.removeBuff();
                     iterator.remove();
+                }
             }
         }
+    }
+
+    public static void refreshIsUsed() {
+        if (buffs != null)
+            for (Buff buff : buffs) {
+                if (!buff.getKind().equals("Poison"))
+                    buff.setUsed(false);
+            }
     }
 
     public static void refreshBuffs() {
@@ -336,7 +348,7 @@ public class Buff {
     }
 
     public void removeBuff() {
-        buffs.remove(this);
+        //buffs.remove(this);
     }
 }
 
