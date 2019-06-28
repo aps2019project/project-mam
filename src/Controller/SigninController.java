@@ -37,8 +37,10 @@ public class SigninController {
     private void login(String userName, String password){
         GsonWriter.sendClientCommand(new ClientCommand(CommandType.SIGNIN, userName, password), Page.getOutput());
         ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
-        if (serverCommand.getResult() == Result.SUCCESSFUL)
+        if (serverCommand.getResult() == Result.SUCCESSFUL) {
+            User.user = serverCommand.getUser();
             Page.getPages().push(new MainMenuPage());
+        }
         else msgLb.setText(serverCommand.getMessage());
     }
 
