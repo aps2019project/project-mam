@@ -223,7 +223,6 @@ public class Game {
 
     public void startGame() {
         setMap();
-
         if (flagCount == 1)
             map.getCells()[2][4].setFlagCount(1);
         else {
