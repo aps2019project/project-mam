@@ -4,9 +4,6 @@ import Model.user.User;
 
 public class   ServerCommand {
 
-    public ServerCommand() {
-    }
-
     public ServerCommand(CommandType type) {
         this.type = type;
     }
