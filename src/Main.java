@@ -4,6 +4,9 @@ import javafx.stage.Stage;
 
 import view.pages.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 
@@ -11,6 +14,9 @@ public class Main extends Application {
     private int port = 8000;
     private String hostName = "127.0.0.1";
     private Socket server;
+
+    private InputStream input;
+    private OutputStream output;
 
     public static void main(String argc[]) {
         launch(argc);
@@ -22,6 +28,9 @@ public class Main extends Application {
             System.out.println("connecting to server ...");
             server = new Socket(hostName, port);
             System.out.println("connected to " + server.getLocalPort());
+
+            input = server.getInputStream();
+            output = server.getOutputStream();
 
 
             primaryStage.setTitle("Duelyst");
@@ -43,6 +52,8 @@ public class Main extends Application {
             primaryStage.show();
         } catch (ConnectException e) {
             System.out.println("connection failed!");
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 }
