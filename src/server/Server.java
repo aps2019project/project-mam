@@ -10,8 +10,6 @@ public class Server {
 
     private static int port = 8000;
 
-
-
     public static void main(String[] args) {
         try {
             ServerSocket server = new ServerSocket(port);
