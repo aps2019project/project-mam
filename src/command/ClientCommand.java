@@ -4,6 +4,17 @@ package command;
 import Model.user.User;
 
 public class ClientCommand {
+
+    public ClientCommand(CommandType type){
+        this.type = type;
+    }
+
+    public ClientCommand(CommandType type, String userName, String pass) {
+        this.type = type;
+        this.userName = userName;
+        this.pass = pass;
+    }
+
     private CommandType type;
     private User user;
 
