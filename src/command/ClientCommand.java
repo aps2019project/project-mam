@@ -4,7 +4,7 @@ package command;
 import Model.user.User;
 
 public enum ClientCommand {
-    SINGIN, SINGUP, SAVE,
+    SIGNIN, SIGNUP, SAVE,
     BUY, SELL, SEARCH, SHOWALL,
     REQUEST_GAME, CREATE_GAME, MOVE, ENDTURN, ATTACK, INSERT,
     ;
