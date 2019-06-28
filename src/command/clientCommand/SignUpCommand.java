@@ -3,6 +3,8 @@ package command.clientCommand;
 import command.CommandType;
 import command.clientCommand.ClientCommand;
 
+import java.io.DataOutputStream;
+
 public class SignUpCommand extends ClientCommand {
     private String userName;
     private String pass;
@@ -13,7 +15,8 @@ public class SignUpCommand extends ClientCommand {
         type = CommandType.SIGNUP;
     }
 
-    public void handleCommand(){
-
+    @Override
+    public void handleCommand(DataOutputStream output) {
+        super.handleCommand(output);
     }
 }
