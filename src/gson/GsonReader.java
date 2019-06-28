@@ -13,7 +13,7 @@ import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import command.ClientCommand;
+import command.clientCommand.ClientCommand;
 import command.ServerCommand;
 
 import java.io.*;

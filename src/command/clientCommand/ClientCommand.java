@@ -1,9 +1,20 @@
-package command;
+package command.clientCommand;
 
 
 import Model.user.User;
+import command.CommandType;
 
-public class ClientCommand {
+public abstract class ClientCommand {
+    protected CommandType type;
+    private User user;
+
+    private String userName;
+    private String pass;
+
+    private String cardName;
+    private String cardId;
+    private int row;
+    private int column;
 
     public ClientCommand(CommandType type){
         this.type = type;
@@ -15,16 +26,9 @@ public class ClientCommand {
         this.pass = pass;
     }
 
-    private CommandType type;
-    private User user;
+    public ClientCommand() {
+    }
 
-    private String userName;
-    private String pass;
-
-    private String cardName;
-    private String cardId;
-    private int row;
-    private int column;
 
     public CommandType getType() {
         return type;

@@ -9,11 +9,9 @@ import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import command.ClientCommand;
+import command.clientCommand.ClientCommand;
 import command.ServerCommand;
-import server.Server;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;

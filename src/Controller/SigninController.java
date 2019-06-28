@@ -1,8 +1,7 @@
 package Controller;
 
-import Model.enums.ErrorType;
 import Model.user.User;
-import command.ClientCommand;
+import command.clientCommand.ClientCommand;
 import command.CommandType;
 import command.Result;
 import command.ServerCommand;
