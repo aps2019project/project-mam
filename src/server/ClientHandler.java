@@ -35,43 +35,11 @@ public class ClientHandler extends Thread {
         while (true) {
             ClientCommand command = GsonReader.getClientCommand(input);
             if (command != null)
-                switch (command.getType()) {
-                    case BUY:
-                    case MOVE:
-                    case SAVE:
-                    case SELL:
-                    case ATTACK:
-                    case INSERT:
-                    case SEARCH:
-                    case SIGNIN:
-                        command.handleCommand(output);
-                    case SIGNUP:
-                        createAccount(command.getUserName(), command.getPass());
-                    case ENDTURN:
-                    case SHOWALL:
-                    case CREATE_GAME:
-                    case REQUEST_GAME:
-                }
+                command.handleCommand(output);
             else {
                 System.out.println("client disconnected!");
                 break;
             }
         }
     }
-
-    public void createAccount(String userName, String password) {
-        if (!userName.trim().equalsIgnoreCase("")) {
-            if (User.isUserNameNew(userName)) {
-                if (!password.trim().equalsIgnoreCase("")) {
-                    User.addUser(new User(userName, password));
-                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNUP, User.user, Result.SUCCESSFUL), output);
-                } else
-                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_PASSWORD.getMessage()), output);
-            } else
-                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.DUPLICATE_USERNAME.getMessage()), output);
-        } else
-            GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
-    }
-
-
 }
