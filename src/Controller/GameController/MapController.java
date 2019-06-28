@@ -140,8 +140,8 @@ public class MapController {
                 //setOnHandClick();
                 handCardSelected = false;
             } else if (isSelected) {
-                if ((game.getTurn() % 2 == 1 && rectangle.getFill() == Color.BLUE)
-                        || (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.RED)) {
+                if ((game.isMyTurn() && rectangle.getFill() == Color.BLUE)
+                        || (game.isOppTurn() && rectangle.getFill() == Color.RED)) {
                     attack(Integer.parseInt(rectangle.getId()));
                     updateMap();
                     isSelected = false;
@@ -151,10 +151,10 @@ public class MapController {
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
-                if (game.getTurn() % 2 == 1 && rectangle.getFill() == Color.RED) {
+                if (game.isMyTurn() && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
                     isSelected = true;
-                } else if (game.getTurn() % 2 == 0 && rectangle.getFill() == Color.BLUE) {
+                } else if (game.isOppTurn() && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
                     isSelected = true;
                 } else label.setText("please select your card");
@@ -289,11 +289,11 @@ public class MapController {
             if (game.cardCanMove(x, y)) {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
-                animationCtrl.moveTo(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()),
+                animationCtrl.moveTo(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()),
                         game.getCurrentCard(),
                         cells[x][y].getX() + (xStep - 15) / 2, cells[x][y].getY() + (yStep - 35) / 2);
-                imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
-                imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
+                imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
+                imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
                 imageController.updateFlags(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
                 imageController.updateCollect(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
                 StringBuilder message = new StringBuilder();
@@ -309,10 +309,9 @@ public class MapController {
         if (game.getCurrentCard().isCanAttack()) {
             if (game.isCardInOppPlayerCellCard(oppId)) {
                 if (game.isOppAvailableForAttack(oppId, game.getCurrentCard().getId(), game.getTurn())) {
-                    animationCtrl.attack(imageController.getView(game.getTurn() % 2, game.getCurrentCard().getId()), game.getCurrentCard());
-                    int changedTurn = abs(game.getTurn() % 2 + 1);
+                    animationCtrl.attack(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()), game.getCurrentCard());
                     if (game.canCounterAttack(game.getCurrentCard().getId(), oppId))
-                        animationCtrl.counterAttack(imageController.getView(changedTurn, oppId), game.getCard(changedTurn, oppId));
+                        animationCtrl.counterAttack(imageController.getView(game.isOppTurn(), oppId), game.getCard(game.isOppTurn(), oppId));
                     game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                 } else label.setText(ErrorType.UNAVAILABLE_OPP_ATTACK.getMessage());
