@@ -1,6 +1,8 @@
 package view.pages;
 
 import Controller.MainMenuController;
+import Model.user.User;
+import gson.GsonReader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
