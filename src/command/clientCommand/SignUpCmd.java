@@ -3,10 +3,10 @@ package command.clientCommand;
 import command.CommandType;
 import command.clientCommand.ClientCommand;
 
-public class SignUpCmd extends ClientCommand {
 import java.io.DataOutputStream;
 
-public class SignUpCommand extends ClientCommand {
+public class SignUpCmd extends ClientCommand {
+
     private String userName;
     private String pass;
 

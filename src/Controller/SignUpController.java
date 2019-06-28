@@ -5,7 +5,7 @@ import Model.enums.ErrorType;
 import Model.user.User;
 import command.Result;
 import command.ServerCommand;
-import command.clientCommand.SignUpCommand;
+import command.clientCommand.SignUpCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.scene.control.Button;
@@ -26,7 +26,7 @@ public class SignUpController {
     }
 
     private void create(String userName, String password){
-        GsonWriter.sendClientCommand(new SignUpCommand(userName, password), Page.getOutput());
+        GsonWriter.sendClientCommand(new SignUpCmd(userName, password), Page.getOutput());
         ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
         if (serverCommand.getResult() == Result.SUCCESSFUL) {
             User.addUser(new User(userName, password));

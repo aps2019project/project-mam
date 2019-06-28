@@ -96,7 +96,8 @@ public class GsonReader {
     public static ServerCommand getServerCommand(DataInputStream in){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
-                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .create();
         try {
             return gson.fromJson(in.readUTF(), ServerCommand.class);
         } catch (IOException e) {
@@ -108,7 +109,9 @@ public class GsonReader {
     public static ClientCommand getClientCommand(DataInputStream in) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
-                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
+                .create();
         try {
             return gson.fromJson(in.readUTF(), ClientCommand.class);
         } catch (IOException e) {

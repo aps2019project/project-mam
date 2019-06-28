@@ -104,6 +104,7 @@ public class GsonWriter {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
         try {
             out.writeUTF(gson.toJson(command));
