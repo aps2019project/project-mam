@@ -4,6 +4,8 @@ package command.clientCommand;
 import Model.user.User;
 import command.CommandType;
 
+import java.io.DataOutputStream;
+
 public abstract class ClientCommand {
     protected CommandType type;
     private User user;
@@ -28,6 +30,8 @@ public abstract class ClientCommand {
 
     public ClientCommand() {
     }
+
+    public void handleCommand(DataOutputStream output){}
 
 
     public CommandType getType() {

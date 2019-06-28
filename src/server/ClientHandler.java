@@ -44,7 +44,7 @@ public class ClientHandler extends Thread {
                     case INSERT:
                     case SEARCH:
                     case SIGNIN:
-                        loginAccount(command.getUserName(), command.getPass());
+                        command.handleCommand(output);
                     case SIGNUP:
                         createAccount(command.getUserName(), command.getPass());
                     case ENDTURN:
@@ -71,21 +71,6 @@ public class ClientHandler extends Thread {
                 GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.DUPLICATE_USERNAME.getMessage()), output);
         } else
             GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
-    }
-
-    public void loginAccount(String userName, String password) {
-        if (!User.isUserNameNew(userName)) {
-            if (User.isPassCorrect(userName, password)) {
-                User.user = User.login(userName, password);
-                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, User.user, Result.SUCCESSFUL), output);
-            } else
-                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INCORRECT_PASSWORD.getMessage()), output);
-        } else
-            GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
-    }
-
-    public void handleCommand() {
-
     }
 
 

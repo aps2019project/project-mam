@@ -4,6 +4,7 @@ import Model.user.User;
 import command.Result;
 import command.ServerCommand;
 import command.clientCommand.SignInCmd;
+import command.clientCommand.SignInCommand;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.fxml.FXML;
