@@ -1,10 +1,9 @@
 package Controller;
 
 import Model.user.User;
-import command.clientCommand.ClientCommand;
-import command.CommandType;
 import command.Result;
 import command.ServerCommand;
+import command.clientCommand.SignInCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.fxml.FXML;
@@ -34,7 +33,7 @@ public class SigninController {
     }
 
     private void login(String userName, String password) {
-        GsonWriter.sendClientCommand(new ClientCommand(CommandType.SIGNIN, userName, password), Page.getOutput());
+        GsonWriter.sendClientCommand(new SignInCmd(userName, password), Page.getOutput());
         ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
         if (serverCommand.getResult() == Result.SUCCESSFUL) {
             User.user = serverCommand.getUser();
