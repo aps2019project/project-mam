@@ -258,7 +258,7 @@ public class Shop {
         deck.setHero(heros.get(6));
         deck.addCard(spells.get(2)).addCard(spells.get(3)).addCard(spells.get(5)).addCard(spells.get(9))
                 .addCard(spells.get(1)).addCard(spells.get(11)).addCard(spells.get(19))
-                .addCard(minions.get(12)).addCard(minions.get(2)).addCard(minions.get(4)).addCard(minions.get(7))
+                .addCard(minions.get(12)).addCard(minions.get(3)).addCard(minions.get(4)).addCard(minions.get(7))
                 .addCard(minions.get(11)).addCard(minions.get(20)).addCard(minions.get(14)).addCard(minions.get(1))
                 .addCard(minions.get(22)).addCard(minions.get(26)).addCard(minions.get(9)).addCard(minions.get(2))
                 .addCard(minions.get(17)).addItem(usableItems.get(5));

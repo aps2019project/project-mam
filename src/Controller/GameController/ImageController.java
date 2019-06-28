@@ -279,8 +279,8 @@ public class ImageController {
         }
     }
 
-    public ImageView getView(int turn, int id) {
-        if (turn % 2 == 1)
+    public ImageView getView(boolean isMyturn, int id) {
+        if (isMyturn)
             return views1.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
         return views2.entrySet().stream().filter(x -> x.getKey() == id).findFirst().get().getValue();
     }
