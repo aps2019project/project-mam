@@ -35,8 +35,7 @@ public class SigninController {
     }
 
     private void login(String userName, String password){
-        ClientCommand command  = new ClientCommand();
-        command.setType(CommandType.SIGNIN);
+        ClientCommand command  = new ClientCommand(CommandType.SIGNIN);
         command.setUserName(userName);
         command.setPass(password);
         GsonWriter.sendClientCommand(command, Page.getOutput());

@@ -4,6 +4,12 @@ package command;
 import Model.user.User;
 
 public class ClientCommand {
+
+    public ClientCommand(CommandType type){
+        this.type = type;
+    }
+
+
     private CommandType type;
     private User user;
 
