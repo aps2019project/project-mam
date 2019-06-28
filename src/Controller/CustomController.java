@@ -9,7 +9,7 @@ import Model.enums.BuffType;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
-import Model.gson.GsonWriter;
+import gson.GsonWriter;
 import Model.shop.Shop;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

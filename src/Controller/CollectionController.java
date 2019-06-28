@@ -2,8 +2,8 @@ package Controller;
 
 import Model.deck.Deck;
 import Model.enums.ErrorType;
-import Model.gson.GsonReader;
-import Model.gson.GsonWriter;
+import gson.GsonReader;
+import gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import view.pages.Page;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

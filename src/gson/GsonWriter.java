@@ -1,4 +1,4 @@
-package Model.gson;
+package gson;
 
 import Model.Buffs.Buff;
 import Model.card.Card;
@@ -9,7 +9,6 @@ import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import sun.awt.geom.AreaOp;
 
 import java.io.FileWriter;
 import java.io.IOException;

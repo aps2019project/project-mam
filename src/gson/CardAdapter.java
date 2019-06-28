@@ -1,4 +1,4 @@
-package Model.gson;
+package gson;
 
 import Model.card.Card;
 import Model.card.Hero;
@@ -6,7 +6,6 @@ import Model.card.Minion;
 import Model.card.Spell;
 import com.google.gson.*;
 
-import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 

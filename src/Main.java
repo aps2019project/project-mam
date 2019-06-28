@@ -1,12 +1,7 @@
-import Model.gson.GsonReader;
-import Model.gson.GsonWriter;
-import Model.shop.Shop;
-import Model.user.User;
-import com.google.gson.Gson;
+import gson.GsonReader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import view.BattleMenu.MainBattleMenuPage;
 import view.pages.*;
 
 public class Main extends Application {

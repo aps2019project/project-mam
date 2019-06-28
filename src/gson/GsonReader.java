@@ -1,4 +1,4 @@
-package Model.gson;
+package gson;
 
 import Model.Buffs.Buff;
 import Model.card.Card;

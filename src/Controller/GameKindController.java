@@ -1,8 +1,7 @@
 package Controller;
 
 import Model.enums.ErrorType;
-import Model.game.Game;
-import Model.gson.GsonReader;
+import gson.GsonReader;
 import Model.user.User;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

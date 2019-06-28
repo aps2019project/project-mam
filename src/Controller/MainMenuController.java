@@ -1,16 +1,14 @@
 package Controller;
 
 import Model.enums.ErrorType;
-import Model.gson.GsonWriter;
+import gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
 import view.pages.*;
-import javafx.scene.layout.AnchorPane;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class MainMenuController {
