@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.Socket;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -19,8 +20,17 @@ public abstract class Page {
      protected static Deque<Page> pages = new LinkedList<>();
     protected static DataInputStream input;
     protected static DataOutputStream output;
+    protected static Socket server;
 
     public Page() {
+    }
+
+    public static Socket getServer() {
+        return server;
+    }
+
+    public static void setServer(Socket server) {
+        Page.server = server;
     }
 
     public static DataInputStream getInput() {

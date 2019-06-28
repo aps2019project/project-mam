@@ -31,24 +31,29 @@ public class ClientHandler extends Thread {
     }
 
     @Override
-    public void run()  {
+    public void run() {
         while (true) {
-            ClientCommand command =  GsonReader.getClientCommand(input);
-            switch (command.getType()){
-                case BUY:
-                case MOVE:
-                case SAVE:
-                case SELL:
-                case ATTACK:
-                case INSERT:
-                case SEARCH:
-                case SIGNIN:
-                    loginAccount(command.getUserName(), command.getPass());
-                case SIGNUP:
-                case ENDTURN:
-                case SHOWALL:
-                case CREATE_GAME:
-                case REQUEST_GAME:
+            ClientCommand command = GsonReader.getClientCommand(input);
+            if (command != null)
+                switch (command.getType()) {
+                    case BUY:
+                    case MOVE:
+                    case SAVE:
+                    case SELL:
+                    case ATTACK:
+                    case INSERT:
+                    case SEARCH:
+                    case SIGNIN:
+                        loginAccount(command.getUserName(), command.getPass());
+                    case SIGNUP:
+                    case ENDTURN:
+                    case SHOWALL:
+                    case CREATE_GAME:
+                    case REQUEST_GAME:
+                }
+            else {
+                System.out.println("client disconnected!");
+                break;
             }
         }
     }
@@ -61,11 +66,13 @@ public class ClientHandler extends Thread {
                 //command.setResult(Result.SUCCESSFUL);
                 //command.setUser(User.user);
                 GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, User.user, Result.SUCCESSFUL), output);
-            } else  GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INCORRECT_PASSWORD.getMessage()), output);
-        } else GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
+            } else
+                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INCORRECT_PASSWORD.getMessage()), output);
+        } else
+            GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
     }
 
-    public void handleCommand(){
+    public void handleCommand() {
 
     }
 

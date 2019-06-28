@@ -12,7 +12,8 @@ import java.net.Socket;
 public class Main extends Application {
     private int port = 8000;
     private String hostName = "127.0.0.1";
-    private Socket server;
+
+    private static Socket server;
 
     private static DataInputStream input;
     private static DataOutputStream output;
@@ -40,6 +41,7 @@ public class Main extends Application {
             Page.setStage(primaryStage);
             Page.setInput(input);
             Page.setOutput(output);
+            Page.setServer(server);
 
         /*GsonWriter.writeCards();
         GsonWriter.writeItems();*/
