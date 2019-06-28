@@ -8,8 +8,9 @@ public class   ServerCommand {
         this.type = type;
     }
 
-    public ServerCommand(CommandType type, Result result) {
+    public ServerCommand(CommandType type,User user, Result result) {
         this.type = type;
+        this.user = user;
         this.result = result;
     }
 

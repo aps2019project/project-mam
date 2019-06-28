@@ -54,13 +54,13 @@ public class ClientHandler extends Thread {
     }
 
     public void loginAccount(String userName, String password) {
-        ServerCommand command = new ServerCommand(CommandType.SIGNIN);
+        //ServerCommand command = new ServerCommand(CommandType.SIGNIN);
         if (!User.isUserNameNew(userName)) {
             if (User.isPassCorrect(userName, password)) {
                 User.user = User.login(userName, password);
-                command.setResult(Result.SUCCESSFUL);
-                command.setUser(User.user);
-                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.SUCCESSFUL), output);
+                //command.setResult(Result.SUCCESSFUL);
+                //command.setUser(User.user);
+                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, User.user, Result.SUCCESSFUL), output);
             } else  GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INCORRECT_PASSWORD.getMessage()), output);
         } else GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
     }

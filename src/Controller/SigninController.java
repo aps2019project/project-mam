@@ -34,14 +34,13 @@ public class SigninController {
         Page.getPages().push(new SignUp());
     }
 
-    private void login(String userName, String password){
+    private void login(String userName, String password) {
         GsonWriter.sendClientCommand(new ClientCommand(CommandType.SIGNIN, userName, password), Page.getOutput());
         ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
         if (serverCommand.getResult() == Result.SUCCESSFUL) {
             User.user = serverCommand.getUser();
             Page.getPages().push(new MainMenuPage());
-        }
-        else msgLb.setText(serverCommand.getMessage());
+        } else msgLb.setText(serverCommand.getMessage());
     }
 
 }
