@@ -3,9 +3,9 @@ package gson;
 import com.google.gson.*;
 import command.CommandType;
 import command.clientCommand.ClientCommand;
-import command.clientCommand.SaveCommand;
-import command.clientCommand.SignInCommand;
-import command.clientCommand.SignUpCommand;
+import command.clientCommand.SaveCmd;
+import command.clientCommand.SignInCmd;
+import command.clientCommand.SignUpCmd;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -14,9 +14,9 @@ public class ClientCommandAdaptor implements JsonSerializer<ClientCommand>, Json
     private static HashMap<String, Class> map = new HashMap<>();
     static
     {
-        map.put(CommandType.SIGNIN.toString(), SignInCommand.class);
-        map.put(CommandType.SIGNUP.toString(), SignUpCommand.class);
-        map.put(CommandType.SAVE.toString(), SaveCommand.class);
+        map.put(CommandType.SIGNIN.toString(), SignInCmd.class);
+        map.put(CommandType.SIGNUP.toString(), SignUpCmd.class);
+        map.put(CommandType.SAVE.toString(), SaveCmd.class);
     }
 
     @Override

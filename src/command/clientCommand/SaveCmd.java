@@ -2,6 +2,6 @@ package command.clientCommand;
 
 import command.clientCommand.ClientCommand;
 
-public class SaveCommand extends ClientCommand {
+public class SaveCmd extends ClientCommand {
 
 }
