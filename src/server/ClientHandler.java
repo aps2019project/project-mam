@@ -8,7 +8,7 @@ import command.Result;
 import command.ServerCommand;
 import gson.GsonReader;
 import gson.GsonWriter;
-import org.omg.PortableInterceptor.SUCCESSFUL;
+import view.pages.Page;
 
 import java.io.*;
 import java.net.Socket;
@@ -46,6 +46,7 @@ public class ClientHandler extends Thread {
                     case SIGNIN:
                         loginAccount(command.getUserName(), command.getPass());
                     case SIGNUP:
+                        createAccount(command.getUserName(), command.getPass());
                     case ENDTURN:
                     case SHOWALL:
                     case CREATE_GAME:
@@ -58,13 +59,24 @@ public class ClientHandler extends Thread {
         }
     }
 
+    public void createAccount(String userName, String password) {
+        if (!userName.trim().equalsIgnoreCase("")) {
+            if (User.isUserNameNew(userName)) {
+                if (!password.trim().equalsIgnoreCase("")) {
+                    User.addUser(new User(userName, password));
+                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNUP, User.user, Result.SUCCESSFUL), output);
+                } else
+                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_PASSWORD.getMessage()), output);
+            } else
+                GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.DUPLICATE_USERNAME.getMessage()), output);
+        } else
+            GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_USERNAME.getMessage()), output);
+    }
+
     public void loginAccount(String userName, String password) {
-        //ServerCommand command = new ServerCommand(CommandType.SIGNIN);
         if (!User.isUserNameNew(userName)) {
             if (User.isPassCorrect(userName, password)) {
                 User.user = User.login(userName, password);
-                //command.setResult(Result.SUCCESSFUL);
-                //command.setUser(User.user);
                 GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, User.user, Result.SUCCESSFUL), output);
             } else
                 GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INCORRECT_PASSWORD.getMessage()), output);
