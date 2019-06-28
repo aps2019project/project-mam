@@ -18,11 +18,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try {
+        /*try {
             System.out.println("connecting to server ...");
             server = new Socket(hostName, port);
             System.out.println("connected to " + server.getLocalPort());
-
+        } catch (ConnectException e) {
+            System.out.println("connection failed!");
+        }*/
 
             primaryStage.setTitle("Duelyst");
             Page.setStage(primaryStage);
@@ -41,8 +43,6 @@ public class Main extends Application {
 //        Page.getPages().push(new MainBattleMenuPage());
             //Page.getPages().push(new CustomMenuPage());
             primaryStage.show();
-        } catch (ConnectException e) {
-            System.out.println("connection failed!");
-        }
+
     }
 }

@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.Random;
 
 public class User {
-    public static User user = new User();
-    private static ArrayList<User> users = new ArrayList<>();
+    public transient static User user = new User();
+    private transient static ArrayList<User> users = new ArrayList<>();
     private String name;
     private String password;
     private int numberOfWin;

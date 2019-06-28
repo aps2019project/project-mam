@@ -21,7 +21,9 @@ import java.io.FileReader;
 public class GsonReader {
 
     public static void readUser() throws FileNotFoundException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         JsonReader reader;
         try {
             File dir = new File("gson/users");

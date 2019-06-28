@@ -9,7 +9,12 @@ import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import command.ClientCommand;
+import command.ServerCommand;
+import server.Server;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -17,7 +22,8 @@ public class GsonWriter {
 
     public static void writeUser(User user) throws IOException {
         FileWriter out = new FileWriter("gson/users/" + user.toString() + ".json");
-        Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
         out.write(gson.toJson(user));
         out.flush();
@@ -81,5 +87,20 @@ public class GsonWriter {
         writer.write(gson.toJson(deck));
         writer.flush();
         writer.close();
+    }
+
+    public static void sendClientCommand(ClientCommand command, DataOutputStream out){
+        Gson gson = new GsonBuilder().create();
+        try {
+            out.writeUTF(gson.toJson(command));
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendServerCommand(ServerCommand command){
+        Gson gson = new GsonBuilder().create();
+
     }
 }
