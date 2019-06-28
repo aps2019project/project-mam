@@ -16,10 +16,6 @@ public class GameMoodMenuPage extends Page {
 
     private BattleMenuPage battleMenuPage = BattleMenuPage.getInstance();
 
-    public GameMoodMenuPage(Stage stage) {
-        super(stage);
-    }
-
     public GameMoodMenuPage(){
         start();
     }

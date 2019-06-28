@@ -5,12 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class SignUp extends Page{
-    public SignUp(Stage stage) {
-        super(stage);
-    }
 
     public SignUp(){
         start();

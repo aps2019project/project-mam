@@ -16,10 +16,6 @@ public class CollectionMenuPage extends Page {
     private static Pane root = new Pane();
     private CollectionController controller;
 
-    public CollectionMenuPage(Stage stage) {
-        super(stage);
-    }
-
     public CollectionMenuPage() {
         start();
     }

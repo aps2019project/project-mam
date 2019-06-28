@@ -1,6 +1,6 @@
 package command;
 
-public enum State {
+public enum Result {
     SUCCESSFUL, FAILED
     ;
 }

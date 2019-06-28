@@ -13,10 +13,10 @@ import Model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import command.ClientCommand;
+import command.ServerCommand;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 public class GsonReader {
 
@@ -90,6 +90,30 @@ public class GsonReader {
         for (File file : dir.listFiles()) {
             reader = new JsonReader(new FileReader(file));
             Shop.getCollectibles().add(gson.fromJson(reader, CollectableItem.class));
+        }
+    }
+
+    public static ServerCommand getServerCommand(DataInputStream in){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
+        try {
+            return gson.fromJson(in.readUTF(), ServerCommand.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ClientCommand getClientCommand(DataInputStream in) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
+        try {
+            return gson.fromJson(in.readUTF(), ClientCommand.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -2,6 +2,12 @@ package Controller;
 
 import Model.enums.ErrorType;
 import Model.user.User;
+import command.ClientCommand;
+import command.CommandType;
+import command.Result;
+import command.ServerCommand;
+import gson.GsonReader;
+import gson.GsonWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,23 +25,25 @@ public class SigninController {
 
 
     @FXML
-    public void onSignInBtnClicked(){
-        loginAccount(userName.getText(), password.getText());
+    public void onSignInBtnClicked() {
+        login(userName.getText(), password.getText());
     }
 
     @FXML
-    public void onSignUpClicked(){
+    public void onSignUpClicked() {
         Page.getPages().push(new SignUp());
-
     }
 
-
-    public void loginAccount(String userName, String password) {
-        if (!User.isUserNameNew(userName)) {
-            if (User.isPassCorrect(userName, password)) {
-                User.user = User.login(userName, password);
-                Page.getPages().push(new MainMenuPage());
-            } else msgLb.setText(ErrorType.INCORRECT_PASSWORD.getMessage());
-        } else msgLb.setText(ErrorType.INVALID_USERNAME.getMessage());
+    private void login(String userName, String password){
+        ClientCommand command  = new ClientCommand();
+        command.setType(CommandType.SIGNIN);
+        command.setUserName(userName);
+        command.setPass(password);
+        GsonWriter.sendClientCommand(command, Page.getOutput());
+        ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
+        if (serverCommand.getResult() == Result.SUCCESSFUL)
+            Page.getPages().push(new MainMenuPage());
+        else msgLb.setText(serverCommand.getMessage());
     }
+
 }

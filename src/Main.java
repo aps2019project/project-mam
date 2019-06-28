@@ -1,12 +1,11 @@
 import gson.GsonReader;
 import javafx.application.Application;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import view.pages.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
 
@@ -15,8 +14,8 @@ public class Main extends Application {
     private String hostName = "127.0.0.1";
     private Socket server;
 
-    private InputStream input;
-    private OutputStream output;
+    private static DataInputStream input;
+    private static DataOutputStream output;
 
     public static void main(String argc[]) {
         launch(argc);
@@ -24,17 +23,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*try {
+        try {
             System.out.println("connecting to server ...");
             server = new Socket(hostName, port);
             System.out.println("connected to " + server.getLocalPort());
 
-            input = server.getInputStream();
-            output = server.getOutputStream();
+            input = new DataInputStream(server.getInputStream());
+            output = new DataOutputStream(server.getOutputStream());
+        }catch (ConnectException e){
+            e.printStackTrace();
+        }
 
 
             primaryStage.setTitle("Duelyst");
+
             Page.setStage(primaryStage);
+            Page.setInput(input);
+            Page.setOutput(output);
 
         /*GsonWriter.writeCards();
         GsonWriter.writeItems();*/

@@ -7,6 +7,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Deque;
@@ -15,13 +17,26 @@ import java.util.LinkedList;
 public abstract class Page {
      protected static Stage stage;
      protected static Deque<Page> pages = new LinkedList<>();
-
-    public Page(Stage stage) {
-        this.stage = stage;
-    }
+    protected static DataInputStream input;
+    protected static DataOutputStream output;
 
     public Page() {
-        //start();
+    }
+
+    public static DataInputStream getInput() {
+        return input;
+    }
+
+    public static DataOutputStream getOutput() {
+        return output;
+    }
+
+    public static void setInput(DataInputStream input) {
+        Page.input = input;
+    }
+
+    public static void setOutput(DataOutputStream output) {
+        Page.output = output;
     }
 
     public static void setStage(Stage stage) {

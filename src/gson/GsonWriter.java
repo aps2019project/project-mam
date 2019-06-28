@@ -90,7 +90,10 @@ public class GsonWriter {
     }
 
     public static void sendClientCommand(ClientCommand command, DataOutputStream out){
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .create();
         try {
             out.writeUTF(gson.toJson(command));
             out.flush();
@@ -99,8 +102,17 @@ public class GsonWriter {
         }
     }
 
-    public static void sendServerCommand(ServerCommand command){
-        Gson gson = new GsonBuilder().create();
+    public static void sendServerCommand(ServerCommand command, DataOutputStream out){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .create();
+        try {
+            out.writeUTF(gson.toJson(command));
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

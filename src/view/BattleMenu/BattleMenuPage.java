@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 import view.pages.Page;
 
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class BattleMenuPage extends Page {
 
@@ -27,10 +25,6 @@ public class BattleMenuPage extends Page {
 
     private static Pane root = new Pane();
     private BattleMenuController controller;
-
-    public BattleMenuPage(Stage stage) {
-        super(stage);
-    }
 
     public BattleMenuPage() {
         start();

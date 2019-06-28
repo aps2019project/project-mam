@@ -12,9 +12,7 @@ import javafx.scene.layout.Pane;
 import view.pages.Page;
 
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class MainBattleMenuPage extends Page {
 
@@ -22,7 +20,6 @@ public class MainBattleMenuPage extends Page {
     public static Game getGame(){
         return game;
     }
-
 
     public MainBattleMenuPage() {
         game = Game.getInstance();
