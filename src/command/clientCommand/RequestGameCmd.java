@@ -1,6 +1,8 @@
 package command.clientCommand;
 
-import command.CommandType;
+import java.io.DataOutputStream;
+
+import static command.CommandType.*;
 
 public class RequestGameCmd extends ClientCommand {
     private String gameMode;
@@ -9,7 +11,11 @@ public class RequestGameCmd extends ClientCommand {
     public RequestGameCmd(String gameMode, int flag) {
         this.gameMode = gameMode;
         this.flag = flag;
-        type = CommandType.REQUEST_GAME;
+        type = REQUEST_GAME;
     }
 
+    @Override
+    public void handleCommand(DataOutputStream output) {
+        super.handleCommand(output);
+    }
 }

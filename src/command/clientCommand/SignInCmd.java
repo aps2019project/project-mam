@@ -6,6 +6,7 @@ import command.CommandType;
 import command.Result;
 import command.ServerCommand;
 import command.clientCommand.ClientCommand;
+import static command.CommandType.*;
 import gson.GsonWriter;
 
 import java.io.DataOutputStream;
@@ -17,7 +18,7 @@ public class SignInCmd extends ClientCommand {
     public SignInCmd(String userName, String pass) {
         this.userName = userName;
         this.pass = pass;
-        type = CommandType.SIGNIN;
+        type = SIGNIN;
     }
 
     public void handleCommand(DataOutputStream output){
