@@ -2,10 +2,7 @@ package gson;
 
 import com.google.gson.*;
 import command.CommandType;
-import command.clientCommand.ClientCommand;
-import command.clientCommand.SaveCmd;
-import command.clientCommand.SignInCmd;
-import command.clientCommand.SignUpCmd;
+import command.clientCommand.*;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -17,6 +14,15 @@ public class ClientCommandAdaptor implements JsonSerializer<ClientCommand>, Json
         map.put(CommandType.SIGNIN.toString(), SignInCmd.class);
         map.put(CommandType.SIGNUP.toString(), SignUpCmd.class);
         map.put(CommandType.SAVE.toString(), SaveCmd.class);
+        map.put(CommandType.BUY.toString(), BuyCmd.class);
+        map.put(CommandType.REQUEST_GAME.toString(), RequestGameCmd.class);
+        map.put(CommandType.SEARCH.toString(), SearchCmd.class);
+        map.put(CommandType.SELL.toString(), SellCmd.class);
+        map.put(CommandType.SHOWALL.toString(), ShowAllCmd.class);
+        map.put(CommandType.ATTACK.toString(), AttackCmd.class);
+        map.put(CommandType.MOVE.toString(), MoveCmd.class);
+        map.put(CommandType.SELECT.toString(), SellCmd.class);
+        map.put(CommandType.INSERT.toString(), InsertCmd.class);
     }
 
     @Override
