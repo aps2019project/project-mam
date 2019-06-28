@@ -6,27 +6,17 @@ import command.CommandType;
 
 import java.io.DataOutputStream;
 
-public abstract class ClientCommand {
+public class ClientCommand {
     protected CommandType type;
     private User user;
 
-    private String userName;
+    /*private String userName;
     private String pass;
-
+*/
     private String cardName;
     private String cardId;
     private int row;
     private int column;
-
-    public ClientCommand(CommandType type){
-        this.type = type;
-    }
-
-    public ClientCommand(CommandType type, String userName, String pass) {
-        this.type = type;
-        this.userName = userName;
-        this.pass = pass;
-    }
 
     public ClientCommand() {
     }
@@ -50,21 +40,21 @@ public abstract class ClientCommand {
         this.user = user;
     }
 
-    public String getUserName() {
+    /*public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
+    }*/
 
-    public String getPass() {
+    /*public String getPass() {
         return pass;
     }
 
     public void setPass(String pass) {
         this.pass = pass;
-    }
+    }*/
 
     public String getCardName() {
         return cardName;
