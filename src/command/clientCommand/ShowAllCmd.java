@@ -1,6 +1,7 @@
 package command.clientCommand;
 
 import command.CommandType;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -12,7 +13,7 @@ public class ShowAllCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
-        super.handleCommand(output);
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        super.handleCommand(output, handler);
     }
 }

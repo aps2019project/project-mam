@@ -8,10 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class Server {
 
     private static int port = 8000;
+
+    private static HashMap<String, ClientHandler> clients = new HashMap<>();
 
     public static void main(String[] args) {
         try {
@@ -31,5 +34,9 @@ public class Server {
     private static void initServer() throws FileNotFoundException {
         GsonReader.readUser();
         GsonReader.initShop();
+    }
+
+    public static HashMap<String, ClientHandler> getClients() {
+        return clients;
     }
 }

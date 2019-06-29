@@ -1,5 +1,7 @@
 package command.clientCommand;
 
+import server.ClientHandler;
+
 import java.io.DataOutputStream;
 import static command.CommandType.*;
 
@@ -12,7 +14,6 @@ public class SearchCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
-        super.handleCommand(output);
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
     }
 }

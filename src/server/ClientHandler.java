@@ -16,9 +16,10 @@ import java.net.Socket;
 public class ClientHandler extends Thread {
     private Socket client;
 
+    private User user;
+
     private DataInputStream input;
     private DataOutputStream output;
-
 
     public ClientHandler(Socket client) {
         this.client = client;
@@ -35,11 +36,22 @@ public class ClientHandler extends Thread {
         while (true) {
             ClientCommand command = GsonReader.getClientCommand(input);
             if (command != null)
-                command.handleCommand(output);
+                if (command.getType() == CommandType.SIGNIN)
+                    command.handleCommand(output, this);
+                else
+                    command.handleCommand(output);
             else {
                 System.out.println("client disconnected!");
                 break;
             }
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

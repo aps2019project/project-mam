@@ -6,6 +6,7 @@ import Model.user.User;
 import command.Result;
 import command.ServerCommand;
 import gson.GsonWriter;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -21,12 +22,12 @@ public class SellCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
         int ID = Integer.parseInt(cardId);
-        if (shop.sellCard(ID, User.user)) {
-            GsonWriter.sendServerCommand(new ServerCommand(SELL, User.user, Result.SUCCESSFUL), output);
+        if (shop.sellCard(ID, handler.getUser())) {
+            GsonWriter.sendServerCommand(new ServerCommand(SELL, handler.getUser(), Result.SUCCESSFUL), output);
         } else if (shop.sellItem(ID, User.user)) {
-            GsonWriter.sendServerCommand(new ServerCommand(SELL, User.user, Result.SUCCESSFUL), output);
+            GsonWriter.sendServerCommand(new ServerCommand(SELL, handler.getUser(), Result.SUCCESSFUL), output);
         } else
             GsonWriter.sendServerCommand(new ServerCommand(SELL, Result.FAILED, ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage()), output);
     }

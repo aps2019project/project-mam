@@ -1,6 +1,7 @@
 package command.clientCommand;
 
 import command.CommandType;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -11,7 +12,7 @@ public class EndTurnCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
 
     }
 }

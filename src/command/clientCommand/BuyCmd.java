@@ -2,10 +2,10 @@ package command.clientCommand;
 
 import Model.enums.ErrorType;
 import Model.shop.Shop;
-import Model.user.User;
 import command.Result;
 import command.ServerCommand;
 import gson.GsonWriter;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -21,17 +21,17 @@ public class BuyCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
         if (shop.cardNameIsAvailable(cardName)) {
-            if (shop.priceIsEnough(shop.getCardPrice(cardName), User.user)) {
-                shop.buyCard(cardName, User.user);
-                GsonWriter.sendServerCommand(new ServerCommand(BUY, User.user, Result.SUCCESSFUL, ErrorType.SUCCESSFUL_BUY.getMessage()), output);
+            if (shop.priceIsEnough(shop.getCardPrice(cardName), handler.getUser())) {
+                shop.buyCard(cardName, handler.getUser());
+                GsonWriter.sendServerCommand(new ServerCommand(BUY, handler.getUser(), Result.SUCCESSFUL, ErrorType.SUCCESSFUL_BUY.getMessage()), output);
             } else
                 GsonWriter.sendServerCommand(new ServerCommand(BUY, Result.FAILED, ErrorType.MONEY_IS_NOT_ENOUGH.getMessage()), output);
         } else if (shop.itemNameIsAvailable(cardName)) {
-            if (shop.isPossibleToAddItem(User.user)) {
-                if (shop.priceIsEnough(shop.getItemPrice(cardName), User.user)) {
-                    shop.buyItem(cardName, User.user);
+            if (shop.isPossibleToAddItem(handler.getUser())) {
+                if (shop.priceIsEnough(shop.getItemPrice(cardName), handler.getUser())) {
+                    shop.buyItem(cardName, handler.getUser());
                     GsonWriter.sendServerCommand(new ServerCommand(BUY, Result.SUCCESSFUL, ErrorType.SUCCESSFUL_BUY.getMessage()), output);
                 } else
                     GsonWriter.sendServerCommand(new ServerCommand(BUY, Result.FAILED, ErrorType.MONEY_IS_NOT_ENOUGH.getMessage()), output);

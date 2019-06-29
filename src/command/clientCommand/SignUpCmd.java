@@ -8,6 +8,7 @@ import command.ServerCommand;
 import command.clientCommand.ClientCommand;
 import static command.CommandType.*;
 import gson.GsonWriter;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -23,12 +24,12 @@ public class SignUpCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
         if (!userName.trim().equalsIgnoreCase("")) {
             if (User.isUserNameNew(userName)) {
                 if (!pass.trim().equalsIgnoreCase("")) {
                     User.addUser(new User(userName, pass));
-                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNUP, User.user, Result.SUCCESSFUL), output);
+                    GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNUP, handler.getUser(), Result.SUCCESSFUL), output);
                 } else
                     GsonWriter.sendServerCommand(new ServerCommand(CommandType.SIGNIN, Result.FAILED, ErrorType.INVALID_PASSWORD.getMessage()), output);
             } else

@@ -1,6 +1,7 @@
 package command.clientCommand;
 
 import command.CommandType;
+import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
@@ -15,7 +16,6 @@ public class MoveCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output) {
-        super.handleCommand(output);
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
     }
 }
