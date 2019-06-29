@@ -15,6 +15,8 @@ import java.net.Socket;
 
 public class ClientHandler extends Thread {
     private Socket client;
+    private boolean isRequested = false;
+    private ClientHandler oppHandler;
 
     private User user;
 
@@ -36,15 +38,36 @@ public class ClientHandler extends Thread {
         while (true) {
             ClientCommand command = GsonReader.getClientCommand(input);
             if (command != null)
-                if (command.getType() == CommandType.SIGNIN)
-                    command.handleCommand(output, this);
-                else
-                    command.handleCommand(output);
+                command.handleCommand(output, this);
             else {
                 System.out.println("client disconnected!");
                 break;
             }
         }
+    }
+
+    public void setOppHandler(ClientHandler oppHandler) {
+        this.oppHandler = oppHandler;
+    }
+
+    public ClientHandler getOppHandler() {
+        return oppHandler;
+    }
+
+    public DataInputStream getInput() {
+        return input;
+    }
+
+    public DataOutputStream getOutput() {
+        return output;
+    }
+
+    public boolean isRequested() {
+        return isRequested;
+    }
+
+    public void setRequested(boolean requested) {
+        isRequested = requested;
     }
 
     public User getUser() {

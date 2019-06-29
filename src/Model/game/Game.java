@@ -272,7 +272,7 @@ public class Game {
             if (flagCount % 2 == 1)
                 map.getCells()[2][4].incrementOfFlag(1);
         }
-        insertCollectibleToMap();
+//        insertCollectibleToMap();
     }
 
     private void setMap() {

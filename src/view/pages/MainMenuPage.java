@@ -19,13 +19,13 @@ public class MainMenuPage extends Page {
     private static Pane root = new Pane();
 
     public MainMenuPage(){
-        try {
+        /*try {
             User.user.getCollection().getDecks().add(GsonReader.getDeck("mission_2"));
             User.user.getCollection().setMainDeck(GsonReader.getDeck("mission_2"));
             User.user.setMainDeck(GsonReader.getDeck("mission_2"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
         start();
     }
 

@@ -2,57 +2,50 @@ package Controller;
 
 import Model.enums.ErrorType;
 import Model.user.User;
+import command.CommandType;
+import command.Result;
+import command.ServerCommand;
+import command.clientCommand.ExitGameCmd;
+import command.clientCommand.RequestGameCmd;
+import gson.GsonReader;
+import gson.GsonWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import server.Server;
 import view.BattleMenu.BattleMenuPage;
 import view.BattleMenu.GameMoodMenuPage;
 import view.pages.Page;
 
 public class SelectUserController {
 
-    public Label users;
-    public Label select;
-    public Label label;
-
-    public TextField user;
-
     public ImageView back;
 
     @FXML
-    public void setSelect() {
-        if (!User.isUserNameNew(user.getText())) {
-            if (isMainDeckValid(user.getText())) {
-                BattleMenuPage.setSecondUser(User.getUser(user.getText()));
-                Page.getPages().push(new GameMoodMenuPage());
-            } else label.setText(ErrorType.INVALID_DECK_2.getMessage());
-        }
-        else label.setText(ErrorType.INVALID_USERNAME.getMessage());
-    }
-
-    @FXML
     public void setBack() {
+        exit();
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
 
-    public void showUsers() {
-        StringBuilder info = new StringBuilder();
-        info.append("Accounts:\n");
-        for (User users : User.getUsers()) {
-            if (!users.getName().equalsIgnoreCase(User.user.getName())) {
-                info.append("\t").append("Name: ").append(users.getName()).append("    Num of Wins: ").append(users.getNumberOfWin()).append("\n");
-            }
+    public void request() {
+        GsonWriter.sendClientCommand(new RequestGameCmd(BattleMenuPage.getGameMood(),
+                BattleMenuPage.getFlags()), Page.getOutput());
+        ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+        if (command.getResult() == Result.SUCCESSFUL) {
+            BattleMenuPage.setSecondUser(command.getUser());
+            BattleMenuPage.createGame();
+        } else {
+            command = GsonReader.getServerCommand(Page.getInput());
+            if (command.getType() == CommandType.EXIT_GAME)
+                return;
+            BattleMenuPage.setSecondUser(command.getUser());
+            BattleMenuPage.createGame();
         }
-        users.setText(info.toString());
     }
 
-    public boolean isMainDeckValid(String userName) {
-        try {
-            return User.getUser(userName).getCollection().isValidMainDeck();
-        } catch (NullPointerException e) {
-            return false;
-        }
+    public void exit() {
+        GsonWriter.sendClientCommand(new ExitGameCmd(), Page.getOutput());
     }
 }

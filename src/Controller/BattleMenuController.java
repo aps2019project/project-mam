@@ -10,6 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
 import view.BattleMenu.GameKindMenuPage;
+import view.BattleMenu.MultiPlayerMoodPage;
 import view.BattleMenu.SelectUserMenuPage;
 import view.pages.Page;
 
@@ -30,7 +31,7 @@ public class BattleMenuController {
     public void setMulti() {
         BattleMenuPage.setNumOfPlayers("2");
         BattleMenuPage.setGameKind("custom");
-        Page.getPages().push(new SelectUserMenuPage());
+        Page.getPages().push(new MultiPlayerMoodPage());
     }
 
     public void setBack() {

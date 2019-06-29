@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -34,31 +31,13 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="693.0" prefWidth="1500.0" GridPane.rowIndex="1">
          <children>
-            <VBox alignment="CENTER" prefHeight="527.0" prefWidth="553.0" spacing="50.0">
+            <VBox alignment="CENTER" prefHeight="527.0" prefWidth="553.0" spacing="100.0">
                <children>
-                  <ScrollPane maxHeight="229.0" maxWidth="439.0" opacity="0.8" prefHeight="229.0" prefWidth="439.0">
-                     <content>
-                        <Label fx:id="users" alignment="TOP_LEFT" prefHeight="3001.0" prefWidth="420.0">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </Label>
-                     </content>
-                  </ScrollPane>
-                  <TextField fx:id="user" maxWidth="208.0" minHeight="0.0" minWidth="0.0" opacity="0.8" prefWidth="208.0">
+                  <Label text="waiting for your opponent ...">
                      <font>
-                        <Font size="24.0" />
-                     </font>
-                  </TextField>
-                  <Label fx:id="select" alignment="CENTER" onMouseClicked="#setSelect" prefHeight="70.0" prefWidth="211.0" text="Select">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
+                        <Font name="System Bold Italic" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label" textFill="#f5f3f3" />
                </children>
             </VBox>
          </children>
