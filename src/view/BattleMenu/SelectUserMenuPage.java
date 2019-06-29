@@ -36,7 +36,7 @@ public class SelectUserMenuPage extends Page {
             stage.setScene(scene);
 //            stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
-            controller.request();
+            //controller.request();
         } catch (IOException e) {
             e.printStackTrace();
         }

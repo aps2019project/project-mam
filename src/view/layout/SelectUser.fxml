@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -31,13 +32,18 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="693.0" prefWidth="1500.0" GridPane.rowIndex="1">
          <children>
-            <VBox alignment="CENTER" prefHeight="527.0" prefWidth="553.0" spacing="100.0">
+            <VBox alignment="CENTER" prefHeight="590.0" prefWidth="640.0" spacing="100.0">
                <children>
-                  <Label text="waiting for your opponent ...">
+                  <Label fx:id="label" text="select &quot;search&quot; to find opponent">
                      <font>
                         <Font name="System Bold Italic" size="36.0" />
                      </font>
                   </Label>
+                  <Button fx:id="start" mnemonicParsing="false" onMouseClicked="#setStart" text="Search">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </children>
