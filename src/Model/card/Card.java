@@ -20,6 +20,7 @@ public class Card {
     private String attackImage;
     private String runImage;
     private String deathImage;
+    private int count;
 
     private boolean canMove = true;
     private boolean canAttack = true;
@@ -35,6 +36,7 @@ public class Card {
         this.price = price;
         this.name = name;
         this.desc = desc;
+        count = 10;
     }
 
     public String getBreathingImage() {

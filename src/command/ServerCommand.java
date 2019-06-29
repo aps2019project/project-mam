@@ -1,38 +1,10 @@
 package command;
 
+import Model.card.Card;
+import Model.item.Item;
 import Model.user.User;
 
-public class   ServerCommand {
-
-    public ServerCommand(CommandType type) {
-        this.type = type;
-    }
-
-    public ServerCommand(CommandType type,User user, Result result) {
-        this.type = type;
-        this.user = user;
-        this.result = result;
-    }
-
-    public ServerCommand(CommandType type, Result result, String message) {
-        this.type = type;
-        this.result = result;
-        this.message = message;
-    }
-
-
-    public ServerCommand(CommandType type, User user, String message, Result result, int baseTurn, String cardName, String cardId, int row, int column) {
-        this.type = type;
-        this.user = user;
-        this.message = message;
-        this.result = result;
-        this.baseTurn = baseTurn;
-        this.cardName = cardName;
-        this.cardId = cardId;
-        this.row = row;
-        this.column = column;
-    }
-
+public class ServerCommand {
     private CommandType type;
     private User user;
 
@@ -44,6 +16,43 @@ public class   ServerCommand {
     private String cardId;
     private int row;
     private int column;
+
+    public ServerCommand(CommandType type) {
+        this.type = type;
+    }
+
+    public ServerCommand(CommandType type, User user, Result result) {
+        this(type);
+        this.user = user;
+        this.result = result;
+    }
+
+    public ServerCommand(CommandType type, Result result, String message) {
+        this(type);
+        this.result = result;
+        this.message = message;
+    }
+
+
+    public ServerCommand(CommandType type, User user, String message, Result result, int baseTurn, String cardName, String cardId, int row, int column) {
+        this(type, user, result);
+        this.message = message;
+        this.baseTurn = baseTurn;
+        this.cardName = cardName;
+        this.cardId = cardId;
+        this.row = row;
+        this.column = column;
+    }
+
+    public ServerCommand(CommandType type, Result result) {
+        this.type = type;
+        this.result = result;
+    }
+
+    public ServerCommand(CommandType type, User user, Result result, String message) {
+        this(type, result, message);
+        this.user = user;
+    }
 
     public CommandType getType() {
         return type;

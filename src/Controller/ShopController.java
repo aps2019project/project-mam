@@ -3,6 +3,13 @@ package Controller;
 import Model.enums.ErrorType;
 import Model.shop.Shop;
 import Model.user.User;
+import command.Result;
+import command.ServerCommand;
+import command.clientCommand.BuyCmd;
+import command.clientCommand.SellCmd;
+import command.clientCommand.SignInCmd;
+import gson.GsonReader;
+import gson.GsonWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -81,28 +88,23 @@ public class ShopController {
     }
 
     public void buy(String name) {
-        if (shop.cardNameIsAvailable(name)) {
-            if (shop.priceIsEnough(shop.getCardPrice(name), User.user)) {
-                shop.buyCard(name, User.user);
-                SResult_lb.setText(ErrorType.SUCCESSFUL_BUY.getMessage());
-            } else SResult_lb.setText(ErrorType.MONEY_IS_NOT_ENOUGH.getMessage());
-        } else if (shop.itemNameIsAvailable(name)) {
-            if (shop.isPossibleToAddItem(User.user)) {
-                if (shop.priceIsEnough(shop.getItemPrice(name), User.user)) {
-                    shop.buyItem(name, User.user);
-                    SResult_lb.setText(ErrorType.SUCCESSFUL_BUY.getMessage());
-                } else SResult_lb.setText(ErrorType.MONEY_IS_NOT_ENOUGH.getMessage());
-            } else SResult_lb.setText(ErrorType.THREE_ITEM.getMessage());
-        } else SResult_lb.setText(ErrorType.UNAVAILABLE_CARD_OR_ITEM.getMessage());
+        GsonWriter.sendClientCommand(new BuyCmd(name), Page.getOutput());
+        ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
+        if (serverCommand.getResult() == Result.SUCCESSFUL) {
+            SResult_lb.setText(serverCommand.getMessage());
+            User.user = serverCommand.getUser();
+        }
+        else
+            SResult_lb.setText(serverCommand.getMessage());
     }
 
     public void sell(String id) {
-        int ID = Integer.parseInt(id);
-        if (shop.sellCard(ID, User.user)) {
+        GsonWriter.sendClientCommand(new SellCmd(id), Page.getOutput());
+        ServerCommand serverCommand = GsonReader.getServerCommand(Page.getInput());
+        if (serverCommand.getResult() == Result.SUCCESSFUL){
             CResult_lb.setText(ErrorType.SUCCESSFUL_SELL.getMessage());
-        } else if (shop.sellItem(ID, User.user)) {
-            CResult_lb.setText(ErrorType.SUCCESSFUL_SELL.getMessage());
-        } else CResult_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
+            User.user = serverCommand.getUser();
+        } else CResult_lb.setText(serverCommand.getMessage());
     }
 
 }

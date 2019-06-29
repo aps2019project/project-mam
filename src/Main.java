@@ -47,8 +47,8 @@ public class Main extends Application {
         GsonWriter.writeItems();*/
 
 
-            GsonReader.readUser();
-            GsonReader.initShop();
+            //GsonReader.readUser();
+            //GsonReader.initShop();
             Page.getPages().push(new SignIn());
             //Page.getPages().push(new MainMenuPage());
             //Page.getPages().push(new ShopMenuPage());
