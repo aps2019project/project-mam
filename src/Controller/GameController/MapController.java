@@ -9,18 +9,25 @@ import Model.game.Cell;
 import Model.game.Game;
 import Model.size.Coordinate;
 import Model.size.Resolution;
+import command.CommandType;
+import command.ServerCommand;
+import command.clientCommand.MoveCmd;
+import command.clientCommand.SelectCmd;
+import gson.GsonWriter;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import view.pages.Page;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.floor;
+import static java.lang.Math.negateExact;
 
 public class MapController {
     private static MapController ourInstance = new MapController();
@@ -134,6 +141,8 @@ public class MapController {
 
     private void setOnRecClicked(Rectangle rectangle, int x, int y) {
         rectangle.setOnMouseClicked(event -> {
+            if (!game.isMyTurn())
+                return;
             if (handCardSelected) {
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
                 removeIdFromHand(Integer.parseInt(handCardId));
@@ -304,12 +313,14 @@ public class MapController {
 
     public void selectCard(String cardId) {
         game.selectCard(Integer.parseInt(cardId));
+        GsonWriter.sendClientCommand(new SelectCmd(cardId), Page.getOutput());
         label.setText(cardId + " selected");
     }
 
     public void moveCard(int x, int y) {
         if (game.getCurrentCard().isCanMove()) {
             if (game.cardCanMove(x, y)) {
+                GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
                 animationCtrl.moveTo(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()),

@@ -48,12 +48,14 @@ public class SelectUserController {
             ServerCommand command = GsonReader.getServerCommand(Page.getInput());
             if (command.getResult() == Result.SUCCESSFUL) {
                 BattleMenuPage.setSecondUser(command.getUser());
+                BattleMenuPage.setBaseTurn(command.getBaseTurn());
                 Platform.runLater(BattleMenuPage::createGame);
             } else {
                 command = GsonReader.getServerCommand(Page.getInput());
                 if (command.getType() == CommandType.EXIT_GAME)
                     return;
                 BattleMenuPage.setSecondUser(command.getUser());
+                BattleMenuPage.setBaseTurn(command.getBaseTurn());
                 Platform.runLater(BattleMenuPage::createGame);
             }
         }).start();

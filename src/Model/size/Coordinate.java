@@ -53,10 +53,6 @@ public class Coordinate {
         setCellCoordinate();
         setHandCoordinate();
         setButtonCoordinate();
-        /*backGround.setFitHeight(height);
-        backGround.setFitWidth(width);
-        pane.setPrefWidth(width);
-        pane.setPrefHeight(height);*/
     }
 
     public void setHandCoordinate() {

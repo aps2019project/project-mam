@@ -22,6 +22,7 @@ public class BattleMenuPage extends Page {
     private static String mission = null;
     private static User secondUser = new User("notAi");
     private static int flags = 0;
+    private static int baseTurn;
 
     private static Pane root = new Pane();
     private BattleMenuController controller;
@@ -60,6 +61,10 @@ public class BattleMenuPage extends Page {
 
     public static int getFlags() {
         return flags;
+    }
+
+    public static void setBaseTurn(int baseTurn) {
+        BattleMenuPage.baseTurn = baseTurn;
     }
 
     public static void setNumOfPlayers(String numOfPlayers) {
@@ -110,7 +115,7 @@ public class BattleMenuPage extends Page {
     }
 
     public static void createGame() {
-        new Game(User.user, secondUser, gameMood, gameKind, flags);
+        new Game(User.user, secondUser, gameMood, gameKind, flags, baseTurn);
         Page.getPages().push(new MainBattleMenuPage());
 
     }

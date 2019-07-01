@@ -1,20 +1,23 @@
 package command.clientCommand;
 
-import command.CommandType;
+import command.ServerCommand;
+import gson.GsonWriter;
 import server.ClientHandler;
 
 import java.io.DataOutputStream;
 
-public class SelectCmd extends ClientCommand {
-    private int cardId;
+import static command.CommandType.SELECT;
 
-    public SelectCmd(int cardId) {
+public class SelectCmd extends ClientCommand {
+    private String cardId;
+
+    public SelectCmd(String cardId) {
         this.cardId = cardId;
-        type = CommandType.SELECT;
+        type = SELECT;
     }
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
-
+        GsonWriter.sendServerCommand(new ServerCommand(SELECT, cardId), handler.getOppHandler().getOutput());
     }
 }

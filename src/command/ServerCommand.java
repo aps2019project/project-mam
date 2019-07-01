@@ -54,6 +54,22 @@ public class ServerCommand {
         this.user = user;
     }
 
+    public ServerCommand(CommandType type, int row, int column){
+        this.type = type;
+        this.row = row;
+        this.column = column;
+    }
+
+    public ServerCommand(CommandType type, String cardId) {
+        this.type = type;
+        this.cardId = cardId;
+    }
+
+    public ServerCommand(CommandType type, User user, Result result, int baseTurn) {
+        this(type, user, result);
+        this.baseTurn = baseTurn;
+    }
+
     public CommandType getType() {
         return type;
     }

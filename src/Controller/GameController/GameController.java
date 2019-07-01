@@ -9,6 +9,8 @@ import Model.game.Game;
 import Model.size.Coordinate;
 import Model.size.Resolution;
 import Model.user.AI;
+import command.ServerCommand;
+import gson.GsonReader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -82,6 +84,7 @@ public class GameController {
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
+        catchServerCommand();
     }
 
     public void init() {
@@ -167,5 +170,32 @@ public class GameController {
                 ai.getCommand();
             }
         }
+    }
+
+    private void catchServerCommand(){
+        Thread catchCommand = new Thread(() -> {
+            while(true){
+                ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+                switch (command.getType()){
+                    case SELECT:
+                        mapCtrl.selectCard(command.getCardId());
+                        break;
+                    case MOVE:
+                        mapCtrl.moveCard(command.getRow(), command.getColumn());
+                        break;
+                    case ATTACK:
+                        mapCtrl.attack(Integer.parseInt(command.getCardId()));
+                        break;
+                    case ENDTURN:
+                        endTurn();
+                        break;
+                    case INSERT:
+                        mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn());
+                        break;
+                }
+            }
+        });
+        catchCommand.setName("catchCommand");
+        catchCommand.start();
     }
 }

@@ -1,9 +1,13 @@
 package command.clientCommand;
 
-import command.CommandType;
+import command.ServerCommand;
+import gson.GsonWriter;
 import server.ClientHandler;
+import view.pages.Page;
 
 import java.io.DataOutputStream;
+
+import static command.CommandType.MOVE;
 
 public class MoveCmd extends ClientCommand {
     private int row;
@@ -12,10 +16,11 @@ public class MoveCmd extends ClientCommand {
     public MoveCmd(int row, int column) {
         this.row = row;
         this.column = column;
-        type = CommandType.MOVE;
+        type = MOVE;
     }
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        GsonWriter.sendServerCommand(new ServerCommand(MOVE, 4 - row, 8 - column), handler.getOppHandler().getOutput());
     }
 }
