@@ -5,6 +5,8 @@ import Model.game.Cell;
 import Model.game.Game;
 import Model.game.Map;
 import Model.item.CollectableItem;
+import Model.size.Coordinate;
+import Model.size.Resolution;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -234,12 +236,16 @@ public class ImageController {
     }
 
     public void addCard(int row, int column, Card card, int playerTurn) {
+        int length = 120;
+        if (Coordinate.getInstance().getResolution() == Resolution.HD){
+            length = 80;
+        }
         try {
             ImageView view = new ImageView(new Image(new FileInputStream(card.getBreathingImage())));
             view.setY(MapController.getInstance().getCells()[row][column].getY() - 35);
             view.setX(MapController.getInstance().getCells()[row][column].getX() - 15);
-            view.setFitWidth(120);
-            view.setFitHeight(120);
+            view.setFitWidth(length);
+            view.setFitHeight(length);
             MapController.getInstance().getPane().getChildren().add(view);
             if (playerTurn % 2 == 1)
                 views1.put(card.getId(), view);

@@ -1,11 +1,14 @@
 package Controller;
 
 import Model.shop.Shop;
+import gson.GsonReader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
 import view.BattleMenu.GameMoodMenuPage;
 import view.pages.Page;
+
+import java.io.FileNotFoundException;
 
 public class MissionController {
 
@@ -18,7 +21,11 @@ public class MissionController {
     public void setMission1() {
         BattleMenuPage.setMission("1");
         BattleMenuPage.setGameMood("1");
-        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(0));
+        try {
+            BattleMenuPage.getSecondUser().setMainDeck(GsonReader.getDeck("mission_1"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BattleMenuPage.createGame();
     }
 

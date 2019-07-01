@@ -8,6 +8,7 @@ import Model.enums.SPActivationTime;
 import Model.game.Cell;
 import Model.game.Game;
 import Model.size.Coordinate;
+import Model.size.Resolution;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.floor;
 
 public class MapController {
     private static MapController ourInstance = new MapController();
@@ -241,12 +243,23 @@ public class MapController {
     }
 
     public void updateHand() {
+        int X = 410;
+        int Y = 860;
+        int STEP = 195;
+        int RADIUS = 150;
+
+        if (Coordinate.getInstance().getResolution() == Resolution.HD){
+            X = 265;
+            Y = 565;
+            RADIUS = 110;
+            STEP = 130;
+        }
         int counter = 0;
         for (Map.Entry<Integer, Card> entry : game.getFirstPlayerHand().entrySet()) {
             removeIdFromHand(entry.getValue().getId(), counter);
             controller.handCards.get(counter).setId(String.valueOf(entry.getValue().getId()));
             controller.handCardsMana.get(counter).setText(String.valueOf(entry.getValue().getMP()));
-            imageController.addCard(410 + counter * 195, 860.0, entry.getValue(), 150, 1);
+            imageController.addCard(X + counter * STEP, Y, entry.getValue(), RADIUS, 1);
             counter++;
         }
         setOnHandClick();
@@ -254,9 +267,19 @@ public class MapController {
     }
 
     public void updateNextCard() {
+        int X = 135;
+        int Y = 785;
+        int RADIUS = 150;
+
+        if (Coordinate.getInstance().getResolution() == Resolution.HD){
+            X = 86;
+            Y = 505;
+            RADIUS = 150;
+        }
+
         if (game.getNextFirstPlayerCard() != null) {
             controller.nextCard.setId(String.valueOf(game.getNextFirstPlayerCard().getId()));
-            imageController.addCard(135, 785, game.getNextFirstPlayerCard(), 200, 2);
+            imageController.addCard(X, Y, game.getNextFirstPlayerCard(), RADIUS, 2);
             setOnNextEnteredAndExited();
         }
     }

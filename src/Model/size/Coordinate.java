@@ -3,6 +3,7 @@ package Model.size;
 import Controller.GameController.GameController;
 import Controller.GameController.MapController;
 import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -25,16 +26,15 @@ public class Coordinate {
         return instance;
     }
 
-    public Resolution getResolution() {
-        return resolution;
-    }
-
-    public void setResolution(Resolution resolution) {
-        this.resolution = resolution;
-    }
-
     private Resolution resolution;
     private GameController gameCtrl;
+
+    public Resolution getResolution() {
+        if (resolution != null)
+            return resolution;
+        setResolution();
+        return resolution;
+    }
 
     public void setResolution() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -60,7 +60,8 @@ public class Coordinate {
     }
 
     public void setHandCoordinate() {
-
+        gameCtrl.handCards.get(0).setCenterX(322);
+        gameCtrl.handCards.get(0).setCenterY(630);
     }
 
     public void setCellCoordinate() {
@@ -85,16 +86,17 @@ public class Coordinate {
     }
 
     private void setPaneCoordinate() {
-
+        gameCtrl.pane.setPrefWidth(1280);
+        gameCtrl.pane.setPrefHeight(720);
+        //setBackGround();
     }
 
-    private void setButtonCoordinate(){
-        gameCtrl.endTurn.setX(0);
-        gameCtrl.endTurn.setY(0);
-        /*try {
-            gameCtrl.endTurn.setImage(new Image(new FileInputStream("resources/ui/button_primary_middle_glow@2x.png")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
+    private void setButtonCoordinate() {
+        gameCtrl.endTurn.setX(1000);
+        gameCtrl.endTurn.setY(579);
+        gameCtrl.endTurn.relocate(990, 575);
+        gameCtrl.endTurn.setFitWidth(230);
+        gameCtrl.endTurn.setFitHeight(70);
     }
+
 }
