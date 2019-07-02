@@ -12,6 +12,7 @@ import Model.size.Resolution;
 import command.CommandType;
 import command.ServerCommand;
 import command.clientCommand.ClientCommand;
+import command.clientCommand.InsertCmd;
 import command.clientCommand.MoveCmd;
 import command.clientCommand.SelectCmd;
 import gson.GsonWriter;
@@ -145,10 +146,12 @@ public class MapController {
             if (!game.isMyTurn())
                 return;
             if (handCardSelected) {
+                if (game.isMulti())
+                    GsonWriter.sendClientCommand(new InsertCmd(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y), Page.getOutput());
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
-                //removeIdFromHand(Integer.parseInt(handCardId));
+                removeIdFromHand(Integer.parseInt(handCardId));
                 //updateMap();
-                //updateHand();
+                updateHand();
                 //setOnHandClick();
                 handCardSelected = false;
             } else if (isSelected) {
@@ -159,18 +162,21 @@ public class MapController {
                     isSelected = false;
                 } else {
                     moveCard(x, y);
-                    GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
+                    if (game.isMulti())
+                        GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
                     //updateMap();
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
                 if (game.isMyTurn() && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
-                    GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
+                    if (game.isMulti())
+                        GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else if (game.isOppTurn() && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
-                    GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
+                    if (game.isMulti())
+                        GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else label.setText("please select your card");
             }
@@ -263,7 +269,7 @@ public class MapController {
         int STEP = 195;
         int RADIUS = 150;
 
-        if (Coordinate.getInstance().getResolution() == Resolution.HD){
+        if (Coordinate.getInstance().getResolution() == Resolution.HD) {
             X = 265;
             Y = 565;
             RADIUS = 110;
@@ -286,7 +292,7 @@ public class MapController {
         int Y = 785;
         int RADIUS = 150;
 
-        if (Coordinate.getInstance().getResolution() == Resolution.HD){
+        if (Coordinate.getInstance().getResolution() == Resolution.HD) {
             X = 86;
             Y = 505;
             RADIUS = 150;
@@ -405,9 +411,9 @@ public class MapController {
                     ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
                     label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
                     updatePlayersMana();
-                    removeIdFromHand(Integer.parseInt(handCardId));
+                    //removeIdFromHand(Integer.parseInt(handCardId));
                     updateMap();
-                    updateHand();
+                    //updateHand();
                 } else label.setText(ErrorType.INVALID_TARGET.getMessage());
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
         } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());

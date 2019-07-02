@@ -1,9 +1,13 @@
 package command.clientCommand;
 
 import command.CommandType;
+import command.ServerCommand;
+import gson.GsonWriter;
 import server.ClientHandler;
 
 import java.io.DataOutputStream;
+
+import static command.CommandType.INSERT;
 
 public class InsertCmd extends ClientCommand {
     private String cardName;
@@ -14,11 +18,11 @@ public class InsertCmd extends ClientCommand {
         this.cardName = cardName;
         this.row = row;
         this.column = column;
-        type = CommandType.INSERT;
+        type = INSERT;
     }
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
-
+        GsonWriter.sendServerCommand(new ServerCommand(INSERT, cardName, row, 8 - column), handler.getOppHandler().getOutput());
     }
 }

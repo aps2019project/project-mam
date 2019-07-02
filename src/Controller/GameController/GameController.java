@@ -87,7 +87,8 @@ public class GameController {
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
-        catchServerCommand();
+        if (game.isMulti())
+            catchServerCommand();
     }
 
     public void init() {
@@ -104,7 +105,7 @@ public class GameController {
         handCardsMana.add(handCard5mana);
     }
 
-    public void setUserInfo1(){
+    public void setUserInfo1() {
         if (userInfo1SP.isVisible())
             userInfo1SP.setVisible(false);
         else {
@@ -113,7 +114,7 @@ public class GameController {
         }
     }
 
-    public void setUserInfo2(){
+    public void setUserInfo2() {
         if (userInfo2SP.isVisible())
             userInfo2SP.setVisible(false);
         else {
@@ -122,7 +123,7 @@ public class GameController {
         }
     }
 
-    public void setGameInfo(){
+    public void setGameInfo() {
         if (gameInfoSP.isVisible())
             gameInfoSP.setVisible(false);
         else {
@@ -157,7 +158,8 @@ public class GameController {
         if (!game.isMyTurn())
             return;
         endTurn();
-        GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
+        if (game.isMulti())
+            GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }
 
     public void endTurn() {
@@ -178,11 +180,11 @@ public class GameController {
         }
     }
 
-    private void catchServerCommand(){
+    private void catchServerCommand() {
         Thread catchCommand = new Thread(() -> {
-            while(true){
+            while (true) {
                 ServerCommand command = GsonReader.getServerCommand(Page.getInput());
-                switch (command.getType()){
+                switch (command.getType()) {
                     case SELECT:
                         Platform.runLater(() -> mapCtrl.selectCard(command.getCardId()));
                         break;

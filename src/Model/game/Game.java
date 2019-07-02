@@ -69,6 +69,8 @@ public class Game {
     private String winnerName;
     private int price = 1000;
 
+    private boolean isMulti = false;
+
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         game = this;
         this.firstUser = firstUser;
@@ -95,6 +97,7 @@ public class Game {
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount, int baseTurn) {
         game = this;
+        isMulti = true;
         this.firstUser = firstUser;
         this.secondUser = secondUser;
         this.mode = mode;
@@ -120,7 +123,8 @@ public class Game {
         ImageController.getInstance().initCollectibleImage();
     }
 
-    public Game() {
+    public boolean isMulti() {
+        return isMulti;
     }
 
     public static Game getInstance() {
