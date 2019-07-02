@@ -110,8 +110,13 @@ public class Game {
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
         turn = FIRST_PLAYER_TURN;
-        secondPlayerMana = basicMana;
-        firstPlayerMana = basicMana - 1;
+        if (baseTurn == 1) {
+            secondPlayerMana = basicMana;
+            firstPlayerMana = basicMana - 1;
+        } else {
+            secondPlayerMana = basicMana - 1;
+            firstPlayerMana = basicMana;
+        }
         firstPlayerHand = new HashMap<>();
         secondPlayerHand = new HashMap<>();
         //setId(firstPlayerDeck);
@@ -172,11 +177,15 @@ public class Game {
     }
 
     public int getBasicMana1() {
-        return basicMana - 1;
+        if (baseTurn == 1)
+            return basicMana - 1;
+        return basicMana;
     }
 
     public int getBasicMana2() {
-        return basicMana;
+        if (baseTurn == 1)
+            return basicMana;
+        return basicMana - 1;
     }
 
     public Item getCurrentItem() {
@@ -244,11 +253,11 @@ public class Game {
     public void changeTurn() {
         turn++;
     }
-    
-    private void decreaseMana(int amount){
+
+    private void decreaseMana(int amount) {
         if (isMyTurn())
             firstPlayerMana -= amount;
-        else 
+        else
             secondPlayerMana -= amount;
     }
 
@@ -375,11 +384,11 @@ public class Game {
         }
     }
 
-    public boolean isMyTurn(){
+    public boolean isMyTurn() {
         return getTurn() % 2 == baseTurn;
     }
-    
-    public boolean isOppTurn(){
+
+    public boolean isOppTurn() {
         return !isMyTurn();
     }
 
@@ -767,20 +776,24 @@ public class Game {
     }
 
     public void endTurn() {
-        if (isOppTurn()) {
+        if (getTurn() % 2 == 0) {
             if (basicMana < 9)
                 basicMana++;
             updateCoolDown(getHero(map.getFirstPlayerCellCard()));
             updateCoolDown(getHero(map.getSecondPlayerCellCard()));
             //if (basicMana <= 9)
-            firstPlayerMana = basicMana + extraPlayer1Mana - 1;
+            if (baseTurn == 1)
+                firstPlayerMana = basicMana + extraPlayer1Mana - 1;
+            else firstPlayerMana = basicMana + extraPlayer1Mana;
             //else mana[1] = 9 + extraPlayer1Mana;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
             Buff.updateBuffs();
         } else {
             //if (basicMana <= 9)
-            secondPlayerMana = basicMana + extraPlayer2Mana;
+            if (baseTurn == 1)
+                secondPlayerMana = basicMana + extraPlayer2Mana;
+            else secondPlayerMana = basicMana + extraPlayer2Mana - 1;
             //else mana[0] = 9 + extraPlayer2Mana;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
