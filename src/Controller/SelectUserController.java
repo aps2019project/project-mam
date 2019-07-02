@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.enums.ErrorType;
-import Model.user.User;
 import command.CommandType;
 import command.Result;
 import command.ServerCommand;
@@ -13,11 +11,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import server.Server;
 import view.BattleMenu.BattleMenuPage;
-import view.BattleMenu.GameMoodMenuPage;
 import view.pages.Page;
 
 public class SelectUserController {
@@ -49,14 +44,14 @@ public class SelectUserController {
             if (command.getResult() == Result.SUCCESSFUL) {
                 BattleMenuPage.setSecondUser(command.getUser());
                 BattleMenuPage.setBaseTurn(command.getBaseTurn());
-                Platform.runLater(BattleMenuPage::createGame);
+                Platform.runLater(BattleMenuPage::createMultiGame);
             } else {
                 command = GsonReader.getServerCommand(Page.getInput());
                 if (command.getType() == CommandType.EXIT_GAME)
                     return;
                 BattleMenuPage.setSecondUser(command.getUser());
                 BattleMenuPage.setBaseTurn(command.getBaseTurn());
-                Platform.runLater(BattleMenuPage::createGame);
+                Platform.runLater(BattleMenuPage::createMultiGame);
             }
         }).start();
 

@@ -154,6 +154,8 @@ public class GameController {
     }
 
     public void setEndTurn() {
+        if (!game.isMyTurn())
+            return;
         endTurn();
         GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }

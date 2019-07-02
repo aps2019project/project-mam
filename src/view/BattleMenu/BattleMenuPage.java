@@ -114,7 +114,13 @@ public class BattleMenuPage extends Page {
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
     }
 
-    public static void createGame() {
+    public static void createSingleGame() {
+        new Game(User.user, secondUser, gameMood, gameKind, flags);
+        Page.getPages().push(new MainBattleMenuPage());
+
+    }
+
+    public static void createMultiGame() {
         new Game(User.user, secondUser, gameMood, gameKind, flags, baseTurn);
         Page.getPages().push(new MainBattleMenuPage());
 
