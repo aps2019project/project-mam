@@ -10,7 +10,10 @@ import Model.size.Coordinate;
 import Model.size.Resolution;
 import Model.user.AI;
 import command.ServerCommand;
+import command.clientCommand.EndTurnCmd;
 import gson.GsonReader;
+import gson.GsonWriter;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -152,6 +155,7 @@ public class GameController {
 
     public void setEndTurn() {
         endTurn();
+        GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }
 
     public void endTurn() {
@@ -178,19 +182,19 @@ public class GameController {
                 ServerCommand command = GsonReader.getServerCommand(Page.getInput());
                 switch (command.getType()){
                     case SELECT:
-                        mapCtrl.selectCard(command.getCardId());
+                        Platform.runLater(() -> mapCtrl.selectCard(command.getCardId()));
                         break;
                     case MOVE:
-                        mapCtrl.moveCard(command.getRow(), command.getColumn());
+                        Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), command.getColumn()));
                         break;
                     case ATTACK:
-                        mapCtrl.attack(Integer.parseInt(command.getCardId()));
+                        Platform.runLater(() -> mapCtrl.attack(Integer.parseInt(command.getCardId())));
                         break;
                     case ENDTURN:
-                        endTurn();
+                        Platform.runLater(this::endTurn);
                         break;
                     case INSERT:
-                        mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn());
+                        Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
                         break;
                 }
             }

@@ -1,6 +1,8 @@
 package command.clientCommand;
 
 import command.CommandType;
+import command.ServerCommand;
+import gson.GsonWriter;
 import server.ClientHandler;
 
 import java.io.DataOutputStream;
@@ -13,6 +15,6 @@ public class EndTurnCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
-
+        GsonWriter.sendServerCommand(new ServerCommand(CommandType.ENDTURN), handler.getOppHandler().getOutput());
     }
 }
