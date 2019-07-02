@@ -35,7 +35,7 @@ public class RequestGameCmd extends ClientCommand {
                 handler.setOppHandler(opp.getValue());
                 opp.getValue().setOppHandler(handler);
                 GsonWriter.sendServerCommand(new ServerCommand(CREATE_GAME, handler.getUser(),
-                        Result.SUCCESSFUL, 2), opp.getValue().getOutput());
+                        Result.SUCCESSFUL, 0), opp.getValue().getOutput());
                 return;
             }
         }
