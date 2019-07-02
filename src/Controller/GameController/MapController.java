@@ -11,6 +11,7 @@ import Model.size.Coordinate;
 import Model.size.Resolution;
 import command.CommandType;
 import command.ServerCommand;
+import command.clientCommand.ClientCommand;
 import command.clientCommand.MoveCmd;
 import command.clientCommand.SelectCmd;
 import gson.GsonWriter;
@@ -158,15 +159,18 @@ public class MapController {
                     isSelected = false;
                 } else {
                     moveCard(x, y);
+                    GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
                     updateMap();
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
                 if (game.isMyTurn() && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
+                    GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else if (game.isOppTurn() && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
+                    GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else label.setText("please select your card");
             }
@@ -310,17 +314,18 @@ public class MapController {
         //imageController.addFlags(getPane());
     }
 
+    /*public void sendCommand(<? extends ClientCommand>){
+        GsonWriter.sendClientCommand(command, Page.getOutput());
+    }*/
 
     public void selectCard(String cardId) {
         game.selectCard(Integer.parseInt(cardId));
-        GsonWriter.sendClientCommand(new SelectCmd(cardId), Page.getOutput());
         label.setText(cardId + " selected");
     }
 
     public void moveCard(int x, int y) {
         if (game.getCurrentCard().isCanMove()) {
             if (game.cardCanMove(x, y)) {
-                GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
                 animationCtrl.moveTo(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()),
