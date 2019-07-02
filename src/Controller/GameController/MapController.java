@@ -181,6 +181,8 @@ public class MapController {
     private void setOnHandClick() {
         for (Map.Entry<Integer, ImageView> entry : imageController.getViewsHand().entrySet()) {
             entry.getValue().setOnMouseClicked(event -> {
+                if (!game.isMyTurn())
+                    return;
                 handCardId = String.valueOf(entry.getKey());
                 handCardSelected = true;
                 label.setText(handCardId + " from hand selected");
