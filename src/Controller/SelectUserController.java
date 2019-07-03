@@ -3,6 +3,7 @@ package Controller;
 import command.CommandType;
 import command.Result;
 import command.ServerCommand;
+import command.clientCommand.ChatCmd;
 import command.clientCommand.ExitGameCmd;
 import command.clientCommand.RequestGameCmd;
 import gson.GsonReader;
@@ -11,7 +12,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import server.Server;
 import view.BattleMenu.BattleMenuPage;
 import view.pages.Page;
 
@@ -22,6 +28,40 @@ public class SelectUserController {
     public Button start;
 
     public Label label;
+
+    public ScrollPane chatList;
+    public GridPane chatGrid;
+    public TextField message;
+    public Button send;
+
+    public int count = 0;
+
+    public void init() {
+
+    }
+
+    public void setSend() {
+        showMyMessage();
+        GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
+    }
+
+    public void showMyMessage() {
+        chatGrid.add(new Label(message.getText()), 1, count++);
+    }
+
+    public void showOthersMessage() {
+        new Thread(() -> {
+            while (true) {
+                ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+                Platform.runLater(() -> {
+                    chatGrid.add(new Label(command.getUserName() + ": " + command.getMessage()), 0, count++);
+                });
+            }
+        }).start();
+        /*ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+        chatGrid.add(new Label(command.getMessage()), 0, count++);*/
+        //showOthersMessage();
+    }
 
     @FXML
     public void setStart() {

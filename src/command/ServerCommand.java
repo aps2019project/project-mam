@@ -8,6 +8,7 @@ public class ServerCommand {
     private CommandType type;
     private User user;
     private Card card;
+    private String userName;
 
     private String message;
     private Result result;
@@ -79,6 +80,20 @@ public class ServerCommand {
     public ServerCommand(CommandType type, Card card){
         this.type = type;
         this.card = card;
+    }
+
+    public ServerCommand(CommandType type, String userName, String message) {
+        this.type = type;
+        this.userName = userName;
+        this.message = message;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public CommandType getType() {
