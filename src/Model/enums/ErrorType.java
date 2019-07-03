@@ -43,6 +43,7 @@ public enum ErrorType {
     CARD_CAN_NOT_ATTACK(""),
     CARD_CAN_NOT_MOVE("card can't move!"),
     CARD_HAVE_NOT_SP("card have'nt special power"),
+    CAN_NOT_BUY_CARD("card is sold out!")
 
 
     ;

@@ -24,8 +24,11 @@ public class BuyCmd extends ClientCommand {
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         if (shop.cardNameIsAvailable(cardName)) {
             if (shop.priceIsEnough(shop.getCardPrice(cardName), handler.getUser())) {
-                shop.buyCard(cardName, handler.getUser());
-                GsonWriter.sendServerCommand(new ServerCommand(BUY, handler.getUser(), Result.SUCCESSFUL, ErrorType.SUCCESSFUL_BUY.getMessage()), output);
+                if (shop.canBuyCard(cardName)) {
+                    shop.buyCard(cardName, handler.getUser());
+                    GsonWriter.sendServerCommand(new ServerCommand(BUY, handler.getUser(), Result.SUCCESSFUL, ErrorType.SUCCESSFUL_BUY.getMessage()), output);
+                } else
+                    GsonWriter.sendServerCommand(new ServerCommand(BUY, Result.FAILED, ErrorType.CAN_NOT_BUY_CARD.getMessage()), output);
             } else
                 GsonWriter.sendServerCommand(new ServerCommand(BUY, Result.FAILED, ErrorType.MONEY_IS_NOT_ENOUGH.getMessage()), output);
         } else if (shop.itemNameIsAvailable(cardName)) {

@@ -63,6 +63,15 @@ public class Shop {
         return collectibles;
     }
 
+    public Boolean canBuyCard(String cardName){
+        for (Card card : cards) {
+            if (card.getName().equalsIgnoreCase(cardName)){
+                return card.getCount() > 0;
+            }
+        }
+        return false;
+    }
+
     public String getCardInfo() {
         StringBuilder info = new StringBuilder();
         int counter = 1;
@@ -160,6 +169,7 @@ public class Shop {
     public void buyCard(String cardName, User user) {
         for (Card card : cards) {
             if (card.getName().equalsIgnoreCase(cardName)) {
+                card.setCount(card.getCount()-1);
                 Card newCard = card.copyCard();
                 newCard.setId(user.getIdCounter());
                 user.getCollection().addCard(newCard);
@@ -197,10 +207,7 @@ public class Shop {
     }
 
     public boolean isPossibleToAddItem(User user) {
-        if (user.getCollection().getItems().size() < 3)
-            return true;
-        else
-            return false;
+        return user.getCollection().getItems().size() < 3;
     }
 
     public boolean cardNameIsAvailable(String cardName) {
@@ -222,9 +229,7 @@ public class Shop {
     }
 
     public boolean priceIsEnough(int price, User user) {
-        if (user.getMoney() >= price)
-            return true;
-        return false;
+        return user.getMoney() >= price;
     }
 
     public boolean sellCard(int cardId, User user) {
