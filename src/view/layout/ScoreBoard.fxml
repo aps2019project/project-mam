@@ -26,7 +26,7 @@
             <Image url="@../../../resources/ui/button_back_corner@2x.png" />
          </image>
       </ImageView>
-      <ScrollPane fx:id="scoreBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ScrollPane fx:id="scoreBoard" opacity="0.7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <content>
             <Label fx:id="scoreBoardLb" text="Label" />
          </content>

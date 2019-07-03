@@ -247,7 +247,7 @@ public class ImageController {
             view.setFitWidth(length);
             view.setFitHeight(length);
             MapController.getInstance().getPane().getChildren().add(view);
-            if (playerTurn % 2 == 1)
+            if (playerTurn % 2 == Game.getInstance().getBaseTurn())
                 views1.put(card.getId(), view);
             else views2.put(card.getId(), view);
         } catch (FileNotFoundException e) {

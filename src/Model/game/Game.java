@@ -131,6 +131,10 @@ public class Game {
         ImageController.getInstance().initCollectibleImage();
     }
 
+    public int getBaseTurn() {
+        return baseTurn;
+    }
+
     public boolean isMulti() {
         return isMulti;
     }
