@@ -39,14 +39,6 @@ public class Card {
         count = 10;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public String getBreathingImage() {
         return breathingImage;
     }
@@ -73,6 +65,14 @@ public class Card {
 
     public String getDeathImage() {
         return deathImage;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setDeathImage(String deathImage) {
@@ -271,6 +271,7 @@ public class Card {
                 ", desc='" + desc + '\'' +
                 ", specialPower=" + specialPower +
                 ", selected=" + selected +
+                ", count=" + count +
                 '}';
     }
 }

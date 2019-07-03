@@ -4,6 +4,7 @@ import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.deck.Deck;
 import Model.item.CollectableItem;
+import Model.item.Item;
 import Model.item.UsableItem;
 import Model.shop.Shop;
 import Model.user.User;
@@ -77,6 +78,20 @@ public class GsonWriter {
             writer.close();
         }
     }
+
+    public static void writeCustomUsableItem(Item item){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .create();
+        try {
+            FileWriter writer = new FileWriter("gson/items/usable/" + item.getName() + ".json");
+            writer.write(gson.toJson(item));
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void writeDeck(Deck deck) throws IOException {
         FileWriter writer = new FileWriter("gson/decks/" + deck.getName() + ".json");

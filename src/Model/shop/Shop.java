@@ -10,7 +10,9 @@ import Model.enums.TargetCommunity;
 import Model.item.CollectableItem;
 import Model.item.UsableItem;
 import Model.user.User;
+import gson.GsonWriter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static Model.enums.TargetCommunity.*;
@@ -175,17 +177,24 @@ public class Shop {
                 user.getCollection().addCard(newCard);
                 user.setMoney(user.getMoney() - card.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
+                try {
+                    GsonWriter.writeCustomCard(card);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     public void buyItem(String itemName, User user) {
         for (UsableItem item : usableItems) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
+            if (item.getName().equalsIgnoreCase(itemName) && item.getCount() > 0) {
                 item.setId(user.getIdCounter());
                 user.getCollection().addItem(item);
                 user.setMoney(user.getMoney() - item.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
+                item.setCount(item.getCount() - 1);
+                GsonWriter.writeCustomUsableItem(item);
             }
         }
     }
@@ -237,10 +246,24 @@ public class Shop {
             if (card.getId() == cardId) {
                 user.getCollection().removeCard(card);
                 user.setMoney(user.getMoney() + card.getPrice());
+                card.setCount(card.getCount() + 1);
+                try {
+                    GsonWriter.writeCustomCard(card);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    private Card getCard(int cardId){
+        for (Card card : cards) {
+            if (card.getId() == cardId)
+                return card;
+        }
+        return null;
     }
 
     public boolean sellItem(int itemId, User user) {
@@ -248,6 +271,8 @@ public class Shop {
             if (item.getId() == itemId) {
                 user.getCollection().removeItem(item);
                 user.setMoney(user.getMoney() + item.getPrice());
+                item.setCount(item.getCount() + 1);
+               GsonWriter.writeCustomUsableItem(item);
                 return true;
             }
         }

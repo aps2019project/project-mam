@@ -12,6 +12,7 @@ public class Item {
     private ArrayList<Buff> buffs = new ArrayList<>();
     private String imageAddress;
     private String actionAdress;
+    private int count = 5;
 
     public Item(){}
 
@@ -56,6 +57,14 @@ public class Item {
         return desc;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public SPActivationTime getSpActivationTime() {
         return null;
     }
@@ -70,7 +79,7 @@ public class Item {
 
     public String getInfo() {
         StringBuilder info = new StringBuilder();
-        info.append("name : ").append(name).append(" id : ").append(id).append(" desc : ").append(desc);
+        info.append("name : ").append(name).append(" id : ").append(id).append(" desc : ").append(desc).append(" count : ").append(count);
         return info.toString();
     }
 
