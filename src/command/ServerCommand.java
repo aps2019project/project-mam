@@ -7,6 +7,7 @@ import Model.user.User;
 public class ServerCommand {
     private CommandType type;
     private User user;
+    private Card card;
 
     private String message;
     private Result result;
@@ -73,6 +74,11 @@ public class ServerCommand {
     public ServerCommand(CommandType type, String cardName, int row, int column) {
         this(type, row, column);
         this.cardName = cardName;
+    }
+
+    public ServerCommand(CommandType type, Card card){
+        this.type = type;
+        this.card = card;
     }
 
     public CommandType getType() {

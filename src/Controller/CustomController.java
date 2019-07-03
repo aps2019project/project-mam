@@ -9,6 +9,7 @@ import Model.enums.BuffType;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
 import Model.enums.TargetCommunity;
+import command.clientCommand.CustomCmd;
 import gson.GsonWriter;
 import Model.shop.Shop;
 import javafx.beans.value.ChangeListener;
@@ -225,12 +226,7 @@ public class CustomController {
         if (!isInfoComplete())
             return;
         initCard();
-        Shop.getCards().add(card);
-        try {
-            GsonWriter.writeCustomCard(card);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        GsonWriter.sendClientCommand(new CustomCmd(card), Page.getOutput());
         label.setText("created");
         System.out.println("created");
     }

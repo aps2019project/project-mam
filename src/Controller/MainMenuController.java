@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.enums.ErrorType;
+import command.clientCommand.SaveCmd;
 import gson.GsonWriter;
 import Model.user.User;
 import javafx.fxml.FXML;
@@ -45,11 +46,7 @@ public class MainMenuController {
 
     @FXML
     public void onSaveClicked(){
-        try {
-            GsonWriter.writeUser(User.user);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+            GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
     }
 
     @FXML
