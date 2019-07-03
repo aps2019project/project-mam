@@ -26,6 +26,7 @@ public class ClientCommandAdaptor implements JsonSerializer<ClientCommand>, Json
         map.put(CommandType.EXIT_GAME.toString(), ExitGameCmd.class);
         map.put(CommandType.ENDTURN.toString(), EndTurnCmd.class);
         map.put(CommandType.CREATE_CUSTOM.toString(), CustomCmd.class);
+        map.put(CommandType.SCORE_BOARD.toString(), ScoreBoardCmd.class);
     }
 
     @Override

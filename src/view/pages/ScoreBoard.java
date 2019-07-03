@@ -1,6 +1,7 @@
 package view.pages;
 
 import Controller.MainMenuController;
+import Controller.ScoreBoardCtrl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ScoreBoard extends Page{
-    private MainMenuController controller;
+    private ScoreBoardCtrl controller;
     private static Pane root = new Pane();
 
     public ScoreBoard(){
@@ -25,6 +26,7 @@ public class ScoreBoard extends Page{
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
             initializeImage();
+            controller.initialize();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
@@ -36,12 +38,8 @@ public class ScoreBoard extends Page{
     }
 
     private void initializeImage() throws FileNotFoundException {
-
-    }
-
-    public MainMenuController getController()
-    {
-        return controller;
+        setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+        controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
     }
 
 }
