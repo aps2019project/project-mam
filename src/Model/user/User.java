@@ -19,6 +19,7 @@ public class User {
     private int money;
     private int idCounter;
     private Deck mainDeck;
+    private boolean isOnline = false;
 
 
     public User(String name, String password) {
@@ -57,6 +58,14 @@ public class User {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
     }
 
     public void setPassword(String password) {
@@ -183,9 +192,14 @@ public class User {
         StringBuilder info = new StringBuilder();
         Collections.sort(User.getUsers(), new SortUsers());
         int counter = 1;
-        for (User users : User.getUsers()) {
-            info.append(counter).append(" - UserName : ").append(users.getName());
-            info.append(" - Wins : ").append(users.getNumberOfWin()).append("\n");
+        for (User user : User.getUsers()) {
+            info.append(counter).append(" - UserName : ").append(user.getName());
+            info.append(" - Wins : ").append(user.getNumberOfWin());
+            if (user.isOnline)
+                info.append("  online");
+            else
+                info.append(" ofline");
+            info.append("\n");
             counter++;
         }
         return info.toString();
