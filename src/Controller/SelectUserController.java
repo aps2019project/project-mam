@@ -35,6 +35,7 @@ public class SelectUserController {
     public Button send;
 
     public int count = 0;
+    private boolean isGameCreated = false;
 
     public void setSend() {
         showMyMessage();
@@ -71,7 +72,7 @@ public class SelectUserController {
         if (command.getResult() == Result.SUCCESSFUL) {
             BattleMenuPage.setSecondUser(command.getUser());
             BattleMenuPage.setBaseTurn(command.getBaseTurn());
-            Platform.runLater(BattleMenuPage::createMultiGame);
+            isGameCreated = true;
         } /*else {
             command = GsonReader.getServerCommand(Page.getInput());
             if (command.getType() == CommandType.EXIT_GAME)
@@ -89,8 +90,10 @@ public class SelectUserController {
                 request(command);
                 if (command.getType() == CommandType.CHAT)
                     showOthersMessage(command);
-                if (command.getType() == CommandType.CREATE_GAME && command.getResult() == Result.SUCCESSFUL)
+                if (isGameCreated){
+                    Platform.runLater(BattleMenuPage::createMultiGame);
                     break;
+                }
             }
         }).start();
     }
