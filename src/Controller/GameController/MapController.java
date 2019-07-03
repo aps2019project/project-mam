@@ -188,7 +188,6 @@ public class MapController {
             entry.getValue().setOnMouseClicked(event -> {
                 if (!game.isMyTurn())
                     return;
-//                GsonWriter.sendClientCommand(new SelectCmd(String.valueOf(entry.getKey())), Page.getOutput());
                 handCardId = String.valueOf(entry.getKey());
                 handCardSelected = true;
                 label.setText(handCardId + " from hand selected");
