@@ -21,6 +21,6 @@ public class MoveCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
-        GsonWriter.sendServerCommand(new ServerCommand(MOVE, 4 - row, 8 - column), handler.getOppHandler().getOutput());
+        GsonWriter.sendServerCommand(new ServerCommand(MOVE, row, 8 - column), handler.getOppHandler().getOutput());
     }
 }

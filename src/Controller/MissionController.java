@@ -5,7 +5,6 @@ import gson.GsonReader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import view.BattleMenu.BattleMenuPage;
-import view.BattleMenu.GameMoodMenuPage;
 import view.pages.Page;
 
 import java.io.FileNotFoundException;
@@ -26,7 +25,7 @@ public class MissionController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        BattleMenuPage.createGame();
+        BattleMenuPage.createSingleGame();
     }
 
     public void setMission2() {
@@ -34,7 +33,7 @@ public class MissionController {
         BattleMenuPage.setGameMood("2");
         BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(1));
         BattleMenuPage.setFlags(1);
-        BattleMenuPage.createGame();
+        BattleMenuPage.createSingleGame();
     }
 
     public void setMission3() {
@@ -42,7 +41,7 @@ public class MissionController {
         BattleMenuPage.setGameMood("3");
         BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(2));
         BattleMenuPage.setFlags(7);
-        BattleMenuPage.createGame();
+        BattleMenuPage.createSingleGame();
     }
 
     public void setBack() {
