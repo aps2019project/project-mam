@@ -38,6 +38,9 @@ public class Game {
     private Deck firstPlayerDeck = new Deck();
     private Deck secondPlayerDeck;
 
+    private int firstCardCounter = 0;
+    private int secondCardCounter = 0;
+
     private User firstUser;
     private User secondUser;
 
@@ -121,7 +124,7 @@ public class Game {
         secondPlayerHand = new HashMap<>();
         //setId(firstPlayerDeck);
         //setId(secondPlayerDeck);
-        setPlayersHand();
+        setMultiPlayerHand();
         setNextFirstPlayerCard();
         setNextSecondPlayerCard();
         startGame();
@@ -509,6 +512,33 @@ public class Game {
         return true;
     }
 
+    private void setMultiPlayerHand(){
+        int counter = 0;
+        while (counter < 5){
+            addCardFromFirstPlayerDeckToHand();
+            counter++;
+        }
+        counter = 0;
+        while (counter < 5){
+            addCardFromSecondPlayerDeckToHand();
+            counter++;
+        }
+    }
+
+    private void addCardFromFirstPlayerDeckToHand() {
+        if (firstPlayerDeck.getCards().size() != 0) {
+            firstPlayerHand.put(firstPlayerDeck.getCards().get(firstCardCounter).getId(), firstPlayerDeck.getCards().get(firstCardCounter));
+            firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(firstCardCounter++));
+        }
+    }
+
+    private void addCardFromSecondPlayerDeckToHand() {
+        if (secondPlayerDeck.getCards().size() != 0) {
+            secondPlayerHand.put(secondPlayerDeck.getCards().get(secondCardCounter).getId(), secondPlayerDeck.getCards().get(secondCardCounter));
+            secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(secondCardCounter++));
+        }
+    }
+
     private void setPlayersHand() {
         Random random = new Random();
         int rand;
@@ -546,13 +576,27 @@ public class Game {
         secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(rand));
     }
 
+    private void addCardFromFirstPlayerDeckToNextCard() {
+        nextFirstPlayerCard = firstPlayerDeck.getCards().get(0);
+        firstPlayerDeck.removeCard(firstPlayerDeck.getCards().get(0));
+    }
+
+    private void addCardFromSecondPlayerDeckToNextCard() {
+        nextSecondPlayerCard = secondPlayerDeck.getCards().get(0);
+        secondPlayerDeck.removeCard(secondPlayerDeck.getCards().get(0));
+    }
+
     private void updateFirstPlayerHand() {
         if (nextFirstPlayerCard != null && firstPlayerHand.size() < 5) {
             firstPlayerHand.put(nextFirstPlayerCard.getId(), nextFirstPlayerCard);
             if (firstPlayerDeck.getCards().size() != 0) {
-                Random random = new Random();
-                addRandomCardFromFirstPlayerDeckToNextCard(random.
-                        nextInt(firstPlayerDeck.getCards().size()));
+                if (isMulti()){
+                    addCardFromFirstPlayerDeckToNextCard();
+                }else {
+                    Random random = new Random();
+                    addRandomCardFromFirstPlayerDeckToNextCard(random.
+                            nextInt(firstPlayerDeck.getCards().size()));
+                }
             } else nextFirstPlayerCard = null;
         }
     }
@@ -561,9 +605,13 @@ public class Game {
         if (nextSecondPlayerCard != null && secondPlayerHand.size() < 5) {
             secondPlayerHand.put(nextSecondPlayerCard.getId(), nextSecondPlayerCard);
             if (secondPlayerDeck.getCards().size() != 0) {
-                Random rand = new Random();
-                addRandomCardFromSecondPlayerDeckToNextCard(rand.
-                        nextInt(secondPlayerDeck.getCards().size()));
+                if (isMulti()){
+                    addCardFromSecondPlayerDeckToNextCard();
+                } else {
+                    Random rand = new Random();
+                    addRandomCardFromSecondPlayerDeckToNextCard(rand.
+                            nextInt(secondPlayerDeck.getCards().size()));
+                }
             } else nextSecondPlayerCard = null;
         }
     }
@@ -571,9 +619,13 @@ public class Game {
     private void setNextFirstPlayerCard() {
         if (firstPlayerHand.size() <= 5) {
             if (firstPlayerDeck.getCards().size() != 0) {
-                Random random = new Random();
-                nextFirstPlayerCard = firstPlayerDeck.getCards().
-                        get(random.nextInt(firstPlayerDeck.getCards().size()));
+                if (isMulti()){
+                    nextFirstPlayerCard = firstPlayerDeck.getCards().get(0);
+                }else {
+                    Random random = new Random();
+                    nextFirstPlayerCard = firstPlayerDeck.getCards().
+                            get(random.nextInt(firstPlayerDeck.getCards().size()));
+                }
             } else
                 nextFirstPlayerCard = null;
         }
@@ -582,9 +634,13 @@ public class Game {
     private void setNextSecondPlayerCard() {
         if (secondPlayerHand.size() <= 5) {
             if (secondPlayerDeck.getCards().size() != 0) {
-                Random random = new Random();
-                int rand = random.nextInt(secondPlayerDeck.getCards().size());
-                nextSecondPlayerCard = secondPlayerDeck.getCards().get(rand);
+                if (isMulti()){
+                    nextSecondPlayerCard = secondPlayerDeck.getCards().get(0);
+                } else {
+                    Random random = new Random();
+                    int rand = random.nextInt(secondPlayerDeck.getCards().size());
+                    nextSecondPlayerCard = secondPlayerDeck.getCards().get(rand);
+                }
             } else
                 nextSecondPlayerCard = null;
         }
