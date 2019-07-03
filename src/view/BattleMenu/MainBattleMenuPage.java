@@ -2,6 +2,8 @@ package view.BattleMenu;
 
 import Controller.GameController.GameController;
 import Model.game.Game;
+import command.clientCommand.EndTurnCmd;
+import gson.GsonWriter;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -59,8 +61,14 @@ public class MainBattleMenuPage extends Page {
         setBackGround(controller.label, "resources/ui/button_primary_middle_glow@2x.png");
 
         EventHandler<KeyEvent> handler = event -> {
-            if (event.getCode()  == KeyCode.Z)
+            if (event.getCode()  == KeyCode.Z) {
+                if (!game.isMyTurn())
+                    return;
                 controller.endTurn();
+                if (game.isMulti())
+                    GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
+                //controller.endTurn();
+            }
         };
 
         root.getScene().addEventHandler(KeyEvent.KEY_PRESSED, handler);
