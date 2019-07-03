@@ -25,8 +25,6 @@ public class CustomMenuPage extends Page {
     private static Pane root = new Pane();
     private CustomController controller;
 
-
-
     @Override
     public void start() {
         try {

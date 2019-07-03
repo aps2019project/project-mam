@@ -21,6 +21,7 @@ public class MainMenuController {
     public Label label;
     public ImageView exit;
     public ImageView logout;
+    public Label scoreBoard;
 
 
     public MainMenuController() {
@@ -63,6 +64,11 @@ public class MainMenuController {
     @FXML
     public void onExitClicked(){
         Page.getStage().close();
+    }
+
+    @FXML
+    public void onScoreBoardClicked(){
+        Page.getPages().push(new ScoreBoard());
     }
 
     public boolean isMainDeckValid() {
