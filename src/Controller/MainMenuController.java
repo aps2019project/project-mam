@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.enums.ErrorType;
+import command.clientCommand.LogOutCmd;
 import command.clientCommand.SaveCmd;
 import gson.GsonWriter;
 import Model.user.User;
@@ -57,12 +58,14 @@ public class MainMenuController {
 
     @FXML
     public void onLogoutClicked(){
+        GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
 
     @FXML
     public void onExitClicked(){
+        GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getStage().close();
     }
 
