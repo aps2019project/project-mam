@@ -146,9 +146,9 @@ public class MapController {
                 if (game.isMulti())
                     GsonWriter.sendClientCommand(new InsertCmd(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y), Page.getOutput());
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
-                removeIdFromHand(Integer.parseInt(handCardId));
+                //removeIdFromHand(Integer.parseInt(handCardId));
                 //updateMap();
-                updateHand();
+                //updateHand();
                 //setOnHandClick();
                 handCardSelected = false;
             } else if (isSelected) {
@@ -410,9 +410,9 @@ public class MapController {
                     ErrorType.SUCCESSFUL_INSERTING_CARD.setMessage(message.toString());
                     label.setText(ErrorType.SUCCESSFUL_INSERTING_CARD.getMessage());
                     updatePlayersMana();
-                    //removeIdFromHand(Integer.parseInt(handCardId));
+                    removeIdFromHand(Integer.parseInt(handCardId));
                     updateMap();
-                    //updateHand();
+                    updateHand();
                 } else label.setText(ErrorType.INVALID_TARGET.getMessage());
             } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_INSERT.getMessage());
         } else label.setText(ErrorType.INVALID_CARD_NAME.getMessage());
