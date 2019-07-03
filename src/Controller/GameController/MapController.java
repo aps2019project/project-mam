@@ -11,9 +11,7 @@ import Model.size.Coordinate;
 import Model.size.Resolution;
 import command.CommandType;
 import command.ServerCommand;
-import command.clientCommand.ClientCommand;
-import command.clientCommand.MoveCmd;
-import command.clientCommand.SelectCmd;
+import command.clientCommand.*;
 import gson.GsonWriter;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -145,6 +143,8 @@ public class MapController {
             if (!game.isMyTurn())
                 return;
             if (handCardSelected) {
+                GsonWriter.sendClientCommand
+                        (new InsertCmd(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), 4 - x, 8 - y), Page.getOutput());
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
                 removeIdFromHand(Integer.parseInt(handCardId));
                 updateMap();
@@ -155,6 +155,7 @@ public class MapController {
                 if ((game.isMyTurn() && rectangle.getFill() == Color.BLUE)
                         || (game.isOppTurn() && rectangle.getFill() == Color.RED)) {
                     attack(Integer.parseInt(rectangle.getId()));
+                    GsonWriter.sendClientCommand(new AttackCmd(rectangle.getId()), Page.getOutput());
                     updateMap();
                     isSelected = false;
                 } else {

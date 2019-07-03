@@ -70,6 +70,11 @@ public class ServerCommand {
         this.baseTurn = baseTurn;
     }
 
+    public ServerCommand(CommandType type, String cardName, int row, int column) {
+        this(type, row, column);
+        this.cardName = cardName;
+    }
+
     public CommandType getType() {
         return type;
     }

@@ -131,7 +131,7 @@ public class ImageController {
     }
 
     public void addCollectibleList(Pane pane){
-        int counter = 0;
+        /*int counter = 0;
         for (CollectableItem item : Game.getInstance().getPlayer1Collectable()) {
             ImageView view = null;
             try {
@@ -149,7 +149,7 @@ public class ImageController {
             viewsCollectList.add(view);
             pane.getChildren().add(view);
             counter++;
-        }
+        }*/
     }
 
 
