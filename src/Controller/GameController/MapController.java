@@ -289,7 +289,7 @@ public class MapController {
     public void updateNextCard() {
         int X = 135;
         int Y = 785;
-        int RADIUS = 150;
+        int RADIUS = 200;
 
         if (Coordinate.getInstance().getResolution() == Resolution.HD) {
             X = 86;

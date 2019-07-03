@@ -180,8 +180,8 @@ public class ImageController {
     }
 
     public void initHeroImage() {
-        addCard(Game.getInstance().getMap().getCells()[2][0]);
-        addCard(Game.getInstance().getMap().getCells()[2][8]);
+        addCard(Game.getInstance().getMap().getCells()[2][0], Game.getInstance().getBaseTurn());
+        addCard(Game.getInstance().getMap().getCells()[2][8], Game.getInstance().getBaseTurn()+1);
     }
 
     public void initItemImage() {
@@ -255,26 +255,8 @@ public class ImageController {
         }
     }
 
-    public void addCard(Cell cell) {
-        int length = 120;
-        int row = cell.getRow();
-        int column = cell.getColumn();
-        if (Coordinate.getInstance().getResolution() == Resolution.HD){
-            length = 80;
-        }
-        try {
-            ImageView view = new ImageView(new Image(new FileInputStream(cell.getCard().getBreathingImage())));
-            view.setY(MapController.getInstance().getCells()[row][column].getY() - 35);
-            view.setX(MapController.getInstance().getCells()[row][column].getX() - 15);
-            view.setFitWidth(length);
-            view.setFitHeight(length);
-            MapController.getInstance().getPane().getChildren().add(view);
-            if (Game.getInstance().isMyTurn())
-                views1.put(cell.getCard().getId(), view);
-            else views2.put(cell.getCard().getId(), view);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void addCard(Cell cell, int turn) {
+        addCard(cell.getRow(), cell.getColumn(), cell.getCard(), turn);
     }
 
     public void addCard(double x, double y, Card card, int size, int playerTurn) {
