@@ -11,14 +11,15 @@ public class Spell extends Card {
         type = "spell";
     }
 
-    public Spell(){}
+    public Spell() {
+    }
 
     public Spell(String name, int price, int MP, ArrayList<Buff> buffs) {
         super(name, MP, price);
         type = "spell";
     }
 
-    public Spell(String name, int price,int MP) {
+    public Spell(String name, int price, int MP) {
         super(name, MP, price);
         type = "spell";
     }
@@ -32,7 +33,8 @@ public class Spell extends Card {
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Type : Spell - Name : ").append(getName()).append(" - MP : ").append(getMP());
-        info.append(" - Description : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
+        info.append(" - Description : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice())
+                .append(" - count : ").append(getCount());
         return info.toString();
     }
 

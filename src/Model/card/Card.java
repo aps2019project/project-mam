@@ -87,6 +87,7 @@ public class Card {
         this.MP = MP;
         this.price = price;
         this.name = name;
+        count = 10;
     }
     public int getMP() {
         return MP;

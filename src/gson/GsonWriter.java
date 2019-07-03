@@ -32,7 +32,7 @@ public class GsonWriter {
     public static void writeCards() throws IOException {
         Shop.importCards();
         for (Card card : Shop.getMinions()) {
-            FileWriter out = new FileWriter("gson/Cards/minion/"+ card.getName() + ".json");
+            FileWriter out = new FileWriter("gson/Cards/Minion/"+ card.getName() + ".json");
             Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
                     .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             out.write(gson.toJson(card));

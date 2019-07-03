@@ -1,1 +1,1 @@
-{"AP":4,"HP":4,"TargetCommunity":3,"minionClass":"HYBRID","SPActivationTime":"NULL","row":0,"column":0,"MP":1,"id":11,"price":600,"name":"neyzedaranTorani","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":4,"HP":4,"TargetCommunity":3,"minionClass":"HYBRID","SPActivationTime":"NULL","row":0,"column":0,"MP":1,"id":11,"price":600,"name":"neyzedaranTorani","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

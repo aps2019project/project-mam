@@ -1,6 +1,9 @@
 package server;
 
+import Model.card.Card;
+import Model.shop.Shop;
 import gson.GsonReader;
+import gson.GsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +19,7 @@ public class Server {
 
     private static HashMap<String, ClientHandler> clients = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
             ServerSocket server = new ServerSocket(port);
             System.out.println("server created");

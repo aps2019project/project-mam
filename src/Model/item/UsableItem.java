@@ -31,7 +31,8 @@ public class UsableItem extends Item {
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Name : ").append(getName()).append(" - Description : ").append(getDesc());
-        info.append(" - Sell Cost : ").append(getPrice());
+        info.append(" - Sell Cost : ").append(getPrice())
+                .append(" - count : ").append(getCount());
         return info.toString();
     }
 

@@ -15,7 +15,6 @@ public class Minion extends Card {
     private Model.enums.SPActivationTime SPActivationTime;
 
 
-
     public Minion(String name, int price, int MP, int HP, int AP, ImpactType minionClass, int targetCommunity,
                   String desc, Model.enums.SPActivationTime SPActivationTime, ArrayList<Buff> buffs) {
         super(name, price, MP, desc);
@@ -43,51 +42,12 @@ public class Minion extends Card {
         return "minion";
     }
 
-    /*public int getRow() {
-        return row;
-    }
-
-    public int getColumn() {
-        return column;
-    }*/
-
-    /*public boolean isCanMove() {
-        return canMove;
-    }
-
-    public boolean isCanAttack() {
-        return canAttack;
-    }
-
-    public boolean canCounterAttack() {
-        return canCounterAttack;
-    }*/
-
-    /*public void setRow(int row) {
-        this.row = row;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }*/
-
-    /*public void setCanMove(boolean canMove) {
-        this.canMove = canMove;
-    }
-
-    public void setCanAttack(boolean canAttack) {
-        this.canAttack = canAttack;
-    }
-
-    public void setCanCounterAttack(boolean canCounterAttack) {
-        this.canCounterAttack = canCounterAttack;
-    }*/
-
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Type : Minion - Name : ").append(getName()).append(" ID : ").append(getId()).append(" - Class : ").append(getCardClass());
         info.append(" - AP : ").append(getAP()).append(" - HP : ").append(getHP()).append(" - MP : ").append(getMP());
-        info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
+        info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice())
+                .append(" - count : ").append(getCount());
         return info.toString();
     }
 
@@ -163,7 +123,8 @@ public class Minion extends Card {
         return newCard;
 
     }
-    public String getImportantInfo(){
+
+    public String getImportantInfo() {
         StringBuilder info = new StringBuilder();
         info.append(getId()).append(" : ").append(getName()).append(",  health : ").append(getHP()).append(",  location : (").
                 append(getRow()).append(", ").append(getColumn()).append("),  power : ").append(getAP());

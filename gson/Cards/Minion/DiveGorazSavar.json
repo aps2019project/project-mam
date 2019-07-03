@@ -1,1 +1,1 @@
-{"AP":8,"HP":16,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"NULL","row":0,"column":0,"MP":6,"id":19,"price":300,"name":"DiveGorazSavar","specialPower":[],"type":"minion","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":8,"HP":16,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"NULL","row":0,"column":0,"MP":6,"id":19,"price":300,"name":"DiveGorazSavar","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
