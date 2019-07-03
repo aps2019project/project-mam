@@ -2,6 +2,7 @@ package view.pages;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -85,6 +86,14 @@ public abstract class Page {
 
     protected void setBackGround(Pane root, Color color){
         root.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    protected void setBackGround(ScrollPane root, Color color){
+        root.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    protected void setBackGround(Label label, Color color){
+        label.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     protected void setBackGround(Label label, String address){

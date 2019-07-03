@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,7 +39,9 @@ public class ScoreBoard extends Page{
     }
 
     private void initializeImage() throws FileNotFoundException {
-        setBackGround(root, "resources/codex/chapter22_background@2x.jpg");
+        setBackGround(root, "resources/codex/chapter18_background@2x.jpg");
+        //setBackGround(controller.scoreBoard, Color.rgb(0, 0, 0, 0.5));
+        //setBackGround(controller.scoreBoardLb, Color.rgb(0, 0, 0, 0.5));
         controller.back.setImage(new Image(new FileInputStream("resources/ui/button_back_corner@2x.png")));
     }
 
