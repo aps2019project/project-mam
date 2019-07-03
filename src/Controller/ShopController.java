@@ -5,10 +5,7 @@ import Model.shop.Shop;
 import Model.user.User;
 import command.Result;
 import command.ServerCommand;
-import command.clientCommand.BuyCmd;
-import command.clientCommand.SellCmd;
-import command.clientCommand.ShowAllCmd;
-import command.clientCommand.SignInCmd;
+import command.clientCommand.*;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.fxml.FXML;
@@ -64,7 +61,8 @@ public class ShopController {
 
     @FXML
     public void onSSearchClicked(){
-        searchInShop(searchInStore_tf.getText());
+        GsonWriter.sendClientCommand(new SearchCmd(searchInStore_tf.getText()), Page.getOutput());
+        SResult_lb.setText(GsonReader.getServerCommand(Page.getInput()).getMessage());
     }
 
     @FXML
@@ -79,15 +77,6 @@ public class ShopController {
         scrollPane.setVisible(false);
     }
 
-
-
-    public void searchInShop(String name) {
-        if (shop.searchCard(name)) {
-            SResult_lb.setText(shop.getCardInfo(name));
-        } else if (shop.searchItem(name)) {
-            SResult_lb.setText(shop.getItemInfo(name));
-        } else SResult_lb.setText(ErrorType.NOT_FOUND_CARD_OR_ITEM.getMessage());
-    }
 
     public void buy(String name) {
         GsonWriter.sendClientCommand(new BuyCmd(name), Page.getOutput());
