@@ -36,10 +36,6 @@ public class SelectUserController {
 
     public int count = 0;
 
-    public void init() {
-
-    }
-
     public void setSend() {
         showMyMessage();
         GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
@@ -49,24 +45,17 @@ public class SelectUserController {
         chatGrid.add(new Label(message.getText()), 1, count++);
     }
 
-    public void showOthersMessage() {
-        new Thread(() -> {
-            while (true) {
-                ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+    public void showOthersMessage(ServerCommand command) {
                 Platform.runLater(() -> {
                     chatGrid.add(new Label(command.getUserName() + ": " + command.getMessage()), 0, count++);
                 });
-            }
-        }).start();
-        /*ServerCommand command = GsonReader.getServerCommand(Page.getInput());
-        chatGrid.add(new Label(command.getMessage()), 0, count++);*/
-        //showOthersMessage();
     }
 
     @FXML
     public void setStart() {
         label.setText("searching for an opponent ...");
-        request();
+        GsonWriter.sendClientCommand(new RequestGameCmd(BattleMenuPage.getGameMood(),
+                BattleMenuPage.getFlags()), Page.getOutput());
     }
 
     @FXML
@@ -76,25 +65,34 @@ public class SelectUserController {
         Page.getPages().peek().start();
     }
 
-    public void request() {
+    public void request(ServerCommand command) {
+        if (command.getType() != CommandType.CREATE_GAME)
+            return;
+        if (command.getResult() == Result.SUCCESSFUL) {
+            BattleMenuPage.setSecondUser(command.getUser());
+            BattleMenuPage.setBaseTurn(command.getBaseTurn());
+            Platform.runLater(BattleMenuPage::createMultiGame);
+        } /*else {
+            command = GsonReader.getServerCommand(Page.getInput());
+            if (command.getType() == CommandType.EXIT_GAME)
+                return;
+            BattleMenuPage.setSecondUser(command.getUser());
+            BattleMenuPage.setBaseTurn(command.getBaseTurn());
+            Platform.runLater(BattleMenuPage::createMultiGame);
+        }*/
+    }
+
+    public void handleServerCmd() {
         new Thread(() -> {
-            GsonWriter.sendClientCommand(new RequestGameCmd(BattleMenuPage.getGameMood(),
-                    BattleMenuPage.getFlags()), Page.getOutput());
-            ServerCommand command = GsonReader.getServerCommand(Page.getInput());
-            if (command.getResult() == Result.SUCCESSFUL) {
-                BattleMenuPage.setSecondUser(command.getUser());
-                BattleMenuPage.setBaseTurn(command.getBaseTurn());
-                Platform.runLater(BattleMenuPage::createMultiGame);
-            } else {
-                command = GsonReader.getServerCommand(Page.getInput());
-                if (command.getType() == CommandType.EXIT_GAME)
-                    return;
-                BattleMenuPage.setSecondUser(command.getUser());
-                BattleMenuPage.setBaseTurn(command.getBaseTurn());
-                Platform.runLater(BattleMenuPage::createMultiGame);
+            while(true) {
+                ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+                request(command);
+                if (command.getType() == CommandType.CHAT)
+                    showOthersMessage(command);
+                if (command.getType() == CommandType.CREATE_GAME && command.getResult() == Result.SUCCESSFUL)
+                    break;
             }
         }).start();
-
     }
 
     public void exit() {

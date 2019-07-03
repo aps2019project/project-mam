@@ -31,13 +31,12 @@ public class SelectUserMenuPage extends Page {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/SelectUser.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
-            controller.showOthersMessage();
             initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
-            //controller.request();
+            controller.handleServerCmd();
         } catch (IOException e) {
             e.printStackTrace();
         }
