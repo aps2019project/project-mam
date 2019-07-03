@@ -7,6 +7,7 @@ import command.Result;
 import command.ServerCommand;
 import command.clientCommand.BuyCmd;
 import command.clientCommand.SellCmd;
+import command.clientCommand.ShowAllCmd;
 import command.clientCommand.SignInCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
@@ -69,7 +70,8 @@ public class ShopController {
     @FXML
     public void onShowAllBtnClicked(){
         scrollPane.setVisible(true);
-        showAllLbl.setText(shop.show());
+        GsonWriter.sendClientCommand(new ShowAllCmd(), Page.getOutput());
+        showAllLbl.setText(GsonReader.getServerCommand(Page.getInput()).getMessage());
     }
 
     @FXML

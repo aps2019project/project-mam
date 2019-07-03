@@ -1,6 +1,10 @@
 package command.clientCommand;
 
+import Model.shop.Shop;
 import command.CommandType;
+import command.Result;
+import command.ServerCommand;
+import gson.GsonWriter;
 import server.ClientHandler;
 
 import java.io.DataOutputStream;
@@ -14,6 +18,6 @@ public class ShowAllCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
-        super.handleCommand(output, handler);
+        GsonWriter.sendServerCommand(new ServerCommand(SHOWALL, Result.SUCCESSFUL, Shop.getSHOP().show()) , output);
     }
 }
