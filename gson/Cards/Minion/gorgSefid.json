@@ -1,1 +1,1 @@
-{"AP":2,"HP":8,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","row":0,"column":0,"MP":5,"id":18,"price":400,"name":"gorgSefid","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":2,"HP":8,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","row":0,"column":0,"MP":5,"id":18,"price":400,"name":"gorgSefid","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

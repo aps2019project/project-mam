@@ -1,1 +1,1 @@
-{"AP":10,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","row":0,"column":0,"MP":6,"id":13,"price":800,"name":"shahzadeTorani","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":10,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","row":0,"column":0,"MP":6,"id":13,"price":800,"name":"shahzadeTorani","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

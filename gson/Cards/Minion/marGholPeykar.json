@@ -1,1 +1,1 @@
-{"AP":7,"HP":14,"TargetCommunity":5,"minionClass":"RANGED","SPActivationTime":"ON_SPAWN","row":0,"column":0,"MP":8,"id":17,"price":500,"name":"marGholPeykar","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":7,"HP":14,"TargetCommunity":5,"minionClass":"RANGED","SPActivationTime":"ON_SPAWN","row":0,"column":0,"MP":8,"id":17,"price":500,"name":"marGholPeykar","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

@@ -1,1 +1,1 @@
-{"AP":14,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEFEND","row":0,"column":0,"MP":6,"id":10,"price":500,"name":"gorazVahshi","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":14,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_DEFEND","row":0,"column":0,"MP":6,"id":10,"price":500,"name":"gorazVahshi","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

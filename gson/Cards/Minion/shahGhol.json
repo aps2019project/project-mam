@@ -1,1 +1,1 @@
-{"AP":4,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","row":0,"column":0,"MP":5,"id":21,"price":600,"name":"shahGhol","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":4,"HP":10,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"COMBO","row":0,"column":0,"MP":5,"id":21,"price":600,"name":"shahGhol","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

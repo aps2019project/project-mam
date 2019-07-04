@@ -186,8 +186,10 @@ public class GameController {
         AudioController.getInstance().onEndTurn();
         game.endTurn();
         label.setText("---<End turn>---");
-        if (game.isGameEnd())
+        if (game.isGameEnd()) {
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
+            AudioController.getInstance().onEndGame();
+        }
         else {
             mapCtrl.updateHand();
             mapCtrl.updatePlayersMana();

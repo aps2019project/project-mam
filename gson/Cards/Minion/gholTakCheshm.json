@@ -1,1 +1,1 @@
-{"AP":11,"HP":12,"TargetCommunity":3,"minionClass":"HYBRID","SPActivationTime":"ON_DEATH","row":0,"column":0,"MP":7,"id":15,"price":500,"name":"gholTakCheshm","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":11,"HP":12,"TargetCommunity":3,"minionClass":"HYBRID","SPActivationTime":"ON_DEATH","row":0,"column":0,"MP":7,"id":15,"price":500,"name":"gholTakCheshm","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

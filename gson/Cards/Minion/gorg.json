@@ -1,1 +1,1 @@
-{"AP":1,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","row":0,"column":0,"MP":3,"id":21,"price":400,"name":"gorg","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":1,"HP":6,"TargetCommunity":0,"minionClass":"MELEE","SPActivationTime":"ON_ATTACK","row":0,"column":0,"MP":3,"id":21,"price":400,"name":"gorg","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

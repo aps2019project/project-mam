@@ -246,9 +246,10 @@ public class Shop {
             if (card.getId() == cardId) {
                 user.getCollection().removeCard(card);
                 user.setMoney(user.getMoney() + card.getPrice());
-                card.setCount(card.getCount() + 1);
                 try {
-                    GsonWriter.writeCustomCard(card);
+                    Card soldCard = getCard(cardId);
+                    soldCard.setCount(soldCard.getCount() + 1);
+                    GsonWriter.writeCustomCard(soldCard);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -271,8 +272,13 @@ public class Shop {
             if (item.getId() == itemId) {
                 user.getCollection().removeItem(item);
                 user.setMoney(user.getMoney() + item.getPrice());
-                item.setCount(item.getCount() + 1);
-               GsonWriter.writeCustomUsableItem(item);
+                for (CollectableItem collectible : collectibles) {
+                    if (collectible.getId() == itemId) {
+                        item.setCount(item.getCount() + 1);
+                        GsonWriter.writeCustomUsableItem(item);
+                        break;
+                    }
+                }
                 return true;
             }
         }

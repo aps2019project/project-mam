@@ -20,7 +20,7 @@ public class Card {
     private String attackImage;
     private String runImage;
     private String deathImage;
-    private int count;
+    protected int count;
 
     private boolean canMove = true;
     private boolean canAttack = true;

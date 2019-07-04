@@ -49,4 +49,8 @@ public class AudioController {
         setUpAudio(getPlayer("sfx_ui_yourturn_1.m4a"));
     }
 
+    void onEndGame(){
+        setUpAudio(getPlayer("sfx_victory_match_w_vo.m4a"));
+    }
+
 }

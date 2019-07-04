@@ -2,6 +2,7 @@ package server;
 
 import Model.card.Card;
 import Model.shop.Shop;
+import com.google.gson.Gson;
 import gson.GsonReader;
 import gson.GsonWriter;
 
