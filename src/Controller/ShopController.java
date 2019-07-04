@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import Model.enums.ErrorType;
 import Model.shop.Shop;
 import Model.user.User;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import view.pages.Page;
 
 public class ShopController {
@@ -33,13 +35,14 @@ public class ShopController {
     public Label showAllLbl;
     public Button showAllBtn;
 
-
+    private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("music_tutorial.m4a");
 
     private Shop shop = Shop.getInstance();
 
 
     @FXML
     public void onBackClicked(){
+        musicPlayer.stop();
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
@@ -75,6 +78,11 @@ public class ShopController {
     @FXML
     public void onScrollPaneClicked(){
         scrollPane.setVisible(false);
+    }
+
+    public void setUpMusic(){
+        musicPlayer.play();
+        musicPlayer.setAutoPlay(true);
     }
 
 

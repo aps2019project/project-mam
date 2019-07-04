@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,12 +21,14 @@ public class MultiPlayerMoodCtrl {
 
     @FXML
     public void setMood1() {
+        AudioController.getInstance().onSelect();
         BattleMenuPage.setGameMood("1");
         Page.getPages().push(new SelectUserMenuPage());
     }
 
     @FXML
     public void setMood2() {
+        AudioController.getInstance().onSelect();
         BattleMenuPage.setGameMood("2");
         BattleMenuPage.setFlags(1);
         Page.getPages().push(new SelectUserMenuPage());
@@ -33,6 +36,7 @@ public class MultiPlayerMoodCtrl {
 
     @FXML
     public void setMood3() {
+        AudioController.getInstance().onSelect();
         BattleMenuPage.setGameMood("3");
         BattleMenuPage.setFlags(Integer.parseInt(numOfFlags.getText()));
         Page.getPages().push(new SelectUserMenuPage());

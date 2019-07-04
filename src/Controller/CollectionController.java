@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import Model.deck.Deck;
 import Model.enums.ErrorType;
 import gson.GsonReader;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import view.pages.Page;
 
 import java.io.FileNotFoundException;
@@ -56,10 +58,12 @@ public class CollectionController {
 
     public ScrollPane scrollPane;
     public Label scrollPane_lb;
+    public MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("music_collection.m4a");
 
 
     @FXML
     public void setBack() {
+        musicPlayer.stop();
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
@@ -128,6 +132,11 @@ public class CollectionController {
     @FXML
     public void setScrollPane() {
         scrollPane.setVisible(false);
+    }
+
+    public void setUpMusic(){
+        musicPlayer.play();
+        musicPlayer.setAutoPlay(true);
     }
 
 

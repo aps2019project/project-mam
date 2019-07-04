@@ -1,6 +1,7 @@
 package view.pages;
 
 import Controller.*;
+import Controller.GameController.AudioController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -23,11 +24,13 @@ public class ShopMenuPage extends Page {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/Shop.fxml"));
         root = fxmlLoader.load();
         controller = fxmlLoader.getController();
+        controller.setUpMusic();
         initializeImage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
+            AudioController.getInstance().inShop();
         } catch (IOException e) {
             e.printStackTrace();
         }

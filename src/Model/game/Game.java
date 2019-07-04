@@ -1093,10 +1093,10 @@ public class Game {
     private void buffCreator(Card card, Cell cell) {
         for (Buff buff : card.getSpecialPower()) {
             for (Card cards : buff.getMinionsSPTarget(card, cell.getCard(), getMyTeam(), getOppTeam(), map)) {
-                Buff newBuff = buff.copy();
+                /*Buff newBuff = buff.copy();
                 newBuff.setCard(cards);
                 newBuff.setStarted(true);
-                Buff.addBuff(newBuff);
+                Buff.addBuff(newBuff);*/
             }
         }
     }

@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import Model.game.Game;
 import Model.user.AI;
 import Model.user.User;
@@ -23,18 +24,21 @@ public class BattleMenuController {
     public ImageView back;
 
     public void setSingle() {
+        AudioController.getInstance().onSelect();
         BattleMenuPage.setNumOfPlayers("1");
         BattleMenuPage.setSecondUser(AI.getInstance().getAI());
         Page.getPages().push(new GameKindMenuPage());
     }
 
     public void setMulti() {
+        AudioController.getInstance().onSelect();
         BattleMenuPage.setNumOfPlayers("2");
         BattleMenuPage.setGameKind("custom");
         Page.getPages().push(new MultiPlayerMoodPage());
     }
 
     public void setBack() {
+        AudioController.getInstance().onSelect();
         Page.getPages().pop();
         Page.getPages().peek().start();
     }

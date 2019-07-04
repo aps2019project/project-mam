@@ -19,7 +19,7 @@ public class AudioController {
     private final String ATTACK_PATH = "sfx_f5_vindicator_attack_swing.m4a";
 
 
-    private MediaPlayer getPlayer(String name) {
+    public MediaPlayer getPlayer(String name) {
         Media media = new Media(new File("resources/sfx/" + name).toURI().toString());
         return new MediaPlayer(media);
     }
@@ -29,15 +29,15 @@ public class AudioController {
         player.setAutoPlay(false);
     }
 
-    public void onMove() {
+    void onMove() {
         setUpAudio(getPlayer(MOVE_PATH));
     }
 
-    public void onAttack() {
+    void onAttack() {
         setUpAudio(getPlayer(ATTACK_PATH));
     }
 
-    public void onInsert() {
+    void onInsert() {
         setUpAudio(getPlayer("sfx_unit_run_magical_4.m4a"));
     }
 
@@ -48,6 +48,5 @@ public class AudioController {
     void onEndTurn(){
         setUpAudio(getPlayer("sfx_ui_yourturn_1.m4a"));
     }
-
 
 }

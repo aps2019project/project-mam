@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import Model.enums.ErrorType;
 import command.clientCommand.LogOutCmd;
 import command.clientCommand.SaveCmd;
@@ -31,6 +32,7 @@ public class MainMenuController {
 
     @FXML
     public void onBattleClicked(){
+        AudioController.getInstance().onSelect();
         if (isMainDeckValid()) {
             Page.getPages().push(new BattleMenuPage());
         }
@@ -38,26 +40,31 @@ public class MainMenuController {
 
     @FXML
     public void onShopClicked(){
+        AudioController.getInstance().onSelect();
         Page.getPages().push(new ShopMenuPage());
     }
 
     @FXML
     public void onCollectionClicked(){
+        AudioController.getInstance().onSelect();
         Page.getPages().push(new CollectionMenuPage());
     }
 
     @FXML
     public void onSaveClicked(){
-            GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
+        AudioController.getInstance().onSelect();
+        GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
     }
 
     @FXML
     public void onCustomClicked(){
+        AudioController.getInstance().onSelect();
         Page.getPages().push(new CustomMenuPage());
     }
 
     @FXML
     public void onLogoutClicked(){
+        AudioController.getInstance().onSelect();
         GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getPages().pop();
         Page.getPages().peek().start();
@@ -65,12 +72,14 @@ public class MainMenuController {
 
     @FXML
     public void onExitClicked(){
+        AudioController.getInstance().onSelect();
         GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getStage().close();
     }
 
     @FXML
     public void onScoreBoardClicked(){
+        AudioController.getInstance().onSelect();
         Page.getPages().push(new ScoreBoard());
     }
 

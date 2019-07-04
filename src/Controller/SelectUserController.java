@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.GameController.AudioController;
 import command.CommandType;
 import command.Result;
 import command.ServerCommand;
@@ -38,6 +39,7 @@ public class SelectUserController {
     private boolean isGameCreated = false;
 
     public void setSend() {
+        AudioController.getInstance().onSelect();
         showMyMessage();
         GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
     }
@@ -54,6 +56,7 @@ public class SelectUserController {
 
     @FXML
     public void setStart() {
+        AudioController.getInstance().onSelect();
         label.setText("searching for an opponent ...");
         GsonWriter.sendClientCommand(new RequestGameCmd(BattleMenuPage.getGameMood(),
                 BattleMenuPage.getFlags()), Page.getOutput());
