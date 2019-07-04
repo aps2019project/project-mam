@@ -510,14 +510,14 @@ public class Game {
         return true;
     }
 
-    private void setMultiPlayerHand(){
+    private void setMultiPlayerHand() {
         int counter = 0;
-        while (counter < 5){
+        while (counter < 5) {
             addCardFromFirstPlayerDeckToHand();
             counter++;
         }
         counter = 0;
-        while (counter < 5){
+        while (counter < 5) {
             addCardFromSecondPlayerDeckToHand();
             counter++;
         }
@@ -588,9 +588,9 @@ public class Game {
         if (nextFirstPlayerCard != null && firstPlayerHand.size() < 5) {
             firstPlayerHand.put(nextFirstPlayerCard.getId(), nextFirstPlayerCard);
             if (firstPlayerDeck.getCards().size() != 0) {
-                if (isMulti()){
+                if (isMulti()) {
                     addCardFromFirstPlayerDeckToNextCard();
-                }else {
+                } else {
                     Random random = new Random();
                     addRandomCardFromFirstPlayerDeckToNextCard(random.
                             nextInt(firstPlayerDeck.getCards().size()));
@@ -603,7 +603,7 @@ public class Game {
         if (nextSecondPlayerCard != null && secondPlayerHand.size() < 5) {
             secondPlayerHand.put(nextSecondPlayerCard.getId(), nextSecondPlayerCard);
             if (secondPlayerDeck.getCards().size() != 0) {
-                if (isMulti()){
+                if (isMulti()) {
                     addCardFromSecondPlayerDeckToNextCard();
                 } else {
                     Random rand = new Random();
@@ -617,9 +617,9 @@ public class Game {
     private void setNextFirstPlayerCard() {
         if (firstPlayerHand.size() <= 5) {
             if (firstPlayerDeck.getCards().size() != 0) {
-                if (isMulti()){
+                if (isMulti()) {
                     nextFirstPlayerCard = firstPlayerDeck.getCards().get(0);
-                }else {
+                } else {
                     Random random = new Random();
                     nextFirstPlayerCard = firstPlayerDeck.getCards().
                             get(random.nextInt(firstPlayerDeck.getCards().size()));
@@ -632,7 +632,7 @@ public class Game {
     private void setNextSecondPlayerCard() {
         if (secondPlayerHand.size() <= 5) {
             if (secondPlayerDeck.getCards().size() != 0) {
-                if (isMulti()){
+                if (isMulti()) {
                     nextSecondPlayerCard = secondPlayerDeck.getCards().get(0);
                 } else {
                     Random random = new Random();
@@ -868,17 +868,13 @@ public class Game {
         return isOppAvailableForAttack(targetId, CountererId, getTurn() + 1) && !isDisarm;
     }
 
-
-    public boolean canComboAttack(Card defender, ArrayList<Card> attackers) {
-        if (!isCardIdValidForAttack(defender.getId()))
-            return false;
-        for (Card attacker : attackers) {
-            if (!attacker.isCanAttack())
-                return false;
-            if (!isOppAvailableForAttack(defender.getId(), attacker.getId(), getTurn()))
-                return false;
-        }
-        return true;
+    private int getRewardPrice() {
+        if (mode.equals("1"))
+            return 500;
+        if (mode.equals("2"))
+            return 1000;
+        else
+            return 1500;
     }
 
     private void checkHpState(HashMap<Integer, Cell> cells, ArrayList<Card> graveYard, int player) {
@@ -889,28 +885,26 @@ public class Game {
                 } else if (player == 2 && secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_DEATH)
                     buffCreator(entry.getValue().getCard(), entry.getValue());
                 Buff.refreshBuffs();
-                if (entry.getValue().getCard() instanceof Hero) {
-                    if (kind != null && kind.equalsIgnoreCase("1"))
-                        price = 500;
-                    if (player == 1) {
-                        winnerName = firstUser.getName();
-                        firstUser.setMoney(price);
-                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
-                    } else {
-                        winnerName = secondUser.getName();
-                        secondUser.setMoney(price);
-                        secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
-                    }
-                    winner = player;
-                    isGameEnd = true;
-                    break;
+                if (entry.getValue().getCard() instanceof Hero)
+                    price = getRewardPrice();
+                if (player == 1) {
+                    winnerName = secondUser.getName();
+                    secondUser.setMoney(price);
+                    secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
+                } else {
+                    winnerName = firstUser.getName();
+                    firstUser.setMoney(price);
+                    firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
                 }
-                if (entry.getValue().getFlagCount() != 0)
-                    havingFlagCount = 0;
-                graveYard.add(entry.getValue().getCard());
-                map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
-                cells.remove(entry.getKey());
+                winner = player;
+                isGameEnd = true;
+                break;
             }
+            if (entry.getValue().getFlagCount() != 0)
+                havingFlagCount = 0;
+            graveYard.add(entry.getValue().getCard());
+            map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
+            cells.remove(entry.getKey());
         }
     }
 
