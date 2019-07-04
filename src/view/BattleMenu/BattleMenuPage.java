@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.pages.MainMenuPage;
 import view.pages.Page;
 
 import java.awt.*;
@@ -115,14 +116,20 @@ public class BattleMenuPage extends Page {
     }
 
     public static void createSingleGame() {
+        turnOffMusic();
         new Game(User.user, secondUser, gameMood, gameKind, flags);
         Page.getPages().push(new MainBattleMenuPage());
 
     }
 
     public static void createMultiGame() {
+        turnOffMusic();
         new Game(User.user, secondUser, gameMood, gameKind, flags, baseTurn);
         Page.getPages().push(new MainBattleMenuPage());
 
+    }
+
+    private static void turnOffMusic(){
+        MainMenuPage.getInstance().getController().turnOffMusic();
     }
 }

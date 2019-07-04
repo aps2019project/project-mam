@@ -19,6 +19,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import view.pages.Page;
@@ -78,12 +79,10 @@ public class GameController {
     public ScrollPane userInfo2SP;
     public Label userInfo2L;
 
-    //------------------me-----------
-
-
     public Rectangle[][] cells = new Rectangle[5][9];
     public ArrayList<Circle> handCards = new ArrayList<>();
     public ArrayList<Label> handCardsMana = new ArrayList<>();
+    private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("music_battlemap_duskfall.m4a");
 
     private int speed = 1;
 
@@ -92,6 +91,13 @@ public class GameController {
         mapCtrl.initialize(cells, pane, label, handCards);
         if (game.isMulti())
             catchServerCommand();
+        setUpMusic();
+    }
+
+    private void setUpMusic(){
+        musicPlayer.play();
+        musicPlayer.setAutoPlay(true);
+        musicPlayer.setVolume(10);
     }
 
     public void init() {
