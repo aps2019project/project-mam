@@ -42,6 +42,7 @@ public class MapController {
     private Game game = Game.getInstance();
     private ImageController imageController = ImageController.getInstance();
     private AnimationController animationCtrl = AnimationController.getInstance();
+    private AudioController audioCtrl = AudioController.getInstance();
 
     private Rectangle[][] cells;
     private Pane pane;
@@ -326,6 +327,7 @@ public class MapController {
     }*/
 
     public void selectCard(String cardId) {
+        audioCtrl.onSelect();
         game.selectCard(Integer.parseInt(cardId));
         label.setText(cardId + " selected");
     }
@@ -335,6 +337,7 @@ public class MapController {
             if (game.cardCanMove(x, y)) {
                 cells[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()].setFill(Color.BLACK);
                 game.moveCurrentCardTo(x, y);
+                audioCtrl.onMove();
                 animationCtrl.moveTo(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()),
                         game.getCurrentCard(),
                         cells[x][y].getX() + (xStep - 15) / 2, cells[x][y].getY() + (yStep - 35) / 2);
@@ -359,6 +362,7 @@ public class MapController {
                     animationCtrl.attack(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()), game.getCurrentCard());
                     if (game.canCounterAttack(game.getCurrentCard().getId(), oppId))
                         animationCtrl.counterAttack(imageController.getView(game.isOppTurn(), oppId), game.getCard(game.isOppTurn(), oppId));
+                    audioCtrl.onAttack();
                     game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                     updateMap();
@@ -372,33 +376,13 @@ public class MapController {
         }
     }
 
-    public void comboAttack(String oppCardId, ArrayList<String> myCardsId) {
-        int[] attackersId = new int[myCardsId.size()];
-        int counter = 0;
-        for (String cardId : myCardsId) {
-            attackersId[counter] = Integer.parseInt(cardId);
-            counter++;
-        }
-        if (game.isCardInOppPlayerCellCard(Integer.parseInt(oppCardId))) {
-            game.comboAttack(Integer.parseInt(oppCardId), attackersId);
-        } else label.setText(ErrorType.INVALID_CARD_ID.getMessage());
-    }
-
-    public void useSP(String x, String y) {
-        if (game.getCurrentCard() instanceof Minion && game.getCurrentCard().getSPActivationTime() == SPActivationTime.ON_SPAWN) {
-            if (game.getCurrentCard() instanceof Hero && game.getCurrentCard().getCooldown() == 0) {
-                game.useSP(Integer.parseInt(x), Integer.parseInt(y));
-            } else label.setText(ErrorType.MANA_IS_NOT_ENOUGH_USE_SP.getMessage());
-        } else label.setText(ErrorType.CARD_HAVE_NOT_SP.getMessage());
-    }
-
     public void insertCard(String cardName, int x, int y) {
         if (game.isCardInPlayerHand(cardName)) {
             if (game.haveEnoughMana(cardName)) {
                 if ((game.isCellValidForInsertMinion(x, y) && game.getCardInHand(cardName).getCardType().equalsIgnoreCase("minion")) ||
                         (game.isCellValidForInsertSpell(game.getCardInHand(cardName), x, y) && game.getCardInHand(cardName).getCardType().equalsIgnoreCase("spell"))) {
                     game.insertPlayerCard(cardName, x, y);
-
+                    audioCtrl.onInsert();
                     if (game.getCurrentCard().getCardType().equals("minion"))
                         imageController.addCard(x, y, game.getCurrentCard(), game.getTurn());
                     else {
