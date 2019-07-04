@@ -1,5 +1,6 @@
 package view.pages;
 
+import Controller.GameController.AudioController;
 import Controller.MainMenuController;
 import Model.user.User;
 import gson.GsonReader;
@@ -7,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,6 +36,7 @@ public class MainMenuPage extends Page {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/MainMenu.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
+            controller.setUpMusic();
             initializeImage();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -9,6 +9,7 @@ import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import view.BattleMenu.BattleMenuPage;
 import view.pages.*;
 
@@ -24,6 +25,7 @@ public class MainMenuController {
     public ImageView exit;
     public ImageView logout;
     public Label scoreBoard;
+    private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("mainmenu_v2c_looping.m4a");
 
 
     public MainMenuController() {
@@ -32,6 +34,7 @@ public class MainMenuController {
 
     @FXML
     public void onBattleClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         if (isMainDeckValid()) {
             Page.getPages().push(new BattleMenuPage());
@@ -40,12 +43,14 @@ public class MainMenuController {
 
     @FXML
     public void onShopClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         Page.getPages().push(new ShopMenuPage());
     }
 
     @FXML
     public void onCollectionClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         Page.getPages().push(new CollectionMenuPage());
     }
@@ -64,6 +69,7 @@ public class MainMenuController {
 
     @FXML
     public void onLogoutClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getPages().pop();
@@ -72,6 +78,7 @@ public class MainMenuController {
 
     @FXML
     public void onExitClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         GsonWriter.sendClientCommand(new LogOutCmd(User.user.getName()), Page.getOutput());
         Page.getStage().close();
@@ -79,8 +86,14 @@ public class MainMenuController {
 
     @FXML
     public void onScoreBoardClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         Page.getPages().push(new ScoreBoard());
+    }
+
+    public void setUpMusic(){
+        musicPlayer.play();
+        musicPlayer.setAutoPlay(true);
     }
 
     public boolean isMainDeckValid() {
@@ -94,5 +107,9 @@ public class MainMenuController {
         }
         label.setText(ErrorType.NOT_SELECT_MAIN_DECK.getMessage());
         return false;
+    }
+
+    public void turnOffMusic(){
+        musicPlayer.stop();
     }
 }

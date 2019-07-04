@@ -31,7 +31,11 @@ public class MissionController {
     public void setMission2() {
         BattleMenuPage.setMission("2");
         BattleMenuPage.setGameMood("2");
-        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(1));
+        try {
+            BattleMenuPage.getSecondUser().setMainDeck(GsonReader.getDeck("mission_2"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BattleMenuPage.setFlags(1);
         BattleMenuPage.createSingleGame();
     }
@@ -39,7 +43,11 @@ public class MissionController {
     public void setMission3() {
         BattleMenuPage.setMission("3");
         BattleMenuPage.setGameMood("3");
-        BattleMenuPage.getSecondUser().setMainDeck(Shop.getDecks().get(2));
+        try {
+            BattleMenuPage.getSecondUser().setMainDeck(GsonReader.getDeck("mission_3"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BattleMenuPage.setFlags(7);
         BattleMenuPage.createSingleGame();
     }

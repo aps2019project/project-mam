@@ -19,6 +19,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import view.pages.Page;
@@ -85,6 +86,7 @@ public class GameController {
     public Rectangle[][] cells = new Rectangle[5][9];
     public ArrayList<Circle> handCards = new ArrayList<>();
     public ArrayList<Label> handCardsMana = new ArrayList<>();
+    private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("music_battlemap_duskfall.m4a");
 
     private int speed = 1;
 
@@ -99,6 +101,13 @@ public class GameController {
             catchServerCommand();
         if (game.isMyTurn())
             setTimer();
+        setUpMusic();
+    }
+
+    private void setUpMusic(){
+        musicPlayer.play();
+        musicPlayer.setAutoPlay(true);
+        musicPlayer.setVolume(6);
     }
 
     public void init() {
@@ -232,7 +241,6 @@ public class GameController {
                         break;
                     case ENDTURN:
                         Platform.runLater(this::endTurn);
-                        //timer.scheduleAtFixedRate(task, 0, 1000);
                         break;
                     case INSERT:
                         Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
