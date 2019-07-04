@@ -54,6 +54,10 @@ public class MapController {
         this.controller = controller;
     }
 
+    public GameController getController() {
+        return controller;
+    }
+
     public void initialize(Rectangle[][] cells, Pane pane, Label label, ArrayList<Circle> handCards) {
         this.label = label;
         this.cells = cells;
@@ -72,6 +76,8 @@ public class MapController {
         updateNextCard();
         imageController.addFlags(getPane());
         imageController.addCollectibles(getPane());
+
+        animationCtrl.setMapController(this);
     }
 
     private String text;

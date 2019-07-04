@@ -40,7 +40,7 @@ public class ClientHandler extends Thread {
             if (command != null)
                 command.handleCommand(output, this);
             else {
-                System.out.println("client disconnected!");
+                System.out.println("client disconnected!: " + client.getPort());
                 break;
             }
         }

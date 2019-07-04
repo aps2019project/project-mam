@@ -51,6 +51,7 @@ public class GameController {
     public ImageView exit;
     public ImageView help;
     public ImageView endTurn;
+    public ImageView forward;
 
     public Circle item1;
     public Circle item2;
@@ -84,6 +85,8 @@ public class GameController {
     public ArrayList<Circle> handCards = new ArrayList<>();
     public ArrayList<Label> handCardsMana = new ArrayList<>();
 
+    private int speed = 1;
+
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
@@ -103,6 +106,14 @@ public class GameController {
         handCardsMana.add(handCard3mana);
         handCardsMana.add(handCard4mana);
         handCardsMana.add(handCard5mana);
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setForward() {
+        speed = 2;
     }
 
     public void setUserInfo1() {
@@ -157,6 +168,7 @@ public class GameController {
     public void setEndTurn() {
         if (!game.isMyTurn())
             return;
+        speed = 1;
         endTurn();
         if (game.isMulti())
             GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());

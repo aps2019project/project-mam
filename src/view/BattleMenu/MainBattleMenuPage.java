@@ -59,6 +59,11 @@ public class MainBattleMenuPage extends Page {
     private void initializeImage() {
         setBackGround(root, "resources/maps/gameBackgaround.jpg");
         setBackGround(controller.label, "resources/ui/button_primary_middle_glow@2x.png");
+        try {
+            controller.forward.setImage(new Image(new FileInputStream("resources/ui/sliding_panel/sliding_panel_paging_button_text@2x.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         EventHandler<KeyEvent> handler = event -> {
             if (event.getCode()  == KeyCode.Z) {

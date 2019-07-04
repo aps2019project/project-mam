@@ -19,11 +19,11 @@ public class Server {
     public static void main(String[] args) {
         try {
             ServerSocket server = new ServerSocket(port);
-            System.out.println("server created");
+            System.out.println("server started.");
             initServer();
             while (true){
                 Socket client = server.accept();
-                System.out.println("a new client connected");
+                System.out.println("a new client connected: " + client.getInetAddress()+" / "+client.getPort());
                 new ClientHandler(client).start();
             }
         } catch (Exception e) {

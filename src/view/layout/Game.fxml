@@ -194,5 +194,10 @@
             </Label>
          </content>
       </ScrollPane>
+      <ImageView fx:id="forward" fitHeight="96.0" fitWidth="95.0" layoutX="1818.0" layoutY="864.0" onMouseClicked="#setForward" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/sliding_panel/sliding_panel_paging_button_text@2x.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
