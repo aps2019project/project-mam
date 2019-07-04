@@ -247,7 +247,7 @@ public class Shop {
                 user.getCollection().removeCard(card);
                 user.setMoney(user.getMoney() + card.getPrice());
                 try {
-                    Card soldCard = getCard(cardId);
+                    Card soldCard = getCard(card.getName());
                     soldCard.setCount(soldCard.getCount() + 1);
                     GsonWriter.writeCustomCard(soldCard);
                 } catch (IOException e) {
@@ -267,15 +267,22 @@ public class Shop {
         return null;
     }
 
+    private Card getCard(String cardName){
+        for (Card card : cards) {
+            if (card.getName().equals(cardName))
+                return card;
+        }
+        return null;
+    }
     public boolean sellItem(int itemId, User user) {
         for (UsableItem item : user.getCollection().getItems()) {
             if (item.getId() == itemId) {
                 user.getCollection().removeItem(item);
                 user.setMoney(user.getMoney() + item.getPrice());
                 for (CollectableItem collectible : collectibles) {
-                    if (collectible.getId() == itemId) {
-                        item.setCount(item.getCount() + 1);
-                        GsonWriter.writeCustomUsableItem(item);
+                    if (collectible.getName().equals(item.getName())) {
+                        collectible.setCount(collectible.getCount() + 1);
+                        GsonWriter.writeCustomUsableItem(collectible);
                         break;
                     }
                 }
