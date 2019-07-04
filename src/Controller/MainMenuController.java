@@ -34,6 +34,7 @@ public class MainMenuController {
 
     @FXML
     public void onBattleClicked(){
+        turnOffMusic();
         AudioController.getInstance().onSelect();
         if (isMainDeckValid()) {
             Page.getPages().push(new BattleMenuPage());

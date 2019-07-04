@@ -33,9 +33,9 @@ public class GameKindController {
         if (isDeckValid(deckName.getText())) {
             BattleMenuPage.setGameKind("custom");                 //TODO : write real deck
             try {
-                BattleMenuPage.getSecondUser().setMainDeck(GsonReader.getDeck("test2"));
+                BattleMenuPage.getSecondUser().setMainDeck(GsonReader.getDeck(deckName.getText()));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                label.setText(ErrorType.INVALID_DECK.getMessage());
             }
             Page.getPages().push(new GameMoodMenuPage());
         } else label.setText(ErrorType.INVALID_DECK.getMessage());

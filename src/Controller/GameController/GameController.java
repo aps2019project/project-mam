@@ -97,7 +97,7 @@ public class GameController {
     private void setUpMusic(){
         musicPlayer.play();
         musicPlayer.setAutoPlay(true);
-        musicPlayer.setVolume(10);
+        musicPlayer.setVolume(6);
     }
 
     public void init() {
