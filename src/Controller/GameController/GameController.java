@@ -23,8 +23,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import view.pages.Page;
 
-import java.awt.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GameController {
@@ -87,11 +88,17 @@ public class GameController {
 
     private int speed = 1;
 
+
+    int count = 0;
+    Timer timer = new Timer();
+
     public void initializeGame() {
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
         if (game.isMulti())
             catchServerCommand();
+        if (game.isMyTurn())
+            setTimer();
     }
 
     public void init() {
@@ -177,6 +184,8 @@ public class GameController {
     public void endTurn() {
         if (game.getNextFirstPlayerCard() != null)
             mapCtrl.removeNextCard();
+        if (!game.isMyTurn())
+            setTimer();
         AudioController.getInstance().onEndTurn();
         game.endTurn();
         label.setText("---<End turn>---");
@@ -191,6 +200,20 @@ public class GameController {
                 ai.getCommand();
             }
         }
+    }
+
+    private void setTimer() {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (count == 60) {
+                    System.out.println("ended");
+                    Platform.runLater(() -> setEndTurn());
+                    count = 0;
+                    cancel();
+                } else System.out.println(count++);
+            }
+        }, 0, 1000);
     }
 
     private void catchServerCommand() {
@@ -209,6 +232,7 @@ public class GameController {
                         break;
                     case ENDTURN:
                         Platform.runLater(this::endTurn);
+                        //timer.scheduleAtFixedRate(task, 0, 1000);
                         break;
                     case INSERT:
                         Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));

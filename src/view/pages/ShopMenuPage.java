@@ -30,7 +30,7 @@ public class ShopMenuPage extends Page {
         stage.setScene(scene);
         //stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
-            AudioController.getInstance().inShop();
+            //AudioController.getInstance().inShop();
         } catch (IOException e) {
             e.printStackTrace();
         }
