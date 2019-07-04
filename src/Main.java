@@ -7,7 +7,6 @@ import view.pages.*;
 
 import java.io.*;
 import java.net.ConnectException;
-import java.net.InetAddress;
 import java.net.Socket;
 
 public class Main extends Application {
@@ -16,6 +15,8 @@ public class Main extends Application {
     //private String hostName = "213.233.188.27";
     //private String hostName = "172.17.1.226";
     //private String hostName = "81.31.160.11";
+//    private String hostName = "213.233.188.156";
+//    private String hostName = "213.233.188.27";
 
     private static Socket server;
 

@@ -1,1 +1,1 @@
-{"AP":2,"HP":30,"TargetCommunity":6,"cooldown":2,"BASE_COOL_DOWN":2,"heroClass":"RANGED","row":0,"column":0,"MP":2,"id":1,"price":10000,"name":"arash","specialPower":[],"type":"hero","canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":2,"HP":30,"TargetCommunity":6,"cooldown":2,"BASE_COOL_DOWN":2,"heroClass":"RANGED","row":0,"column":0,"MP":2,"id":1,"price":10000,"name":"arash","specialPower":[],"type":"hero","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}

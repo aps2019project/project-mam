@@ -1101,15 +1101,6 @@ public class Game {
         }
     }
 
-    private void buffAlocator(Cell entry, Buff buff) {
-        for (Cell cell : buff.getSpecialPowerTargetCells(entry, null, getMyTeam(entry),
-                getOppTeam(entry), map)) {
-            Buff newBuff = buff.copy();
-            newBuff.setCard(cell.getCard());
-            Buff.addBuff(newBuff);
-        }
-    }
-
     private HashMap<Integer, Cell> getMyTeam() {
         if (isMyTurn())
             return map.getFirstPlayerCellCard();

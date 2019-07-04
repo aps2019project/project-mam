@@ -39,14 +39,6 @@ public class Card {
         count = 10;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public String getBreathingImage() {
         return breathingImage;
     }
@@ -75,6 +67,14 @@ public class Card {
         return deathImage;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public void setDeathImage(String deathImage) {
         this.deathImage = deathImage;
     }
@@ -87,6 +87,7 @@ public class Card {
         this.MP = MP;
         this.price = price;
         this.name = name;
+        count = 10;
     }
     public int getMP() {
         return MP;
@@ -271,6 +272,7 @@ public class Card {
                 ", desc='" + desc + '\'' +
                 ", specialPower=" + specialPower +
                 ", selected=" + selected +
+                ", count=" + count +
                 '}';
     }
 }

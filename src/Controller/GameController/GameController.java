@@ -177,6 +177,7 @@ public class GameController {
     public void endTurn() {
         if (game.getNextFirstPlayerCard() != null)
             mapCtrl.removeNextCard();
+        AudioController.getInstance().onEndTurn();
         game.endTurn();
         label.setText("---<End turn>---");
         if (game.isGameEnd())

@@ -81,22 +81,6 @@ public class Hero extends Card {
         return super.getSPActivationTime();
     }
 
-    /*public int getRow(){
-        return row;
-    }*/
-
-    /*public int getColumn() {
-        return column;
-    }*/
-
-    /*public boolean isCanMove() {
-        return canMove;
-    }
-
-    public boolean isCanAttack() {
-        return canAttack;
-    }*/
-
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
@@ -104,26 +88,6 @@ public class Hero extends Card {
     public void decrementOfCoolDown(int number){
         cooldown -= number;
     }
-
-    /*public void setCanMove(boolean canMove) {
-        this.canMove = canMove;
-    }
-
-    public void setCanAttack(boolean canAttack) {
-        this.canAttack = canAttack;
-    }*/
-
-   /* public void setRow(int row) {
-        this.row = row;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }*/
-
-    /*public void setCanCounterAttack(boolean canCounterAttack) {
-        this.canCounterAttack = canCounterAttack;
-    }*/
 
     public void incrementOfHp(int number){
         this.HP += number;
@@ -142,16 +106,13 @@ public class Hero extends Card {
         AP -= number;
     }
 
-    /*public boolean canCounterAttack(){
-        return canCounterAttack;
-    }*/
-
     @Override
     public String getInfo() {
         StringBuilder info = new StringBuilder();
         info.append("Name : ").append(getName()).append(" - AP : ").append(getAP());
         info.append(" - HP : ").append(getHP()).append(" - Class : ").append(getCardClass());
-        info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice());
+        info.append(" - Special power : ").append(getDesc()).append(" - Sell Cost : ").append(getPrice())
+        .append(" - count : ").append(getCount());
         return info.toString();
     }
 
