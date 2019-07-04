@@ -13,8 +13,10 @@ import command.CommandType;
 import command.ServerCommand;
 import command.clientCommand.*;
 import gson.GsonWriter;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -112,6 +114,7 @@ public class MapController {
                 rectangle.setFill(Color.BLACK);
                 rectangle.setOpacity(0.2);
                 setOnRecClicked(rectangle, i, j);
+                setOnRecDrag(rectangle, i, j);
                 pane.getChildren().add(rectangle);
                 cells[i][j] = rectangle;
             }
@@ -188,6 +191,64 @@ public class MapController {
             }
             text = label.getText();
         });
+    }
+
+    private void setOnRecDrag(Rectangle rectangle, int x, int y){
+        rectangle.setOnDragOver(event -> {
+            if (event.getGestureSource() != rectangle && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+
+        rectangle.setOnDragEntered(event -> {
+            Dragboard db = event.getDragboard();
+            if (event.getGestureSource() != rectangle && event.getDragboard().hasString()) {
+                if ((game.isCellValidForInsertMinion(x, y) && game.getCardInHand(db.getString()).getCardType().equalsIgnoreCase("minion")) ||
+                        (game.isCellValidForInsertSpell(game.getCardInHand(db.getString()), x, y) && game.getCardInHand(db.getString()).getCardType().equalsIgnoreCase("spell")))
+                    rectangle.setFill(Color.GREEN);
+            }
+            event.consume();
+        });
+
+        rectangle.setOnDragExited(event -> {
+            rectangle.setFill(Color.BLACK);
+            updateMap();
+            event.consume();
+        });
+
+        rectangle.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+                if (game.isMulti())
+                    GsonWriter.sendClientCommand(new InsertCmd(db.getString(), x, y), Page.getOutput());
+                insertCard(db.getString(), x, y);
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
+    }
+
+    private void setOnHandDrag() {
+        for (Map.Entry<Integer, ImageView> entry : imageController.getViewsHand().entrySet()) {
+            entry.getValue().setOnDragDetected(event -> {
+                handCardId = String.valueOf(entry.getKey());
+                Dragboard dragboard = entry.getValue().startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(game.getFirstPlayerHand().get(entry.getKey()).getName());
+                dragboard.setContent(content);
+                event.consume();
+            });
+
+            entry.getValue().setOnDragDone(event -> {
+                if (event.getTransferMode() == TransferMode.MOVE) {
+                    updateHand();
+                }
+                event.consume();
+            });
+        }
     }
 
     private void setOnHandClick() {
@@ -291,6 +352,7 @@ public class MapController {
         }
         setOnHandClick();
         setOnHandEnteredAndExited();
+        setOnHandDrag();
     }
 
     public void updateNextCard() {
