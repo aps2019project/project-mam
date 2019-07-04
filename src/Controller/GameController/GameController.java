@@ -104,7 +104,7 @@ public class GameController {
         setUpMusic();
     }
 
-    private void setUpMusic(){
+    private void setUpMusic() {
         musicPlayer.play();
         musicPlayer.setAutoPlay(true);
         musicPlayer.setVolume(6);
@@ -193,7 +193,11 @@ public class GameController {
     public void endTurn() {
         if (game.getNextFirstPlayerCard() != null)
             mapCtrl.removeNextCard();
-        if (!game.isMyTurn())
+        if (game.isMyTurn()) {
+            timer.cancel();
+            count = 0;
+        }
+        else
             setTimer();
         AudioController.getInstance().onEndTurn();
         game.endTurn();
@@ -201,8 +205,7 @@ public class GameController {
         if (game.isGameEnd()) {
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();
-        }
-        else {
+        } else {
             mapCtrl.updateHand();
             mapCtrl.updatePlayersMana();
             mapCtrl.updateNextCard();
@@ -214,6 +217,7 @@ public class GameController {
     }
 
     private void setTimer() {
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
