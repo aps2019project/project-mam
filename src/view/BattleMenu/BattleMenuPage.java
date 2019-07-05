@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import view.pages.MainMenuPage;
 import view.pages.Page;
 
+import javax.jws.soap.SOAPBinding;
 import java.awt.*;
 import java.io.*;
 
@@ -22,6 +23,7 @@ public class BattleMenuPage extends Page {
     private static String gameMood = null;
     private static String mission = null;
     private static User secondUser = new User("notAi");
+    private static User firstUser;
     private static int flags = 0;
     private static int baseTurn;
 
@@ -34,6 +36,14 @@ public class BattleMenuPage extends Page {
 
     public static BattleMenuPage getInstance() {
         return BATTLE_MENU_PAGE;
+    }
+
+    public static User getFirstUser() {
+        return firstUser;
+    }
+
+    public static void setFirstUser(User firstUser) {
+        BattleMenuPage.firstUser = firstUser;
     }
 
     public static String getNumOfPlayers() {
@@ -124,6 +134,10 @@ public class BattleMenuPage extends Page {
     public static void createMultiGame() {
         new Game(User.user, secondUser, gameMood, gameKind, flags, baseTurn);
         Page.getPages().push(new MainBattleMenuPage());
+    }
 
+    public static void createLiveGame(Game game){
+        new Game(game);
+        Page.getPages().push(new MainBattleMenuPage());
     }
 }

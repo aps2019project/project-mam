@@ -14,6 +14,7 @@ import Model.item.CollectableItem;
 import Model.item.Item;
 import Model.user.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -131,8 +132,42 @@ public class Game {
         ImageController.getInstance().initCollectibleImage();
     }
 
+    /*public Game(User firstUser, User secondUser, Map map, String mode, String kind, int flagCount, int baseTurn){
+        this.firstUser = firstUser;
+        this.secondUser = secondUser;
+        this.mode = mode;
+        this.flagCount = flagCount;
+        this.kind = kind;
+        this.firstPlayerDeck = firstUser.getMainDeck();
+        this.secondPlayerDeck = secondUser.getMainDeck();
+        this.baseTurn = -1;
+        this.map = map;
+        game = this;
+    }*/
+
+    public Game(Game liveGame){
+        liveGame.setBaseTurn(-1);
+        game = liveGame;
+    }
+
+    public int getBasicMana() {
+        return basicMana;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public int getFlagCount() {
+        return flagCount;
+    }
+
     public int getBaseTurn() {
         return baseTurn;
+    }
+
+    public void setBaseTurn(int baseTurn) {
+        this.baseTurn = baseTurn;
     }
 
     public boolean isMulti() {

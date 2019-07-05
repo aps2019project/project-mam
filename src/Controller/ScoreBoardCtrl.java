@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.game.Game;
+import command.ServerCommand;
 import command.clientCommand.RequestLiveCmd;
 import command.clientCommand.ScoreBoardCmd;
 import gson.GsonReader;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import view.BattleMenu.BattleMenuPage;
 import view.pages.Page;
 
 public class ScoreBoardCtrl {
@@ -24,6 +27,18 @@ public class ScoreBoardCtrl {
 
     public void setShow() {
         GsonWriter.sendClientCommand(new RequestLiveCmd(Integer.parseInt(gameNum.getText())), Page.getOutput());
+        ServerCommand command = GsonReader.getServerCommand(Page.getInput());
+        showGame(command.getGame());
+    }
+
+    private void showGame(Game game){
+        /*BattleMenuPage.setFlags(game.getFlagCount());
+        BattleMenuPage.setGameMood(game.getMode());
+        BattleMenuPage.setGameKind(game.getKind());
+        BattleMenuPage.setSecondUser(game.getSecondUser());
+        BattleMenuPage.setFirstUser(game.getFirstUser());
+        BattleMenuPage.setBaseTurn(game.getBaseTurn());*/
+        BattleMenuPage.createLiveGame(game);
     }
 
     public void setBack() {

@@ -253,7 +253,8 @@ public class GameController {
                         Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
                         break;
                     case GET_GAME:
-                        GsonWriter.sendClientCommand(new GetGameCmd(), Page.getOutput());
+                        GsonWriter.sendClientCommand(new GetGameCmd(Game.getInstance(), command.getUserName()), Page.getOutput());
+                        System.out.println("game send");
                         break;
                 }
             }

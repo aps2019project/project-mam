@@ -1,6 +1,7 @@
 package command;
 
 import Model.card.Card;
+import Model.game.Game;
 import Model.item.Item;
 import Model.user.User;
 
@@ -13,6 +14,7 @@ public class ServerCommand {
     private String message;
     private Result result;
 
+    private Game game;
     private String gameMode;
     private int flag;
     private int baseTurn;
@@ -90,6 +92,19 @@ public class ServerCommand {
         this.type = type;
         this.userName = userName;
         this.message = message;
+    }
+
+    public ServerCommand(CommandType type, Game game) {
+        this.type = type;
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getGameMode() {

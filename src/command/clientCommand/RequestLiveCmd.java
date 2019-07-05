@@ -22,12 +22,12 @@ public class RequestLiveCmd extends ClientCommand {
     }
 
     @Override
-    public void handleCommand(DataOutputStream output, ClientHandler clientHandler) {
+    public void handleCommand(DataOutputStream output, ClientHandler handler) {
         int count = 1;
         for (Map.Entry<ClientHandler, ClientHandler> entry : Server.getGames().entrySet()) {
             if (count++ == gameNum){
                 System.out.println("requested");
-                GsonWriter.sendServerCommand(new ServerCommand(GET_GAME), entry.getKey().getOutput());
+                GsonWriter.sendServerCommand(new ServerCommand(GET_GAME, handler.getUser().getName(), ""), entry.getKey().getOutput());
                 break;
             }
         }
