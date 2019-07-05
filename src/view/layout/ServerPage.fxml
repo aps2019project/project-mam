@@ -3,23 +3,35 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServerCtrl">
+<AnchorPane prefHeight="552.0" prefWidth="1254.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServerCtrl">
    <children>
-      <ScrollPane layoutX="210.0" prefHeight="295.0" prefWidth="290.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="294.0" prefWidth="277.0">
-               <children>
-                  <Label fx:id="clientLbl" alignment="CENTER" prefHeight="97.0" prefWidth="277.0" />
-                  <Separator layoutY="99.0" prefHeight="6.0" prefWidth="290.0" />
-                  <Label fx:id="shopLbl" layoutX="6.0" layoutY="103.0" prefHeight="190.0" prefWidth="514.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-      <Button fx:id="refresh" layoutX="44.0" layoutY="173.0" mnemonicParsing="false" onAction="#onRefreshClicked" text="Refresh" />
-      <Button fx:id="shop" layoutX="46.0" layoutY="128.0" mnemonicParsing="false" onAction="#onShopClicked" prefHeight="25.0" prefWidth="56.0" text="Shop" />
+      <Button fx:id="refresh" layoutX="30.0" layoutY="173.0" mnemonicParsing="false" onAction="#onRefreshClicked" text="Refresh" />
+      <Button fx:id="shop" layoutX="37.0" layoutY="125.0" mnemonicParsing="false" onAction="#onShopClicked" prefHeight="25.0" prefWidth="56.0" text="Shop" />
+      <GridPane layoutX="135.0" layoutY="51.0" prefHeight="453.0" prefWidth="1064.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="500.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ScrollPane prefHeight="100.0">
+               <content>
+                  <Label fx:id="clientLbl" alignment="CENTER" />
+               </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="200.0" GridPane.rowIndex="1">
+               <content>
+                  <Label fx:id="shopLbl" />
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
