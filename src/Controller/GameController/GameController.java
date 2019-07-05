@@ -9,6 +9,7 @@ import Model.game.Game;
 import Model.size.Coordinate;
 import Model.size.Resolution;
 import Model.user.AI;
+import Model.user.User;
 import command.ServerCommand;
 import command.clientCommand.EndTurnCmd;
 import gson.GsonReader;
@@ -186,6 +187,7 @@ public class GameController {
             return;
         speed = 1;
         endTurn();
+        User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
         if (game.isMulti())
             GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }

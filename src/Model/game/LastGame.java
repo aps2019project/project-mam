@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class LastGame {
     private Game game;
     private String name;
-    private ArrayList<ClientCommand> commands;
+    private ArrayList<ClientCommand> commands = new ArrayList<>();
 
     public LastGame(Game game) {
         this.game = game;
@@ -16,6 +16,9 @@ public class LastGame {
     public LastGame(Game game, String name) {
         this.game = game;
         this.name = name;
+    }
+
+    public LastGame() {
     }
 
     public ArrayList<ClientCommand> getCommands() {

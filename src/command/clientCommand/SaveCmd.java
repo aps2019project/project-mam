@@ -11,14 +11,17 @@ import java.io.IOException;
 import static command.CommandType.*;
 
 public class SaveCmd extends ClientCommand {
-    public SaveCmd() {
+    private User user;
+    public SaveCmd(User user) {
+        this.user = user;
         type = SAVE;
     }
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         try {
-            GsonWriter.writeUser(User.user);
+            handler.setUser(user);
+            GsonWriter.writeUser(user);
         } catch (IOException e) {
             e.printStackTrace();
         }

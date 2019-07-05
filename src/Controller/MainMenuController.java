@@ -58,7 +58,7 @@ public class MainMenuController {
     @FXML
     public void onSaveClicked(){
         AudioController.getInstance().onSelect();
-        GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
+        GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
     }
 
     @FXML

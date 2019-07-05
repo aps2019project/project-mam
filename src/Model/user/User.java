@@ -18,7 +18,7 @@ public class User {
     public transient static User user = new User();
     private transient static ArrayList<User> users = new ArrayList<>();
     private ArrayList<LastGame> lastGames = new ArrayList<>();
-    private transient LastGame currentGame;
+    private transient LastGame currentGame = new LastGame();
     private String name;
     private String password;
     private int numberOfWin;
@@ -60,6 +60,9 @@ public class User {
         this.idCounter = idCounter;
     }
 
+    public LastGame getCurrentGame() {
+        return currentGame;
+    }
 
     public static ArrayList<User> getUsers() {
         return users;
@@ -123,7 +126,7 @@ public class User {
         LastGame lastGame = new LastGame(game, "" + lastGames.size());
         lastGames.add(lastGame);
         currentGame = lastGame;
-        GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
+        GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
     }
 
     public static boolean isUserNameNew(String userName) {
