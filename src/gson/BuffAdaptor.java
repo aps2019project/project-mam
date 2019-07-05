@@ -11,6 +11,7 @@ public class BuffAdaptor implements JsonSerializer<Buff>, JsonDeserializer<Buff>
 
     static
     {
+        map.put("Buff", Buff.class);
         map.put("CellEffect", CellEffect.class);
         map.put("DestroyNegatives", DestroyNegatives.class);
         map.put("DestroyPositives", DestroyPositives.class);

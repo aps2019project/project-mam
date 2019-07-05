@@ -15,7 +15,7 @@ public class Buff {
     private BuffType type;
     private int remainTime;
     private int buffPower;
-    private String kind = "";
+    private String kind = "Buff";
     private int activationTime;
     private boolean isStarted = false;
     private boolean isUsed = false;
@@ -25,6 +25,7 @@ public class Buff {
     private Cell cell;
 
     public Buff(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
+        kind = type.toString();
         this.type = type;
         this.remainTime = time;
         this.buffPower = buffPower;
@@ -34,6 +35,7 @@ public class Buff {
 
     public Buff(BuffType type, int buffPower, int activationTime,
                 boolean isContinous, TargetCommunity targetCommunity) {
+        kind = type.toString();
         this.type = type;
         this.buffPower = buffPower;
         this.activationTime = activationTime;
@@ -44,6 +46,7 @@ public class Buff {
 
     public Buff(BuffType type, int remainTime, int buffPower, int activationTime,
                 boolean isStarted, TargetCommunity targetCommunity) {
+        kind = type.toString();
         this.type = type;
         this.remainTime = remainTime;
         this.buffPower = buffPower;
