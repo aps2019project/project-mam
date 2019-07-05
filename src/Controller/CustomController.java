@@ -246,25 +246,25 @@ public class CustomController {
 
     private void initSpell() {
         card = new Spell(cardName.getText(), Integer.parseInt(cost.getText()), 2);
-        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
-                Integer.parseInt(effectValue.getText()), (TargetCommunity) spellTarget.getUserData()));
+        card.addBuff(new Buff((BuffType) buffType.getSelectedToggle().getUserData(), Integer.parseInt(delay.getText()) ,
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) spellTarget.getSelectedToggle().getUserData()));
     }
 
     private void initHero() {
         card = new Hero(cardName.getText(), Integer.parseInt(cost.getText()),
                 Integer.parseInt(hp.getText()), Integer.parseInt(ap.getText()),
-                (ImpactType) attackType.getUserData(), Integer.parseInt(range.getText()),
+                (ImpactType) attackType.getSelectedToggle().getUserData(), Integer.parseInt(range.getText()),
                 2, Integer.parseInt(coolDown.getText()));
-        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
-                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getUserData()));
+        card.addBuff(new Buff((BuffType) buffType.getSelectedToggle().getUserData(), Integer.parseInt(delay.getText()) ,
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getSelectedToggle().getUserData()));
     }
 
     private void initMinion() {
         card = new Minion(cardName.getText(), Integer.parseInt(cost.getText()),
                 2, Integer.parseInt(hp.getText()), Integer.parseInt(ap.getText()), Integer.parseInt(range.getText()),
-                (ImpactType) attackType.getUserData(), (SPActivationTime) activation.getUserData());
+                (ImpactType) attackType.getSelectedToggle().getUserData(), (SPActivationTime) activation.getSelectedToggle().getUserData());
         card.addBuff(new Buff((BuffType) buffType.getSelectedToggle().getUserData(), Integer.parseInt(delay.getText()) ,
-                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getUserData()));
+                Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getSelectedToggle().getUserData()));
     }
 
     private boolean isInfoComplete() {
