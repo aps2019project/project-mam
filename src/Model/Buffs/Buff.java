@@ -11,7 +11,7 @@ import Model.game.Game;
 import java.util.*;
 
 public class Buff {
-    private static ArrayList<Buff> buffs = new ArrayList<>();
+    private transient static ArrayList<Buff> buffs = new ArrayList<>();
     private BuffType type;
     private int remainTime;
     private int buffPower;
