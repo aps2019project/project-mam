@@ -263,7 +263,7 @@ public class CustomController {
         card = new Minion(cardName.getText(), Integer.parseInt(cost.getText()),
                 2, Integer.parseInt(hp.getText()), Integer.parseInt(ap.getText()), Integer.parseInt(range.getText()),
                 (ImpactType) attackType.getUserData(), (SPActivationTime) activation.getUserData());
-        card.addBuff(new Buff((BuffType) buffType.getUserData(), Integer.parseInt(delay.getText()) ,
+        card.addBuff(new Buff((BuffType) buffType.getSelectedToggle().getUserData(), Integer.parseInt(delay.getText()) ,
                 Integer.parseInt(effectValue.getText()), (TargetCommunity) enemyOrFriend.getUserData()));
     }
 
