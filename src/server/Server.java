@@ -25,7 +25,7 @@ public class Server extends Application {
     private static int port = 8000;
 
     private static HashMap<String, ClientHandler> clients = new HashMap<>();
-    private static HashMap<User, User> games = new HashMap<>();
+    private static HashMap<ClientHandler, ClientHandler> games = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         launch();
@@ -35,7 +35,7 @@ public class Server extends Application {
         return clients;
     }
 
-    public static HashMap<User, User> getGames() {
+    public static HashMap<ClientHandler, ClientHandler> getGames() {
         return games;
     }
 
@@ -90,8 +90,8 @@ public class Server extends Application {
         int counter = 1;
         StringBuilder info = new StringBuilder();
         info.append("Games:\n");
-        for (Map.Entry<User, User> entry : games.entrySet()) {
-            info.append("\n").append(counter++).append(" - ").append(entry.getKey().getName()).append(" Vs. ").append(entry.getValue().getName());
+        for (Map.Entry<ClientHandler, ClientHandler> entry : games.entrySet()) {
+            info.append("\n").append(counter++).append(" - ").append(entry.getKey().getUser().getName()).append(" Vs. ").append(entry.getValue().getUser().getName());
         }
         return info.toString();
     }

@@ -11,6 +11,7 @@ import Model.size.Resolution;
 import Model.user.AI;
 import command.ServerCommand;
 import command.clientCommand.EndTurnCmd;
+import command.clientCommand.GetGameCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.application.Platform;
@@ -252,7 +253,7 @@ public class GameController {
                         Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
                         break;
                     case GET_GAME:
-                        System.out.println("get game-------------------------");
+                        GsonWriter.sendClientCommand(new GetGameCmd(), Page.getOutput());
                         break;
                 }
             }
