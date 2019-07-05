@@ -25,5 +25,6 @@ public class ServerCtrl {
             info.append("client name : ").append(entry.getValue().getUser().getName()).append("\n");
         }
         clientLbl.setText(info.toString());
+        shopLbl.setText(Shop.getInstance().show());
     }
 }
