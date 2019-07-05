@@ -77,4 +77,8 @@ public class ClientHandler extends Thread {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Socket getClient() {
+        return client;
+    }
 }
