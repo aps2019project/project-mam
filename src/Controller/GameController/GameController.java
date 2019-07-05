@@ -11,6 +11,7 @@ import Model.size.Resolution;
 import Model.user.AI;
 import command.ServerCommand;
 import command.clientCommand.EndTurnCmd;
+import command.clientCommand.GetGameCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.application.Platform;
@@ -100,7 +101,8 @@ public class GameController {
         if (game.isMulti())
             catchServerCommand();
         if (game.isMyTurn())
-            setTimer();
+            if (!game.isLive())
+                setTimer();
         setUpMusic();
     }
 
@@ -193,11 +195,10 @@ public class GameController {
     public void endTurn() {
         if (game.getNextFirstPlayerCard() != null)
             mapCtrl.removeNextCard();
-        if (game.isMyTurn()) {
+        if (game.isMyTurn() && !game.isLive()) {
             timer.cancel();
             count = 0;
-        }
-        else
+        } else if (!game.isLive())
             setTimer();
         AudioController.getInstance().onEndTurn();
         game.endTurn();
@@ -240,16 +241,34 @@ public class GameController {
                         Platform.runLater(() -> mapCtrl.selectCard(command.getCardId()));
                         break;
                     case MOVE:
-                        Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), command.getColumn()));
+                        if (game.isLive()) {
+                            if (game.isMyTurn())
+                                Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), command.getColumn()));
+                            else
+                                Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), 8 - command.getColumn()));
+                        } else
+                            Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), command.getColumn()));
                         break;
                     case ATTACK:
                         Platform.runLater(() -> mapCtrl.attack(Integer.parseInt(command.getCardId())));
                         break;
                     case ENDTURN:
+                        /*if (game.isLive())
+                            game.changeBaseTurn();*/
                         Platform.runLater(this::endTurn);
                         break;
                     case INSERT:
-                        Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
+                        if (game.isLive()) {
+                            if (game.isMyTurn())
+                                Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
+                            else
+                                Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), 8 - command.getColumn()));
+                        } else
+                            Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
+                        break;
+                    case GET_GAME:
+                        GsonWriter.sendClientCommand(new GetGameCmd(Game.getInstance(), command.getUserName()), Page.getOutput());
+                        System.out.println("game send");
                         break;
                 }
             }

@@ -75,6 +75,8 @@ public class SelectUserController {
         if (command.getResult() == Result.SUCCESSFUL) {
             BattleMenuPage.setSecondUser(command.getUser());
             BattleMenuPage.setBaseTurn(command.getBaseTurn());
+            BattleMenuPage.setGameMood(command.getGameMode());
+            BattleMenuPage.setFlags(command.getFlag());
             isGameCreated = true;
         } /*else {
             command = GsonReader.getServerCommand(Page.getInput());

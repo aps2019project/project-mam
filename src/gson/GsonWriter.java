@@ -32,7 +32,7 @@ public class GsonWriter {
     public static void writeCards() throws IOException {
         Shop.importCards();
         for (Card card : Shop.getSpells()) {
-            FileWriter out = new FileWriter("gson/Cards/Spell/"+ card.getName() + ".json");
+            FileWriter out = new FileWriter("gson/Cards/Spell/" + card.getName() + ".json");
             Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardAdapter())
                     .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();
             out.write(gson.toJson(card));
@@ -43,7 +43,7 @@ public class GsonWriter {
 
     public static void writeCustomCard(Card card) throws IOException {
         StringBuilder path = new StringBuilder("gson/Cards/");
-        switch (card.getCardType()){
+        switch (card.getCardType()) {
             case "hero":
                 path.append("Hero/");
                 break;
@@ -79,7 +79,7 @@ public class GsonWriter {
         }
     }
 
-    public static void writeCustomUsableItem(Item item){
+    public static void writeCustomUsableItem(Item item) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .create();
@@ -102,31 +102,56 @@ public class GsonWriter {
         writer.close();
     }
 
-    public static void sendClientCommand(ClientCommand command, DataOutputStream out){
+    public static void sendClientCommand(ClientCommand command, DataOutputStream out) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .create();
         try {
-            out.writeUTF(gson.toJson(command));
+            //out.writeUTF(gson.toJson(command));
+            send(gson.toJson(command), out);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void sendServerCommand(ServerCommand command, DataOutputStream out){
+    public static void sendServerCommand(ServerCommand command, DataOutputStream out) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
         try {
-            out.writeUTF(gson.toJson(command));
+            //out.writeUTF(gson.toJson(command));
+            send(gson.toJson(command), out);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static void send(String file, DataOutputStream out) {
+        int max = file.length() / 20000 + 2;
+        String[] files = new String[max];
+        files[0] = String.valueOf(max);
+        int count = 1;
+        while (count < max) {
+            if (count == max - 1)
+                files[count] = file.substring((count - 1) * 20000);
+            else
+                files[count] = file.substring((count - 1) * 20000, (count) * 20000);
+            count++;
+        }
+        count = 0;
+        while (count < max) {
+            try {
+                out.writeUTF(files[count]);
+                count++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
