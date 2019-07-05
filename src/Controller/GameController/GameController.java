@@ -251,6 +251,9 @@ public class GameController {
                     case INSERT:
                         Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
                         break;
+                    case CREATE_GAME:
+                        System.out.println("get game-------------------------");
+                        break;
                 }
             }
         });
