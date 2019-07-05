@@ -3,6 +3,7 @@ package Model.card;
 import Model.Buffs.Buff;
 import Model.enums.ImpactType;
 import Model.enums.SPActivationTime;
+import com.sun.xml.internal.ws.developer.Serialization;
 
 import java.util.ArrayList;
 
