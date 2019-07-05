@@ -28,6 +28,7 @@ public class RequestGameCmd extends ClientCommand {
         for (Map.Entry<String, ClientHandler> opp : Server.getClients().entrySet()) {
             if (opp.getValue().isRequested() && !opp.getKey().equals(handler.getUser().getName()))
             {
+                Server.getGames().put(handler.getUser(), opp.getValue().getUser());
                 handler.setRequested(false);
                 opp.getValue().setRequested(false);
                 GsonWriter.sendServerCommand(new ServerCommand(CREATE_GAME,

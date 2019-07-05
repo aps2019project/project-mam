@@ -13,6 +13,8 @@ public class ScoreBoardCtrl {
     public ImageView back;
     public ScrollPane scoreBoard;
     public Label scoreBoardLb;
+    public ScrollPane games;
+    public Label gamesLb;
 
     public void setBack() {
         Page.getPages().pop();
@@ -22,5 +24,6 @@ public class ScoreBoardCtrl {
     public void initialize(){
         GsonWriter.sendClientCommand(new ScoreBoardCmd(), Page.getOutput());
         scoreBoardLb.setText(GsonReader.getServerCommand(Page.getInput()).getMessage());
+        gamesLb.setText(GsonReader.getServerCommand(Page.getInput()).getMessage());
     }
 }

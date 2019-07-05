@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScoreBoardCtrl">
   <columnConstraints>
@@ -26,13 +27,25 @@
             <Image url="@../../../resources/ui/button_back_corner@2x.png" />
          </image>
       </ImageView>
-      <ScrollPane fx:id="scoreBoard" opacity="0.7" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <content>
-            <Label fx:id="scoreBoardLb" text="Label" />
-         </content>
-         <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </padding>
-      </ScrollPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <ScrollPane fx:id="scoreBoard" opacity="0.7" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <Label fx:id="scoreBoardLb" text="Label" />
+               </content>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </ScrollPane>
+            <ScrollPane fx:id="games" opacity="0.7" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <Label fx:id="gamesLb" text="Label" />
+               </content>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </GridPane>
