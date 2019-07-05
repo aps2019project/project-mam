@@ -14,7 +14,7 @@ public class Card {
     private int price;
     private String name;
     private String desc;
-    private ArrayList<Buff> specialPower = new ArrayList<>();
+    private transient ArrayList<Buff> specialPower = new ArrayList<>();
     protected String type = "";
     private String breathingImage;
     private String attackImage;

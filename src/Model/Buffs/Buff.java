@@ -15,14 +15,14 @@ public class Buff {
     private BuffType type;
     private int remainTime;
     private int buffPower;
-    private String kind = "Buff";
+    private String kind;
     private int activationTime;
     private boolean isStarted = false;
     private boolean isUsed = false;
     private boolean isContinous = false;
     private TargetCommunity targetCommunity;
-    private Card card;
-    private Cell cell;
+    private transient Card card;
+    private transient Cell cell;
 
     public Buff(BuffType type, int time, int buffPower, TargetCommunity targetCommunity) {
         kind = type.toString();
