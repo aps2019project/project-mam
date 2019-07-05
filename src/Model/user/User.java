@@ -52,6 +52,10 @@ public class User {
         return lastGames;
     }
 
+    public void setCurrentGame(LastGame currentGame) {
+        this.currentGame = currentGame;
+    }
+
     public void setNumberOfWin(int numberOfWin) {
         this.numberOfWin = numberOfWin;
     }

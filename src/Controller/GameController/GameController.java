@@ -100,6 +100,8 @@ public class GameController {
         mapCtrl.initialize(cells, pane, label, handCards);
         if (game.isMulti())
             catchServerCommand();
+        if (game.isReplay())
+
         if (game.isMyTurn())
             setTimer();
         setUpMusic();
@@ -258,5 +260,9 @@ public class GameController {
         });
         catchCommand.setName("catchCommand");
         catchCommand.start();
+    }
+
+    private void renderReplayCommand(){
+
     }
 }

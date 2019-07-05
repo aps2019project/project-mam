@@ -73,6 +73,14 @@ public class Game {
     private int price = 1000;
 
     private boolean isMulti = false;
+    private boolean isReplay = false;
+
+    public Game(Game lastGame){
+        game = lastGame;
+        isReplay = true;
+        ImageController.getInstance().initCardImage();
+        ImageController.getInstance().initCollectibleImage();
+    }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         game = this;
@@ -137,6 +145,10 @@ public class Game {
 
     public boolean isMulti() {
         return isMulti;
+    }
+
+    public boolean isReplay() {
+        return isReplay;
     }
 
     public static Game getInstance() {

@@ -31,7 +31,7 @@ public class GsonReader {
                 reader = new JsonReader(new FileReader(file));
                 User.getUsers().add(gson.fromJson(reader, User.class));
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -93,14 +93,15 @@ public class GsonReader {
         }
     }
 
-    public static ServerCommand getServerCommand(DataInputStream in){
+    public static ServerCommand getServerCommand(DataInputStream in) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .create();
         try {
-            return gson.fromJson(in.readUTF(), ServerCommand.class);
-        } catch (IOException e) {
+            //return gson.fromJson(in.readUTF(), ServerCommand.class);
+            return gson.fromJson(receive(in), ServerCommand.class);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -113,11 +114,27 @@ public class GsonReader {
                 .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
         try {
-            return gson.fromJson(in.readUTF(), ClientCommand.class);
-        } catch (IOException e) {
+            //return gson.fromJson(in.readUTF(), ClientCommand.class);
+            return gson.fromJson(receive(in), ClientCommand.class);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static String receive(DataInputStream in) {
+        StringBuilder file = new StringBuilder();
+        try {
+            String size = in.readUTF();
+            int count = 1;
+            while (count < Integer.parseInt(size)){
+                file.append(in.readUTF());
+                count++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.toString();
     }
 
 }
