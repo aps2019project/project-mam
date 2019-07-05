@@ -29,11 +29,6 @@ public class Server extends Application {
         launch();
     }
 
-    private static void initServer() throws FileNotFoundException {
-        GsonReader.readUser();
-        GsonReader.initShop();
-    }
-
     public static HashMap<String, ClientHandler> getClients() {
         return clients;
     }
@@ -62,5 +57,10 @@ public class Server extends Application {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private static void initServer() throws FileNotFoundException {
+        GsonReader.readUser();
+        GsonReader.initShop();
     }
 }
