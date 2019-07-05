@@ -27,6 +27,8 @@ public class RequestLiveCmd extends ClientCommand {
         for (Map.Entry<ClientHandler, ClientHandler> entry : Server.getGames().entrySet()) {
             if (count++ == gameNum){
                 System.out.println("requested");
+                handler.setSeeingLive(true);
+                handler.setGameNum(gameNum);
                 GsonWriter.sendServerCommand(new ServerCommand(GET_GAME, handler.getUser().getName(), ""), entry.getKey().getOutput());
                 break;
             }
