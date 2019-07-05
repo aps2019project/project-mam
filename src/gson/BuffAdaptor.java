@@ -17,10 +17,12 @@ public class BuffAdaptor implements JsonSerializer<Buff>, JsonDeserializer<Buff>
         map.put("DestroyPositives", DestroyPositives.class);
         map.put("Disarm", Disarm.class);
         map.put("Holy", Holy.class);
+        map.put("HOLY", Holy.class);
         map.put("IncreaseMana", IncreaseMana.class);
         map.put("Kill", Kill.class);
         map.put("Poison", Poison.class);
         map.put("Power", Power.class);
+        map.put("POWER", Power.class);
         map.put("Stun", Stun.class);
         map.put("Weakness", Weakness.class);
     }
