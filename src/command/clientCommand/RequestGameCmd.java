@@ -31,11 +31,11 @@ public class RequestGameCmd extends ClientCommand {
                 handler.setRequested(false);
                 opp.getValue().setRequested(false);
                 GsonWriter.sendServerCommand(new ServerCommand(CREATE_GAME,
-                        opp.getValue().getUser(), Result.SUCCESSFUL, 1), output);
+                        opp.getValue().getUser(), flag, gameMode, Result.SUCCESSFUL, 1), output);
                 handler.setOppHandler(opp.getValue());
                 opp.getValue().setOppHandler(handler);
-                GsonWriter.sendServerCommand(new ServerCommand(CREATE_GAME, handler.getUser(),
-                        Result.SUCCESSFUL, 0), opp.getValue().getOutput());
+                GsonWriter.sendServerCommand(new ServerCommand(CREATE_GAME,
+                        handler.getUser(), flag, gameMode, Result.SUCCESSFUL, 0), opp.getValue().getOutput());
                 return;
             }
         }

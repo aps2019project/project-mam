@@ -13,6 +13,8 @@ public class ServerCommand {
     private String message;
     private Result result;
 
+    private String gameMode;
+    private int flag;
     private int baseTurn;
     private String cardName;
     private String cardId;
@@ -67,9 +69,11 @@ public class ServerCommand {
         this.cardId = cardId;
     }
 
-    public ServerCommand(CommandType type, User user, Result result, int baseTurn) {
+    public ServerCommand(CommandType type, User user,int flag, String gameMode, Result result, int baseTurn) {
         this(type, user, result);
         this.baseTurn = baseTurn;
+        this.flag = flag;
+        this.gameMode = gameMode;
     }
 
     public ServerCommand(CommandType type, String cardName, int row, int column) {
@@ -86,6 +90,22 @@ public class ServerCommand {
         this.type = type;
         this.userName = userName;
         this.message = message;
+    }
+
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     public String getUserName() {
