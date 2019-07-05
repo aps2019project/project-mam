@@ -9,6 +9,7 @@ import Model.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import view.BattleMenu.BattleMenuPage;
 import view.pages.*;
@@ -25,6 +26,7 @@ public class MainMenuController {
     public ImageView exit;
     public ImageView logout;
     public Label scoreBoard;
+    public Label history;
     private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("mainmenu_v2c_looping.m4a");
 
 
@@ -48,6 +50,12 @@ public class MainMenuController {
         Page.getPages().push(new ShopMenuPage());
     }
 
+    @FXML
+    public void onHistoryClicked(){
+        turnOffMusic();
+        AudioController.getInstance().onSelect();
+        Page.getPages().push(new HistoryPage());
+    }
     @FXML
     public void onCollectionClicked(){
         turnOffMusic();

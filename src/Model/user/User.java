@@ -48,6 +48,10 @@ public class User {
         this.name = name;
     }
 
+    public ArrayList<LastGame> getLastGames() {
+        return lastGames;
+    }
+
     public void setNumberOfWin(int numberOfWin) {
         this.numberOfWin = numberOfWin;
     }

@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import command.clientCommand.ClientCommand;
 import command.ServerCommand;
 
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -114,7 +115,7 @@ public class GsonWriter {
         try {
             out.writeUTF(gson.toJson(command));
             out.flush();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -131,6 +132,22 @@ public class GsonWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    private void sendLargeFile(String object, DataOutputStream out){
+        byte[] bytes = object.getBytes();
+        BufferedOutputStream buffer =
+                new BufferedOutputStream(out);
+
+        int len = bytes.length;
+        try {
+            buffer.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*while (len > 0) {
+            len--;
+            buffer.write();
+        }*/
     }
 }
