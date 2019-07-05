@@ -118,12 +118,12 @@ public class BattleMenuPage extends Page {
     public static void createSingleGame() {
         new Game(User.user, secondUser, gameMood, gameKind, flags);
         Page.getPages().push(new MainBattleMenuPage());
-
+        User.user.addGameToLastGames(Game.getInstance());
     }
 
     public static void createMultiGame() {
         new Game(User.user, secondUser, gameMood, gameKind, flags, baseTurn);
         Page.getPages().push(new MainBattleMenuPage());
-
+        User.user.addGameToLastGames(Game.getInstance());
     }
 }

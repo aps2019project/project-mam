@@ -22,7 +22,7 @@ import static java.lang.Math.abs;
 
 
 public class Game {
-    private static Game game;
+    private transient static Game game;
     private int baseTurn = 1;
     private static final String SINGLE_PLAYER = "single player";
     private static final String MULTI_PLAYER = "multi player";
@@ -41,8 +41,8 @@ public class Game {
     private int firstCardCounter = 0;
     private int secondCardCounter = 0;
 
-    private User firstUser;
-    private User secondUser;
+    private transient User firstUser;
+    private transient User secondUser;
 
     private ArrayList<Card> firstPlayerGraveYard;
     private ArrayList<Card> secondPlayerGraveYard;
@@ -383,11 +383,11 @@ public class Game {
             }
         }
         if (winner == 1) {
-            firstUser.addGameToLastGames(firstUser.getName(), true, 0);
-            secondUser.addGameToLastGames(secondUser.getName(), false, 0);
+            /*firstUser.addGameToLastGames(firstUser.getName(), true, 0);
+            secondUser.addGameToLastGames(secondUser.getName(), false, 0);*/
         } else if (winner == 2) {
-            firstUser.addGameToLastGames(secondUser.getName(), false, 0);
-            secondUser.addGameToLastGames(firstUser.getName(), true, 0);
+            /*firstUser.addGameToLastGames(secondUser.getName(), false, 0);
+            secondUser.addGameToLastGames(firstUser.getName(), true, 0);*/
         }
     }
 

@@ -2,6 +2,12 @@ package Model.user;
 
 import Model.collection.Collection;
 import Model.deck.Deck;
+import Model.game.Game;
+import Model.game.LastGame;
+import command.clientCommand.SaveCmd;
+import gson.GsonWriter;
+import javafx.scene.layout.Pane;
+import view.pages.Page;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
@@ -11,16 +17,16 @@ import java.util.Random;
 public class User {
     public transient static User user = new User();
     private transient static ArrayList<User> users = new ArrayList<>();
+    private ArrayList<LastGame> lastGames = new ArrayList<>();
+    private transient LastGame currentGame;
     private String name;
     private String password;
     private int numberOfWin;
     private Collection collection;
-    private ArrayList<StringBuilder> lastGames;
     private int money;
     private int idCounter;
     private Deck mainDeck;
     private boolean isOnline = false;
-
 
     public User(String name, String password) {
         this.name = name;
@@ -28,7 +34,6 @@ public class User {
         this.numberOfWin = 0;
         this.password = password;
         collection = new Collection();
-        lastGames = new ArrayList<>();
         idCounter = 1;
     }
 
@@ -102,10 +107,6 @@ public class User {
         return collection;
     }
 
-    public ArrayList<StringBuilder> getLastGames() {
-        return lastGames;
-    }
-
     public void incrementOfMoney(int number){
         money += number;
     }
@@ -118,16 +119,11 @@ public class User {
         users.add(user);
     }
 
-    public void addGameToLastGames(String opponent, boolean isPlayerWin, int time) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(opponent);
-        stringBuilder.append("/");
-        if (isPlayerWin)
-            stringBuilder.append("win/");
-        else
-            stringBuilder.append("loss/");
-        stringBuilder.append(time);
-        lastGames.add(stringBuilder);
+    public void addGameToLastGames(Game game) {
+        LastGame lastGame = new LastGame(game, "" + lastGames.size());
+        lastGames.add(lastGame);
+        currentGame = lastGame;
+        GsonWriter.sendClientCommand(new SaveCmd(), Page.getOutput());
     }
 
     public static boolean isUserNameNew(String userName) {

@@ -3,6 +3,7 @@ package gson;
 import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.deck.Deck;
+import Model.game.Game;
 import Model.item.CollectableItem;
 import Model.item.Item;
 import Model.item.UsableItem;
@@ -39,6 +40,10 @@ public class GsonWriter {
             out.flush();
             out.close();
         }
+    }
+
+    public static void writeGame(Game game){
+
     }
 
     public static void writeCustomCard(Card card) throws IOException {
