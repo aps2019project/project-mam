@@ -12,16 +12,11 @@ import java.util.Map;
 public class ServerCtrl {
     public Label clientLbl;
     public Button refresh;
-    public Button shop;
     public Label shopLbl;
 
     @FXML
     public void onRefreshClicked(){
         refreshList();
-    }
-    @FXML
-    public void onShopClicked(){
-        shopLbl.setText(Shop.getInstance().show());
     }
 
     public void refreshList(){

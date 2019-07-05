@@ -1,5 +1,6 @@
 package server;
 
+import Controller.ServerCtrl;
 import Model.card.Card;
 import Model.shop.Shop;
 import com.google.gson.Gson;
@@ -8,13 +9,11 @@ import gson.GsonWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -33,13 +32,31 @@ public class Server extends Application {
         return clients;
     }
 
+    private ServerCtrl controller;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         runServer();
-        Pane root = new FXMLLoader(getClass().getResource("../view/layout/ServerPage.fxml")).load();
+        primaryStage.setTitle("Server");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/layout/ServerPage.fxml"));
+        Pane root = fxmlLoader.load();
+        controller = fxmlLoader.getController();
+        controller.shopLbl.setText(Shop.getInstance().show());
+        setBackGround(root, "resources/codex/codex_background.jpg");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    protected void setBackGround(Pane root, String address){
+        try {
+            Image image = new Image(new FileInputStream(address));
+            BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            root.setBackground(new Background(myBI));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void runServer(){
