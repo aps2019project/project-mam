@@ -74,6 +74,7 @@ public class Game {
     private int price = 1000;
 
     private boolean isMulti = false;
+    private boolean isLive = false;
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
         game = this;
@@ -146,8 +147,24 @@ public class Game {
     }*/
 
     public Game(Game liveGame){
-        liveGame.setBaseTurn(-1);
+        //liveGame.setBaseTurn(1);
+        liveGame.setLive(true);
         game = liveGame;
+        //isLive = true;
+    }
+
+    public void changeBaseTurn(){
+        if (baseTurn == 1)
+            baseTurn = 0;
+        else baseTurn = 1;
+    }
+
+    public boolean isLive() {
+        return isLive;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
     }
 
     public int getBasicMana() {

@@ -30,10 +30,10 @@ public class InsertCmd extends ClientCommand {
         int count = 1;
         for (Map.Entry<ClientHandler, ClientHandler> entry : Server.getGames().entrySet()) {
             if (entry.getKey().getUser().getName().equalsIgnoreCase(handler.getUser().getName()) ||
-                    entry.getValue().getUser().getName().equalsIgnoreCase(handler.getOppHandler().getUser().getName())){
+                    entry.getValue().getUser().getName().equalsIgnoreCase(handler.getUser().getName())){
                 for (Map.Entry<String, ClientHandler> handlerEntry : Server.getClients().entrySet()) {
                     if (handlerEntry.getValue().isSeeingLive() && handlerEntry.getValue().getGameNum() == count){
-                        GsonWriter.sendServerCommand(new ServerCommand(INSERT, cardName, row, 8 - column), handlerEntry.getValue().getOutput());
+                        GsonWriter.sendServerCommand(new ServerCommand(INSERT, cardName, row, column), handlerEntry.getValue().getOutput());
                     }
                 }
             }
