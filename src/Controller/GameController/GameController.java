@@ -12,7 +12,9 @@ import Model.user.AI;
 import Model.user.User;
 import command.ServerCommand;
 import command.clientCommand.ClientCommand;
+import command.clientCommand.EndGameCmd;
 import command.clientCommand.EndTurnCmd;
+import command.clientCommand.SaveCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.application.Platform;
@@ -206,6 +208,9 @@ public class GameController {
         game.endTurn();
         label.setText("---<End turn>---");
         if (game.isGameEnd()) {
+            User.user.getGames().add(game.getId());
+            GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
+            //write game (its name is id).
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();
         } else {

@@ -15,6 +15,7 @@ public class EndTurnCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        handler.getUser().getCurrentGame().getCommands().add(this);
         GsonWriter.sendServerCommand(new ServerCommand(CommandType.ENDTURN), handler.getOppHandler().getOutput());
     }
 }

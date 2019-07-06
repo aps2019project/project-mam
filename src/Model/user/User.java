@@ -18,6 +18,7 @@ public class User {
     public transient static User user = new User();
     private transient static ArrayList<User> users = new ArrayList<>();
     //private ArrayList<LastGame> lastGames = new ArrayList<>();
+    private ArrayList<Integer> games = new ArrayList<>();
     private transient LastGame currentGame = new LastGame();
     private String name;
     private String password;
@@ -39,6 +40,10 @@ public class User {
     }
 
     public User() {
+    }
+
+    public ArrayList<Integer> getGames() {
+        return games;
     }
 
     public void setMainDeck(Deck mainDeck) {
