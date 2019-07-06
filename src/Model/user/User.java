@@ -131,8 +131,8 @@ public class User {
     }
 
     public void addGameToLastGames(Game game) {
-        if (lastGames.size() == 3)
-            lastGames.remove(lastGames.size());
+        if (lastGames.size() == 1)
+            lastGames.remove(lastGames.size() - 1);
         LastGame lastGame = new LastGame(game, "" + lastGames.size());
         lastGames.add(lastGame);
         currentGame = lastGame;

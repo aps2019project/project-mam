@@ -1,5 +1,6 @@
 package command.clientCommand;
 
+import Model.user.User;
 import command.ServerCommand;
 import gson.GsonWriter;
 import server.ClientHandler;
@@ -18,6 +19,8 @@ public class SelectCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        User.user.getCurrentGame().getCommands().add(this);
+        if (User.user.getCurrentGame().getGame().isMulti())
         GsonWriter.sendServerCommand(new ServerCommand(SELECT, cardId), handler.getOppHandler().getOutput());
     }
 }
