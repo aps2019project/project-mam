@@ -44,8 +44,8 @@ public class Game {
     private int firstCardCounter = 0;
     private int secondCardCounter = 0;
 
-    private transient User firstUser;
-    private transient User secondUser;
+    private User firstUser;
+    private User secondUser;
 
     private ArrayList<Card> firstPlayerGraveYard;
     private ArrayList<Card> secondPlayerGraveYard;
@@ -80,8 +80,9 @@ public class Game {
     private boolean isReplay = false;
 
     public Game(Game lastGame){
-        /*liveGame.setLive(true);
-        game = liveGame;*/
+        //liveGame.setLive(true);
+        lastGame.setLive(true);
+        //game = liveGame;
 
         game = lastGame;
         isReplay = true;
