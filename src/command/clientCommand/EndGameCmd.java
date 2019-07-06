@@ -1,5 +1,7 @@
 package command.clientCommand;
 
+import Model.game.LastGame;
+import Model.user.User;
 import command.CommandType;
 import server.ClientHandler;
 
@@ -14,6 +16,7 @@ public class EndGameCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        LastGame.getLastGames().add(handler.getUser().getCurrentGame());
         //write user's last game.(with id)
     }
 }

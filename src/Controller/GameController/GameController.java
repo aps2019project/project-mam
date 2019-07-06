@@ -12,6 +12,7 @@ import Model.user.AI;
 import Model.user.User;
 import command.ServerCommand;
 import command.clientCommand.ClientCommand;
+import command.clientCommand.EndGameCmd;
 import command.clientCommand.EndTurnCmd;
 import command.clientCommand.SaveCmd;
 import gson.GsonReader;
@@ -208,7 +209,7 @@ public class GameController {
         label.setText("---<End turn>---");
         if (game.isGameEnd()) {
             User.user.getGames().add(game.getId());
-            GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
+            GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
             //write game (its name is id).
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();
