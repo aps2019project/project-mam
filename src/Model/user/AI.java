@@ -4,8 +4,11 @@ import Controller.GameController.MapController;
 import Model.card.Card;
 import Model.game.Cell;
 import Model.game.Game;
+import command.clientCommand.*;
+import gson.GsonWriter;
 import javafx.application.Platform;
 import view.BattleMenu.MainBattleMenuPage;
+import view.pages.Page;
 
 import java.util.Map;
 
@@ -92,6 +95,7 @@ public class AI {
         moved = false;
         attacked = false;
         Platform.runLater(() -> MainBattleMenuPage.getController().endTurn());
+        GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }
 
     private boolean cardsCanInsert() {
@@ -119,6 +123,7 @@ public class AI {
     private void commandInsert() {
         inserted = true;
         Platform.runLater(() -> mapCtrl.insertCard(insertCard.getName(),insertTarget.getRow(), insertCard.getColumn()));
+        GsonWriter.sendClientCommand(new InsertCmd(insertCard.getName(),insertTarget.getRow(), insertCard.getColumn()), Page.getOutput());
         sleep(2000);
     }
 
@@ -136,6 +141,7 @@ public class AI {
 
     private void commandSelect() {
         Platform.runLater(() -> mapCtrl.selectCard(String.valueOf(selectedCard.getId())));
+        GsonWriter.sendClientCommand(new SelectCmd(String.valueOf(selectedCard.getId())), Page.getOutput());
         sleep(50);
     }
 
@@ -158,6 +164,7 @@ public class AI {
     private void commandMove() {
         moved = true;
         Platform.runLater(() -> mapCtrl.moveCard(moveTarget.getRow(), moveTarget.getColumn()));
+        GsonWriter.sendClientCommand(new MoveCmd(moveTarget.getRow(), moveTarget.getColumn()), Page.getOutput());
         sleep(1000);
     }
 
@@ -177,6 +184,7 @@ public class AI {
 
     private void commandAttack() {
         Platform.runLater(() -> mapCtrl.attack(attackTarget.getId()));
+        GsonWriter.sendClientCommand(new AttackCmd(String.valueOf(attackTarget.getId())), Page.getOutput());
         sleep(2500);
     }
 }

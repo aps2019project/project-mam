@@ -83,7 +83,6 @@ public class Game {
     }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
-        game = this;
         this.firstUser = firstUser;
         this.secondUser = secondUser;
         this.mode = mode;
@@ -91,6 +90,7 @@ public class Game {
         this.kind = kind;
         this.firstPlayerDeck = firstUser.getMainDeck();
         this.secondPlayerDeck = secondUser.getMainDeck();
+        game = this;
         ImageController.getInstance().initCardImage();
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();
@@ -107,7 +107,6 @@ public class Game {
     }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount, int baseTurn) {
-        game = this;
         isMulti = true;
         this.firstUser = firstUser;
         this.secondUser = secondUser;
@@ -117,6 +116,7 @@ public class Game {
         this.firstPlayerDeck = firstUser.getMainDeck();
         this.secondPlayerDeck = secondUser.getMainDeck();
         this.baseTurn = baseTurn;
+        game = this;
         ImageController.getInstance().initCardImage();
         firstPlayerGraveYard = new ArrayList<>();
         secondPlayerGraveYard = new ArrayList<>();

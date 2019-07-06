@@ -154,7 +154,7 @@ public class MapController {
             if (!game.isMyTurn())
                 return;
             if (handCardSelected) {
-                if (game.isMulti())
+                /*if (game.isMulti())*/
                     GsonWriter.sendClientCommand(new InsertCmd(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y), Page.getOutput());
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
                 //removeIdFromHand(Integer.parseInt(handCardId));
@@ -165,14 +165,14 @@ public class MapController {
             } else if (isSelected) {
                 if ((game.isMyTurn() && rectangle.getFill() == Color.BLUE)
                         || (game.isOppTurn() && rectangle.getFill() == Color.RED)) {
-                    if (game.isMulti())
+                    /*if (game.isMulti())*/
                         GsonWriter.sendClientCommand(new AttackCmd(rectangle.getId()), Page.getOutput());
                     attack(Integer.parseInt(rectangle.getId()));
                     //updateMap();
                     isSelected = false;
                 } else {
                     moveCard(x, y);
-                    if (game.isMulti())
+                    /*if (game.isMulti())*/
                         GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
                     //updateMap();
                     isSelected = false;
@@ -180,12 +180,12 @@ public class MapController {
             } else if (rectangle.getId() != null) {
                 if (game.isMyTurn() && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
-                    if (game.isMulti())
+//                    if (game.isMulti())
                         GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else if (game.isOppTurn() && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
-                    if (game.isMulti())
+//                    if (game.isMulti())
                         GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else label.setText("please select your card");
@@ -391,12 +391,7 @@ public class MapController {
         //imageController.addFlags(getPane());
     }
 
-    /*public void sendCommand(<? extends ClientCommand>){
-        GsonWriter.sendClientCommand(command, Page.getOutput());
-    }*/
-
     public void selectCard(String cardId) {
-        User.user.getCurrentGame().getCommands().add(new SelectCmd(cardId));
         audioCtrl.onSelect();
         game.selectCard(Integer.parseInt(cardId));
         label.setText(cardId + " selected");
@@ -411,7 +406,6 @@ public class MapController {
                 animationCtrl.moveTo(imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()),
                         game.getCurrentCard(),
                         cells[x][y].getX() + (xStep - 15) / 2, cells[x][y].getY() + (yStep - 35) / 2);
-                User.user.getCurrentGame().getCommands().add(new MoveCmd(x, y));
                 imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()).setX(cells[x][y].getX() - 15);
                 imageController.getView(game.isMyTurn(), game.getCurrentCard().getId()).setY(cells[x][y].getY() - 35);
                 imageController.updateFlags(getPane(), game.getMap().getCells()[game.getCurrentCard().getRow()][game.getCurrentCard().getColumn()]);
@@ -434,7 +428,6 @@ public class MapController {
                     if (game.canCounterAttack(game.getCurrentCard().getId(), oppId))
                         animationCtrl.counterAttack(imageController.getView(game.isOppTurn(), oppId), game.getCard(game.isOppTurn(), oppId));
                     audioCtrl.onAttack();
-                    User.user.getCurrentGame().getCommands().add(new AttackCmd(String.valueOf(oppId)));
                     game.attack(oppId);
                     label.setText(ErrorType.SUCCESSFUL_ATTACK.getMessage());
                     updateMap();
@@ -460,7 +453,6 @@ public class MapController {
                     else {
                         animationCtrl.insertSpell(cells[x][y], game.getCurrentCard(), getPane());
                     }
-                    User.user.getCurrentGame().getCommands().add(new InsertCmd(cardName, x, y));
                     StringBuilder message = new StringBuilder();
                     message.append(cardName).append(" with ").append(game.getCurrentCard().getId());
                     message.append(" inserted to ( ").append(x).append(", ").append(y).append(" )");

@@ -11,6 +11,7 @@ import java.io.IOException;
 public class HistoryPage extends Page{
     private Pane root;
     private HistoryCtrl controller;
+
     public HistoryPage(){
         start();
     }
@@ -22,10 +23,10 @@ public class HistoryPage extends Page{
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
             initializeImage();
-            controller.init();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreen(true);
+//            stage.setFullScreen(true);
+            controller.init();
         } catch (IOException e) {
 
         }

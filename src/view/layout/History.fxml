@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HistoryCtrl">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HistoryCtrl">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="300.0">
+      <VBox alignment="CENTER" prefHeight="349.0" prefWidth="238.0" spacing="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="300.0">
          <children>
-            <Label fx:id="history" alignment="CENTER" prefHeight="81.0" prefWidth="251.0">
+            <Label fx:id="history" alignment="CENTER" opacity="0.49" prefHeight="261.0" prefWidth="238.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <TextField fx:id="txt" alignment="CENTER" promptText="enter game name" />
-            <Button fx:id="start" mnemonicParsing="false" onAction="#onStartClicked" text="start" />
+            <Button fx:id="start" alignment="CENTER" mnemonicParsing="false" onAction="#onStartClicked" text="start" />
          </children>
       </VBox>
    </children>

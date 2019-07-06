@@ -10,8 +10,6 @@ import java.io.DataOutputStream;
 public abstract class ClientCommand {
     protected CommandType type;
 
-    //public void handleCommand(DataOutputStream output){}
-
     public void handleCommand(DataOutputStream output, ClientHandler clientHandler){}
 
     public CommandType getType() {

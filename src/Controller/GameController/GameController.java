@@ -11,6 +11,7 @@ import Model.size.Resolution;
 import Model.user.AI;
 import Model.user.User;
 import command.ServerCommand;
+import command.clientCommand.ClientCommand;
 import command.clientCommand.EndTurnCmd;
 import gson.GsonReader;
 import gson.GsonWriter;
@@ -100,8 +101,6 @@ public class GameController {
         mapCtrl.initialize(cells, pane, label, handCards);
         if (game.isMulti())
             catchServerCommand();
-        if (game.isReplay())
-
         if (game.isMyTurn())
             setTimer();
         setUpMusic();
@@ -262,7 +261,4 @@ public class GameController {
         catchCommand.start();
     }
 
-    private void renderReplayCommand(){
-
-    }
 }
