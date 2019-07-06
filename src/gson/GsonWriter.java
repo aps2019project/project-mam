@@ -109,7 +109,7 @@ public class GsonWriter {
                 .create();
         DataOutputStream out = null;
         try {
-            out = new DataOutputStream(new FileOutputStream("gson/lastGame/" + lastGame.getName() + ".json"));
+            out = new DataOutputStream(new FileOutputStream("gson/lastGame/" + lastGame.getId() + ".json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

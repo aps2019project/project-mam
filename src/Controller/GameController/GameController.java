@@ -210,7 +210,7 @@ public class GameController {
         if (game.isGameEnd()) {
             User.user.getGames().add(game.getId());
             GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
-            //write game (its name is id).
+            GsonWriter.writeGame(game);
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();
         } else {

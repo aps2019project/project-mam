@@ -3,6 +3,7 @@ package command.clientCommand;
 import Model.game.LastGame;
 import Model.user.User;
 import command.CommandType;
+import gson.GsonWriter;
 import server.ClientHandler;
 
 import java.io.DataOutputStream;
@@ -17,6 +18,6 @@ public class EndGameCmd extends ClientCommand {
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         LastGame.getLastGames().add(handler.getUser().getCurrentGame());
-        //write user's last game.(with id)
+        GsonWriter.writeLastGame(handler.getUser().getCurrentGame());
     }
 }
