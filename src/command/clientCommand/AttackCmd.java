@@ -24,6 +24,7 @@ public class AttackCmd extends ClientCommand {
 
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
+        handler.getUser().getCurrentGame().getCommands().add(this);
         GsonWriter.sendServerCommand(new ServerCommand(ATTACK, oppId), handler.getOppHandler().getOutput());
     }
 }
