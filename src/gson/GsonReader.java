@@ -6,6 +6,8 @@ import Model.card.Hero;
 import Model.card.Minion;
 import Model.card.Spell;
 import Model.deck.Deck;
+import Model.game.Game;
+import Model.game.LastGame;
 import Model.item.CollectableItem;
 import Model.item.UsableItem;
 import Model.shop.Shop;
@@ -122,11 +124,37 @@ public class GsonReader {
         }
     }
 
-    public static void ReadLastGames(){
+    public static void readLastGames(){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
+                .create();
+        DataInputStream reader = null;
         File dir = new File("gson/lastGame");
         for (File file : dir.listFiles()) {
-
+            try {
+                reader = new DataInputStream(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            LastGame.getLastGames().add(gson.fromJson(receive(reader), LastGame.class));
         }
+    }
+
+    public static Game readGame(String name){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
+                .create();
+        DataInputStream reader = null;
+        try {
+            reader = new DataInputStream(new FileInputStream("gson/Game/" + name + ".json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return gson.fromJson(receive(reader), Game.class);
     }
 
     private static String receive(DataInputStream in) {
