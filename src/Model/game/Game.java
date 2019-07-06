@@ -831,6 +831,8 @@ public class Game {
             if (baseTurn == 1)
                 firstPlayerMana = basicMana + extraPlayer1Mana - 1;
             else firstPlayerMana = basicMana + extraPlayer1Mana;
+            if (basicMana == 9)
+                firstPlayerMana = 9;
             updateFirstPlayerHand();
             updateCellCard(map.getFirstPlayerCellCard());
             Buff.updateBuffs();
@@ -838,6 +840,8 @@ public class Game {
             if (baseTurn == 1)
                 secondPlayerMana = basicMana + extraPlayer2Mana;
             else secondPlayerMana = basicMana + extraPlayer2Mana - 1;
+            if (basicMana == 9)
+                secondPlayerMana = 9;
             updateSecondPlayerHand();
             updateCellCard(map.getSecondPlayerCellCard());
             Buff.refreshIsUsed();
@@ -857,14 +861,13 @@ public class Game {
 
     public void attack(int cardId) {
         currentCard.setCanAttack(false);
-        currentCard.setCanMove(false);
+        //currentCard.setCanMove(false);
         if (isMyTurn()) {
             if (firstPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_ATTACK) {
                 buffCreator(currentCard, map.getSecondPlayerCellCard().get(cardId));
             }
             map.getSecondPlayerCellCard().get(cardId).getCard().decrementOfHp(currentCard.getAP());
-            if ((currentCard instanceof Minion && currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)
-                    || currentCard.getName().equals("zahak")) {
+            if ((currentCard instanceof Minion && currentCard.getSPActivationTime() == SPActivationTime.ON_ATTACK)) {
                 buffCreator(currentCard, map.getSecondPlayerCellCard().get(cardId));
             }
 
@@ -961,26 +964,27 @@ public class Game {
                 } else if (player == 2 && secondPlayerDeck.getItem().getSpActivationTime() == SPActivationTime.ON_DEATH)
                     buffCreator(entry.getValue().getCard(), entry.getValue());
                 Buff.refreshBuffs();
-                if (entry.getValue().getCard() instanceof Hero)
+                if (entry.getValue().getCard() instanceof Hero) {
                     price = getRewardPrice();
-                if (player == 1) {
-                    winnerName = secondUser.getName();
-                    secondUser.setMoney(price);
-                    secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
-                } else {
-                    winnerName = firstUser.getName();
-                    firstUser.setMoney(price);
-                    firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
+                    if (player == 1) {
+                        winnerName = secondUser.getName();
+                        secondUser.setMoney(price);
+                        secondUser.setNumberOfWin(secondUser.getNumberOfWin() + 1);
+                    } else {
+                        winnerName = firstUser.getName();
+                        firstUser.setMoney(price);
+                        firstUser.setNumberOfWin(firstUser.getNumberOfWin() + 1);
+                    }
+                    winner = player;
+                    isGameEnd = true;
+                    break;
                 }
-                winner = player;
-                isGameEnd = true;
-                break;
+                if (entry.getValue().getFlagCount() != 0)
+                    havingFlagCount = 0;
+                graveYard.add(entry.getValue().getCard());
+                map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
+                cells.remove(entry.getKey());
             }
-            if (entry.getValue().getFlagCount() != 0)
-                havingFlagCount = 0;
-            graveYard.add(entry.getValue().getCard());
-            map.getCells()[entry.getValue().getRow()][entry.getValue().getColumn()].setCard(null);
-            cells.remove(entry.getKey());
         }
     }
 

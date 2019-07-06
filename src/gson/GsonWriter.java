@@ -123,7 +123,7 @@ public class GsonWriter {
                 .create();
         DataOutputStream out = null;
         try {
-            out = new DataOutputStream(new FileOutputStream("gson/Game/" + game.getId() + ".json"));
+            out = new DataOutputStream(new FileOutputStream("gson/Games/" + game.getId() + ".json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
