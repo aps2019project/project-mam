@@ -118,16 +118,13 @@ public class GsonReader {
         try {
             //return gson.fromJson(in.readUTF(), ClientCommand.class);
             return gson.fromJson(receive(in), ClientCommand.class);
-        } catch (Exception e) {
-            //return gson.fromJson(in.readUTF(), ClientCommand.class);
-            return gson.fromJson(receive(in), ClientCommand.class);
-        } catch (Exception e) {
+        }  catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private static String receive(DataInputStream in) {
+   /* private static String receive(DataInputStream in) {
         StringBuilder file = new StringBuilder();
         try {
             String size = in.readUTF();
@@ -140,7 +137,7 @@ public class GsonReader {
             e.printStackTrace();
         }
         return file.toString();
-    }
+    }*/
 
     public static void readLastGames(){
         Gson gson = new GsonBuilder()

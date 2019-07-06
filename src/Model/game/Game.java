@@ -80,6 +80,9 @@ public class Game {
     private boolean isReplay = false;
 
     public Game(Game lastGame){
+        /*liveGame.setLive(true);
+        game = liveGame;*/
+
         game = lastGame;
         isReplay = true;
         ImageController.getInstance().initCardImage();
@@ -162,12 +165,12 @@ public class Game {
         game = this;
     }*/
 
-    public Game(Game liveGame){
+    /*public Game(Game liveGame){
         //liveGame.setBaseTurn(1);
-        liveGame.setLive(true);
-        game = liveGame;
+        *//*liveGame.setLive(true);
+        game = liveGame;*//*
         //isLive = true;
-    }
+    }*/
 
     public void changeBaseTurn(){
         if (baseTurn == 1)
