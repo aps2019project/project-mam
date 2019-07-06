@@ -122,6 +122,13 @@ public class GsonReader {
         }
     }
 
+    public static void ReadLastGames(){
+        File dir = new File("gson/lastGame");
+        for (File file : dir.listFiles()) {
+
+        }
+    }
+
     private static String receive(DataInputStream in) {
         StringBuilder file = new StringBuilder();
         try {

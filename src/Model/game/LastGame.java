@@ -1,6 +1,10 @@
 package Model.game;
 
+import Model.user.User;
 import command.clientCommand.ClientCommand;
+import command.clientCommand.SaveCmd;
+import gson.GsonWriter;
+import view.pages.Page;
 
 import java.util.ArrayList;
 
@@ -26,8 +30,6 @@ public class LastGame {
         return lastGames;
     }
 
-
-
     public ArrayList<ClientCommand> getCommands() {
         return commands;
     }
@@ -50,5 +52,14 @@ public class LastGame {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public void addGameToLastGames(Game game) {
+        if (lastGames.size() == 1)
+            lastGames.remove(lastGames.size() - 1);
+        LastGame lastGame = new LastGame(game, "" + lastGames.size());
+        lastGames.add(lastGame);
+//        currentGame = lastGame;
+        GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
     }
 }

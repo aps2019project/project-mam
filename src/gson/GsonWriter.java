@@ -3,6 +3,7 @@ package gson;
 import Model.Buffs.Buff;
 import Model.card.Card;
 import Model.deck.Deck;
+import Model.game.LastGame;
 import Model.item.CollectableItem;
 import Model.item.Item;
 import Model.item.UsableItem;
@@ -13,9 +14,7 @@ import com.google.gson.GsonBuilder;
 import command.clientCommand.ClientCommand;
 import command.ServerCommand;
 
-import java.io.DataOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class GsonWriter {
 
@@ -101,6 +100,21 @@ public class GsonWriter {
         writer.flush();
         writer.close();
     }
+
+    public static void writeGame(LastGame lastGame){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                .create();
+        DataOutputStream out = null;
+        try {
+            out = new DataOutputStream(new FileOutputStream("gson/lastGame/" + lastGame.getName() + ".json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        send(gson.toJson(lastGame), out);
+    }
+
 
     public static void sendClientCommand(ClientCommand command, DataOutputStream out) {
         Gson gson = new GsonBuilder()
