@@ -7,11 +7,13 @@ import java.util.ArrayList;
 public class LastGame {
     private Game game;
     private String name;
+    private int id;
     private ArrayList<ClientCommand> commands = new ArrayList<>();
     private static ArrayList<LastGame> lastGames = new ArrayList<>();
 
     public LastGame(Game game) {
         this.game = game;
+        this.id = game.getId();
     }
 
     public LastGame(Game game, String name) {
@@ -30,6 +32,10 @@ public class LastGame {
 
     public ArrayList<ClientCommand> getCommands() {
         return commands;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

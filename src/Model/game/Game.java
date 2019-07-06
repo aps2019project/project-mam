@@ -23,6 +23,8 @@ import static java.lang.Math.abs;
 
 public class Game {
     private transient static Game game;
+
+    private int id;
     private int baseTurn = 1;
     private static final String SINGLE_PLAYER = "single player";
     private static final String MULTI_PLAYER = "multi player";
@@ -104,6 +106,7 @@ public class Game {
         setNextSecondPlayerCard();
         startGame();
         ImageController.getInstance().initCollectibleImage();
+        this.id = new Random().nextInt(100000);
     }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount, int baseTurn) {
@@ -137,6 +140,11 @@ public class Game {
         setNextSecondPlayerCard();
         startGame();
         ImageController.getInstance().initCollectibleImage();
+        this.id = new Random().nextInt(100000);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getBaseTurn() {
