@@ -179,6 +179,14 @@ public class GameController {
     }
 
     public void setExit() {
+
+        //test
+        User.user.getGames().add(game.getId());
+        GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
+        GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
+        GsonWriter.writeGame(game);
+        //
+
         Page.getPages().pop();
         Page.getPages().peek().start();
     }
@@ -211,6 +219,7 @@ public class GameController {
         if (game.isGameEnd()) {
             User.user.getGames().add(game.getId());
             GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
+            GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
             GsonWriter.writeGame(game);
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();

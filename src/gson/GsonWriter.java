@@ -102,7 +102,7 @@ public class GsonWriter {
         writer.close();
     }
 
-    public static void writeLastGame(LastGame lastGame){
+    public static void writeLastGame(LastGame lastGame) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
@@ -116,18 +116,25 @@ public class GsonWriter {
         send(gson.toJson(lastGame), out);
     }
 
-    public static void writeGame(Game game){
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Card.class, new CardAdapter())
-                .registerTypeAdapter(Buff.class, new BuffAdaptor())
-                .create();
-        DataOutputStream out = null;
+    public static void writeGame(Game game) {
         try {
-            out = new DataOutputStream(new FileOutputStream("gson/Games/" + game.getId() + ".json"));
-        } catch (FileNotFoundException e) {
+            FileWriter writer = new FileWriter("gson/Games/" + game.getId() + ".json");
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Card.class, new CardAdapter())
+                    .registerTypeAdapter(Buff.class, new BuffAdaptor())
+                    .create();
+        /*DataOutputStream out = null;
+
+            out = new DataOutputStream(new FileOutputStream("gson/Games/" + game.getId() + ".json"));*/
+
+            //send(gson.toJson(game), out);
+            writer.write(gson.toJson(game));
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        send(gson.toJson(game), out);
+
     }
 
 
