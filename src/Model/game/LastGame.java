@@ -8,6 +8,7 @@ public class LastGame {
     private Game game;
     private String name;
     private ArrayList<ClientCommand> commands = new ArrayList<>();
+    private static ArrayList<LastGame> lastGames = new ArrayList<>();
 
     public LastGame(Game game) {
         this.game = game;
@@ -20,6 +21,12 @@ public class LastGame {
 
     public LastGame() {
     }
+
+    public static ArrayList<LastGame> getLastGames() {
+        return lastGames;
+    }
+
+
 
     public ArrayList<ClientCommand> getCommands() {
         return commands;

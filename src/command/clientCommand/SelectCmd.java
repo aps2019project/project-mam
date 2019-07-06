@@ -21,6 +21,6 @@ public class SelectCmd extends ClientCommand {
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         User.user.getCurrentGame().getCommands().add(this);
         if (User.user.getCurrentGame().getGame().isMulti())
-        GsonWriter.sendServerCommand(new ServerCommand(SELECT, cardId), handler.getOppHandler().getOutput());
+            GsonWriter.sendServerCommand(new ServerCommand(SELECT, cardId), handler.getOppHandler().getOutput());
     }
 }
