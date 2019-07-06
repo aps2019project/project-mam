@@ -17,7 +17,7 @@ import java.util.Random;
 public class User {
     public transient static User user = new User();
     private transient static ArrayList<User> users = new ArrayList<>();
-    private ArrayList<LastGame> lastGames = new ArrayList<>();
+    //private ArrayList<LastGame> lastGames = new ArrayList<>();
     private transient LastGame currentGame = new LastGame();
     private String name;
     private String password;
@@ -48,12 +48,12 @@ public class User {
         this.name = name;
     }
 
-    public ArrayList<LastGame> getLastGames() {
+    /*public ArrayList<LastGame> getLastGames() {
         return lastGames;
-    }
+    }*/
 
-    public void setCurrentGame(LastGame currentGame) {
-        this.currentGame = currentGame;
+    public void setCurrentGame(Game game) {
+        currentGame = new LastGame(game);
     }
 
     public void setNumberOfWin(int numberOfWin) {
@@ -130,14 +130,14 @@ public class User {
         users.add(user);
     }
 
-    public void addGameToLastGames(Game game) {
+    /*public void addGameToLastGames(Game game) {
         if (lastGames.size() == 1)
             lastGames.remove(lastGames.size() - 1);
         LastGame lastGame = new LastGame(game, "" + lastGames.size());
         lastGames.add(lastGame);
         currentGame = lastGame;
         GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
-    }
+    }*/
 
     public static boolean isUserNameNew(String userName) {
         for (User user : users)
