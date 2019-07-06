@@ -119,9 +119,27 @@ public class GsonReader {
             //return gson.fromJson(in.readUTF(), ClientCommand.class);
             return gson.fromJson(receive(in), ClientCommand.class);
         } catch (Exception e) {
+            //return gson.fromJson(in.readUTF(), ClientCommand.class);
+            return gson.fromJson(receive(in), ClientCommand.class);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static String receive(DataInputStream in) {
+        StringBuilder file = new StringBuilder();
+        try {
+            String size = in.readUTF();
+            int count = 1;
+            while (count < Integer.parseInt(size)){
+                file.append(in.readUTF());
+                count++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.toString();
     }
 
     public static void readLastGames(){

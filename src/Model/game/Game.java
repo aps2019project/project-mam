@@ -14,6 +14,7 @@ import Model.item.CollectableItem;
 import Model.item.Item;
 import Model.user.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -75,6 +76,7 @@ public class Game {
     private int price = 1000;
 
     private boolean isMulti = false;
+    private boolean isLive = false;
     private boolean isReplay = false;
 
     public Game(Game lastGame){
@@ -147,8 +149,58 @@ public class Game {
         return id;
     }
 
+    /*public Game(User firstUser, User secondUser, Map map, String mode, String kind, int flagCount, int baseTurn){
+        this.firstUser = firstUser;
+        this.secondUser = secondUser;
+        this.mode = mode;
+        this.flagCount = flagCount;
+        this.kind = kind;
+        this.firstPlayerDeck = firstUser.getMainDeck();
+        this.secondPlayerDeck = secondUser.getMainDeck();
+        this.baseTurn = -1;
+        this.map = map;
+        game = this;
+    }*/
+
+    public Game(Game liveGame){
+        //liveGame.setBaseTurn(1);
+        liveGame.setLive(true);
+        game = liveGame;
+        //isLive = true;
+    }
+
+    public void changeBaseTurn(){
+        if (baseTurn == 1)
+            baseTurn = 0;
+        else baseTurn = 1;
+    }
+
+    public boolean isLive() {
+        return isLive;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
+    }
+
+    public int getBasicMana() {
+        return basicMana;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public int getFlagCount() {
+        return flagCount;
+    }
+
     public int getBaseTurn() {
         return baseTurn;
+    }
+
+    public void setBaseTurn(int baseTurn) {
+        this.baseTurn = baseTurn;
     }
 
     public boolean isMulti() {

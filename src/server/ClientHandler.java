@@ -16,6 +16,8 @@ import java.net.Socket;
 public class ClientHandler extends Thread {
     private Socket client;
     private boolean isRequested = false;
+    private boolean isSeeingLive = false;
+    private int gameNum;
     private ClientHandler oppHandler;
 
     private User user;
@@ -44,6 +46,22 @@ public class ClientHandler extends Thread {
                 break;
             }
         }
+    }
+
+    public int getGameNum() {
+        return gameNum;
+    }
+
+    public void setGameNum(int gameNum) {
+        this.gameNum = gameNum;
+    }
+
+    public boolean isSeeingLive() {
+        return isSeeingLive;
+    }
+
+    public void setSeeingLive(boolean seeingLive) {
+        isSeeingLive = seeingLive;
     }
 
     public void setOppHandler(ClientHandler oppHandler) {
@@ -76,5 +94,9 @@ public class ClientHandler extends Thread {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Socket getClient() {
+        return client;
     }
 }

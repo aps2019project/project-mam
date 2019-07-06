@@ -21,8 +21,11 @@ public class ServerCtrl {
 
     public void refreshList(){
         StringBuilder info = new StringBuilder();
+        info.append("Users:\n");
         for (Map.Entry<String, ClientHandler> entry : Server.getClients().entrySet()) {
-            info.append("client name : ").append(entry.getValue().getUser().getName()).append("\n");
+            info.append("\n").append("client name:  ").append(entry.getKey()).append("  |     on port:  ")
+                    .append(entry.getValue().getClient().getPort()).append("  |     game requested:  ")
+                    .append(entry.getValue().isRequested());
         }
         clientLbl.setText(info.toString());
         shopLbl.setText(Shop.getInstance().show());

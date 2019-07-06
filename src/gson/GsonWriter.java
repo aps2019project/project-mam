@@ -102,6 +102,7 @@ public class GsonWriter {
         writer.close();
     }
 
+    public static void sendClientCommand(ClientCommand command, DataOutputStream out) {
     public static void writeLastGame(LastGame lastGame){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardAdapter())

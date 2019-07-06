@@ -22,6 +22,7 @@ public class ScoreBoardCmd extends ClientCommand {
         resetStateOfUsers();
         updateOnlineUsers();
         GsonWriter.sendServerCommand(new ServerCommand(SCORE_BOARD, Result.SUCCESSFUL, User.showUsers()), output);
+        GsonWriter.sendServerCommand(new ServerCommand(SCORE_BOARD, Result.SUCCESSFUL, Server.showGames()), output);
     }
 
     private void resetStateOfUsers() {
