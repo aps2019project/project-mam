@@ -35,6 +35,7 @@ public class User {
         this.password = password;
         collection = new Collection();
         idCounter = 1;
+
     }
 
     public User() {
