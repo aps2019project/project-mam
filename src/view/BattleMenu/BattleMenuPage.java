@@ -136,7 +136,7 @@ public class BattleMenuPage extends Page {
     }
 
     public static void createLiveGame(Game game){
-        new Game(game);
+        new Game(game, true);
         Page.getPages().push(new MainBattleMenuPage());
     }
 }

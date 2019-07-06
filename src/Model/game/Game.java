@@ -79,15 +79,15 @@ public class Game {
     private boolean isLive = false;
     private boolean isReplay = false;
 
-    public Game(Game lastGame){
+    public Game(Game lastGame, boolean isLive){
         //liveGame.setLive(true);
-        lastGame.setLive(true);
+        lastGame.setLive(isLive);
         //game = liveGame;
 
         game = lastGame;
-        isReplay = true;
-        ImageController.getInstance().initCardImage();
-        ImageController.getInstance().initCollectibleImage();
+        //isReplay = true;
+        /*ImageController.getInstance().initCardImage();
+        ImageController.getInstance().initCollectibleImage();*/
     }
 
     public Game(User firstUser, User secondUser, String mode, String kind, int flagCount) {
