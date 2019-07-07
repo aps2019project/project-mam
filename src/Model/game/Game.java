@@ -994,9 +994,9 @@ public class Game {
                 Buff newBuff = buff.copy();
                 if (cell.getCard() != null)
                     newBuff.setCard(cell.getCard());
-                newBuff.setCell(cell);
+                /*newBuff.setCell(cell);
                 newBuff.setStarted(true);
-                Buff.addBuff(newBuff);
+                Buff.addBuff(newBuff);*/
             }
         }
     }
