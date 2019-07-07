@@ -111,7 +111,8 @@ public class AI {
     private boolean insertTarget() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                if (game.isCellValidForInsertMinion(i, j)) {
+                    if ((game.isCellValidForInsertMinion(i, j) && game.getCardInHand(insertCard.getName()).getCardType().equalsIgnoreCase("minion")) ||
+                            (game.isCellValidForInsertSpell(game.getCardInHand(insertCard.getName()), i, j) && game.getCardInHand(insertCard.getName()).getCardType().equalsIgnoreCase("spell"))){
                     insertTarget = game.getMap().getCells()[i][j];
                     return true;
                 }
