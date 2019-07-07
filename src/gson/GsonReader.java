@@ -164,7 +164,7 @@ public class GsonReader {
                 .create();
         FileReader reader = null;
         try {
-            reader = new FileReader("gson/Game/" + name + ".json");
+            reader = new FileReader("gson/Games/" + name + ".json");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
