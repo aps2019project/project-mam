@@ -202,9 +202,8 @@ public class GameController {
             return;
         speed = 1;
         endTurn();
-        User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
-        if (game.isMulti())
-            GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
+//        User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
+        GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }
 
     public void endTurn() {

@@ -94,8 +94,8 @@ public class AI {
         reselected = false;
         moved = false;
         attacked = false;
-        Platform.runLater(() -> MainBattleMenuPage.getController().endTurn());
         GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
+        Platform.runLater(() -> MainBattleMenuPage.getController().endTurn());
     }
 
     private boolean cardsCanInsert() {
