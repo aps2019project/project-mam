@@ -182,6 +182,9 @@ public class GameController {
 
     public void setExit() {
 
+        timer.cancel();
+        count = 0;
+
         //test
         User.user.getGames().add(game.getId());
         GsonWriter.sendClientCommand(new EndGameCmd(game.getId()), Page.getOutput());
@@ -278,7 +281,7 @@ public class GameController {
                         break;
                     case INSERT:
                         if (game.isLive()) {
-                            if (game.isMyTurn())
+                            if (game.isMyTurn() || game.getSecondUser().getName().equals("AI"))
                                 Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), command.getColumn()));
                             else
                                 Platform.runLater(() -> mapCtrl.insertCard(command.getCardName(), command.getRow(), 8 - command.getColumn()));
