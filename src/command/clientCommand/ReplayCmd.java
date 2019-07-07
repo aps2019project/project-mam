@@ -21,15 +21,15 @@ public class ReplayCmd extends ClientCommand {
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler clientHandler) {
         try {
-            User.user.setCurrentGame(LastGame.setCurrentGame(gameId));
+            clientHandler.getUser().setCurrentGame(LastGame.setCurrentGame(gameId));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         new Thread(() -> {
-            int size = User.user.getCurrentGame().getCommands().size();
+            int size = clientHandler.getUser().getCurrentGame().getCommands().size();
             int counter = 0;
             while (size > counter) {
-                ClientCommand command = User.user.getCurrentGame().getCommands().get(counter++);
+                ClientCommand command = clientHandler.getUser().getCurrentGame().getCommands().get(counter++);
                 GsonWriter.sendServerCommand(new ServerCommand(command.type, command.getCardId(), command.getRow(), command.getColumn())
                         , clientHandler.getOutput());
             }
