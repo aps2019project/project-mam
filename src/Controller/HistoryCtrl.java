@@ -31,7 +31,7 @@ public class HistoryCtrl {
     @FXML
     public void onStartClicked(){
         String gameId = txt.getText();
-        new Game(GsonReader.readGame(gameId), false);
+        new Game(GsonReader.readGame(gameId), true);
         GsonWriter.sendClientCommand(new ReplayCmd(Integer.parseInt(gameId)), Page.getOutput());
         Page.getPages().push(new MainBattleMenuPage());
     }
