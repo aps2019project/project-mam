@@ -23,6 +23,7 @@ public class EndGameCmd extends ClientCommand {
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         handler.getUser().getCurrentGame().setId(gameId);
+        handler.getUser().getGames().add(gameId);
         LastGame.getLastGames().add(handler.getUser().getCurrentGame());
         GsonWriter.writeLastGame(handler.getUser().getCurrentGame());
         try {

@@ -30,7 +30,7 @@ public class ReplayCmd extends ClientCommand {
             int counter = 0;
             while (size > counter) {
                 ClientCommand command = clientHandler.getUser().getCurrentGame().getCommands().get(counter++);
-                GsonWriter.sendServerCommand(new ServerCommand(command.type, command.getCardId(), command.getRow(), command.getColumn())
+                GsonWriter.sendServerCommand(new ServerCommand(command.type, command.getCardId(), command.getCardName(), command.getRow(), command.getColumn())
                         , clientHandler.getOutput());
             }
         }).start();
