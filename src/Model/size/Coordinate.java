@@ -93,6 +93,12 @@ public class Coordinate {
         gameCtrl.endTurn.relocate(990, 575);
         gameCtrl.endTurn.setFitWidth(230);
         gameCtrl.endTurn.setFitHeight(70);
+
+        gameCtrl.exit.setX(1100);
+        gameCtrl.exit.setY(645);
+        gameCtrl.exit.relocate(1100, 645);
+        gameCtrl.exit.setFitHeight(34);
+        gameCtrl.exit.setFitWidth(125);
     }
 
 }
