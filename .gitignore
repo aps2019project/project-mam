@@ -87,3 +87,4 @@ resources/
 /gson/users/User{name='a'}.json
 gson/decks/custom_1.json
 !/gson/users/User{name='a'}.json
+/gson/
