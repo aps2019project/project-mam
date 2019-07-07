@@ -22,7 +22,11 @@ public abstract class ClientCommand {
     }
 
     public String getCardId() {
-        return null;
+        return "";
+    }
+
+    public String getCardName() {
+        return "";
     }
 
     public int getRow() {

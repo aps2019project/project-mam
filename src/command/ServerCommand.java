@@ -101,6 +101,11 @@ public class ServerCommand {
         this.game = game;
     }
 
+    public ServerCommand(CommandType type, String cardId, String cardName, int row, int column) {
+        this(type, cardName, row, column);
+        this.cardId = cardId;
+    }
+
     public Game getGame() {
         return game;
     }
