@@ -145,15 +145,14 @@ public class GsonReader {
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
-        DataInputStream reader = null;
         File dir = new File("gson/lastGame");
         for (File file : dir.listFiles()) {
             try {
-                reader = new DataInputStream(new FileInputStream(file));
+                FileReader reader = new FileReader(file);
+                LastGame.getLastGames().add(gson.fromJson(reader, LastGame.class));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            LastGame.getLastGames().add(gson.fromJson(receive(reader), LastGame.class));
         }
     }
 
@@ -163,13 +162,13 @@ public class GsonReader {
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
-        DataInputStream reader = null;
+        FileReader reader = null;
         try {
-            reader = new DataInputStream(new FileInputStream("gson/Games/" + name + ".json"));
+            reader = new FileReader("gson/Game/" + name + ".json");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return gson.fromJson(receive(reader), Game.class);
+        return gson.fromJson(reader, Game.class);
     }
 
     private static String receive(DataInputStream in) {

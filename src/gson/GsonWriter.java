@@ -107,13 +107,14 @@ public class GsonWriter {
                 .registerTypeAdapter(Card.class, new CardAdapter())
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .create();
-        DataOutputStream out = null;
         try {
-            out = new DataOutputStream(new FileOutputStream("gson/lastGame/" + lastGame.getId() + ".json"));
-        } catch (FileNotFoundException e) {
+            FileWriter writer = new FileWriter("gson/Games/" + lastGame.getId() + ".json");
+            writer.write(gson.toJson(lastGame));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        send(gson.toJson(lastGame), out);
     }
 
     public static void writeGame(Game game) {
@@ -123,11 +124,6 @@ public class GsonWriter {
                     .registerTypeAdapter(Card.class, new CardAdapter())
                     .registerTypeAdapter(Buff.class, new BuffAdaptor())
                     .create();
-        /*DataOutputStream out = null;
-
-            out = new DataOutputStream(new FileOutputStream("gson/Games/" + game.getId() + ".json"));*/
-
-            //send(gson.toJson(game), out);
             writer.write(gson.toJson(game));
             writer.flush();
             writer.close();
