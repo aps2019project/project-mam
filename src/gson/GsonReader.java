@@ -145,7 +145,7 @@ public class GsonReader {
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .registerTypeAdapter(ClientCommand.class, new ClientCommandAdaptor())
                 .create();
-        File dir = new File("gson/lastGame");
+        File dir = new File("gson/lastGames");
         for (File file : dir.listFiles()) {
             try {
                 FileReader reader = new FileReader(file);

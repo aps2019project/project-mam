@@ -108,7 +108,7 @@ public class GsonWriter {
                 .registerTypeAdapter(Buff.class, new BuffAdaptor())
                 .create();
         try {
-            FileWriter writer = new FileWriter("gson/Games/" + lastGame.getId() + ".json");
+            FileWriter writer = new FileWriter("gson/lastGames/" + lastGame.getId() + ".json");
             writer.write(gson.toJson(lastGame));
             writer.flush();
             writer.close();
