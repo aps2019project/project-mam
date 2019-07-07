@@ -21,7 +21,7 @@ public class HistoryCtrl {
         StringBuilder games = new StringBuilder();
         int counter = 1;
         for (Integer game : User.user.getGames()) {
-            games.append(counter++).append(":  id: ").append(game);
+            games.append(counter++).append(":  id: ").append(game).append("\n");
         }
         history.setText(games.toString());
         /*for (LastGame lastGame : User.user.getLastGames()) {

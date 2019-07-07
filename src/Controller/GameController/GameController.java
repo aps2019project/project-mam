@@ -182,7 +182,7 @@ public class GameController {
 
         //test
         User.user.getGames().add(game.getId());
-        GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
+        GsonWriter.sendClientCommand(new EndGameCmd(game.getId()), Page.getOutput());
         GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
         GsonWriter.writeGame(game);
         //
@@ -218,7 +218,7 @@ public class GameController {
         label.setText("---<End turn>---");
         if (game.isGameEnd()) {
             User.user.getGames().add(game.getId());
-            GsonWriter.sendClientCommand(new EndGameCmd(), Page.getOutput());
+            GsonWriter.sendClientCommand(new EndGameCmd(game.getId()), Page.getOutput());
             GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
             GsonWriter.writeGame(game);
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");

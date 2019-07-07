@@ -28,6 +28,10 @@ public class LastGame {
     public LastGame() {
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public static ArrayList<LastGame> getLastGames() {
         return lastGames;
     }
