@@ -154,28 +154,38 @@ public class MapController {
             if (!game.isMyTurn())
                 return;
             if (handCardSelected) {
+                /*if (game.isMulti())*/
                 GsonWriter.sendClientCommand(new InsertCmd(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y), Page.getOutput());
                 insertCard(game.getFirstPlayerHand().get(Integer.parseInt(handCardId)).getName(), x, y);
-
+                //removeIdFromHand(Integer.parseInt(handCardId));
+                //updateMap();
+                //updateHand();
+                //setOnHandClick();
                 handCardSelected = false;
             } else if (isSelected) {
                 if ((game.isMyTurn() && rectangle.getFill() == Color.BLUE)
                         || (game.isOppTurn() && rectangle.getFill() == Color.RED)) {
+                    /*if (game.isMulti())*/
                     GsonWriter.sendClientCommand(new AttackCmd(rectangle.getId()), Page.getOutput());
                     attack(Integer.parseInt(rectangle.getId()));
+                    //updateMap();
                     isSelected = false;
                 } else {
                     moveCard(x, y);
+                    /*if (game.isMulti())*/
                     GsonWriter.sendClientCommand(new MoveCmd(x, y), Page.getOutput());
+                    //updateMap();
                     isSelected = false;
                 }
             } else if (rectangle.getId() != null) {
                 if (game.isMyTurn() && rectangle.getFill() == Color.RED) {
                     selectCard(rectangle.getId());
+//                    if (game.isMulti())
                     GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else if (game.isOppTurn() && rectangle.getFill() == Color.BLUE) {
                     selectCard(rectangle.getId());
+//                    if (game.isMulti())
                     GsonWriter.sendClientCommand(new SelectCmd(rectangle.getId()), Page.getOutput());
                     isSelected = true;
                 } else label.setText("please select your card");
@@ -212,7 +222,7 @@ public class MapController {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {
-                if (game.isMulti())
+                /*if (game.isMulti())*/
                     GsonWriter.sendClientCommand(new InsertCmd(db.getString(), x, y), Page.getOutput());
                 insertCard(db.getString(), x, y);
                 success = true;

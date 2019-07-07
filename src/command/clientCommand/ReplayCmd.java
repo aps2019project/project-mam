@@ -33,7 +33,7 @@ public class ReplayCmd extends ClientCommand {
                 GsonWriter.sendServerCommand(new ServerCommand(command.type, command.getCardId(), command.getCardName(), command.getRow(), command.getColumn())
                         , clientHandler.getOutput());
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

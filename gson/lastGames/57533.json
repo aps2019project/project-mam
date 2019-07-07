@@ -1,1 +1,0 @@
-{"id":57533,"commands":[{"cardId":"1","type":"SELECT"},{"row":2,"column":2,"type":"MOVE"},{"type":"ENDTURN"},{"cardId":"1","type":"SELECT"},{"row":2,"column":4,"type":"MOVE"},{"type":"ENDTURN"},{"cardId":"1","type":"SELECT"},{"row":2,"column":5,"type":"MOVE"},{"cardId":"1","type":"SELECT"},{"oppId":"1","type":"ATTACK"}]}
