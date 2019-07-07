@@ -27,6 +27,8 @@ public class InsertCmd extends ClientCommand {
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         handler.getUser().getCurrentGame().getCommands().add(this);
+        if(handler.getOppHandler() == null)
+            return;
         GsonWriter.sendServerCommand(new ServerCommand(INSERT, cardName, row, 8 - column), handler.getOppHandler().getOutput());
         int count = 1;
         for (Map.Entry<ClientHandler, ClientHandler> entry : Server.getGames().entrySet()) {
