@@ -84,7 +84,3 @@ hs_err_pid*
 /resources/
 .idea/1.iml
 resources/
-/gson/users/User{name='a'}.json
-gson/decks/custom_1.json
-!/gson/users/User{name='a'}.json
-/gson/

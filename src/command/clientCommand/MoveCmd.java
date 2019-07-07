@@ -37,6 +37,7 @@ public class MoveCmd extends ClientCommand {
         handler.getUser().getCurrentGame().getCommands().add(this);
         if(handler.getOppHandler() == null)
             return;
+        handler.getOppHandler().getUser().getCurrentGame().getCommands().add(this);
         GsonWriter.sendServerCommand(new ServerCommand(MOVE, row, 8 - column), handler.getOppHandler().getOutput());
         int count = 1;
         for (Map.Entry<ClientHandler, ClientHandler> entry : Server.getGames().entrySet()) {
