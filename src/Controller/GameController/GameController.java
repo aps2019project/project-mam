@@ -100,6 +100,8 @@ public class GameController {
     Timer timer = new Timer();
 
     public void initializeGame() {
+        GsonWriter.writeGame(game);
+
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
         if (game.isMulti())
@@ -184,7 +186,7 @@ public class GameController {
         User.user.getGames().add(game.getId());
         GsonWriter.sendClientCommand(new EndGameCmd(game.getId()), Page.getOutput());
         //GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
-        GsonWriter.writeGame(game);
+        //GsonWriter.writeGame(game);
         //
 
         Page.getPages().pop();
@@ -220,7 +222,7 @@ public class GameController {
             User.user.getGames().add(game.getId());
             GsonWriter.sendClientCommand(new EndGameCmd(game.getId()), Page.getOutput());
             //GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
-            GsonWriter.writeGame(game);
+            //GsonWriter.writeGame(game);
             label.setText("-----<game ended>------\n" + game.getWinnerName() + " win");
             AudioController.getInstance().onEndGame();
         } else {
