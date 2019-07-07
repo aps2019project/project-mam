@@ -64,12 +64,11 @@ public class LastGame {
         this.game = game;
     }
 
-    public void addGameToLastGames(Game game) {
-        if (lastGames.size() == 1)
-            lastGames.remove(lastGames.size() - 1);
-        LastGame lastGame = new LastGame(game, "" + lastGames.size());
-        lastGames.add(lastGame);
-//        currentGame = lastGame;
-        GsonWriter.sendClientCommand(new SaveCmd(User.user), Page.getOutput());
+    public static LastGame setCurrentGame(int gameId){
+        for (LastGame lastGame : lastGames) {
+            if (lastGame.getId() == gameId)
+                return lastGame;
+        }
+        return null;
     }
 }

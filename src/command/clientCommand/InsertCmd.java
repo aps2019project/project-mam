@@ -24,6 +24,20 @@ public class InsertCmd extends ClientCommand {
         type = INSERT;
     }
 
+    public String getCardName() {
+        return cardName;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getColumn() {
+        return column;
+    }
+
     @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         handler.getUser().getCurrentGame().getCommands().add(this);

@@ -20,6 +20,11 @@ public class SelectCmd extends ClientCommand {
     }
 
     @Override
+    public String getCardId() {
+        return cardId;
+    }
+
+    @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         handler.getUser().getCurrentGame().getCommands().add(this);
         /*if (handler.getUser().getCurrentGame().getGame().isMulti())

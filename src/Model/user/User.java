@@ -42,6 +42,10 @@ public class User {
     public User() {
     }
 
+    public void setCurrentGame(LastGame currentGame) {
+        this.currentGame = currentGame;
+    }
+
     public ArrayList<Integer> getGames() {
         return games;
     }
@@ -52,14 +56,6 @@ public class User {
 
     public User(String name) {
         this.name = name;
-    }
-
-    /*public ArrayList<LastGame> getLastGames() {
-        return lastGames;
-    }*/
-
-    public void setCurrentGame(Game game) {
-        currentGame = new LastGame(game);
     }
 
     public void setNumberOfWin(int numberOfWin) {

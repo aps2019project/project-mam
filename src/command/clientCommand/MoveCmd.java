@@ -23,6 +23,16 @@ public class MoveCmd extends ClientCommand {
     }
 
     @Override
+    public int getColumn() {
+        return column;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
     public void handleCommand(DataOutputStream output, ClientHandler handler) {
         handler.getUser().getCurrentGame().getCommands().add(this);
         if(handler.getOppHandler() == null)

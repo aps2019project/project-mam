@@ -48,6 +48,10 @@ public class ClientHandler extends Thread {
         }
     }
 
+    private void replay(){
+
+    }
+
     public int getGameNum() {
         return gameNum;
     }

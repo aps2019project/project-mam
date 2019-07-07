@@ -14,14 +14,15 @@ import static command.CommandType.ATTACK;
 
 public class AttackCmd extends ClientCommand {
     private String oppId;
-    private int row;
-    private int column;
 
     public AttackCmd(String oppId) {
         this.oppId = oppId;
-        /*this.row = row;
-        this.column = column;*/
         type = ATTACK;
+    }
+
+    @Override
+    public String getOppId() {
+        return oppId;
     }
 
     @Override
