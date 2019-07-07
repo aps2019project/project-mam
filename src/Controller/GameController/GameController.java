@@ -203,7 +203,7 @@ public class GameController {
         speed = 1;
         endTurn();
         User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
-        if (game.isMulti())
+        //if (game.isMulti())
             GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
     }
 
@@ -230,7 +230,7 @@ public class GameController {
             mapCtrl.updatePlayersMana();
             mapCtrl.updateNextCard();
             mapCtrl.updateMap();
-            if (game.getTurn() % 2 == 0 && game.getSecondUser().getName().equals("AI")) {
+            if (!game.isMyTurn() && game.getSecondUser().getName().equals("AI") && !game.isLive()) {
                 ai.getCommand();
             }
         }
@@ -261,7 +261,7 @@ public class GameController {
                         break;
                     case MOVE:
                         if (game.isLive()) {
-                            if (game.isMyTurn())
+                            if (game.isMyTurn() || game.getSecondUser().getName().equals("AI"))
                                 Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), command.getColumn()));
                             else
                                 Platform.runLater(() -> mapCtrl.moveCard(command.getRow(), 8 - command.getColumn()));
