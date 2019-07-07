@@ -32,7 +32,7 @@ public class HistoryCtrl {
     public void onStartClicked(){
         String gameId = txt.getText();
         new Game(GsonReader.readGame(gameId), false);
-        GsonWriter.sendClientCommand(new ReplayCmd(Integer.parseInt(gameId)), Page.getOutput());
         Page.getPages().push(new MainBattleMenuPage());
+        GsonWriter.sendClientCommand(new ReplayCmd(Integer.parseInt(gameId)), Page.getOutput());
     }
 }
