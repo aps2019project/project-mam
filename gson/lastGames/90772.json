@@ -1,0 +1,1 @@
+{"id":90772,"commands":[{"cardId":"1","type":"SELECT"},{"row":2,"column":2,"type":"MOVE"},{"cardName":"Sacrifice","row":1,"column":0,"type":"INSERT"},{"cardId":"1","type":"SELECT"},{"row":0,"column":8,"type":"MOVE"},{"type":"ENDTURN"}]}

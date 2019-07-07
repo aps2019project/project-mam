@@ -84,6 +84,7 @@ public class Server extends Application {
     private static void initServer() throws FileNotFoundException {
         GsonReader.readUser();
         GsonReader.initShop();
+        GsonReader.readLastGames();
     }
 
     public static String showGames(){

@@ -104,7 +104,7 @@ public class GameController {
 
         mapCtrl.setController(this);
         mapCtrl.initialize(cells, pane, label, handCards);
-        if (game.isMulti())
+        if (game.isMulti() || game.isLive())
             catchServerCommand();
         if (game.isMyTurn())
             if (!game.isLive())
