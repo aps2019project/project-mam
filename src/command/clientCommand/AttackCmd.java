@@ -21,7 +21,7 @@ public class AttackCmd extends ClientCommand {
     }
 
     @Override
-    public String getOppId() {
+    public String getCardId() {
         return oppId;
     }
 

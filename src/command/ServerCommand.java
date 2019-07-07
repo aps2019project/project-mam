@@ -81,7 +81,9 @@ public class ServerCommand {
     public ServerCommand(CommandType type, String cardName, int row, int column) {
         this(type, row, column);
         this.cardName = cardName;
+        this.cardId = cardName;
     }
+
 
     public ServerCommand(CommandType type, Card card){
         this.type = type;

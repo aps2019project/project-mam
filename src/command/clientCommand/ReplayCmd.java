@@ -6,6 +6,7 @@ import command.CommandType;
 import command.ServerCommand;
 import gson.GsonWriter;
 import server.ClientHandler;
+import view.pages.Page;
 
 import java.io.DataOutputStream;
 
@@ -27,9 +28,10 @@ public class ReplayCmd extends ClientCommand {
         new Thread(() -> {
             int size = User.user.getCurrentGame().getCommands().size();
             int counter = 0;
-            while (size > 0) {
+            while (size > counter) {
                 ClientCommand command = User.user.getCurrentGame().getCommands().get(counter++);
-                GsonWriter.sendServerCommand(new ServerCommand());
+                GsonWriter.sendServerCommand(new ServerCommand(command.type, command.getCardId(), command.getRow(), command.getColumn())
+                        , clientHandler.getOutput());
             }
         }).start();
     }

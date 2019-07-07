@@ -32,8 +32,4 @@ public abstract class ClientCommand {
     public int getColumn() {
         return 0;
     }
-
-    public String getOppId() {
-        return null;
-    }
 }
