@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.GameController.AudioController;
 import Model.enums.ErrorType;
+import Model.game.LastGame;
 import command.clientCommand.LogOutCmd;
 import command.clientCommand.SaveCmd;
 import gson.GsonWriter;
@@ -27,6 +28,7 @@ public class MainMenuController {
     public ImageView logout;
     public Label scoreBoard;
     public Label history;
+    public Label setting;
     private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("mainmenu_v2c_looping.m4a");
 
 
@@ -97,6 +99,13 @@ public class MainMenuController {
         turnOffMusic();
         AudioController.getInstance().onSelect();
         Page.getPages().push(new ScoreBoard());
+    }
+
+    @FXML
+    public void onSettingClicked(){
+        turnOffMusic();
+        AudioController.getInstance().onSelect();
+        Page.getPages().push(new SettingMenuPage());
     }
 
     public void setUpMusic(){

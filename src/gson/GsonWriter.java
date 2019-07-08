@@ -20,14 +20,16 @@ import java.io.*;
 
 public class GsonWriter {
 
-    public static void writeConfig() throws IOException {
-        FileWriter out = new FileWriter("gson/config/config.json");
-        Gson gson = new GsonBuilder().create();
-                /*.registerTypeAdapter(Card.class, new CardAdapter())
-                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();*/
-        out.write(gson.toJson(Config.getCONFIG()));
-        out.flush();
-        out.close();
+    public static void writeConfig() {
+        try {
+            FileWriter out = new FileWriter("gson/config/config.json");
+            Gson gson = new GsonBuilder().create();
+            out.write(gson.toJson(Config.getCONFIG()));
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void writeUser(User user) throws IOException {

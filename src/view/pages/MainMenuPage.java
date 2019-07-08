@@ -57,6 +57,7 @@ public class MainMenuPage extends Page {
         setBackGround(controller.customLbl, "resources/ui/button_primary_right.png");
         setBackGround(controller.scoreBoard, "resources/ui/button_primary_right.png");
         setBackGround(controller.history, "resources/ui/button_primary_right.png");
+        setBackGround(controller.setting, "resources/ui/button_primary_right.png");
         controller.exit.setImage(new Image(new FileInputStream("resources/ui/utility_menu/settings.png")));
         controller.logout.setImage(new Image(new FileInputStream("resources/ui/button_close.png")));
     }
