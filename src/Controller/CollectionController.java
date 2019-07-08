@@ -247,7 +247,7 @@ public class CollectionController {
 
     public void selectMainDeck(String deckName) {
         if (User.user.getCollection().checkIsExistDeck(deckName)) {
-            User.user.getCollection().setMainDeck(deckName);
+            User.user.setMainDeck(User.user.getCollection().getDeck(deckName));
             select_lb.setText(ErrorType.SELECT_MAIN_DECK.getMessage());
         } else select_lb.setText(ErrorType.NOT_FOUND_DECK.getMessage());
     }
