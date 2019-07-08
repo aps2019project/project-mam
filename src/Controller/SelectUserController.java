@@ -40,9 +40,11 @@ public class SelectUserController {
 
     public void setSend() {
         AudioController.getInstance().onSelect();
-        showMyMessage();
-        GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
-        message.setText(null);
+        if (message.getText() != null && !message.getText().equalsIgnoreCase("")) {
+            showMyMessage();
+            GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
+            message.setText(null);
+        }
     }
 
     public void showMyMessage() {
