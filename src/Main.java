@@ -1,3 +1,4 @@
+import config.Config;
 import gson.GsonReader;
 import javafx.application.Application;
 import javafx.scene.layout.Pane;
@@ -10,10 +11,13 @@ import java.net.ConnectException;
 import java.net.Socket;
 
 public class Main extends Application {
-    private int port = 8000;
-    private String hostName = "127.0.0.1";
-//    private String hostName = "213.233.188.9";
-
+    //private int port = 8000;
+    //private String hostName = "127.0.0.1";
+    //private String hostName = "213.233.188.27";
+    //private String hostName = "172.17.1.226";
+    //private String hostName = "81.31.160.11";
+//    private String hostName = "213.233.188.156";
+//    private String hostName = "213.233.188.27";
 
     private static Socket server;
 
@@ -28,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             System.out.println("connecting to server ...");
-            server = new Socket(hostName, port);
+            server = new Socket(Config.ip, Config.port);
             System.out.println("connected to server: " + server.getLocalPort());
 
             input = new DataInputStream(server.getInputStream());
