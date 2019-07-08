@@ -12,11 +12,8 @@ import java.net.Socket;
 public class Main extends Application {
     private int port = 8000;
     private String hostName = "127.0.0.1";
-    //private String hostName = "213.233.188.27";
-    //private String hostName = "172.17.1.226";
-    //private String hostName = "81.31.160.11";
-//    private String hostName = "213.233.188.156";
-//    private String hostName = "213.233.188.27";
+//    private String hostName = "213.233.188.9";
+
 
     private static Socket server;
 
