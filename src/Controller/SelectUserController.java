@@ -42,6 +42,7 @@ public class SelectUserController {
         AudioController.getInstance().onSelect();
         showMyMessage();
         GsonWriter.sendClientCommand(new ChatCmd(message.getText()), Page.getOutput());
+        message.setText(null);
     }
 
     public void showMyMessage() {
