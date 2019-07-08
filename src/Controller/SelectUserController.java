@@ -99,6 +99,8 @@ public class SelectUserController {
                     Platform.runLater(BattleMenuPage::createMultiGame);
                     break;
                 }
+                if (command.getType() == CommandType.EXIT_GAME)
+                    break;
             }
         }).start();
     }
