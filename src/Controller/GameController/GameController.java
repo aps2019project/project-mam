@@ -16,6 +16,7 @@ import command.clientCommand.EndGameCmd;
 import command.clientCommand.EndTurnCmd;
 import command.clientCommand.SaveCmd;
 import command.clientCommand.GetGameCmd;
+import config.Config;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.application.Platform;
@@ -93,7 +94,8 @@ public class GameController {
     public ArrayList<Label> handCardsMana = new ArrayList<>();
     private MediaPlayer musicPlayer = AudioController.getInstance().getPlayer("music_battlemap_duskfall.m4a");
 
-    private int speed = 1;
+    //private int speed = 1;
+    //private int turnTime = 60;
 
 
     int count = 0;
@@ -132,12 +134,12 @@ public class GameController {
         handCardsMana.add(handCard5mana);
     }
 
-    public int getSpeed() {
+    /*public int getSpeed() {
         return speed;
-    }
+    }*/
 
     public void setForward() {
-        speed = 2;
+        Config.speed = 2;
     }
 
     public void setUserInfo1() {
@@ -203,7 +205,7 @@ public class GameController {
     public void setEndTurn() {
         if (!game.isMyTurn())
             return;
-        speed = 1;
+        Config.speed = 1;
         endTurn();
         //User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
         //if (game.isMulti())
@@ -244,7 +246,7 @@ public class GameController {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (count == 60) {
+                if (count == Config.turnTime) {
                     System.out.println("ended");
                     Platform.runLater(() -> setEndTurn());
                     count = 0;
