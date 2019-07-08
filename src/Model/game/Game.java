@@ -991,9 +991,9 @@ public class Game {
     private void spellBuffCreator(Card attacker, Cell defender) {
         for (Buff buff : attacker.getSpecialPower()) {
             for (Cell cell : buff.getSpellTarget(defender, getMyTeam(), getOppTeam(), getMap())) {
-                Buff newBuff = buff.copy();
+                /*Buff newBuff = buff.copy();
                 if (cell.getCard() != null)
-                    newBuff.setCard(cell.getCard());
+                    newBuff.setCard(cell.getCard());*/
                 /*newBuff.setCell(cell);
                 newBuff.setStarted(true);
                 Buff.addBuff(newBuff);*/
