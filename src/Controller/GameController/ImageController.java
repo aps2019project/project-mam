@@ -180,8 +180,10 @@ public class ImageController {
     }
 
     public void initHeroImage() {
-        addCard(Game.getInstance().getMap().getCells()[2][0], Game.getInstance().getBaseTurn());
-        addCard(Game.getInstance().getMap().getCells()[2][8], Game.getInstance().getBaseTurn()+1);
+        addCard(Game.getInstance().getFirstPlayerDeck().getHero().getRow(), Game.getInstance().getFirstPlayerDeck().getHero().getColumn(),
+                Game.getInstance().getFirstPlayerDeck().getHero(), Game.getInstance().getBaseTurn());
+        addCard(Game.getInstance().getSecondPlayerDeck().getHero().getRow(), Game.getInstance().getSecondPlayerDeck().getHero().getColumn(),
+                Game.getInstance().getSecondPlayerDeck().getHero(), Game.getInstance().getBaseTurn()+1);
     }
 
     public void initItemImage() {
