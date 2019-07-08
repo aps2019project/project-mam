@@ -37,7 +37,7 @@ public class AnimationController {
         Path path = new Path(new MoveTo(image.getX() + image.getFitWidth() / 2, image.getY() + image.getFitHeight() / 2),
                 new LineTo(x, y));
         //path.getElements().add(new CubicCurveTo(180, 60, 250, 340, image.getX() + 200, image.getY()));
-        PathTransition ptr = new PathTransition(Duration.millis((double)1000 / Config.speed), path);
+        PathTransition ptr = new PathTransition(Duration.millis((double)1000 / Config.getCONFIG().speed), path);
         ptr.setNode(image);
         try {
             image.setImage(new Image(new FileInputStream(card.getRunImage())));
@@ -59,7 +59,7 @@ public class AnimationController {
         new Thread(() -> {
             try {
                 image.setImage(new Image(new FileInputStream(attacker.getAttackImage())));
-                Thread.sleep(2500 / Config.speed);
+                Thread.sleep(2500 / Config.getCONFIG().speed);
                 image.setImage(new Image(new FileInputStream(attacker.getBreathingImage())));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -71,9 +71,9 @@ public class AnimationController {
         //TODO : init path
         new Thread(() -> {
             try {
-                Thread.sleep(2500 / Config.speed);
+                Thread.sleep(2500 / Config.getCONFIG().speed);
                 image.setImage(new Image(new FileInputStream(attacker.getAttackImage())));
-                Thread.sleep(2500 / Config.speed);
+                Thread.sleep(2500 / Config.getCONFIG().speed);
                 image.setImage(new Image(new FileInputStream(attacker.getBreathingImage())));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -91,7 +91,7 @@ public class AnimationController {
                 image.setFitWidth(60);
                 image.setFitHeight(60);
                 Platform.runLater(() -> pane.getChildren().add(image));
-                Thread.sleep(2000 / Config.speed);
+                Thread.sleep(2000 / Config.getCONFIG().speed);
                 image.setImage(null);
             } catch (Exception e) {
                 e.printStackTrace();

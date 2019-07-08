@@ -1,9 +1,25 @@
 package config;
 
 public class Config {
-    public static int speed = 1;
-    public static int turnTime = 60;
 
-    public static int port = 8000;
-    public static String ip = "127.0.0.1";
+    private static final Config CONFIG = new Config();
+
+    public static Config getCONFIG() {
+        return CONFIG;
+    }
+
+    private Config() {
+    }
+
+    public int speed = 1;
+    public int turnTime = 60;
+    public int port = 8000;
+    public String ip = "127.0.0.1";
+
+    public void init(int speed, int turnTime, int port, String ip) {
+        this.speed = speed;
+        this.turnTime = turnTime;
+        this.port = port;
+        this.ip = ip;
+    }
 }

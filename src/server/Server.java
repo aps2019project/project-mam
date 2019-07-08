@@ -25,6 +25,8 @@ public class Server extends Application {
 
     //private static int port = 8000;
 
+    //private Config config = new Config();
+
     private static HashMap<String, ClientHandler> clients = new HashMap<>();
     private static HashMap<ClientHandler, ClientHandler> games = new HashMap<>();
 
@@ -42,6 +44,7 @@ public class Server extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        GsonReader.readConfig();
         runServer();
         primaryStage.setTitle("Server");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/layout/ServerPage.fxml"));
@@ -68,7 +71,7 @@ public class Server extends Application {
     private void runServer() {
         new Thread(() -> {
             try {
-                ServerSocket server = new ServerSocket(Config.port);
+                ServerSocket server = new ServerSocket(Config.getCONFIG().port);
                 System.out.println("server started");
                 initServer();
                 while (true) {

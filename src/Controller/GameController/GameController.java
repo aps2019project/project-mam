@@ -139,7 +139,7 @@ public class GameController {
     }*/
 
     public void setForward() {
-        Config.speed = 2;
+        Config.getCONFIG().speed = 2;
     }
 
     public void setUserInfo1() {
@@ -205,7 +205,7 @@ public class GameController {
     public void setEndTurn() {
         if (!game.isMyTurn())
             return;
-        Config.speed = 1;
+        Config.getCONFIG().speed = 1;
         endTurn();
         //User.user.getCurrentGame().getCommands().add(new EndTurnCmd());
         //if (game.isMulti())
@@ -246,7 +246,7 @@ public class GameController {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (count == Config.turnTime) {
+                if (count == Config.getCONFIG().turnTime) {
                     System.out.println("ended");
                     Platform.runLater(() -> setEndTurn());
                     count = 0;

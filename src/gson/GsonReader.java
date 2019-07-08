@@ -17,10 +17,28 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import command.clientCommand.ClientCommand;
 import command.ServerCommand;
+import config.Config;
 
 import java.io.*;
 
 public class GsonReader {
+
+    public static void readConfig(){
+        Gson gson = new GsonBuilder().create();
+        JsonReader reader;
+        try {
+            File dir = new File("gson/config");
+            for (File file : dir.listFiles()) {
+                reader = new JsonReader(new FileReader(file));
+                Config config = gson.fromJson(reader, Config.class);
+                Config.getCONFIG().init(config.speed, config.turnTime, config.port, config.ip);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } /*catch (NullPointerException e) {
+            e.printStackTrace();
+        }*/
+    }
 
     public static void readUser() throws FileNotFoundException {
         Gson gson = new GsonBuilder()

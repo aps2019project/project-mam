@@ -14,10 +14,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import command.clientCommand.ClientCommand;
 import command.ServerCommand;
+import config.Config;
 
 import java.io.*;
 
 public class GsonWriter {
+
+    public static void writeConfig() throws IOException {
+        FileWriter out = new FileWriter("gson/config/config.json");
+        Gson gson = new GsonBuilder().create();
+                /*.registerTypeAdapter(Card.class, new CardAdapter())
+                .registerTypeAdapter(Buff.class, new BuffAdaptor()).create();*/
+        out.write(gson.toJson(Config.getCONFIG()));
+        out.flush();
+        out.close();
+    }
 
     public static void writeUser(User user) throws IOException {
         FileWriter out = new FileWriter("gson/users/" + user.toString() + ".json");

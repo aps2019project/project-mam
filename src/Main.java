@@ -25,6 +25,7 @@ public class Main extends Application {
     private static DataOutputStream output;
 
     public static void main(String argc[]) {
+        GsonReader.readConfig();
         launch(argc);
     }
 
@@ -32,7 +33,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             System.out.println("connecting to server ...");
-            server = new Socket(Config.ip, Config.port);
+            server = new Socket(Config.getCONFIG().ip, Config.getCONFIG().port);
             System.out.println("connected to server: " + server.getLocalPort());
 
             input = new DataInputStream(server.getInputStream());
