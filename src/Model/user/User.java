@@ -23,10 +23,10 @@ public class User {
     private String name;
     private String password;
     private int numberOfWin;
-    private Collection collection;
+    private Collection collection = new Collection();
     private int money;
     private int idCounter;
-    private Deck mainDeck;
+    private Deck mainDeck = new Deck();
     private boolean isOnline = false;
 
     public User(String name, String password) {

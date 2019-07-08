@@ -1,1 +1,1 @@
-{"AP":7,"HP":5,"TargetCommunity":5,"minionClass":"RANGED","SPActivationTime":"ON_DEFEND","row":0,"column":0,"MP":4,"id":19,"price":450,"name":"give","specialPower":[],"type":"minion","count":10,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
+{"AP":7,"HP":5,"TargetCommunity":5,"minionClass":"RANGED","SPActivationTime":"ON_DEFEND","row":0,"column":0,"MP":4,"id":19,"price":450,"name":"give","specialPower":[],"type":"minion","count":0,"canMove":true,"canAttack":true,"canCounterAttack":true,"selected":false}
