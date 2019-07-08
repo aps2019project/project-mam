@@ -139,7 +139,7 @@ public class GameController {
     }*/
 
     public void setForward() {
-        Config.getCONFIG().speed = 2;
+        Config.getCONFIG().speed = 3;
     }
 
     public void setUserInfo1() {
