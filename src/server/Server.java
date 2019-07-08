@@ -5,6 +5,7 @@ import Model.card.Card;
 import Model.shop.Shop;
 import Model.user.User;
 import com.google.gson.Gson;
+import config.Config;
 import gson.GsonReader;
 import gson.GsonWriter;
 import javafx.application.Application;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 public class Server extends Application {
 
-    private static int port = 8000;
+    //private static int port = 8000;
 
     private static HashMap<String, ClientHandler> clients = new HashMap<>();
     private static HashMap<ClientHandler, ClientHandler> games = new HashMap<>();
@@ -67,7 +68,7 @@ public class Server extends Application {
     private void runServer() {
         new Thread(() -> {
             try {
-                ServerSocket server = new ServerSocket(port);
+                ServerSocket server = new ServerSocket(Config.port);
                 System.out.println("server started");
                 initServer();
                 while (true) {
