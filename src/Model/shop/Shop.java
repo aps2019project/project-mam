@@ -177,11 +177,6 @@ public class Shop {
                 user.getCollection().addCard(newCard);
                 user.setMoney(user.getMoney() - card.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
-                try {
-                    GsonWriter.writeCustomCard(card);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
@@ -194,7 +189,6 @@ public class Shop {
                 user.setMoney(user.getMoney() - item.getPrice());
                 user.setIdCounter(user.getIdCounter() + 1);
                 item.setCount(item.getCount() - 1);
-                GsonWriter.writeCustomUsableItem(item);
             }
         }
     }

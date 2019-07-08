@@ -69,7 +69,7 @@ public class MainBattleMenuPage extends Page {
             if (event.getCode()  == KeyCode.Z) {
                 if (!game.isMyTurn())
                     return;
-                controller.endTurn();
+                controller.setEndTurn();
                 if (game.isMulti())
                     GsonWriter.sendClientCommand(new EndTurnCmd(), Page.getOutput());
                 //controller.endTurn();
